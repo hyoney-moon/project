@@ -1,3 +1,7 @@
 /.metadata/
+<<<<<<< HEAD
 *.xml
 *.class
+=======
+.xml
+>>>>>>> fdd4bd8763c1469a85c736cb775d2611079197bd
