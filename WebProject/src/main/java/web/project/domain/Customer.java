@@ -11,7 +11,6 @@ import lombok.Setter;
  *
  */
 @Entity
-@Table(name="CUSTOMER")
 @Setter
 @Getter
 public class Customer implements Serializable {
@@ -20,6 +19,7 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="CUST_ID")
 	private String cust_id;
 	private String email;
 	private String password;

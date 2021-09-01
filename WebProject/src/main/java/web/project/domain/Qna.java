@@ -10,7 +10,6 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name="QNA")
 @Setter
 @Getter
 public class Qna implements Serializable {
@@ -18,17 +17,27 @@ public class Qna implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Long num; // 댓글 글번호
-	private Long grp; // 댓글이 속한 댓글 번호
-	private Long grpl; // 댓글의 깊이
-	private Date date; // 댓글 작성 시간
+	@Column(name="QNA_NUM")
+	@GeneratedValue
+	private Long qna_num; // 댓글 글번호
+	//private Long grp; // 댓글이 속한 댓글 번호
+	//private Long grpl; // 댓글의 깊이
+	//@Temporal(TemporalType.TIMESTAMP)
+	//@Column(updatable = false, columnDefinition = "date default sysdate")
+	private Date reg_date; // 댓글 작성 시간
 	private String content; // 댓글 작성 내용
+	private String profile;
 	
 	@ManyToOne
-	@JoinColumn(name="cust_id")
+	@JoinColumn(name="CUST_ID")
 	private Customer customer;
 	
-	@JoinColumn(name="number")
+	@ManyToOne
+	@JoinColumn(name="BOARD_NUM")
 	private Board board;
+	
+	@ManyToOne
+	@JoinColumn(name="HOST_ID")
+	private Host host;
    
 }
