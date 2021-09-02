@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,27 +19,25 @@ public class Qna implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="QNA_NUM")
 	@GeneratedValue
-	private Long qna_num; // 댓글 글번호
+	private Long qnaNum; // 댓글 글번호
 	//private Long grp; // 댓글이 속한 댓글 번호
 	//private Long grpl; // 댓글의 깊이
-	//@Temporal(TemporalType.TIMESTAMP)
 	//@Column(updatable = false, columnDefinition = "date default sysdate")
-	private Date reg_date; // 댓글 작성 시간
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date commentDate; // 댓글 작성 시간
 	private String content; // 댓글 작성 내용
 	private String profile;
 	
 	@ManyToOne
-	@JoinColumn(name="CUST_ID")
+	@JoinColumn(name="custId")
 	private Customer customer;
 	
 	@ManyToOne
-	@JoinColumn(name="BOARD_NUM")
+	@JoinColumn(name="boardNum")
 	private Board board;
 	
 	@ManyToOne
-	@JoinColumn(name="HOST_ID")
+	@JoinColumn(name="hostId")
 	private Host host;
-   
 }

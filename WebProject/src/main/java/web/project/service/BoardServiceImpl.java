@@ -15,7 +15,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시글 조회
 	@Override
-	public Board getBoard(Long num) {
-		return boardRepo.getById(num);
+	public Board getBoard(Long boardNum) {
+		return boardRepo.getById(boardNum);
 	}
 }

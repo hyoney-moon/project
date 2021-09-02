@@ -10,7 +10,8 @@ import web.project.domain.Qna;
 @Configuration
 public interface QnaService {
 
-	List<Qna> getQnaList(Long num);
+	List<Qna> getQnaList(Long boardNum);
 
-	void updateQnaList(Qna qna);
+	void insertQna(Qna qna);
+
 }

@@ -8,6 +8,6 @@ import web.project.domain.Board;
 @Configuration
 public interface BoardService {
 
-	Board getBoard(Long num);
+	Board getBoard(Long boardNum);
 
 }

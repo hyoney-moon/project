@@ -19,16 +19,14 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="CUST_ID")
-	private String cust_id;
+	private String custId;
 	private String email;
 	private String password;
 	private String nickname;
 	private String gender;
-	private int age;
+	private Long age;
 	private String post;
 	private String cash; 
 	private String profile;
 	private String pick;
-   
 }

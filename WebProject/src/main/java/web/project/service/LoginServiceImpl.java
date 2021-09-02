@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	public Customer getCustomer(Customer customer) {
-		Optional<Customer> findCustomer = loginRepo.findById(customer.getCust_id());
+		Optional<Customer> findCustomer = loginRepo.findById(customer.getCustId());
 		if(findCustomer.isPresent())
 			return findCustomer.get();
 		else

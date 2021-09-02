@@ -22,19 +22,21 @@ public class QnaResultController {
 	@Autowired
 	BoardService boardser;
 
-	@PostMapping("/QnaResult")
-	public String getQnaResult(Long num, Model m) {
-		System.out.print(num);
-		Board BoardResult = boardser.getBoard(num);
-		List<Qna> QnaResult = qnaser.getQnaList(num);
+	// 게시판 + QnA 화면 조회
+	@GetMapping("/QnaResult")
+	public String getQnaResult(Long boardNum, Model m) {
+		Board BoardResult = boardser.getBoard(boardNum);
+		List<Qna> QnaResult = qnaser.getQnaList(boardNum);
 		m.addAttribute("qna", QnaResult);
 		m.addAttribute("board", BoardResult);
 		return "host_board/qnaResult";
 	}
 	
-	@GetMapping("/QnaForm")
-	public String QnaForm() {
-		return "host_board/questionForm";
+	// QnA 작성(일반회원)
+	@PostMapping("/insertQna")
+	public String insertQna(Qna qna) {
+		qnaser.insertQna(qna);
+		return "redirect:/qnaResult";
 	}
 	
 }

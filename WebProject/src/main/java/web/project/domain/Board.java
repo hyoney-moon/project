@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +23,7 @@ public class Board implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="BOARD_NUM")
-	private int num; // 글번호
-	
+	private Long boardNum; // 글번호
 	private String spaceName; // 공간명(글제목)
 	private String content_oneline;
 	private String content;
@@ -32,15 +32,15 @@ public class Board implements Serializable {
 	private String website;
 	private String front_img;
 	private String address;
-	private String readcount; 
-	private Date regdate;
-	private int price;
-	private int headcnt; 
+	private String readcount;
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date regDate;
+	private Long price;
+	private Long headcnt; 
 	private String big_category;
 	private String small_category;
-   
 	
 	@ManyToOne
-	@JoinColumn(name="HOST_ID")
+	@JoinColumn(name="hostId")
 	private Host host;
 }

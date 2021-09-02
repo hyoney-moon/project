@@ -15,13 +15,12 @@ public class QnaServiceImpl implements QnaService {
 	private QnaRepository qnaRepo;
 	
 	@Override
-	public List<Qna> getQnaList(Long num) {
-		return qnaRepo.findByNum(num);
+	public List<Qna> getQnaList(Long boardNum) {
+		return qnaRepo.getQnaList(boardNum);
 	}
-
+	
 	@Override
-	public void updateQnaList(Qna qna) {
-		// TODO Auto-generated method stub
-		
+	public void insertQna(Qna qna) {
+		qnaRepo.save(qna);
 	}
 }

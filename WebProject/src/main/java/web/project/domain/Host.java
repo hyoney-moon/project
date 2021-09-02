@@ -19,8 +19,7 @@ public class Host implements Serializable {
 	private static final long serialVersionUID = 1L;
 
    @Id
-   @Column(name="HOST_ID")
-   private String host_id;
+   private String hostId;
    private String password;
    private String email;
    private String nickname;
