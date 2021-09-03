@@ -1,13 +1,19 @@
 package web.project.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import web.project.domain.Board;
 import web.project.domain.Qna;
@@ -16,27 +22,16 @@ import web.project.service.QnaService;
 
 @Controller
 @RequestMapping("/questions")
-public class QnaResultController {
+public class QnaController {
 	@Autowired
 	QnaService qnaser;
 	@Autowired
 	BoardService boardser;
-
-	// 게시판 + QnA 화면 조회
-	@GetMapping("/QnaResult")
-	public String getQnaResult(Long boardNum, Model m) {
-		Board BoardResult = boardser.getBoard(boardNum);
-		List<Qna> QnaResult = qnaser.getQnaList(boardNum);
-		m.addAttribute("qna", QnaResult);
-		m.addAttribute("board", BoardResult);
-		return "host_board/qnaResult";
-	}
 	
-	// QnA 작성(일반회원)
+	// 질문작성
 	@PostMapping("/insertQna")
 	public String insertQna(Qna qna) {
 		qnaser.insertQna(qna);
-		return "redirect:/qnaResult";
+		return "redirect:host_board/getBoard";
 	}
-	
 }

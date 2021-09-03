@@ -9,7 +9,8 @@ import web.project.domain.Qna;
 
 public interface QnaRepository extends JpaRepository<Qna, Long> {
 
-	@Query("SELECT q from Board b, Qna q WHERE b.boardNum = ?1")
+
+	@Query("SELECT q from Board b, Qna q WHERE b.boardNum = ?1 and q.board.boardNum = ?1 ")
 	List<Qna> getQnaList(Long boardNum);
 
 }

@@ -45,23 +45,25 @@
 </style>
 </head>
 <body>
+<table>
+	<tr><td>제목</td><td>${board.spaceName}</td></tr>
+	<tr><td>내용</td><td>${board.content}</td></tr>
+	<tr><td>등록일</td><td><fmt:formatDate value="${board.regDate}" type="date" dateStyle="long" /></td></tr>
+</table>
 
-<h2>Board 테이블 속성</h2>
-글본문 : ${board.content}<br>
-글번호 : ${board.boardNum}<br>
-작성날짜 : <fmt:formatDate value="${board.regDate}" type="date" dateStyle="long" /><br>
-가격 : ${board.price}<br>
+<h2>QnA</h2>
+<table border="1">
+<tr><td></td></tr>
 
-<h2>Qna 테이블 속성</h2>
-<c:forEach items="${qna}" var="result">
-	고객 아이디 : ${result.customer.custId}<br>
-	고객 댓글 : ${result.content}
-	<hr>
-	&nbsp&nbsp&nbsp 호스트 아이디 : ${result.host.hostId}<br>
-	&nbsp&nbsp&nbsp 호스트 답변 : ${result.content}
-	<hr>
+<c:forEach items="${qna}" var="qna">
+고객 아이디 : ${qna.custId}<br>
+고객 댓글 : ${qna.content}
+<hr>
+	&nbsp&nbsp&nbsp 호스트 답변 : ${qna.content}
+<hr>
 </c:forEach>
 
+</table>
 	<!-- Trigger/Open The Modal -->
     <button id="myBtn">질문하기</button>
  
@@ -73,11 +75,10 @@
         <p>질문 작성하기</p>
         <form action="/questions/insertQna" method="post">
         	<textarea name="content" rows="15" cols="40"></textarea>
-        	<input type="hidden" name="boardNum" value="${board.boardNum}">
+        	<input type="hidden" name="board.boardNum" value="${boardNum}">
         	<input type="hidden" name="profile" value="profile2">
-        	<input type="hidden" name="commentDate" value="${board.regDate}">
-        	<input type="hidden" name="custId" value="custId2">
-        	<input type="hidden" name="hostId" value="">
+        	<!-- <input type="hidden" name="commentDate" value="${board.regDate}">  -->
+        	<input type="hidden" name="custId" value="${customer.custId}">
         	<input type="submit" value="작성">
         	<!-- Qna 엔티티가 조인으로 사용하는 컬럼에 insert 해야함 -->
         </form>

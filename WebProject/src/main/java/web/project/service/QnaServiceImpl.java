@@ -14,6 +14,7 @@ public class QnaServiceImpl implements QnaService {
 	@Autowired
 	private QnaRepository qnaRepo;
 	
+	
 	@Override
 	public List<Qna> getQnaList(Long boardNum) {
 		return qnaRepo.getQnaList(boardNum);

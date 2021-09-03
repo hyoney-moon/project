@@ -25,19 +25,18 @@ public class Qna implements Serializable {
 	//private Long grpl; // 댓글의 깊이
 	//@Column(updatable = false, columnDefinition = "date default sysdate")
 	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(insertable = false, columnDefinition = "date default sysdate")
 	private Date commentDate; // 댓글 작성 시간
 	private String content; // 댓글 작성 내용
 	private String profile;
+	private String custId;
+	private String hostId;
 	
-	@ManyToOne
-	@JoinColumn(name="custId")
-	private Customer customer;
-	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="boardNum")
 	private Board board;
 	
-	@ManyToOne
-	@JoinColumn(name="hostId")
-	private Host host;
+//	@ManyToOne
+//	@JoinColumn(name="hostId")
+//	private Host host;
 }
