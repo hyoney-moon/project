@@ -22,7 +22,7 @@ import web.project.domain.Customer;
 import web.project.domain.HostQna;
 import web.project.service.BoardService;
 import web.project.service.QnaService;
-
+// 
 @Controller
 @RequestMapping("/board")
 @SessionAttributes("customer")

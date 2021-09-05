@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import web.project.domain.CustQna;
 import web.project.domain.HostQna;
-
+//
 public interface QnaRepository extends JpaRepository<CustQna, Long> {
 
 

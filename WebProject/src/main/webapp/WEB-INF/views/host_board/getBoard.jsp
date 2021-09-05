@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+/**/
 /* The Modal (background) */
 .modal {
 	display: none; /* Hidden by default */

@@ -9,7 +9,7 @@ import web.project.domain.CustQna;
 import web.project.domain.HostQna;
 import web.project.persistence.HostQnaRepository;
 import web.project.persistence.QnaRepository;
-
+//
 @Service
 public class QnaServiceImpl implements QnaService {
 

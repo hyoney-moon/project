@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import web.project.domain.Customer;
 import web.project.domain.Host;
 import web.project.service.LoginService;
-
+// 
 @Controller
 @SessionAttributes({"customer", "host"})
 @RequestMapping("/customer")

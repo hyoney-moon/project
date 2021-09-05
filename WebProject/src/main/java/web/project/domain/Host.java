@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
-
+// 
 /**
  * Entity implementation class for Entity: Host
  *

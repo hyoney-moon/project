@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
-
+// 
 /**
  * Entity implementation class for Entity: Board
  *

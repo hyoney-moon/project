@@ -21,7 +21,7 @@ import web.project.domain.CustQna;
 import web.project.domain.HostQna;
 import web.project.service.BoardService;
 import web.project.service.QnaService;
-
+// 
 @Controller
 @RequestMapping("/questions")
 public class QnaController {
