@@ -4,14 +4,19 @@ import java.util.List;
 
 import org.springframework.context.annotation.Configuration;
 
-import web.project.domain.Qna;
+import web.project.domain.CustQna;
+import web.project.domain.HostQna;
 
 
 @Configuration
 public interface QnaService {
 
-	List<Qna> getQnaList(Long boardNum);
+	List<CustQna> getQnaList(Long boardNum);
 
-	void insertQna(Qna qna);
+	void insertCustQna(CustQna qna);
+
+	void insertHostQna(HostQna qna);
+
+	List<HostQna> getHostQnaList(Long boardNum);
 
 }

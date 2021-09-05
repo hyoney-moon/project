@@ -7,15 +7,11 @@
 <title>index</title>
 </head>
 <body>
-index입니다.
-
-<a href="/customer/loginForm">회원 로그인</a>
-<a href="/host/loginForm">호스트 로그인</a>
-<a href="/board/boardList">게시판 목록</a>
-
-<form action="/questions/QnaResult" method="get">
-<input type="hidden" name="boardNum" value="1">
-<input type="submit" value="글번호 전송">
-</form>
+<div style="text-align: center">
+<h2><a href="/customer/loginForm">회원 로그인</a></h2>
+<h2><a href="/customer/hostLoginForm">호스트 로그인</a><br></h2>
+<br><br>
+<h2><a href="/board/boardList">게시판 목록</a></h2>
+</div>
 </body>
 </html>

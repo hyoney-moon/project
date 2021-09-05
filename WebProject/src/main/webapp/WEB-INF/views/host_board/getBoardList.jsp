@@ -16,7 +16,7 @@
 <body>
 <div id="center">
 <h1>게시글 목록</h1>
-<div align="right" id="loginid"><strong>${customer.custId}</strong> 로그인 중 <a href="/logout">로그아웃</a></div>
+<div align="right" id="loginid"><a href="/logout">로그아웃</a></div>
 
 <table border="1">
 	<tr><th>번호</th><th>제목</th><th>작성자</th><th>등록일</th></tr>
@@ -32,10 +32,10 @@
 <c:if test="${begin > 2 }">
 	<a href="/getBoardList?p=${begin-1}">[이전]</a>
 </c:if>
-	<c:forEach begin="${begin }" end="${end}" var ="i">
+	<c:forEach begin="${begin}" end="${end}" var ="i">
 		<a href="/getBoardList?p=${i}">[${i}]</a>
 	</c:forEach>
-<c:if test="${end < totalPage }">
+<c:if test="${end < totalPage}">
 	<a href="/getBoardList?p=${end+1}">[다음]</a>
 </c:if>
 </div>

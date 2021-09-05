@@ -7,13 +7,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
+
 import web.project.domain.Board;
-import web.project.domain.Qna;
+import web.project.domain.CustQna;
+import web.project.domain.Customer;
+import web.project.domain.HostQna;
 import web.project.service.BoardService;
 import web.project.service.QnaService;
 
@@ -26,6 +32,11 @@ public class BoardController {
 	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
+	
+	@ModelAttribute("customer")
+	public Customer getCustomer() {
+		return new Customer();
+	}
 	
 	// 게시글 목록
 	@GetMapping("/boardList")
@@ -52,9 +63,27 @@ public class BoardController {
 	@GetMapping("/content/{boardNum}")
 	public String getBoard(@PathVariable Long boardNum, Model m) {
 		Board board = boardService.getBoard(boardNum);
-		List<Qna> QnaResult = qnaService.getQnaList(boardNum);
-		m.addAttribute("qna", QnaResult);
+		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
+		
+		m.addAttribute("custQna", custQnaResult);
 		m.addAttribute("board",board);
 		return "host_board/getBoard";
+	}
+	
+	// 댓글 출력(ajax)
+	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String commentList(Long boardNum) throws Exception {
+		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
+		Gson json = new Gson();
+		return json.toJson(custQnaResult);
+	}
+	
+	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String replyCommentList(Long boardNum) throws Exception {
+		List<HostQna> hostQnaResult = qnaService.getHostQnaList(boardNum);
+		Gson json = new Gson();
+		return json.toJson(hostQnaResult);
 	}
 }

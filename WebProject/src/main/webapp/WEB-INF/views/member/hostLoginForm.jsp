@@ -5,14 +5,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div style="text-align: center">
-<h1>일반회원 로그인</h1>
+<div style="text-align: center;">
+<h1>호스트 로그인</h1>
 </div>
-<form action="login" method="post">
+<form action="hostLogin" method="post">
 <table align="center" border="1" cellpadding="0" cellspacing="0">				
 	<tr>
 		<td bgcolor="orange" >아이디</td>
-		<td><input name="custId" type="text" size="10"></td>
+		<td><input name="hostId" type="text" size="10"></td>
 	</tr>
 	<tr>
 		<td bgcolor="orange" >비밀번호</td>
