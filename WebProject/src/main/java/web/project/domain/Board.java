@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import lombok.Getter;
+
 @Entity
 @SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq")
 public class Board implements Serializable {
@@ -27,8 +29,10 @@ public class Board implements Serializable {
 	private String address;
 	private int readcount;
 	private int wishList;
+	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
 	private Date regdate;
 	private int price;
+	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int headcnt;
 	
 	@ManyToOne
