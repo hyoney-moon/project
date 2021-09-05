@@ -21,9 +21,6 @@ public class CustQna implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long qnaNum; // 댓글 글번호
-	//private Long grp; // 댓글이 속한 댓글 번호
-	//private Long grpl; // 댓글의 깊이
-	//@Column(updatable = false, columnDefinition = "date default sysdate")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(insertable = false, columnDefinition = "date default sysdate")
 	private Date commentDate; // 댓글 작성 시간
@@ -35,7 +32,4 @@ public class CustQna implements Serializable {
 	@JoinColumn(name="boardNum")
 	private Board board;
 	
-//	@ManyToOne
-//	@JoinColumn(name="hostId")
-//	private Host host;
 }

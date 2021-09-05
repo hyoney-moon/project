@@ -35,8 +35,6 @@ public class QnaController {
 	@ResponseBody
 	public void insertCustQna(CustQna qna) {
 		qnaService.insertCustQna(qna);
-		
-		//return "redirect:";
 	}
 	
 	// 호스트 답변
@@ -44,6 +42,5 @@ public class QnaController {
 	@ResponseBody
 	public void insertHostQna(HostQna qna) {
 		qnaService.insertHostQna(qna);
-		//return "redirect:";
 	}
 }
