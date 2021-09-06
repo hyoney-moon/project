@@ -8,7 +8,7 @@ import javax.persistence.*;
 import lombok.Getter;
 
 @Entity
-@SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq")
+@SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq", initialValue=1, allocationSize=1)
 public class Board implements Serializable {
 
 	
@@ -26,13 +26,35 @@ public class Board implements Serializable {
 	private String website;
 	private String front_img;
 	private String image;
+	private String zipcode;
 	private String address;
+	private String address_detail;
+	
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getAddress_detail() {
+		return address_detail;
+	}
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int readcount;
 	private int wishList;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
 	private Date regdate;
 	private int price;
-	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int headcnt;
 	
 	@ManyToOne
@@ -136,4 +158,12 @@ public class Board implements Serializable {
 		this.headcnt = headcnt;
 	}
 	
+	@Override
+	public String toString() {
+		return "Board [num=" + num + ", host_id=" + host_id + ", spaceName=" + spaceName + ", content_oneline="
+				+ content_oneline + ", content=" + content + ", direction=" + direction + ", caution=" + caution
+				+ ", website=" + website + ", front_img=" + front_img + ", image=" + image + ", address=" + address
+				+ ", readcount=" + readcount + ", wishList=" + wishList + ", regdate=" + regdate + ", price=" + price
+				+ ", headcnt=" + headcnt + ", category=" + category + "]";
+	}
 }
