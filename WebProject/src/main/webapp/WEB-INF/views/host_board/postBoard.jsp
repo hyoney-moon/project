@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,16 +73,15 @@ body {
 			공간유형<br>
 			<div class="row justify-content-between mb-3">
 				<div class="col">
-					<select name="big_category" class="form-select" aria-label="Default select example">
-						<option selected>대분류</option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
+					<select name="category" class="form-select" aria-label="Default select example">
+						<c:forEach items="${cList}" var="clist">
+							<option value="${clist.category }">${clist.category }</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
 
-			공간 한줄 소개 <input name="content_oneline" class="form-control mb-3" type="text"
+			공간 한줄 소개 <input name="contentOneline" class="form-control mb-3" type="text"
 				placeholder="내 귀염 뽀짝한 공간을 한줄로 표현한다면?"
 				aria-label="default input example">
 
@@ -119,13 +119,13 @@ body {
 			주소
 				<input name="address" id="address" class="form-control" type="text" placeholder="주소"
 				aria-label="default input example">
-				<input name="address_detail" id="detailAddress" class="form-control" type="text" placeholder="상세주소"
+				<input name="addressDetail" id="detailAddress" class="form-control" type="text" placeholder="상세주소"
 				aria-label="default input example">
 			</div>
 
 			<div class="mb-3">
 				<label for="formFile" class="form-label">대표이미지</label> <input
-					name="front_img" class="form-control" type="file" id="formFile">
+					name="frontImg" class="form-control" type="file" id="formFile">
 			</div>
 			
 			<div class="mb-3">
