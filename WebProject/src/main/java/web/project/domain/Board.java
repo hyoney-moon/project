@@ -17,38 +17,23 @@ public class Board implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Board_Seq_Gen")
 	private int num;
-	private String host_id;
+	
+	@ManyToOne
+	@JoinColumn(name="hostid", insertable = false, updatable = false)
+	private Host host;
+	
+	private String hostid;
 	private String spaceName;
-	private String content_oneline;
+	private String contentOneline;
 	private String content;
 	private String direction;
 	private String caution;
 	private String website;
-	private String front_img;
+	private String frontImg;
 	private String image;
 	private String zipcode;
 	private String address;
-	private String address_detail;
-	
-	public String getZipcode() {
-		return zipcode;
-	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-	public String getAddress_detail() {
-		return address_detail;
-	}
-	public void setAddress_detail(String address_detail) {
-		this.address_detail = address_detail;
-	}
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
+	private String addressDetail;
 	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int readcount;
 	private int wishList;
@@ -56,16 +41,25 @@ public class Board implements Serializable {
 	private Date regdate;
 	private int price;
 	private int headcnt;
+	private String category;
 	
 	@ManyToOne
-	@JoinColumn(name="big_category", insertable = false, updatable = false)
-	private Category category;
+	@JoinColumn(name="category", insertable = false, updatable = false)
+	private Category categoryFk;
 	
-	public String getHost_id() {
-		return host_id;
+	
+	
+	public Category getCategoryFk() {
+		return categoryFk;
 	}
-	public void setHost_id(String host_id) {
-		this.host_id = host_id;
+	public void setCategoryFk(Category categoryFk) {
+		this.categoryFk = categoryFk;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public int getNum() {
 		return num;
@@ -73,17 +67,29 @@ public class Board implements Serializable {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	public Host getHost() {
+		return host;
+	}
+	public void setHost(Host host) {
+		this.host = host;
+	}
+	public String getHostid() {
+		return hostid;
+	}
+	public void setHostid(String hostid) {
+		this.hostid = hostid;
+	}
 	public String getSpaceName() {
 		return spaceName;
 	}
 	public void setSpaceName(String spaceName) {
 		this.spaceName = spaceName;
 	}
-	public String getContent_oneline() {
-		return content_oneline;
+	public String getContentOneline() {
+		return contentOneline;
 	}
-	public void setContent_oneline(String content_oneline) {
-		this.content_oneline = content_oneline;
+	public void setContentOneline(String contentOneline) {
+		this.contentOneline = contentOneline;
 	}
 	public String getContent() {
 		return content;
@@ -109,11 +115,11 @@ public class Board implements Serializable {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	public String getFront_img() {
-		return front_img;
+	public String getFrontImg() {
+		return frontImg;
 	}
-	public void setFront_img(String front_img) {
-		this.front_img = front_img;
+	public void setFrontImg(String frontImg) {
+		this.frontImg = frontImg;
 	}
 	public String getImage() {
 		return image;
@@ -121,11 +127,23 @@ public class Board implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
 	}
 	public int getReadcount() {
 		return readcount;
@@ -158,12 +176,4 @@ public class Board implements Serializable {
 		this.headcnt = headcnt;
 	}
 	
-	@Override
-	public String toString() {
-		return "Board [num=" + num + ", host_id=" + host_id + ", spaceName=" + spaceName + ", content_oneline="
-				+ content_oneline + ", content=" + content + ", direction=" + direction + ", caution=" + caution
-				+ ", website=" + website + ", front_img=" + front_img + ", image=" + image + ", address=" + address
-				+ ", readcount=" + readcount + ", wishList=" + wishList + ", regdate=" + regdate + ", price=" + price
-				+ ", headcnt=" + headcnt + ", category=" + category + "]";
-	}
 }

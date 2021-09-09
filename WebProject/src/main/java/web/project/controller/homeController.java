@@ -25,4 +25,9 @@ public class homeController {
 	public String postBoard() {
 		return "host_board/postBoard";
 	}
+	
+	@RequestMapping("/joinForm")
+	public String View() {
+		return "login/joinForm";
+	}
 }

@@ -10,10 +10,7 @@ public class Host implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@ManyToOne
-	@JoinColumn(name="host_id",insertable = false, updatable = false)
-	private Board board;
-	
+	private String hostid;
 	private String password;
 	private String email;
 	private String nickname;
@@ -23,12 +20,11 @@ public class Host implements Serializable {
 	private String profile;
 	
 	
-	
-	public Board getBoard() {
-		return board;
+	public String getHostid() {
+		return hostid;
 	}
-	public void setBoard(Board board) {
-		this.board = board;
+	public void setHostid(String hostid) {
+		this.hostid = hostid;
 	}
 	public String getPassword() {
 		return password;

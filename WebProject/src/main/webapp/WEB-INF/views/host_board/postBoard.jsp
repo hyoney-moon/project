@@ -64,12 +64,10 @@ body {
 				메뉴바 검색</nav>
 		</div>
 	</header>
-	<p>
 	<div class="container">
 		<form action="boardList" method="post">
 			공간명<br> <input name="spaceName" class="form-control" type="text"
 				placeholder="공간명" aria-label="default input example">
-			</p>
 
 			공간유형<br>
 			<div class="row justify-content-between mb-3">
@@ -81,17 +79,7 @@ body {
 						<option value="3">Three</option>
 					</select>
 				</div>
-				<div class="col">
-					<select name="small_category" class="form-select width-50%"
-						aria-label="Default select example">
-						<option selected>소분류</option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
-					</select>
-				</div>
 			</div>
-
 
 			공간 한줄 소개 <input name="content_oneline" class="form-control mb-3" type="text"
 				placeholder="내 귀염 뽀짝한 공간을 한줄로 표현한다면?"

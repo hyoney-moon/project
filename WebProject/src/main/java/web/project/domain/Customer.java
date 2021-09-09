@@ -10,7 +10,7 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String cust_id;
+	private String custid;
 	private String email;
 	private String password;
 	private String nickname;
@@ -23,11 +23,12 @@ public class Customer implements Serializable {
 	private String wish;
 	
 	
-	public String getCust_id() {
-		return cust_id;
+	
+	public String getCustid() {
+		return custid;
 	}
-	public void setCust_id(String cust_id) {
-		this.cust_id = cust_id;
+	public void setCustid(String custid) {
+		this.custid = custid;
 	}
 	public String getEmail() {
 		return email;
@@ -89,5 +90,5 @@ public class Customer implements Serializable {
 	public void setWish(String wish) {
 		this.wish = wish;
 	}
-   
+	
 }
