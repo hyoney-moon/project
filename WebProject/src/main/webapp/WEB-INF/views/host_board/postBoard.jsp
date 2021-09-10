@@ -66,7 +66,7 @@ body {
 		</div>
 	</header>
 	<div class="container">
-		<form action="boardList" method="post">
+		<form action="boardList" method="post" enctype="multipart/form-data">
 			공간명<br> <input name="spaceName" class="form-control" type="text"
 				placeholder="공간명" aria-label="default input example">
 
@@ -124,13 +124,13 @@ body {
 			</div>
 
 			<div class="mb-3">
-				<label for="formFile" class="form-label">대표이미지</label> <input
-					name="frontImg" class="form-control" type="file" id="formFile">
+				<label for="formFile" class="form-label">대표이미지</label>
+				<input multiple="multiple" name="frontImg" class="form-control" type="file" id="formFile">
 			</div>
 			
 			<div class="mb-3">
-				<label for="formFile" class="form-label">이미지</label> <input
-					name="image" class="form-control" type="file" id="formFile">
+				<label for="formFile" class="form-label">이미지</label>
+				<input multiple="multiple" name="image" class="form-control" type="file" id="formFile">
 			</div>
 			
 			<div class="mb-3">

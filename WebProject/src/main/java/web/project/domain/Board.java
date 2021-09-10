@@ -1,11 +1,20 @@
 package web.project.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
-
-import lombok.Getter;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq", initialValue=1, allocationSize=1)
@@ -16,7 +25,7 @@ public class Board implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Board_Seq_Gen")
-	private int num;
+	private Long boardNum;
 	
 	@ManyToOne
 	@JoinColumn(name="hostid", insertable = false, updatable = false)
@@ -29,8 +38,6 @@ public class Board implements Serializable {
 	private String direction;
 	private String caution;
 	private String website;
-	private String frontImg;
-	private String image;
 	private String zipcode;
 	private String address;
 	private String addressDetail;
@@ -47,8 +54,31 @@ public class Board implements Serializable {
 	@JoinColumn(name="category", insertable = false, updatable = false)
 	private Category categoryFk;
 	
+	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	private List<FrontImg> frontimgList = new ArrayList<>();
+	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	private List<Img> imgList = new ArrayList<>();
 	
 	
+	
+	public List<FrontImg> getFrontimgList() {
+		return frontimgList;
+	}
+	public void setFrontimgList(List<FrontImg> frontimgList) {
+		this.frontimgList = frontimgList;
+	}
+	public List<Img> getImgList() {
+		return imgList;
+	}
+	public void setImgList(List<Img> imgList) {
+		this.imgList = imgList;
+	}
+	public Long getBoardNum() {
+		return boardNum;
+	}
+	public void setBoardNum(Long boardNum) {
+		this.boardNum = boardNum;
+	}
 	public Category getCategoryFk() {
 		return categoryFk;
 	}
@@ -60,12 +90,6 @@ public class Board implements Serializable {
 	}
 	public void setCategory(String category) {
 		this.category = category;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
 	}
 	public Host getHost() {
 		return host;
@@ -114,18 +138,6 @@ public class Board implements Serializable {
 	}
 	public void setWebsite(String website) {
 		this.website = website;
-	}
-	public String getFrontImg() {
-		return frontImg;
-	}
-	public void setFrontImg(String frontImg) {
-		this.frontImg = frontImg;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
 	}
 	public String getZipcode() {
 		return zipcode;

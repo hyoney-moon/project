@@ -5,5 +5,7 @@
 		<class>web.project.domain.Host</class>
 		<class>web.project.domain.Board</class>
 		<class>web.project.domain.Category</class>
+		<class>web.project.domain.FrontImg</class>
+		<class>web.project.domain.Img</class>
 	</persistence-unit>
 </persistence>

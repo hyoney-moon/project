@@ -28,7 +28,7 @@ public class HostLoginController {
 		Host findHost = hostLoginService.getHost(host);
 		if(findHost != null && findHost.getPassword().equals(host.getPassword())) {
 			model.addAttribute("host",findHost);
-			return "host_board/postBoard";
+			return "redirect:/";
 		} else {
 			return "redirect:hostLoginForm";
 		}

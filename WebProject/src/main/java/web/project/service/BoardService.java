@@ -4,6 +4,6 @@ import web.project.domain.Board;
 
 public interface BoardService {
 	
-	void saveBoard(Board board);
+	Board saveBoard(Board board);
 
 }
