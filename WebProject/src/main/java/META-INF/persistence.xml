@@ -9,6 +9,7 @@
 		<class>web.project.domain.Customer</class>
 		<class>web.project.domain.Host</class>
 		<class>web.project.domain.HostQna</class>
+		<class>web.project.domain.PreBoard</class>
 
 		
 	</persistence-unit>

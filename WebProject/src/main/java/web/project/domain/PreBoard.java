@@ -11,16 +11,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
-// 
+
 /**
- * Entity implementation class for Entity: Board
+ * Entity implementation class for Entity: PreBoard
  *
  */
 @Entity
-@Setter
 @Getter
-public class Board implements Serializable {
-
+@Setter
+public class PreBoard implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -37,9 +36,8 @@ public class Board implements Serializable {
 	private String readcount; // 조회수
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(columnDefinition = "date default sysdate")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	//@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date regDate;
 	private Long price;
 	private Long headcnt; 

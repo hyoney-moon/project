@@ -1,6 +1,8 @@
 package web.project.service;
 
 
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 
@@ -12,5 +14,7 @@ public interface BoardService {
 	Page<Board> getBoardList(int pNum);
 
 	Board getBoard(Long boardNum);
+	
+	void insertAllBoard(List<Board> board);
 
 }

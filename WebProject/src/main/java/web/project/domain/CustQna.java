@@ -30,6 +30,6 @@ public class CustQna implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="boardNum")
-	private Board board;
+	private Board board; // board.boardNum
 	
 }

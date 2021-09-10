@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import web.project.domain.Board;
 //
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepositoryRepository extends JpaRepository<Board, Long> {
 
 	Page<Board> findByOrderByBoardNumDesc(Pageable page);
 

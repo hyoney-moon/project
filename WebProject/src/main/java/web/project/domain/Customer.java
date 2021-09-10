@@ -26,7 +26,8 @@ public class Customer implements Serializable {
 	private String gender;
 	private Long age;
 	private String post;
-	private String cash; 
+	private Long cash; 
 	private String profile;
 	private String pick;
+	private Long totalSpend;
 }

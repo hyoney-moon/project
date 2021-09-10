@@ -70,7 +70,7 @@ public class BoardController {
 		return "host_board/getBoard";
 	}
 	
-	// 댓글 출력(ajax)
+	// 일반회원 댓글 출력(ajax)
 	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String commentList(Long boardNum) throws Exception {
@@ -78,7 +78,7 @@ public class BoardController {
 		Gson json = new Gson();
 		return json.toJson(custQnaResult);
 	}
-	
+	// 호스트 댓글 출력(ajax) 
 	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String replyCommentList(Long boardNum) throws Exception {
