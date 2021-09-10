@@ -1,6 +1,7 @@
 package web.project.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -9,7 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 // 
 /**
@@ -19,6 +22,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class Board implements Serializable {
 
 	
@@ -35,10 +39,11 @@ public class Board implements Serializable {
 	private String front_img; // 공간 이미지
 	private String address; // 공간 주소
 	private String readcount; // 조회수
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(columnDefinition = "date default sysdate")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	//@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	@Temporal(value = TemporalType.DATE)
+	//@Column(columnDefinition = "date default sysdate")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MMM yyyy HH:mm:ss z", timezone = "GMT+2")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date regDate;
 	private Long price;

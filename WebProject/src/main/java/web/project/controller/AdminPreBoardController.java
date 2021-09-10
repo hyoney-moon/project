@@ -1,6 +1,7 @@
 package web.project.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +41,16 @@ public class AdminPreBoardController {
 	
 	@GetMapping("getPreBoardList")
 	@ResponseBody
-	public String getPreBoardList() {
+	public List<PreBoard> getPreBoardList() {
 		List<PreBoard> result = adminPreBoardService.PreBoardList();
-		Gson json = new Gson();
-		
-		return json.toJson(result);
+		//Gson json = new Gson();
+		// json.toJson(result);
+		return result; 
 	}
 	
 	@PostMapping("permission")
-	public void permission(@RequestBody @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul") List<Board> board ) {
+	public void permission(@RequestBody List<Board> board) {
+		
 		boardService.insertAllBoard(board);
 	}
 }
