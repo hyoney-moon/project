@@ -50,7 +50,12 @@ public class AdminPreBoardController {
 	
 	@PostMapping("permission")
 	public void permission(@RequestBody List<Board> board) {
-		
 		boardService.insertAllBoard(board);
+	}
+	
+	@PostMapping("delete")
+	public void delete(@RequestBody List<Long> boardNum) {
+		System.out.print("test " + boardNum);
+		adminPreBoardService.deletePreBoard(boardNum);
 	}
 }

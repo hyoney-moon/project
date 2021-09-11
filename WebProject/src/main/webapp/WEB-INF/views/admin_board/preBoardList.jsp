@@ -58,18 +58,33 @@ $(document).on("click","#permission", function(){
 		contentType: 'application/json',
 		data : JSON.stringify(board),
 	}).done(function(data){
-		alert("정상 등록됐습니다");
+		alert("정상 등록됐습니다"); // 완료 후 화면 새로고침 구현 필요
 	})
 	
 });// click 종료
 
+$(document).on("click","#delete",function(){
+	let boardNum = grid.getColumnValues("boardNum");
+	console.log(boardNum);
+	
+	$.ajax({
+		url : "/preBoard/delete",
+		method : "POST",
+		dataType : "JSON",
+		contentType : 'application/json',
+		data : //boardNum,
+			JSON.stringify(boardNum),
+	}).done(function(data){
+		grid.resetData(result); // 완료 후 화면 새로고침 필요
+	})
+})
+
 };
-
-
 </script>
 <body>
 <div id="grid"></div>
 <button id="permission">공간등록 허가</button>
+<button id="delete">삭제</button>
 
 </body>
 </html>

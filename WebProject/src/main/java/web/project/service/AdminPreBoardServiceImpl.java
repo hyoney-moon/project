@@ -19,4 +19,9 @@ public class AdminPreBoardServiceImpl implements AdminPreBoardService {
 		return adminPreBoardRepository.findAll();
 	}
 
+	@Override
+	public void deletePreBoard(List<Long> boardNum) {
+		adminPreBoardRepository.deleteAllByboardNumIn(boardNum);
+	}
+
 }
