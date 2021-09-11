@@ -10,6 +10,7 @@
 		<class>web.project.domain.Host</class>
 		<class>web.project.domain.HostQna</class>
 		<class>web.project.domain.PreBoard</class>
+		<class>web.project.domain.CustInfo</class>
 
 		
 	</persistence-unit>

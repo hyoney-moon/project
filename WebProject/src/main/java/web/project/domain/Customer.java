@@ -1,6 +1,8 @@
 package web.project.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 import lombok.Getter;
@@ -26,8 +28,9 @@ public class Customer implements Serializable {
 	private String gender;
 	private Long age;
 	private String post;
-	private Long cash; 
+	private Long cash;
 	private String profile;
 	private String pick;
 	private Long totalSpend;
+	private Date joinDate;
 }

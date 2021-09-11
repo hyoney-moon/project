@@ -13,20 +13,30 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import web.project.domain.CustInfo;
 import web.project.domain.Customer;
+import web.project.service.AdminCustomerInfoService;
 import web.project.service.AdminGetCustomerService;
+import web.project.service.CustomerService;
 
 @Controller
 @RequestMapping("customerinfo")
 public class AdminGetCustomerController {
 	@Autowired
 	private AdminGetCustomerService adminGetCustomerService;
+	
+	@Autowired
+	private AdminCustomerInfoService adminCustomerInfoService;
+	
+	@Autowired
+	private CustomerService customerService;
 
 	@GetMapping("customerList")
 	@ResponseBody
@@ -122,4 +132,13 @@ public class AdminGetCustomerController {
 	        wb.close();
 
 		}
+	
+	// 일반회원 통계 조회
+	@GetMapping("getCustomerInfo")
+	public String getCustomerInfo(Model m) {
+		List<Long> custNumList = customerService.getCustCount();
+		m.addAttribute("custNumList",custNumList);
+		
+		return "admin_board/custInfo";
+	}
 	}
