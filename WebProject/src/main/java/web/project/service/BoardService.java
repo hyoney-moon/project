@@ -17,4 +17,6 @@ public interface BoardService {
 	
 	void insertAllBoard(List<Board> board);
 
+	// 게시글 수 조회 통계
+	List<Long> getBoardCount();
 }

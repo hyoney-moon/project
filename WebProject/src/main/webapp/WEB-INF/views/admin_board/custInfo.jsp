@@ -37,9 +37,43 @@ const labels = [
 			  options: {}
 			};
 
-  var myChart = new Chart(
-    document.getElementById('myChart'),
+  var custCountChart = new Chart(
+    document.getElementById('custCountChart'),
     config
+  );
+  
+  // 누적 게시글 수
+  
+  const boardCountlabels = [
+	  '1월',
+	  '2월',
+	  '3월',
+	  '4월',
+	  '5월',
+	  '6월',
+	  '7월',
+	  '8월',
+	  '9월',
+	];
+	const boardCountData = {
+	  labels: boardCountlabels,
+	  datasets: [{
+	    label: '누적 게시글 수(개)',
+	    backgroundColor: 'rgb(255, 99, 132)',
+	    borderColor: 'rgb(255, 99, 132)',
+	    data: ${boardCountList},
+	  }]
+	};
+	
+	const boardCountconfig = {
+			  type: 'bar',
+			  data: boardCountData,
+			  options: {}
+			};
+
+  var boardCountChart = new Chart(
+    document.getElementById('boardCountChart'),
+    boardCountconfig
   );
 }
 </script>
@@ -48,7 +82,13 @@ const labels = [
 <body>
 
 <div>
-  <canvas id="myChart"></canvas>
+  <canvas id="custCountChart"></canvas>
+</div>
+<div>
+  <canvas id="boardCountChart"></canvas>
+</div>
+<div>
+  <canvas id="totalRevenueChart"></canvas>
 </div>
 
 </body>

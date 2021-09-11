@@ -24,6 +24,7 @@ import web.project.domain.CustInfo;
 import web.project.domain.Customer;
 import web.project.service.AdminCustomerInfoService;
 import web.project.service.AdminGetCustomerService;
+import web.project.service.BoardService;
 import web.project.service.CustomerService;
 
 @Controller
@@ -37,6 +38,9 @@ public class AdminGetCustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	@GetMapping("customerList")
 	@ResponseBody
@@ -133,12 +137,22 @@ public class AdminGetCustomerController {
 
 		}
 	
-	// 일반회원 통계 조회
+	
 	@GetMapping("getCustomerInfo")
 	public String getCustomerInfo(Model m) {
+		// 일반회원 통계 조회
 		List<Long> custNumList = customerService.getCustCount();
 		m.addAttribute("custNumList",custNumList);
 		
+		// 게시글 수 통계 조회
+		List<Long> boardCountList = boardService.getBoardCount();
+		m.addAttribute("boardCountList", boardCountList);
+		
+		// 총 거래액 통계 조회(컬럼 추가 후 작성)
+		
+		// 연령 분포 통계
+		
 		return "admin_board/custInfo";
 	}
-	}
+
+}
