@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import web.project.domain.FrontImg;
 
 public interface FrontImgRepository extends JpaRepository<FrontImg, Long> {
+
+//	List<FrontImg> findByFrontImgNo();
 	
 	
 }

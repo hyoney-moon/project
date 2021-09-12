@@ -1,5 +1,7 @@
 package web.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +19,9 @@ public class ImgServiceImpl implements ImgService {
 	public Img saveImg(Img img) {
 		return imgRepo.save(img);
 	}
+	
+//	@Override
+//	public List<Img> getImgList() {
+//		return imgRepo.findByImgNo();
+//	}
 }

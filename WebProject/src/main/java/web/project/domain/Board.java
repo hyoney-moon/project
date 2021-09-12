@@ -49,6 +49,8 @@ public class Board implements Serializable {
 	private int price;
 	private int headcnt;
 	private String category;
+	private Long frontImgNo;
+	private Long imgNo;
 	
 	@ManyToOne
 	@JoinColumn(name="category", insertable = false, updatable = false)
@@ -56,11 +58,24 @@ public class Board implements Serializable {
 	
 	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<FrontImg> frontimgList = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<Img> imgList = new ArrayList<>();
 	
 	
 	
+	public Long getImgNo() {
+		return imgNo;
+	}
+	public void setImgNo(Long imgNo) {
+		this.imgNo = imgNo;
+	}
+	public Long getFrontImgNo() {
+		return frontImgNo;
+	}
+	public void setFrontImgNo(Long frontImgNo) {
+		this.frontImgNo = frontImgNo;
+	}
 	public List<FrontImg> getFrontimgList() {
 		return frontimgList;
 	}
