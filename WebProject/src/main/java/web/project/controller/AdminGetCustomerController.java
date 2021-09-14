@@ -113,7 +113,7 @@ public class AdminGetCustomerController {
 
 	        cell = row.createCell(1);
 	        cell.setCellStyle(bodyStyle);
-	        cell.setCellValue(customer.getNickname());
+	        cell.setCellValue(customer.getNickName());
 
 	        cell = row.createCell(2);
 	        cell.setCellStyle(bodyStyle);
@@ -151,6 +151,12 @@ public class AdminGetCustomerController {
 		// 총 거래액 통계 조회(컬럼 추가 후 작성)
 		
 		// 연령 분포 통계
+		List<Long> custAgeList = customerService.getCustAge();
+		m.addAttribute("custAgeList", custAgeList);
+		
+		// 성비
+		List<Long> genderList = customerService.getCustGender();
+		m.addAttribute("genderList",genderList);
 		
 		return "admin_board/custInfo";
 	}

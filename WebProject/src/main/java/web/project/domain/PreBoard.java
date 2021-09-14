@@ -29,14 +29,14 @@ public class PreBoard implements Serializable {
 	@Id
 	private Long boardNum; // 글번호
 	private String spaceName; // 공간명(글제목)
-	private String content_oneline; // 공간 한줄 소개
+	private String contentOneline; // 공간 한줄 소개
 	private String content; // 공간 소개(본문)
 	private String direction; 
 	private String caution; // 주의사항
 	private String website; 
-	private String front_img; // 공간 이미지
+	private String frontImg; // 공간 이미지
 	private String address; // 공간 주소
-	private String readcount; // 조회수
+	private String readCount; // 조회수
 	@Temporal(value = TemporalType.DATE)
 	//@Column(columnDefinition = "date default sysdate")
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -45,6 +45,6 @@ public class PreBoard implements Serializable {
 	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date regDate;
 	private Long price;
-	private Long headcnt; 
-	private String Category;
+	private Long headCount; 
+	private String category;
 }

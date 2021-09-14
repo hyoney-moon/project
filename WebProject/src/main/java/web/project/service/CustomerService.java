@@ -8,4 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public interface CustomerService {
 
 	List<Long> getCustCount();
+	
+	List<Long> getCustAge();
+	
+	List<Long> getCustGender();
 }

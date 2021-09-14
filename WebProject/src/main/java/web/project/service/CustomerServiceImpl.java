@@ -38,7 +38,38 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		return custNumList;
 	}
-	
-	
 
+	@Override
+	public List<Long> getCustAge() {
+		long countAge10 = CustRepo.countAge10();
+		long countAge20 = CustRepo.countAge20();
+		long countAge30 = CustRepo.countAge30();
+		long countAge40 = CustRepo.countAge40();
+		long countAge50 = CustRepo.countAge50();
+		
+		List<Long> custAgeList = new ArrayList<>();
+		custAgeList.add(countAge10);
+		custAgeList.add(countAge20);
+		custAgeList.add(countAge30);
+		custAgeList.add(countAge40);
+		custAgeList.add(countAge50);
+		
+		return custAgeList;
+	}
+
+	@Override
+	public List<Long> getCustGender() {
+		long countGenderM = CustRepo.countGenderM(); 
+		long countGenderW = CustRepo.countGenderW();
+		
+//		long percentM = countGenderM / (countGenderM + countGenderW);
+//		long percentW = countGenderW / (countGenderM + countGenderW);
+		
+		List<Long> countGenderList = new ArrayList<>();
+		countGenderList.add(countGenderM);
+		countGenderList.add(countGenderW);
+		
+		return countGenderList;
+	}
+	
 }
