@@ -9,7 +9,7 @@ import web.project.domain.FrontImg;
 
 public interface FrontImgRepository extends JpaRepository<FrontImg, Long> {
 
-//	List<FrontImg> findByFrontImgNo();
+	List<FrontImg> findByBoardNumOrderByFrontImgNoDesc(Long boardNum);
 	
 	
 }

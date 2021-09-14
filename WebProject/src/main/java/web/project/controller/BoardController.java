@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,11 +49,13 @@ public class BoardController implements ApplicationContextAware {
 	private ImgService imgService;
 	
 	@PostMapping("/boardList")
-	public String insertBoard(Model model, Board board, @ModelAttribute("host")Host host,List<MultipartFile> frontImg, List<MultipartFile> img) {
+	public String insertBoard(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
 		board.setHostid(host.getHostid());
 		Board b =  boardService.saveBoard(board);
+		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		System.out.println(b.getBoardNum());
 		model.addAttribute("place", b);
+		model.addAttribute("viewImg",imgb);
 		
 		//프론트 이미지 업로드
 		for (MultipartFile file : frontImg) {
@@ -68,13 +71,13 @@ public class BoardController implements ApplicationContextAware {
 		}
 		
 		//이미지 업로드
-		for (MultipartFile file2 : img) {
-		String path = getImgPath(file2);
+		for (MultipartFile file : image) {
+		String path = getImgPath(file);
 		Img im = new Img();
 		im.setBoardNum(b.getBoardNum());
 		im.setFilename(path);
 		im.setFilePath(path);
-		im.setOrigFilename(file2.getOriginalFilename());
+		im.setOrigFilename(file.getOriginalFilename());
 				
 		//save
 		imgService.saveImg(im);
@@ -84,23 +87,23 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	//(이미지)실제 업로드할 경로 만드는 부분
-	private String getImgPath(MultipartFile img) {
+	private String getImgPath(MultipartFile image) {
 		
-		String oriName = img.getOriginalFilename(); //저장 된 파일의 원본 이름
+		String oriName = image.getOriginalFilename(); //저장 된 파일의 원본 이름
 		int index = oriName.lastIndexOf(".");
 		String ext = oriName.substring(index+1); //파일 이름 겹치지 않게 지정
 		Random r = new Random();
 		String fileName = System.currentTimeMillis() + "_" + r.nextInt(50) + "." + ext;
 	
-		String path = context.getServletContext().getRealPath("WEB-INF/img/Img/"+fileName); 
+		String path = context.getServletContext().getRealPath("img/Img/"+fileName); 
     
 		try {
-			img.transferTo(new File(path));
+			image.transferTo(new File(path));
 		}catch(IllegalStateException | IOException e){
 			e.printStackTrace();
 		}
 		
-		return "WEB-INF/img/Img/"+fileName;
+		return "/img/Img/"+fileName;
 	}
 	
 	//(프론트이미지)실제 업로드할 경로 만드는 부분
@@ -112,7 +115,7 @@ public class BoardController implements ApplicationContextAware {
 			Random r = new Random();
 			String fileName = System.currentTimeMillis() + "_" + r.nextInt(50) + "." + ext;
 			
-			String path = context.getServletContext().getRealPath("WEB-INF/img/frontImg/"+fileName); 
+			String path = context.getServletContext().getRealPath("img/frontImg/"+fileName); 
 			System.out.println(path);
 			try {
 				frontImg.transferTo(new File(path));
@@ -120,7 +123,7 @@ public class BoardController implements ApplicationContextAware {
 				e.printStackTrace();
 			}
 			
-        return "WEB-INF/img/frontImg/"+fileName;
+        return "/img/frontImg/"+fileName;
      }
 	
 	//공간 보기
@@ -144,21 +147,22 @@ public class BoardController implements ApplicationContextAware {
 			}
 			model.addAttribute("begin", begin);
 			model.addAttribute("end", end);
-//			List<FrontImg> fiList = frontImgService.getFImgList();
-//			List<Img> imgList = imgService.getImgList();
-			
-//			model.addAttribute("imgList",imgList);
-//			model.addAttribute("fimgList",fiList);
-			model.addAttribute("bList",bList);
 			
 			return "host_board/boardList";
 		}
 		
 		@RequestMapping("/viewPost/{boardNum}")
-		public String viewPost() {
+		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
+			Board view = boardService.viewPost(boardNum);
+			model.addAttribute("view",view);
+			
+			List<FrontImg> fis = frontImgService.viewImg(boardNum);
+			model.addAttribute("fis", fis);
+			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
 	
+	//어플리케이션 객체 구함, realPath구하려고
 	@Override
     public void setApplicationContext(ApplicationContext applicationContext)
           throws BeansException {

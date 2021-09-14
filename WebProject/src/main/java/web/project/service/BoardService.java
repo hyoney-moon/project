@@ -12,5 +12,7 @@ public interface BoardService {
 
 	Page<Board> getBoardList(int pNum);
 
+	Board viewPost(Long boardNum);
+
 
 }

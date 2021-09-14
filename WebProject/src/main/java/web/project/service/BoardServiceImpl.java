@@ -28,4 +28,11 @@ public class BoardServiceImpl implements BoardService {
 		Pageable page = PageRequest.of(pNum-1, 5);
 		return boardRepo.findByOrderByBoardNumDesc(page);
 	}
+	
+	//상세보기
+	@Override
+	public Board viewPost(Long boardNum) {
+		boardRepo.updateReadcount(boardNum);
+		return boardRepo.findByBoardNum(boardNum);
+	}
 }

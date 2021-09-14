@@ -20,9 +20,14 @@ public class FrontImgServiceImpl implements FrontImgService {
 		return frontImgRepo.save(frontImg);
 	}
 	
-//	@Override
-//	public List<FrontImg> getFImgList() {
-//		return frontImgRepo.findByFrontImgNo();
-//	}
+	@Override
+	public List<FrontImg> viewImg(Long boardNum) {
+		return frontImgRepo.findByBoardNumOrderByFrontImgNoDesc(boardNum);
+	}
+
+	@Override
+	public List<FrontImg> viewList() {
+		return frontImgRepo.findAll();
+	}
 
 }
