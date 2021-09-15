@@ -12,12 +12,12 @@
 
 window.onload = function(){
 	$.ajax({
-		url : "/preBoard/getPreBoardList",
+		url : "/permit/getBoardList",
 		method :"GET",
 		dataType : "JSON",
 		success : function(result){
 			grid.resetData(result);
-		} 
+		}
 	});
 	var grid = new tui.Grid({
 	    el: document.getElementById('grid'),
@@ -34,10 +34,6 @@ window.onload = function(){
 	        name: 'spaceName',
 	      },
 	      {
-	        header: 'Category',
-	        name: 'Category'
-	      },
-	      {
 	        header: 'price',
 	        name: 'price'
 	      },
@@ -52,7 +48,7 @@ $(document).on("click","#permission", function(){
 	console.dir(grid.getCheckedRows());
 	let board = grid.getCheckedRows();
 	$.ajax({
-		url : "/preBoard/permission",
+		url : "/permit/update",
 		method : "POST",
 		dataType : "JSON",
 		contentType: 'application/json',
@@ -68,7 +64,7 @@ $(document).on("click","#delete",function(){
 	console.log(boardNum);
 	
 	$.ajax({
-		url : "/preBoard/delete",
+		url : "/permit/delete",
 		method : "POST",
 		dataType : "JSON",
 		contentType : 'application/json',

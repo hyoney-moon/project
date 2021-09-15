@@ -8,7 +8,6 @@
 		<class>web.project.domain.Board</class>
 		<class>web.project.domain.Customer</class>
 		<class>web.project.domain.Host</class>
-		<class>web.project.domain.PreBoard</class>
 		<class>web.project.domain.CustInfo</class>
 
 		

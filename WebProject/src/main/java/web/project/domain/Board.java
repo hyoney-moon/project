@@ -31,22 +31,20 @@ public class Board implements Serializable {
 	@Id
 	private Long boardNum; // 글번호
 	private String spaceName; // 공간명(글제목)
-	private String content_oneline; // 공간 한줄 소개
+	private String contentOneline; // 공간 한줄 소개
 	private String content; // 공간 소개(본문)
-	private String direction; 
 	private String caution; // 주의사항
 	private String website; 
-	private String front_img; // 공간 이미지
-	private String address; // 공간 주소
-	private String readcount; // 조회수
+	private String readCount; // 조회수
 	@Temporal(value = TemporalType.DATE)
-	//@Column(columnDefinition = "date default sysdate")
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E, dd MMM yyyy HH:mm:ss z", timezone = "GMT+2")
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date regDate;
 	private Long price;
-	private Long headcnt; 
-	private String Category;
+	private String zipcode;
+	private String address; // 공간 주소
+	private String addressDetail;
+	private String direction;
+	@Column(columnDefinition = "number default 0")
+	private Long permit;
 }
