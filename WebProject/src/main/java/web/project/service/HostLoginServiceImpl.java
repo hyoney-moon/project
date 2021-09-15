@@ -17,7 +17,7 @@ public class HostLoginServiceImpl implements HostLoginService {
 	
 	@Override
 	public Host getHost(Host host) {
-		Optional<Host> findHost = hostLoginRepo.findByHostid(host.getHostid());
+		Optional<Host> findHost = hostLoginRepo.findByHostId(host.getHostId());
 		if(findHost.isPresent())
 			return findHost.get();
 		else

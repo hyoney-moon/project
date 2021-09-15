@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,13 +24,21 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
-import web.project.domain.PreBoard;
+import com.google.gson.Gson;
+
+import web.project.domain.Board;
+import web.project.domain.CustQna;
+import web.project.domain.Customer;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
+import web.project.domain.HostQna;
 import web.project.domain.Img;
-import web.project.service.PreBoardService;
+import web.project.domain.PreBoard;
+import web.project.service.BoardService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
+import web.project.service.PreBoardService;
+import web.project.service.QnaService;
 
 @SessionAttributes({"host","customer"})
 @Controller
@@ -41,6 +50,10 @@ public class BoardController implements ApplicationContextAware {
 	public Host getHost() {
 		return new Host();
 	}
+	@ModelAttribute("customer")
+	public Customer getCustomer() {
+		return new Customer();
+	}
 	
 	@Autowired
 	private PreBoardService preboardService;
@@ -48,10 +61,14 @@ public class BoardController implements ApplicationContextAware {
 	private FrontImgService frontImgService;
 	@Autowired
 	private ImgService imgService;
+	@Autowired
+	private BoardService boardService;
+	@Autowired
+	private QnaService qnaService;
 	
 	@PostMapping("/boardList")
 	public String insertBoard(Model model, PreBoard board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
-		board.setHostId(host.getHostid());
+		board.setHostId(host.getHostId());
 		PreBoard b =  preboardService.saveBoard(board);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		System.out.println(b.getBoardNum());
@@ -132,7 +149,7 @@ public class BoardController implements ApplicationContextAware {
 		public String viewBoard(Model model,
 				@RequestParam(name="p", defaultValue="1")int pNum, 
 				@ModelAttribute("host")Host host) {
-			if(host.getHostid() == null) {
+			if(host.getHostId() == null) {
 				return "login/hostLoginForm";
 			}
 			Page<PreBoard> pageList = preboardService.getBoardList(pNum);
@@ -170,11 +187,63 @@ public class BoardController implements ApplicationContextAware {
 		return "search/searchForm";
 	}
 	
+	
+
+	
+	// 게시글 목록
+	@GetMapping("/boardList")
+	public String getBoardList(Model m, @RequestParam(name = "p", defaultValue = "1") int pNum) {
+		Page<Board> pageList = boardService.getBoardList(pNum);
+		List<Board> bList = pageList.getContent();
+		int totalPageCount = pageList.getTotalPages();
+		m.addAttribute("blist", bList);
+		m.addAttribute("totalPage", totalPageCount);
+		
+		int begin = (pNum - 1) / 5 * 5 + 1;
+		int end = begin + 5 - 1;
+		if (end > totalPageCount) {
+			end = totalPageCount;
+			
+		m.addAttribute("begin", begin);
+		m.addAttribute("end", end);
+		
+		}
+		return "host_board/getBoardList";
+	}
+	
+	// 게시글 조회
+	@GetMapping("/content/{boardNum}")
+	public String getBoard(@PathVariable Long boardNum, Model m) {
+		Board board = boardService.getBoard(boardNum);
+		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
+		
+		m.addAttribute("custQna", custQnaResult);
+		m.addAttribute("board",board);
+		return "host_board/getBoard";
+	}
+	
+	// 댓글 출력(ajax)
+	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String commentList(Long boardNum) throws Exception {
+		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
+		Gson json = new Gson();
+		return json.toJson(custQnaResult);
+	}
+	
+	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String replyCommentList(Long boardNum) throws Exception {
+		List<HostQna> hostQnaResult = qnaService.getHostQnaList(boardNum);
+		Gson json = new Gson();
+		return json.toJson(hostQnaResult);
+	}
+	
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override
     public void setApplicationContext(ApplicationContext applicationContext)
           throws BeansException {
        this.context = (WebApplicationContext) applicationContext;
     }
-
+	
 }

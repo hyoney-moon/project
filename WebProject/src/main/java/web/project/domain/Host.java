@@ -1,16 +1,27 @@
 package web.project.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+// 
+/**
+ * Entity implementation class for Entity: Host
+ *
+ */
 @Entity
+@Getter
+@Setter
 public class Host implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private String hostid;
+	private String hostId;
 	private String password;
 	private String email;
 	private String nickName;
@@ -18,17 +29,12 @@ public class Host implements Serializable {
 	private String profile;
 	
 	
+	
 	public String getNickName() {
 		return nickName;
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
-	}
-	public String getHostid() {
-		return hostid;
-	}
-	public void setHostid(String hostid) {
-		this.hostid = hostid;
 	}
 	public String getPassword() {
 		return password;
@@ -55,7 +61,4 @@ public class Host implements Serializable {
 		this.profile = profile;
 	}
 	
-	
-
-   
 }

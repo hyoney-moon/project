@@ -8,9 +8,6 @@ import web.project.domain.Host;
 
 public interface HostLoginRepository extends JpaRepository<Host, Long> {
 
-	Optional<Host> findByHostid(String hostid);
-
-
-
+	Optional<Host> findByHostId(String hostid);
 
 }

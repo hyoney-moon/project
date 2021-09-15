@@ -40,6 +40,14 @@ body {
 	</header>
 	<div class="container">
 	<form action="searchBoard" method="post">
+		<div class="row g-3">
+  		<div class="col">
+		<input type="text" class="form-control" placeholder="First name" aria-label="First name">
+		</div>
+		<div class="col">
+ 		<input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+		</div>
+		</div>
 			<select class="form-select form-select-lg mb-3 w-25" aria-label=".form-select-lg example">
 				<option selected>Open this select menu</option>
 				<option value="1">공간명</option>
