@@ -15,8 +15,8 @@ public class Booking_info_Serivice implements BookingService {
 	BoardPickRepository repository;
 	
 	@Override
-	public Book_infoDto getBoardList(Integer num) {
-		Book_infoDto infodto = repository.findByNum(num);
+	public Book_infoDto getBoardList(Integer bookNum) {
+		Book_infoDto infodto = repository.findByBookNum(bookNum);
 		return null;
 	}
 	public void updateBooking(Book_infoDto dto) {

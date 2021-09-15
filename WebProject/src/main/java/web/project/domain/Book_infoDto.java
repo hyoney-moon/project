@@ -3,7 +3,12 @@ package web.project.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,23 +28,23 @@ public class Book_infoDto implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Integer book_num;	//primary key
-	private String cust_id;		//customer foreignkey
-	private String host_id;		//host	   foreignkey
-	private int num;			//board    foreingkey
-	private Date regdate;
+	private Integer bookNum;	//primary key
+	private String custId;		//customer foreignkey
+	private String hostId;		//host	   foreignkey
+	private int boardNum;			//board    foreingkey
+	private Date regDate;
 	private int people;
 	private int price;
 	
 	@ManyToOne
-	@JoinColumn(name = "cust_id",insertable = false, updatable = false)
-	private CustomerDto cust;
+	@JoinColumn(name = "custId",insertable = false, updatable = false)
+	private Customer cust;
 	@ManyToOne
-	@JoinColumn(name = "host_id",insertable = false, updatable = false)
-	private HostDto host;
+	@JoinColumn(name = "hostId",insertable = false, updatable = false)
+	private Host host;
 	@ManyToOne
-	@JoinColumn(name = "num",insertable = false, updatable = false)
-	private BoardDto board;  
+	@JoinColumn(name = "boardNum",insertable = false, updatable = false)
+	private Board board;  
 
 	
 }

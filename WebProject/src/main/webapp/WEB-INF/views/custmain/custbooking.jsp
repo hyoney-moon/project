@@ -1,39 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-<title>ΏΉΎΰ ΖδΐΜΑφ</title>
+<title>μμ•½ νμ΄μ§€</title>
 <link rel="stylesheet" href="assets/css/booking.css" />
-<!-- ΄ή·Β  -->
+<!-- λ‹¬λ ¥  -->
 </head>
 <body>
 <div class="container">
 	<a href="">
 	<img src="../../../images/fulls/01.jpg">
 	</a>
-	<h2>°αΑ¦ΗΟ΄Β ΖδΐΜΑφ</h2>
+	<h2>κ²°μ ν•λ” νμ΄μ§€</h2>
 	<form action="bookingpay">
 		<div class="input-group">
 			<select class="peoplecount">
-				<option selected>ΓΡΏψΌφ</option>
-				<option value="1">1Έν</option>
-				<option value="2">2Έν</option>
-				<option value="3">3Έν</option>
-				<option value="4">4Έν</option>
-				<option value="5">5Έν</option>
-				<option value="6">6Έν</option>
+				<option selected>μ΄μ›μ</option>
+				<option value="1">1λª…</option>
+				<option value="2">2λª…</option>
+				<option value="3">3λª…</option>
+				<option value="4">4λª…</option>
+				<option value="5">5λª…</option>
+				<option value="6">6λª…</option>
 			</select>
 			<div class="input-group-append">
-				<button class="btn btn-outline-secondary" type="button">ΐΞΏψΌφ</button>
+				<button class="btn btn-outline-secondary" type="button">μΈμ›μ</button>
 			</div>
 			<br>
 			<div class="bookingdate">
 				<input type="date"> 
-				<a href="bookingPay">°αΑ¦</a>
-				<input type="submit" id="bookingcall"value="ΏΉΎΰΗΟ±β" >
+				<a href="bookingPay">κ²°μ </a>
+				<input type="submit" id="bookingcall"value="μμ•½ν•κΈ°" >
 			</div>
 		</div>
 	</form>

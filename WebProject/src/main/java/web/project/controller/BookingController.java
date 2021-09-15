@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import web.project.domain.Book_infoDto;
-import web.project.domain.CustomerDto;
+import web.project.domain.Customer;
 import web.project.service.BookingService;
 
 @Controller
@@ -22,7 +22,7 @@ public class BookingController {
 	BookingService service;
 	
 	@RequestMapping("/home")
-	public void updateBooking(Book_infoDto dto,@ModelAttribute("customerDto") CustomerDto cust) {
+	public void updateBooking(Book_infoDto dto,@ModelAttribute("customerDto") Customer cust) {
 		service.updateBooking(dto);
 		
 	}
