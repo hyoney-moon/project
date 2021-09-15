@@ -13,6 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "hostj")
 public class Host implements Serializable {
 
 	

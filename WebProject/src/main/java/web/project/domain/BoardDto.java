@@ -10,7 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "board")
+@Table(name = "BOARD")
 public class BoardDto implements Serializable {
 	
 	@Id
@@ -29,12 +29,18 @@ public class BoardDto implements Serializable {
 	private String roomtype;
 	
 	
-	@Override
-	public String toString() {
-		return "BoarderDto [num=" + num + ", title=" + title + ", content=" + content + ", readcount=" + readcount
-				+ ", wishlist=" + wishlist + ", regdate=" + regdate + ", image=" + image + ", price=" + price
-				+ ", headcnt=" + headcnt + ", address=" + address + ", host_id=" + host_id + ", roomtype=" + roomtype
-				+ "]";
+	/*
+	 * @Override public String toString() { return "BoarderDto [num=" + num +
+	 * ", title=" + title + ", content=" + content + ", readcount=" + readcount +
+	 * ", wishlist=" + wishlist + ", regdate=" + regdate + ", image=" + image +
+	 * ", price=" + price + ", headcnt=" + headcnt + ", address=" + address +
+	 * ", host_id=" + host_id + ", roomtype=" + roomtype + "]"; }
+	 */
+
+	
+
+	public String getTitle() {
+		return title;
 	}
 
 	public Integer getNum() {
@@ -43,10 +49,6 @@ public class BoardDto implements Serializable {
 
 	public void setNum(Integer num) {
 		this.num = num;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public void setTitle(String title) {

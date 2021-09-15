@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,11 +28,14 @@ public class Book_infoDto implements Serializable {
 	private Integer book_num;	//primary key
 	private String cust_id;		//customer foreignkey
 	private String host_id;		//host	   foreignkey
-	private int num;			//board    foreingkey
-	private Date regdate;
+	private Integer num;			//board    foreingkey
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date StartDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date endDate;
 	private int people;
 	private int price;
-	
+	private int permit;   //호스트가 예약 가능하게 true false 값 전달
 	@ManyToOne
 	@JoinColumn(name = "cust_id",insertable = false, updatable = false)
 	private CustomerDto cust;
