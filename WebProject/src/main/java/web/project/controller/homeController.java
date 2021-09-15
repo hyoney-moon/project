@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import web.project.domain.Board;
+import web.project.domain.PreBoard;
 import web.project.domain.Category;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.Img;
-import web.project.service.BoardService;
+import web.project.service.PreBoardService;
 import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
@@ -31,7 +31,7 @@ public class homeController {
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	private BoardService boardService;
+	private PreBoardService boardService;
 	@Autowired
 	private FrontImgService fiService;
 	@Autowired

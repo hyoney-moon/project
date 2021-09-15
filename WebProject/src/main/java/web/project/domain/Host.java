@@ -13,13 +13,17 @@ public class Host implements Serializable {
 	private String hostid;
 	private String password;
 	private String email;
-	private String nickname;
+	private String nickName;
 	private String gender;
-	private String address;
-	private String post;
 	private String profile;
 	
 	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getHostid() {
 		return hostid;
 	}
@@ -38,29 +42,11 @@ public class Host implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPost() {
-		return post;
-	}
-	public void setPost(String post) {
-		this.post = post;
 	}
 	public String getProfile() {
 		return profile;

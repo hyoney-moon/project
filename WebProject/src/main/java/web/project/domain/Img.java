@@ -20,20 +20,20 @@ public class Img implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="boardNum", insertable = false, updatable = false)
-	private Board board;
+	private PreBoard preboard;
 	
 	
+	public PreBoard getPreboard() {
+		return preboard;
+	}
+	public void setPreboard(PreBoard preboard) {
+		this.preboard = preboard;
+	}
 	public Long getBoardNum() {
 		return boardNum;
 	}
 	public void setBoardNum(Long boardNum) {
 		this.boardNum = boardNum;
-	}
-	public Board getBoard() {
-		return board;
-	}
-	public void setBoard(Board board) {
-		this.board = board;
 	}
 	public Long getImgNo() {
 		return imgNo;

@@ -18,7 +18,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq", initialValue=1, allocationSize=1)
-public class Board implements Serializable {
+public class PreBoard implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -28,10 +28,10 @@ public class Board implements Serializable {
 	private Long boardNum;
 	
 	@ManyToOne
-	@JoinColumn(name="hostid", insertable = false, updatable = false)
+	@JoinColumn(name="hostId", insertable = false, updatable = false)
 	private Host host;
 	
-	private String hostid;
+	private String hostId;
 	private String spaceName;
 	private String contentOneline;
 	private String content;
@@ -43,9 +43,8 @@ public class Board implements Serializable {
 	private String addressDetail;
 	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int readcount;
-	private int wishList;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
-	private Date regdate;
+	private Date regDate;
 	private int price;
 	private int headcnt;
 	private String category;
@@ -56,14 +55,26 @@ public class Board implements Serializable {
 	@JoinColumn(name="category", insertable = false, updatable = false)
 	private Category categoryFk;
 	
-	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	@OneToMany(mappedBy = "preboard", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<FrontImg> frontimgList = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	@OneToMany(mappedBy = "preboard", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<Img> imgList = new ArrayList<>();
 	
 	
 	
+	public String getHostId() {
+		return hostId;
+	}
+	public void setHostId(String hostId) {
+		this.hostId = hostId;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 	public Long getImgNo() {
 		return imgNo;
 	}
@@ -111,12 +122,6 @@ public class Board implements Serializable {
 	}
 	public void setHost(Host host) {
 		this.host = host;
-	}
-	public String getHostid() {
-		return hostid;
-	}
-	public void setHostid(String hostid) {
-		this.hostid = hostid;
 	}
 	public String getSpaceName() {
 		return spaceName;
@@ -177,18 +182,6 @@ public class Board implements Serializable {
 	}
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
-	}
-	public int getWishList() {
-		return wishList;
-	}
-	public void setWishList(int wishList) {
-		this.wishList = wishList;
-	}
-	public Date getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
 	}
 	public int getPrice() {
 		return price;

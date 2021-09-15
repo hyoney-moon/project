@@ -18,19 +18,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
-import web.project.domain.Board;
+import web.project.domain.PreBoard;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.Img;
-import web.project.service.BoardService;
+import web.project.service.PreBoardService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 
-@SessionAttributes("host")
+@SessionAttributes({"host","customer"})
 @Controller
 public class BoardController implements ApplicationContextAware {
 	
@@ -42,16 +43,16 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	@Autowired
-	private BoardService boardService;
+	private PreBoardService preboardService;
 	@Autowired
 	private FrontImgService frontImgService;
 	@Autowired
 	private ImgService imgService;
 	
 	@PostMapping("/boardList")
-	public String insertBoard(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
-		board.setHostid(host.getHostid());
-		Board b =  boardService.saveBoard(board);
+	public String insertBoard(Model model, PreBoard board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
+		board.setHostId(host.getHostid());
+		PreBoard b =  preboardService.saveBoard(board);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		System.out.println(b.getBoardNum());
 		model.addAttribute("place", b);
@@ -134,8 +135,8 @@ public class BoardController implements ApplicationContextAware {
 			if(host.getHostid() == null) {
 				return "login/hostLoginForm";
 			}
-			Page<Board> pageList = boardService.getBoardList(pNum);
-			List<Board> bList = pageList.getContent(); //보여질 글
+			Page<PreBoard> pageList = preboardService.getBoardList(pNum);
+			List<PreBoard> bList = pageList.getContent(); //보여질 글
 			int totalCount = pageList.getTotalPages(); //전체 페이지 수
 			model.addAttribute("bList", bList);
 			model.addAttribute("totalCount", totalCount);
@@ -153,7 +154,7 @@ public class BoardController implements ApplicationContextAware {
 		
 		@RequestMapping("/viewPost/{boardNum}")
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-			Board view = boardService.viewPost(boardNum);
+			PreBoard view = preboardService.viewPost(boardNum);
 			model.addAttribute("view",view);
 			
 			List<FrontImg> fis = frontImgService.viewImg(boardNum);
@@ -161,6 +162,13 @@ public class BoardController implements ApplicationContextAware {
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
+	
+	//게시판 검색
+	@RequestMapping("/searchForm")
+	public String searchBoard() {
+//		List<PreBoard> searchList = preboardService.searchBoard
+		return "search/searchForm";
+	}
 	
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override
