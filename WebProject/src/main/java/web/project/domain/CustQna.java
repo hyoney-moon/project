@@ -27,9 +27,11 @@ public class CustQna implements Serializable {
 	private String content; // 댓글 작성 내용
 	private String profile;
 	private String custId;
+	private String hostContent;
+	private String hostId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="boardNum")
-	private Board board; // board.boardNum
+	private Board board;
 	
 }

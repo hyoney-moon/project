@@ -19,7 +19,6 @@ import com.google.gson.Gson;
 import web.project.domain.Board;
 import web.project.domain.CustQna;
 import web.project.domain.Customer;
-import web.project.domain.HostQna;
 import web.project.service.BoardService;
 import web.project.service.QnaService;
 // 
@@ -78,12 +77,5 @@ public class BoardController {
 		Gson json = new Gson();
 		return json.toJson(custQnaResult);
 	}
-	// 호스트 댓글 출력(ajax) 
-	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String replyCommentList(Long boardNum) throws Exception {
-		List<HostQna> hostQnaResult = qnaService.getHostQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(hostQnaResult);
-	}
+
 }

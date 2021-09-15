@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import web.project.domain.Board;
 import web.project.domain.CustQna;
-import web.project.domain.HostQna;
+import web.project.persistence.QnaRepository;
 import web.project.service.BoardService;
 import web.project.service.QnaService;
 // 
@@ -34,13 +34,13 @@ public class QnaController {
 	@PostMapping(value = "/insertCustQna", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public void insertCustQna(CustQna qna) {
-		qnaService.insertCustQna(qna);
+			qnaService.insertCustQna(qna);
 	}
 	
 	// 호스트 답변
-	@PostMapping(value = "/insertHostQna", produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/updateCustQna", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
-	public void insertHostQna(HostQna qna) {
-		qnaService.insertHostQna(qna);
+	public void updateCustQna(String hostContent, Long qnaNum) {
+		qnaService.updateCustQna(hostContent, qnaNum);
 	}
 }

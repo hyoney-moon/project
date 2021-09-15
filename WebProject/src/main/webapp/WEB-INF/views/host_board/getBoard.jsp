@@ -57,11 +57,9 @@ div.button{
 	margin: auto;
 	width: 5%;
 }
-
-
-
 </style>
 </head>
+
 <body>
 	<table id="table">
 		<tr>
@@ -98,6 +96,7 @@ div.button{
 			<span class="close">&times;</span>
 			<p><strong>답변하기</strong></p>
 			<textarea id="content2" name="content" rows="15" cols="40"></textarea>
+			<input type="hidden" value="" id="modalQnaNum">
 			<button id="cmtCnt-btn2">작성</button>
 		</div>
 	</div>
@@ -105,7 +104,6 @@ div.button{
 	<br>
 	<br>
 	<div id=getComment></div>
-	<div id=replyComment></div>
 
 
 <script>
@@ -126,26 +124,50 @@ $(function(){
 			data: params,
 			dataType: "json"
 		}).done(function(args){
+			$("#getComment").empty();
 			for(var num=0; num < args.length; num++){
+				var reply = "";
+				if(args[num].hostContent != undefined){
+					 reply = args[num].hostContent
+					 }
 			$("#getComment").append(
 					"고객이름 : " + args[num].custId + "<br>" +
 					"댓글내용 : " + args[num].content + "<br>" +
+					"<strong>호스트 답변</strong><br>" +
+					reply + "<br>" +
 					
-					"<buttion id='" + "replyBtn'" + 
-					" value='" + args[num].qnaNum +"'>ㄴ답변하기</button>" + 
-					
-					"<div id='" + "replyComment'>" + "</div>" + 
-					"<br><br>"
+					"<button id='" + "replyBtn'" + 
+					" value='" + args[num].qnaNum + "'>답변하기</button><br><br>"
 			);
 			} //for문 종료
 		}) // done 종료
 	} // getcommentList() 종료
 	
+	// 질문작성 클릭 이벤트
+	$("#cmtCnt-btn").click(function(){
+$.ajax({
+	url: "/questions/insertCustQna",
+	type: "POST",
+	dataType: "CustQna",
+	data: {
+		board : ${boardNum},
+		profile : "custprofile",
+		content : $("#content").val(),
+		custId : "${customer.custId}",
+	},
+	complete : function(){
+		modal.style.display = "none";
+		comment.val("");
+		$("#getComment").empty();
+		getcommentList();
+	}
+})
+}) // click
 
-	//답변하기 버튼 클릭 이벤트
+	//답변하기 버튼 클릭 이벤트(모달창 띄우기)
 	$('#getComment').on('click', '#replyBtn', function() {
 		qnaNumber = $(this).attr('value');
-		console.log(qnaNumber);
+		document.getElementById("modalQnaNum").value=qnaNumber;
 		modal2.style.display = "block";
 	})
 	
@@ -154,89 +176,29 @@ $(function(){
 	})
 
 	var board = "board.boardNum";
-    var qnaNum = "custQna.qnaNum";
     var comment = $("#content");
-    var comment2 = $("#content2")
-    
-			$("#cmtCnt-btn").click(function(){
+    var comment2 = $("#content2");
+	
+	// 호스트 답변달기 클릭 이벤트(db 저장)
+	$("#cmtCnt-btn2").click(function(){
 		$.ajax({
-			url: "/questions/insertCustQna",
+			url:"/questions/updateCustQna",
 			type: "POST",
 			dataType: "CustQna",
 			data: {
-				board : ${boardNum},
-				profile : "custprofile",
-				content : $("#content").val(),
-				custId : "${customer.custId}",
-			},
-			complete : function(){
-				modal.style.display = "none";
-				comment.val("");
-				
-				$("#getComment").empty();
-				let params = "boardNum="+ ${board.boardNum}
-				$.ajax({
-					type: "post",
-					url: "/board/comment",
-					data: params,
-					dataType: "json"
-				}).done(function(args){
-					
-					for(var num=0; num < args.length; num++){
-					$("#getComment").append(
-							"<strong>고객 문의</strong><br>" +
-							"아이디 : " + args[num].custId + "<br>" +
-							"문의사항 : " + args[num].content + "<br>" +
-							
-							"<buttion id='" + "replyBtn'" + 
-							" value='" + args[num].qnaNum +"'>ㄴ답변하기</button>" + 
-							
-							"<div id='" + "replyComment'>" + "</div>" + 
-							"<br><br>"
-					);
-					}
-				})
-			}
-		})
-	}) // click
-// 호스트 답변달기
-	$("#cmtCnt-btn2").click(function(){
-		//var qnaNumber = $(this).attr('value');
-		console.log(qnaNumber);
-		$.ajax({
-			url:"/questions/insertHostQna",
-			type: "POST",
-			dataType: "HostQna",
-			data: {
-				board : ${boardNum},
-				profile : "hostprofile",
-				content : $("#content2").val(),
-				hostId : "${host.hostId}",
-				reQnaNum: qnaNumber
+				qnaNum : $("#modalQnaNum").val(),
+				hostContent : $("#content2").val(),
+				//hostId : "${host.hostId}",
 			},
 			complete : function(){
 				modal2.style.display = "none";
 				comment2.val("");
 				$("#replyComment").empty();
-				let params2 = "boardNum="+ ${board.boardNum}
-				
-				$.ajax({
-					type: "post",
-					url: "/board/replyComment",
-					data: params2,
-					dataType: "json"
-				}).done(function(args){
-					for(var num=0; num < args.length; num++){
-						$("#replyComment").append(
-						"<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>호스트 답변</strong><br>"+
-						"&nbsp;&nbsp;&nbsp;&nbsp;"+args[num].content + "<br>"
-						)
-					}
-				}) 
+				getcommentList();
 			}
 		}) 
 	}) // click 종료
-}) // ready function 종료
+}) // ready function 종료	
 </script>
 
 <script>

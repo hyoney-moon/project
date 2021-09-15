@@ -186,7 +186,7 @@ const labels = [
   <canvas id="boardCountChart"></canvas>
 </div>
 <br><br><br><br><br><br><br>
-<h2>총 매출액(원)</h2>
+<!-- <h2>총 매출액(원)</h2> -->
 <div style="position: relative; margin: auto; height:20vh; width:40vw">
   <canvas id="totalRevenueChart"></canvas>
 </div>

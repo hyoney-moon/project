@@ -22,7 +22,7 @@ public class Host implements Serializable {
    private String hostId;
    private String password;
    private String email;
-   private String nickname;
+   private String nickName;
    private String gender;
    private String address; 
    private String post;
