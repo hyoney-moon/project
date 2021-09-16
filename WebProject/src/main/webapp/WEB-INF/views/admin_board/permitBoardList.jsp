@@ -45,8 +45,8 @@ window.onload = function(){
 	  });
 	
 $(document).on("click","#permission", function(){
-	console.dir(grid.getCheckedRows());
 	let board = grid.getCheckedRows();
+	alert(board);
 	$.ajax({
 		url : "/permit/update",
 		method : "POST",

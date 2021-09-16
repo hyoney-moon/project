@@ -39,5 +39,4 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	long boardCountSep();
 	
 	
-	
 }
