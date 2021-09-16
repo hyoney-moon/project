@@ -30,7 +30,7 @@ public class Book_infoDto implements Serializable {
 	private String host_id;		//host	   foreignkey
 	private Integer num;			//board    foreingkey
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date StartDate;
+	private Date startDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 	private int people;

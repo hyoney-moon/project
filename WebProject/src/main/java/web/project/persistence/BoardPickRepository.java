@@ -12,5 +12,5 @@ public interface BoardPickRepository extends JpaRepository<Book_infoDto, Long>{
 	
 	Book_infoDto save(Book_infoDto dto);
 	
-	List<Book_infoDto> findByNumOrderByRegdateAsc(Integer num);
+	List<Book_infoDto> findByNumOrderByStartDateAsc(Integer num);
 }

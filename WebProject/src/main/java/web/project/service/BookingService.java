@@ -15,5 +15,5 @@ public interface BookingService {
 	void insertBooking(Book_infoDto dto);
 	
 	
-	String[] getListDate(Integer num);
+	List<String> getListDate(Integer num);
 }

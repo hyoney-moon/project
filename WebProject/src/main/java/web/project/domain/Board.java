@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-@Table(name = "BOARD")
+@Table(name = "BOARDs")
 public class Board implements Serializable {
 
 	
