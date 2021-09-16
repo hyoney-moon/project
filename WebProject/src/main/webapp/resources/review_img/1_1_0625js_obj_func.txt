@@ -1,0 +1,48 @@
+1) object.getElementById(elementId) - 
+id 애트리뷰트의 값에 맞는 처음 객체를 반환한다.
+ 2) object.getElementsByName(name) - 
+name 애트리뷰트의 값에 기초하여 객체들의 컬렉션을 반환한다.
+ 3) document.write(text) 
+HTML 출력 스트림에 직접 출력 한다.
+ 4) object.innerHTML -  
+innerHTML은 innerHTML 속성을 지원하는 객체의 시작 태그와 종료 태그 사이에 있는 HTML을 설정하거나 가지고 올 수가 있다. innerHTML 속성은 해당 웹 문서를 완전히 읽어들인 후(onload 이벤트 발생 후)에 사용할 수 있다. innerHTML, innerText, outerHTML, outerText 속성은 <table>, <td>, <div>, <span>, <p> 등에서만 사용 가능하고 <input>, <img> 태그에서는 사용 할 수 없다.
+ 5) object.innerText - 
+innerText는 innerText 속성을 지원하는 객체의 시작 태그와 종료 태그 사이에 있는 텍스트를 설정하거나 가지고 올 수가 있다. 즉, HTML 태그를 삽입하여도 태그 자체를 텍스트로 인식한다. 
+6) object.outerHTML - 
+해당 텍스트를 포함하고 있는 태그 요소까지 모두 새로운 내용을 새로운 HTML 항목으로 바꿀 때 사용한다.
+ 7) object.outerText -  
+해당 텍스트를 포함하고 있는 태그 요소까지 모두 새로운 텍스트로 변경되어 진다.
+
+Object
+var user={ name:'자바', age:20}
+
+var user={ name:'자바', age:20 };
+console.log(user.name);
+console.log(user['name']);
+
+name, 자바 값 둘다 출력한다
+var user={ name:'자바', age:20};
+var s;
+for(s in user) { 
+   console.log(s, user[s]); }
+
+function User(arg) { this.name = arg; // 프로퍼티 정의
+ this.getName = function () { return this.name; }; // 메소드 정의
+ this.setName = function (value) { this.name = value; }; // 메소드 정의
+ }
+ let me = new User('자바'); // 객체 생성
+ console.log(me.getName()); // 자바
+ me.setName('JavaScript'); console.log(me.getName()); // JavaScript
+
+function User(arg) { this.name = arg; }
+ User.prototype.getName = function () { return this.name; };
+ User.prototype.setName = function (value) { this.name = value; };
+
+Date
+ - dateObjectName = new Date(); 
+현재 날짜와 시간으로 date 인스턴스를 만든다.
+ - dateObjectName 
+= new Date(year, month-1, day [,hours, minutes, seconds, millisecond]); 
+인수로 지시된 날짜와 시간의 Date 인스턴스를 만든다.
+ - dateObjectName = new Date("month day, year hours:minutes:seconds"); 
+인수로 지시된 날짜와 시간의 date 인스턴스를 만든다
