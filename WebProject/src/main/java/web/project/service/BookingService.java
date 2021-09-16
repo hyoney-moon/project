@@ -16,4 +16,7 @@ public interface BookingService {
 	
 	
 	List<String> getListDate(Integer num);
+
+
+	void updateBooking(Book_infoDto dto);
 }

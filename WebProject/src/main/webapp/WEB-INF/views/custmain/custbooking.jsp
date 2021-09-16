@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -19,6 +19,12 @@
 		size: 2px;
 	}
 </style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<title>예약 페이지</title>
+<link rel="stylesheet" href="assets/css/booking.css" />
 <!-- 달력  -->
 </head>
 <body>
@@ -26,6 +32,7 @@
 <form>
 	<h1>${board.title }</h1>
 	<img src="../../../images/fulls/01.jpg">
+<<<<<<< HEAD
 	<h2>${board.content }</h2>
 	<h1>${board.address }</h1>
 	<h1>${board.price }</h1>
@@ -45,6 +52,25 @@
 			<div class="bookingdate" id="Datepicker">
 				<input type="text" id="startDatepicker" name="startDatepicker">start
 				<input type="text" id="endDatepicker" name="endDatepicker">end
+	</a>
+	<h2>결제하는 페이지</h2>
+	<form action="bookingpay">
+		<div class="input-group">
+			<select class="peoplecount">
+				<option selected>총원수</option>
+				<option value="1">1명</option>
+				<option value="2">2명</option>
+				<option value="3">3명</option>
+				<option value="4">4명</option>
+				<option value="5">5명</option>
+				<option value="6">6명</option>
+			</select>
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="button">인원수</button>
+			</div>
+			<br>
+			<div class="bookingdate">
+				<input type="date"> 
 				<a href="bookingPay">결제</a>
 				<input type="submit" id="bookingcall"value="예약하기" >
 			</div>

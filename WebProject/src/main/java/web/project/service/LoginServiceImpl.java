@@ -31,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
 	// 호스트 로그인
 	@Override
 	public Host getHost(Host host) {
-		Optional<Host> findHost = hostLoginRepo.findById(host.getHostId());
+		Optional<Host> findHost = hostLoginRepo.findByHostId(host.getHostId());
 		if(findHost.isPresent())
 			return findHost.get();
 		else

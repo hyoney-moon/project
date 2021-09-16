@@ -23,7 +23,7 @@ public class Customer implements Serializable {
 	private String custId;
 	private String email;
 	private String password;
-	private String nickname;
+	private String nickName;
 	private String gender;
 	private Long age;
 	private String post;

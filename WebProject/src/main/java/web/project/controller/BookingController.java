@@ -24,6 +24,7 @@ import web.project.domain.BoardDto;
 import web.project.domain.Book_infoDto;
 import web.project.domain.CustomerDto;
 import web.project.domain.HostDto;
+import web.project.domain.Customer;
 import web.project.service.BookingService;
 
 @Controller
@@ -62,6 +63,10 @@ public class BookingController {
 			service.insertBooking(dto);
 			return "redirect:/main";
 		}
+	@RequestMapping("/home")
+	public void updateBooking(Book_infoDto dto,@ModelAttribute("customerDto") Customer cust) {
+		service.updateBooking(dto);
+	}
 		
 		
 		//카카오페이 페이지 이동 메소드

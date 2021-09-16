@@ -30,6 +30,10 @@ public class Booking_info_Serivice implements BookingService {
 		Optional<BoardDto> select = boardrepository.findById(num);
 		return select.get();
 	}
+	public Book_infoDto getBoardList(Integer bookNum) {
+		Book_infoDto infodto = repository.findByBookNum(bookNum);
+		return null;
+	}
 	public void insertBooking(Book_infoDto dto) {
 			repository.save(dto);
 	}
