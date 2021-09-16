@@ -36,7 +36,7 @@ body {
 			<div class="container">
 				<form method="post" action="hostLogin">
 					<div class="form-floating mb-3">
-						<input name="hostid" class="form-control" type="text" aria-label="default input example" placeholder="아이디">
+						<input name="hostId" class="form-control" type="text" aria-label="default input example" placeholder="아이디">
 						<label for="floatingInput">아이디</label>
 					</div>
 					<div class="form-floating mb-3">

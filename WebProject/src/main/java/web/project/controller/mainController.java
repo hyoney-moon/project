@@ -2,9 +2,13 @@ package web.project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+@SessionAttributes("host")
 @Controller
 public class mainController {
+	
+	
 
 	@RequestMapping("/main")
 	public String mainStart() {

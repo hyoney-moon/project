@@ -15,7 +15,7 @@
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
 <style>
-body {background-color: black;}
+body {background-color: ;}
 .list_item {
     display: inline-block;
     width: 800px;
@@ -30,15 +30,18 @@ body {background-color: black;}
     overflow: hidden;
     object-fit: cover;
 }
+.w-100 {
+	width : 100%;
+}
 </style>
 </head>
 <body>
 <div class="container">
-		<div id="carouselExampleControls" class="carousel slide"
+		<div id="carouselExampleControls" class="carousel slide w-100"
 			data-bs-ride="carousel">
-			<div class="carousel-inner list_item">
+			<div class="carousel-inner list_item w-100">
 				<c:forEach items="${fis }" var="fis" begin="0" end="0">
-				<div class="carousel-item active">
+				<div class="carousel-item active w-100">
 					<img src="${fis.filePath }" class="d-block w-500 list_img"
 						alt="...">
 				</div>

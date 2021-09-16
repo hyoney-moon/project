@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,28 +35,42 @@ body {
 <body>
 	<header>
 		<div class="postion-relateive mt-5">
-			<h3 class="position-absolute d-inline top-50 start-50 translate-middle">로고</h3>
-			<nav class="position-absolute top-50 end-0 translate-middle-y"> 메뉴바 검색</nav>
+			<h3
+				class="position-absolute d-inline top-50 start-50 translate-middle">로고</h3>
+			<nav class="position-absolute top-50 end-0 translate-middle-y">
+				메뉴바 검색</nav>
 		</div>
 	</header>
+
 	<div class="container">
-	<form action="searchBoard" method="post">
-		<div class="row g-3">
-  		<div class="col">
-		<input type="text" class="form-control" placeholder="First name" aria-label="First name">
-		</div>
-		<div class="col">
- 		<input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-		</div>
-		</div>
-			<select class="form-select form-select-lg mb-3 w-25" aria-label=".form-select-lg example">
-				<option selected>Open this select menu</option>
+		<form action="searchBoard" method="post">
+			<!-- <div class="row g-3">
+				<div class="col">
+					<input type="text" class="form-control" placeholder="First name"
+						aria-label="First name">
+				</div>
+				<div class="col">
+					<input type="text" class="form-control" placeholder="Last name"
+						aria-label="Last name">
+				</div>
+			</div> -->
+			<select name="search_option"
+				class="form-select form-select-lg mb-3 w-25"
+				aria-label=".form-select-lg example">
+				<option selected value="0">Select</option>
 				<option value="1">공간명</option>
 				<option value="2">카테고리</option>
 				<option value="3">지역별</option>
 			</select>
-			<input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example">
-	</form>
+			<input name="search" class="form-control form-control-lg" type="text" placeholder="검색어를 입력하세요."
+				aria-label=".form-control-lg example">
+				<input type="submit" value="검 색"><br>
+		<c:forEach items="${boardList }" var="boardlist">
+			${boardlist.hostId } / ${boardlist.category } / ${boardlist.spaceName }<br>
+		</c:forEach>
+		
+		</form>
+		
 	</div>
 </body>
 </html>
