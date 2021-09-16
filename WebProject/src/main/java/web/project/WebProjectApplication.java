@@ -1,13 +1,13 @@
 package web.project;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class WebProjectApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebProjectApplication.class, args);
-	}
+	private static Object SpringApplication;
 
+	public static void main(String[] args) {
+		((Object) SpringApplication).run(WebProjectApplication.class, args);
+	}
 }
