@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import web.project.domain.BoardDto;
+import web.project.domain.Board;
 
-public interface mainBoardRepository extends JpaRepository<BoardDto, Long> {
+public interface mainBoardRepository extends JpaRepository<Board, Long> {
 
-	public List<BoardDto> findByNum(Integer num);
+	public List<Board> findByboardNum(Long boardNum);
 	
-	public List<BoardDto> findAll();
+	public List<Board> findAll();
 }

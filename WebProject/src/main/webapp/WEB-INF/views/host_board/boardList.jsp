@@ -47,7 +47,7 @@
 			</tr>
 			<c:forEach items="${bList }" var="blist">
 				<tr>
-					<td>${blist.hostid }</td>
+					<td>${blist.hostId }</td>
 					<td>${blist.category }</td>
 					<td>
 					
@@ -82,7 +82,7 @@
 						</td>
 						
 					<td><a href="viewPost/${blist.boardNum }">${blist.spaceName }</a></td>
-					<td><fmt:formatDate value="${blist.regdate}" pattern="MM.dd" /></td>
+					<td><fmt:formatDate value="${blist.regDate}" pattern="MM.dd" /></td>
 					<td>${blist.readcount }</td>
 				</tr>
 			</c:forEach>

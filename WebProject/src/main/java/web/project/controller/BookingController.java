@@ -20,10 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
-import web.project.domain.BoardDto;
 import web.project.domain.Book_infoDto;
-import web.project.domain.CustomerDto;
-import web.project.domain.HostDto;
 import web.project.domain.Customer;
 import web.project.service.BookingService;
 
@@ -36,12 +33,12 @@ public class BookingController {
 	
 		//요청 페이지 출력
 		@GetMapping("/bookingpage/{num}")
-		public String getbookingView(@PathVariable(name = "num") Integer num,Model m) {
-			BoardDto board =  service.getBoard(num);
+		public String getbookingView(@PathVariable(name = "num") Long boardNum,Model m) {
+			Board board =  service.getBoard(boardNum);
 			System.err.println(board.getHeadcnt());
 			m.addAttribute("board", board);
 			//사용자가 받는 데이터값 유효성 검사 단계
-			 List<String> dateList = service.getListDate(num);
+			 List<String> dateList = service.getListDate(boardNum);
 			Gson json = new Gson();
 			
 			m.addAttribute("dateList",json.toJson(dateList));

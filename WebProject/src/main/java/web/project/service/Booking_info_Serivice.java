@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import web.project.domain.BoardDto;
+import web.project.domain.Board;
 import web.project.domain.Book_infoDto;
 import web.project.persistence.BoardDtoRepository;
 import web.project.persistence.BoardPickRepository;
@@ -26,8 +26,8 @@ public class Booking_info_Serivice implements BookingService {
 	private List<String> list;
 	
 	@Override
-	public BoardDto getBoard(Integer num) {
-		Optional<BoardDto> select = boardrepository.findById(num);
+	public Board getBoard(Long boardNum) {
+		Optional<Board> select = boardrepository.findById(boardNum);
 		return select.get();
 	}
 	public Book_infoDto getBoardList(Integer bookNum) {
@@ -39,8 +39,8 @@ public class Booking_info_Serivice implements BookingService {
 	}
 	@SuppressWarnings("static-access")
 	@Override
-	public List<String> getListDate(Integer num) {
-		List<Book_infoDto> ListDate = repository.findByNumOrderByStartDateAsc(num);
+	public List<String> getListDate(Long boardNum) {
+		List<Book_infoDto> ListDate = repository.findByNumOrderByStartDateAsc(boardNum);
 		List<String> totalDate = new ArrayList<String>();
 		for(int i=0; i < ListDate.size(); i++) {
 			Date start = ListDate.get(i).getStartDate();
@@ -69,7 +69,9 @@ public class Booking_info_Serivice implements BookingService {
 		}
 		return totalDate;
 	}
+	@Override
+	public void updateBooking(Book_infoDto dto) {
+		
+	}
 	
-	
-
 }

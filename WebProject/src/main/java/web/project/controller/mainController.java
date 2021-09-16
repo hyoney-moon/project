@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import web.project.domain.BoardDto;
+import web.project.domain.Board;
 import web.project.service.BoardService;
 import web.project.service.mainboardService;
 
+@SessionAttributes({"host","customerDto"})
 @Controller
-@SessionAttributes("customerDto")
 public class mainController {
 	
 	@Autowired
@@ -22,7 +22,7 @@ public class mainController {
 	
 	@RequestMapping("/main")
 	public String mainStart(Model m) {
-		List<BoardDto> dto = service.getBoardList();
+		List<Board> dto = service.getBoardList();
 		m.addAttribute("board",dto);
 		return "custmain/main";
 	}

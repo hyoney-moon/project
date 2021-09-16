@@ -14,7 +14,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
  
 import lombok.extern.java.Log;
-import web.project.domain.BoardDto;
 import web.project.domain.KakaoPayReadyDto;
 import web.project.persistence.BoardDtoRepository;
  

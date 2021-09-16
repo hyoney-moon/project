@@ -16,4 +16,9 @@ public interface BoardService {
 	Board getBoard(Long boardNum);
 	
 
+	Page<Board> searchBoardList(int pNum, int search_option, String search);
+
+	Board saveBoard(Board board);
+
+	Board viewPost(Long boardNum);
 }

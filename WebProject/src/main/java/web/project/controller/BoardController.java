@@ -33,11 +33,9 @@ import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.HostQna;
 import web.project.domain.Img;
-import web.project.domain.PreBoard;
 import web.project.service.BoardService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
-import web.project.service.PreBoardService;
 import web.project.service.QnaService;
 
 @SessionAttributes({"host","customer"})
@@ -65,9 +63,9 @@ public class BoardController implements ApplicationContextAware {
 	private QnaService qnaService;
 	
 	@PostMapping("/boardList")
-	public String insertBoard(Model model, PreBoard board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
+	public String insertBoard(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
 		board.setHostId(host.getHostId());
-		PreBoard b =  boardService.saveBoard(board);
+		Board b =  boardService.saveBoard(board);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		System.out.println(b.getBoardNum());
 		model.addAttribute("place", b);
@@ -99,7 +97,7 @@ public class BoardController implements ApplicationContextAware {
 		imgService.saveImg(im);
 		}
 		
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 	//(이미지)실제 업로드할 경로 만드는 부분
@@ -150,8 +148,8 @@ public class BoardController implements ApplicationContextAware {
 			if(host.getHostId() == null) {
 				return "login/hostLoginForm";
 			}
-			Page<PreBoard> pageList = boardService.getBoardList(pNum);
-			List<PreBoard> bList = pageList.getContent(); //보여질 글
+			Page<Board> pageList = boardService.getBoardList(pNum);
+			List<Board> bList = pageList.getContent(); //보여질 글
 			int totalCount = pageList.getTotalPages(); //전체 페이지 수
 			model.addAttribute("bList", bList);
 			model.addAttribute("totalCount", totalCount);
@@ -169,7 +167,7 @@ public class BoardController implements ApplicationContextAware {
 		
 		@RequestMapping("/viewPost/{boardNum}")
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-			PreBoard view = boardService.viewPost(boardNum);
+			Board view = boardService.viewPost(boardNum);
 			model.addAttribute("view",view);
 			
 			List<FrontImg> fis = frontImgService.viewImg(boardNum);
@@ -180,11 +178,34 @@ public class BoardController implements ApplicationContextAware {
 	
 	//게시판 검색
 	@RequestMapping("/searchForm")
-	public String searchBoard() {
-//		List<PreBoard> searchList = preboardService.searchBoard
+	public String searchForm() {
 		return "search/searchForm";
 	}
-	
+	@PostMapping("/searchBoard")
+	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
+			Board board, int search_option, String search) {
+		Page<Board> searchList = boardService.searchBoardList(pNum, search_option, search);
+		List<Board> boardList = searchList.getContent(); //보여질 글
+		int totalCount = searchList.getTotalPages(); //전체 페이지 수
+		long total = searchList.getTotalElements();
+		
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("total", total);
+		
+		int begin = (pNum-1)/5*5+1;
+		int end = begin+5-1;
+		if(end>totalCount) {
+			end = totalCount;
+		}
+		
+		model.addAttribute("begin", begin);
+		model.addAttribute("end", end);
+		model.addAttribute("search", search);
+		model.addAttribute("search_option", search_option);
+		
+		return "search/searchForm";
+	}
 	
 
 	

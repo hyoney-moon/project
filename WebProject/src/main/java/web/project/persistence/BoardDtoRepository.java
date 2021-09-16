@@ -10,19 +10,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import web.project.domain.Board;
-import web.project.domain.BoardDto;
-import web.project.domain.PreBoard;
 
-public interface BoardDtoRepository extends JpaRepository<Board, Integer> {
+public interface BoardDtoRepository extends JpaRepository<Board, Long> {
 
 	Board findByBoardNum(Long boardNum);
 	
 	List<Board> findAll();
 	
-	Page<PreBoard> findByOrderByBoardNumDesc(Pageable page);
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE PreBoard b SET b.readcount = b.readcount+1 WHERE b.boardNum=?1")
+	@Query("UPDATE Board b SET b.readcount = b.readcount+1 WHERE b.boardNum=?1")
 	int updateReadcount(Long boardNum);
 }

@@ -1,7 +1,9 @@
 package web.project.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -17,31 +19,50 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-@Table(name = "BOARDs")
+@SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq", initialValue=1, allocationSize=1)
 public class Board implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	private Long boardNum; // 글번호
-	private String frontImgNo; // 공간 이미지
-	private int imgNo; //이미지 번호
-	private String hostId; // 호스트 poreign key
-	private String category;
-	private String spaceName; // 공간명(글제목)
-	private String contentOneline; // 공간 한줄 소개
-	private String content; // 공간 소개(본문)
-	private String caution; // 주의사항
-	private String website; 
-	private String readcount; // 조회수
-	private String direction; 
-	private String address; // 공간 주소
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(columnDefinition = "date default sysdate")
+	
+	@OneToMany()
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Board_Seq_Gen")
+	private Long boardNum;
+	
+	@ManyToOne
+	@JoinColumn(name="hostId", insertable = false, updatable = false)
+	private Host host;
+	
+	private String hostId;
+	private String spaceName;
+	private String contentOneline;
+	private String content;
+	private String direction;
+	private String caution;
+	private String website;
+	private String zipcode;
+	private String address;
+	private String addressDetail;
+	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
+	private int readcount;
+	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
 	private Date regDate;
-	private Long price;
-	private Long headcnt; 
-	private String bigCategory;
-	private String smallCategory;
+	private int price;
+	private int headcnt;
+	private String category;
+	private Long frontImgNo;
+	private Long imgNo;
+	
+	@ManyToOne
+	@JoinColumn(name="category", insertable = false, updatable = false)
+	private Category categoryFk;
+	
+	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	private List<FrontImg> frontimgList = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+	private List<Img> imgList = new ArrayList<>();
+	
 }

@@ -20,15 +20,9 @@ public class FrontImg implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="boardNum", insertable = false, updatable = false)
-	private PreBoard preboard;
+	private Board board;
 	
 	
-	public PreBoard getPreboard() {
-		return preboard;
-	}
-	public void setPreboard(PreBoard preboard) {
-		this.preboard = preboard;
-	}
 	public Long getFrontImgNo() {
 		return frontImgNo;
 	}
