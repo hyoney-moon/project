@@ -40,17 +40,26 @@ public class PermitBoardController {
 	
 	// 게시글 승인
 	@PostMapping("/update")
-	public String permitBoard(@RequestBody List<Board> board) {
-		System.out.print(board);
+	public void permitBoard(@RequestBody List<Board> board) {
+		List<Long> boardNum = new ArrayList<>();
 		
 		 for(int i=0; i < board.size(); i++) { 
-			 System.out.println("test" +
-		 board.get(i).getBoardNum()); 
-			 }
+		 boardNum.add(board.get(i).getBoardNum()); 
+		 }
 		 
-		
-		return "redirect:/permitBoardList";
+		 permitBoardService.permitBoard(boardNum);
 	}
 	
-
+	// 승인 전 게시글 삭제
+	@PostMapping("/deletePermitBoard")
+	public void deletePermitBoard(@RequestBody List<Board> board) {
+		List<Long> boardNum = new ArrayList<>();
+		
+		for(int i=0; i < board.size(); i++) {
+			boardNum.add(board.get(i).getBoardNum());
+		}
+		
+		permitBoardService.deletePermitBoard(boardNum);
+	}
+	
 }

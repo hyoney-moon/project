@@ -44,36 +44,36 @@ window.onload = function(){
 	    ]
 	  });
 	
+	// 공간등록 허가 클릭 이벤트
 $(document).on("click","#permission", function(){
 	let board = grid.getCheckedRows();
-	alert(board);
 	$.ajax({
 		url : "/permit/update",
 		method : "POST",
 		dataType : "JSON",
 		contentType: 'application/json',
 		data : JSON.stringify(board),
-	}).done(function(data){
-		alert("정상 등록됐습니다"); // 완료 후 화면 새로고침 구현 필요
-	})
-	
+	}).done(function(){
+	});
+	location.reload();
 });// click 종료
 
+// 공간 등록 전 게시글 삭제 이벤트
 $(document).on("click","#delete",function(){
-	let boardNum = grid.getColumnValues("boardNum");
-	console.log(boardNum);
+	let board = grid.getCheckedRows();
 	
 	$.ajax({
-		url : "/permit/delete",
+		url : "/permit/deletePermitBoard",
 		method : "POST",
 		dataType : "JSON",
 		contentType : 'application/json',
-		data : //boardNum,
-			JSON.stringify(boardNum),
-	}).done(function(data){
-		grid.resetData(result); // 완료 후 화면 새로고침 필요
+		data : JSON.stringify(board),
+	}).done(function(){
 	})
-})
+	location.reload();
+});
+
+
 
 };
 </script>

@@ -18,4 +18,21 @@ public class PermitBoardServiceImpl implements PermitBoardService {
 		return permitBoard.permitBoardList();
 	}
 
+	@Override
+	public void permitBoard(List<Long> boardNum) {
+		
+		for(int i=0; i < boardNum.size(); i++) {
+			permitBoard.permitBoard(boardNum.get(i));	
+		}
+	}
+
+	@Override
+	public void deletePermitBoard(List<Long> boardNum) {
+		
+		for(int i=0; i < boardNum.size(); i++) {
+			permitBoard.deletePermitBoard(boardNum.get(i));
+		}
+		
+	}
+
 }
