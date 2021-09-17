@@ -7,32 +7,32 @@
 <head>
 <title>예약 페이지</title>
 
-<!-- 달력 기능 사용 -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript">var disabledDays = ${dateList};</script>
-
+  <script type="text/javascript" 
+src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script> 
 <style>
-.img{
-		padding: 40px;
-		size: 2px;
-	}
+#map {width:500px; height:400px;margin: 40px;}
 </style>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <title>예약 페이지</title>
 <link rel="stylesheet" href="assets/css/booking.css" />
-<!-- 달력  -->
+<script>
+
+</script>
+
 </head>
 <body>
 <div class="container">
 <form>
-	<h1>${board.title }</h1>
+	<h1>${board.contentOneline }</h1>
 	<img src="../../../images/fulls/01.jpg">
-<<<<<<< HEAD
 	<h2>${board.content }</h2>
 	<h1>${board.address }</h1>
 	<h1>${board.price }</h1>
@@ -46,39 +46,21 @@
 				<option value="${i}">${i}</option>
 				</c:forEach>
 			</select>
-			<div class="input-group-append">
-			</div>
-			<br>
+		</div>
 			<div class="bookingdate" id="Datepicker">
 				<input type="text" id="startDatepicker" name="startDatepicker">start
 				<input type="text" id="endDatepicker" name="endDatepicker">end
-	</a>
-	<h2>결제하는 페이지</h2>
-	<form action="bookingpay">
-		<div class="input-group">
-			<select class="peoplecount">
-				<option selected>총원수</option>
-				<option value="1">1명</option>
-				<option value="2">2명</option>
-				<option value="3">3명</option>
-				<option value="4">4명</option>
-				<option value="5">5명</option>
-				<option value="6">6명</option>
-			</select>
-			<div class="input-group-append">
-				<button class="btn btn-outline-secondary" type="button">인원수</button>
-			</div>
-			<br>
-			<div class="bookingdate">
-				<input type="date"> 
 				<a href="bookingPay">결제</a>
 				<input type="submit" id="bookingcall"value="예약하기" >
-			</div>
 		</div>
 	</form>
 </div>
+ <div id="map"></div> 
+
+
 
 <script>
+<!-- 달력datePicker 건들면안되용  -->
 $(function(){
 	$("#startDatepicker").datepicker({
 	    dateFormat: 'yy-mm-dd',
@@ -150,6 +132,46 @@ function disableSomeDay(date) {
         }
         return [true];
 }  
+
+ // 카카오 API부분 
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch('경기도 고양시 덕양구 원당동 372-2', function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    // 해당 공간명 입력
+    var infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+    });
+    infowindow.open(map, marker);
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});   
+
 </script>
 </body>
 </html>

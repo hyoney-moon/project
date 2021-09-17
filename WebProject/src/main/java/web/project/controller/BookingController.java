@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -20,22 +21,26 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
-import web.project.domain.Book_infoDto;
+import web.project.domain.BookInfo;
 import web.project.domain.Customer;
+import web.project.service.BoardService;
 import web.project.service.BookingService;
+import web.project.service.HostLoginService;
 
 @Controller
-@SessionAttributes({"cust_id","host_id","board"})
+@SessionAttributes("custId")
 public class BookingController {
 
 	@Autowired
 	BookingService service;
-	
+	@Autowired
+	BoardService boardservice;
 		//요청 페이지 출력
-		@GetMapping("/bookingpage/{num}")
-		public String getbookingView(@PathVariable(name = "num") Long boardNum,Model m) {
+		@GetMapping("/bookingpage/{boardNum}")
+		public String getbookingView(@PathVariable(name = "boardNum") Long boardNum,Model m) {
 			Board board =  service.getBoard(boardNum);
 			System.err.println(board.getHeadcnt());
+			
 			m.addAttribute("board", board);
 			//사용자가 받는 데이터값 유효성 검사 단계
 			 List<String> dateList = service.getListDate(boardNum);
@@ -45,13 +50,14 @@ public class BookingController {
 			return "custmain/custbooking";
 		}
 		//페이지 결과 처리메소드
-		@PostMapping("/bookingpage/{num}")
-		public String insertbooking(Book_infoDto dto,@PathVariable(name = "num") Integer num, int count,@DateTimeFormat(pattern="yyyy-MM-dd") Date startDatepicker,@DateTimeFormat(pattern="yyyy-MM-dd") Date endDatepicker, String host_id, String cust_id) throws ParseException {
-			
-			dto.setPrice(count);
-			dto.setCust_id("kng00233");
-			dto.setHost_id("kkk");
-			dto.setNum(num);
+		@PostMapping("/bookingpage/{boardNum}")
+		public String insertbooking(BookInfo dto,@PathVariable(name = "boardNum") Long boardNum, int count,@DateTimeFormat(pattern="yyyy-MM-dd") Date startDatepicker,@DateTimeFormat(pattern="yyyy-MM-dd") Date endDatepicker,@ModelAttribute("custId")Customer custId) throws ParseException {
+			Board board = service.getBoard(boardNum);
+			Board hostNum = boardservice.getBoard(boardNum);
+			dto.setPrice(board.getPrice());
+			dto.setCustId(custId.getCustId()); 
+			dto.setHostId(hostNum.getHostId());
+			dto.setBoardNum(boardNum);
 			dto.setStartDate(startDatepicker);
 			dto.setEndDate(endDatepicker);
 			dto.setPeople(count);
@@ -61,7 +67,7 @@ public class BookingController {
 			return "redirect:/main";
 		}
 	@RequestMapping("/home")
-	public void updateBooking(Book_infoDto dto,@ModelAttribute("customerDto") Customer cust) {
+	public void updateBooking(BookInfo dto,@ModelAttribute("customerDto") Customer cust) {
 		service.updateBooking(dto);
 	}
 		

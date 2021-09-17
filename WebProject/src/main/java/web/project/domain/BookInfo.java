@@ -23,25 +23,21 @@ import lombok.Setter;
 @Table(name = "BOOKING")
 @Getter
 @Setter
-public class Book_infoDto implements Serializable {
+public class BookInfo implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Integer book_num;	//primary key
-	private String cust_id;		//customer foreignkey
-	private String host_id;		//host	   foreignkey
-	private Integer num;			//board    foreingkey
+	private Long bookNum;	//primary key
+	private Date endDate;
+	private String custId;		//customer foreignkey
+	private String hostId;		//host	   foreignkey
+	private Long boardNum;			//board    foreingkey
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date endDate;
-	private Integer bookNum;	//primary key
-	private String custId;		//customer foreignkey
-	private String hostId;		//host	   foreignkey
-	private int boardNum;			//board    foreingkey
 	private Date regDate;
 	private int people;
 	private int price;

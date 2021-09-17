@@ -16,22 +16,18 @@ public class mainBoradServiceImpl implements mainboardService {
 	@Autowired
 	mainBoardRepository repository;
 
-	@Override
-	public List<Board> getBoardList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	//랜덤으로 7개의 값을 가져오기 기능 
-	/*
-	 * public List<BoardDto> getBoardList(){ List<BoardDto> dto;
-	 * 
-	 * dto = repository.findAll();
-	 * 
-	 * return dto;
-	 * 
-	 * }
-	 */
+	
+	  public List<Board> getBoardList(){ 
+		  
+		  List<Board> dto = repository.findAll();
+	  
+	  return dto;
+	  
+	  }
+	 
 	/*
 	 * @Override public List<BoardDto> getBoardList(Integer num){
 	 * 
