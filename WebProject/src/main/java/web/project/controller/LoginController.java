@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import web.project.domain.Customer;
 import web.project.domain.Host;
@@ -35,7 +36,7 @@ public class LoginController {
 		
 		if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
 			model.addAttribute("customer",findCustomer);
-			return "index";
+			return "custmain/main";
 		} else {
 			return "redirect:loginForm";
 		}
@@ -47,10 +48,16 @@ public class LoginController {
 		
 		if(findHost != null && findHost.getPassword().equals(host.getPassword())) {
 			model.addAttribute("host",findHost);
-			return "index";
+			return "redirect:/index";
 		} else {
 			return "redirect:hostLoginForm";
 		}
+	}
+	
+	@GetMapping("/custLogout")
+	public String custLogout(SessionStatus status) {
+		status.setComplete();
+		return "custmain/main";
 	}
 	
 }
