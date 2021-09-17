@@ -54,11 +54,11 @@ public class BoardController implements ApplicationContextAware {
 	}
 	
 	@Autowired
+	private BoardService boardService;
+	@Autowired
 	private FrontImgService frontImgService;
 	@Autowired
 	private ImgService imgService;
-	@Autowired
-	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
 	

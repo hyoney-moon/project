@@ -10,19 +10,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import web.project.domain.Board;
-//
-public interface BoardRepository extends JpaRepository<Board, Long> {
 
-	Page<Board> findByOrderByBoardNumDesc(Pageable page);
-	
-
-
-	Page<Board> findBySpaceNameContainingIgnoreCase(String spaceName, Pageable page);
-	Page<Board> findByCategoryContainingIgnoreCase(String category, Pageable page);
-	Page<Board> findByAddressContainingIgnoreCase(String address, Pageable page);
-	Page<Board> findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(String spaceName,String category,String address, Pageable page );
+public interface BoardDtoRepository extends JpaRepository<Board, Long> {
 
 	Board findByBoardNum(Long boardNum);
+	
+	List<Board> findAll();
+	
 	
 	@Transactional
 	@Modifying

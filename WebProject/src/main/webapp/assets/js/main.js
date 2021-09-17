@@ -27,7 +27,7 @@ $(function() {
 			$body.removeClass('is-loading');
 		});
 
-	// Poptrox.
+	/*// Poptrox.
 		$window.on('load', function() {
 
 			$('.thumbnails').poptrox({
@@ -44,6 +44,6 @@ $(function() {
 				windowMargin: (skel.breakpoint('small').active ? 5 : 50)
 			});
 
-		});
+		});*/
 
 });
