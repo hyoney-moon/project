@@ -61,22 +61,6 @@ div.button{
 </head>
 
 <body>
-	<table id="table">
-		<tr>
-			<td>글제목 : </td>
-			<td>${board.spaceName}</td>
-		</tr>
-		<tr>
-			<td>내용 : </td>
-			<td>${board.content}</td>
-		</tr>
-		<tr>
-			<td>등록일 : </td>
-			<td><fmt:formatDate value="${board.regDate}" type="date"
-					dateStyle="long" /></td>
-		</tr>
-	</table>
-<hr>
 	<h2 id="qna">QnA</h2>
 	<!-- 질문하기 modal -->
 	<div class="button"><button id="myBtn">질문하기</button></div>
@@ -114,6 +98,8 @@ $(function(){
 	var span2 = document.getElementsByClassName("close")[0];
 	var btn2 = document.getElementById("replyBtn");
 	
+	var hostId = "hostId"; // ${host.hostId}
+	
 	getcommentList();
 	// 댓글 출력
 	function getcommentList(){
@@ -130,15 +116,27 @@ $(function(){
 				if(args[num].hostContent != undefined){
 					 reply = args[num].hostContent
 					 }
-			$("#getComment").append(
-					"고객이름 : " + args[num].custId + "<br>" +
-					"댓글내용 : " + args[num].content + "<br>" +
-					"<strong>호스트 답변</strong><br>" +
-					reply + "<br>" +
-					
-					"<button id='" + "replyBtn'" + 
-					" value='" + args[num].qnaNum + "'>답변하기</button><br><br>"
-			);
+				if(hostId != null){
+					$("#getComment").append(
+							"고객이름 : " + args[num].custId + "<br>" +
+							"댓글내용 : " + args[num].content + "<br>" +
+							
+							"<strong>호스트 답변</strong><br>" +
+							reply + "<br>" +
+							
+							"<button id='" + "replyBtn'" + 
+							" value='" + args[num].qnaNum + "'>답변하기</button><br><br>"
+					);
+				} else {
+					$("#getComment").append(
+							"고객이름 : " + args[num].custId + "<br>" +
+							"댓글내용 : " + args[num].content + "<br>" +
+							
+							"<strong>호스트 답변</strong><br>" +
+							reply + "<br>"
+							)
+				}
+			
 			} //for문 종료
 		}) // done 종료
 	} // getcommentList() 종료
@@ -200,10 +198,6 @@ $.ajax({
 	}) // click 종료
 }) // ready function 종료	
 </script>
-
-<script>
-</script>
-
 </body>
 
 <script>
@@ -233,12 +227,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
-/* window.addEventListener("click", function(event) {
-	if (event.target == modal2) {
-        modal2.style.display = "none";
-    }
-}); */
 
 </script>
 </html>
