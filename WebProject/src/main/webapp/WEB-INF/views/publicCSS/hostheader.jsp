@@ -49,14 +49,11 @@ a {
 			<nav class="navbar navbar-light bg-white fixed-top">
 				<div class="container-fluid">
 					<!-- searchIcon -->
-					<a class="navbar-brand" href="/searchForm"><img
-						class="mh-100 ms-1"
-						style="width: 40px; height: 40px; background-color: white;"
-						src="../images/icon/search.png" /></a>
+					<a class="navbar-brand" href="searchForm"></a>
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="main"><img style="width: 150px;"
+						<a href="hostmain"><img style="width: 150px;"
 							src="../images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->
@@ -68,21 +65,21 @@ a {
 					<div class="offcanvas offcanvas-end" tabindex="-1"
 						id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header h-25">
-							<c:if test="${empty sessionScope.customer }">
-								<a class="textStyle" href="custloginForm">
+							<c:if test="${empty sessionScope.host }">
+								<a class="textStyle" href="hostLoginForm">
 									<h3
 										class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4"
-										id="offcanvasNavbarLabel">회원 로그인</h3>
+										id="offcanvasNavbarLabel">호스트 로그인</h3>
 								</a>
 							</c:if>
-							<c:if test="${!empty sessionScope.customer}">
+							<c:if test="${!empty sessionScope.host}">
 								<h3
 									class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4"
-									id="offcanvasNavbarLabel">${customer.nickName}님<br>
-									당신만의 <strong>공간을</strong><br>
-									찾아보세요.
+									id="offcanvasNavbarLabel">${host.nickName}님<br>
+									당신의 <strong>공간을</strong><br>
+									공유해보세요.
 								</h3>
 							</c:if>
 							<button type="button"
@@ -94,9 +91,10 @@ a {
 								<li><a class="dropdown-item" href="#">마이페이지</a></li>
 								<li><a class="dropdown-item" href="#">프로필수정</a></li>
 								<li><a class="dropdown-item" href="#">예약현황</a></li>
-								<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
-								<c:if test="${!empty sessionScope.customer }">
-									<li><a class="dropdown-item" href="custLogout">로그아웃</a></li>
+								<li><a class="dropdown-item" href="#">리뷰 관리</a></li>
+								<li><a class="dropdown-item" href="#">Q&A 관리</a></li>
+								<c:if test="${!empty sessionScope.host }">
+									<li><a class="dropdown-item" href="hostLogout">로그아웃</a></li>
 								</c:if>
 							</ul>
 							<hr class="dropdown-divider">

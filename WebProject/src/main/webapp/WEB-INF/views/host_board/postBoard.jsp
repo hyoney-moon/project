@@ -72,7 +72,7 @@ body {
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
 	<div class="container">
-		<form action="boardList" method="post" enctype="multipart/form-data">
+		<form action="insertBoard" method="post" enctype="multipart/form-data">
 			공간명<br> <input name="spaceName" class="form-control" type="text"
 				placeholder="공간명" aria-label="default input example"> 공간유형<br>
 			<div class="row justify-content-between mb-3">

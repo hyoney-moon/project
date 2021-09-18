@@ -3,6 +3,13 @@ package web.project.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 @Entity
 @SequenceGenerator(name="Img_Seq_Gen", sequenceName="Img_Seq", initialValue=1, allocationSize=1)
 public class Img implements Serializable {
@@ -18,41 +25,14 @@ public class Img implements Serializable {
 	private String filename;
 	private String filePath;
 	
-	@ManyToOne
-	@JoinColumn(name="boardNum", insertable = false, updatable = false)
-	private Board board;
+//	이렇게하면 왜 안되는지 모르겠어...
+//	@ManyToOne
+//	@JoinColumn(name="boardNum", insertable = false, updatable = false)
+//	private Board board;
 	
-	
-	public Long getBoardNum() {
-		return boardNum;
-	}
-	public void setBoardNum(Long boardNum) {
-		this.boardNum = boardNum;
-	}
-	public Long getImgNo() {
-		return imgNo;
-	}
-	public void setImgNo(Long imgNo) {
-		this.imgNo = imgNo;
-	}
-	public String getOrigFilename() {
-		return origFilename;
-	}
-	public void setOrigFilename(String origFilename) {
-		this.origFilename = origFilename;
-	}
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-	public String getFilePath() {
-		return filePath;
-	}
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
+//	@ManyToOne
+//	@JoinColumn(name="boardNum", insertable = false, updatable = false)
+//	private Board board;
 	
 	
 }

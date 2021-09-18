@@ -14,46 +14,36 @@ import web.project.domain.Host;
 import web.project.service.LoginService;
 // 
 @Controller
-@SessionAttributes({"customer", "host"})
+@SessionAttributes("customer")
 @RequestMapping("/customer")
-public class LoginController {
+public class CustLoginController {
 	@Autowired
 	LoginService loginservice;
-
-	@GetMapping("/loginForm")
+	
+	//회원 메인
+	@RequestMapping("/main")
+	public String mainStart() {
+		return "custmain/main";
+	}
+	//회원 로그인 폼
+	@GetMapping("/custloginForm")
 	public String loginForm() {
-		return "member/loginForm";
+		return "login/custLoginForm";
 	}
-	
-	@GetMapping("/hostLoginForm")
-	public String HostLoginForm() {
-		return "member/hostLoginForm";
-	}
-	
-	@PostMapping("/login")
+	//회원 로그인
+	@PostMapping("/custlogin")
 	public String login(Customer customer, Model model) {
 		Customer findCustomer = loginservice.getCustomer(customer);
 		
 		if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
 			model.addAttribute("customer",findCustomer);
-			return "custmain/main";
+			return "redirect:main";
 		} else {
 			return "redirect:loginForm";
 		}
 	}
 	
-	@PostMapping("/hostLogin")
-	public String hostLogin(Host host, Model model) {
-		Host findHost = loginservice.getHost(host);
-		
-		if(findHost != null && findHost.getPassword().equals(host.getPassword())) {
-			model.addAttribute("host",findHost);
-			return "redirect:/index";
-		} else {
-			return "redirect:hostLoginForm";
-		}
-	}
-	
+	//회원 로그아웃
 	@GetMapping("/custLogout")
 	public String custLogout(SessionStatus status) {
 		status.setComplete();

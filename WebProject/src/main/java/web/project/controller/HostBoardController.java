@@ -3,6 +3,7 @@ package web.project.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
+import web.project.domain.Category;
 import web.project.domain.CustQna;
 import web.project.domain.Customer;
 import web.project.domain.FrontImg;
@@ -34,23 +36,21 @@ import web.project.domain.Host;
 import web.project.domain.HostQna;
 import web.project.domain.Img;
 import web.project.service.BoardService;
+import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 import web.project.service.QnaService;
 
-@SessionAttributes({"host","customer"})
+@SessionAttributes("host")
 @Controller
-public class BoardController implements ApplicationContextAware {
+@RequestMapping("/host")
+public class HostBoardController implements ApplicationContextAware {
 	
 	private WebApplicationContext context = null;
 	
 	@ModelAttribute("host")
 	public Host getHost() {
 		return new Host();
-	}
-	@ModelAttribute("customer")
-	public Customer getCustomer() {
-		return new Customer();
 	}
 	
 	@Autowired
@@ -61,15 +61,30 @@ public class BoardController implements ApplicationContextAware {
 	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private CategoryService categoryService;
 	
-	@PostMapping("/boardList")
+	//공간등록폼
+	@GetMapping("/insertBoardForm")
+	public String postBoard(Model model, Host host) {
+		if(host.getHostId() == null) {
+			return "login/hostLoginForm";
+		}
+		List<Category> cList = categoryService.selectCate();
+		model.addAttribute("cList", cList);
+		return "host_board/postBoard";
+	}
+	
+	//공간등록하기
+	@PostMapping("/insertBoard")
 	public String insertBoard(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
 		board.setHostId(host.getHostId());
 		Board b =  boardService.saveBoard(board);
+//		List<FrontImg> forntImg = new ArrayList<>();
+//		frontImg = forntImg.add(new frontImg);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
-		System.out.println(b.getBoardNum());
 		model.addAttribute("place", b);
-		model.addAttribute("viewImg",imgb);
+		model.addAttribute("viewImg", imgb);
 		
 		//프론트 이미지 업로드
 		for (MultipartFile file : frontImg) {
@@ -97,7 +112,7 @@ public class BoardController implements ApplicationContextAware {
 		imgService.saveImg(im);
 		}
 		
-		return "redirect:/main";
+		return "redirect:hostmain";
 	}
 	
 	//(이미지)실제 업로드할 경로 만드는 부분
@@ -140,7 +155,7 @@ public class BoardController implements ApplicationContextAware {
         return "/img/frontImg/"+fileName;
      }
 	
-	//공간 보기
+	//호스트가 올린 공간 리스트 보기
 		@RequestMapping("/viewBoard")
 		public String viewBoard(Model model,
 				@RequestParam(name="p", defaultValue="1")int pNum, 
@@ -176,36 +191,36 @@ public class BoardController implements ApplicationContextAware {
 			return "host_board/viewPost";
 		}
 	
-	//게시판 검색
-	@RequestMapping("/searchForm")
-	public String searchForm() {
-		return "search/searchForm";
-	}
-	@PostMapping("/searchBoard")
-	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
-			Board board, int search_option, String search) {
-		Page<Board> searchList = boardService.searchBoardList(pNum, search_option, search);
-		List<Board> boardList = searchList.getContent(); //보여질 글
-		int totalCount = searchList.getTotalPages(); //전체 페이지 수
-		long total = searchList.getTotalElements();
-		
-		model.addAttribute("boardList",boardList);
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("total", total);
-		
-		int begin = (pNum-1)/5*5+1;
-		int end = begin+5-1;
-		if(end>totalCount) {
-			end = totalCount;
-		}
-		
-		model.addAttribute("begin", begin);
-		model.addAttribute("end", end);
-		model.addAttribute("search", search);
-		model.addAttribute("search_option", search_option);
-		
-		return "search/searchForm";
-	}
+//	//게시판 검색
+//	@RequestMapping("/searchForm")
+//	public String searchForm() {
+//		return "search/searchForm";
+//	}
+//	@PostMapping("/searchBoard")
+//	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
+//			Board board, int search_option, String search) {
+//		Page<Board> searchList = boardService.searchBoardList(pNum, search_option, search);
+//		List<Board> boardList = searchList.getContent(); //보여질 글
+//		int totalCount = searchList.getTotalPages(); //전체 페이지 수
+//		long total = searchList.getTotalElements();
+//		
+//		model.addAttribute("boardList",boardList);
+//		model.addAttribute("totalCount", totalCount);
+//		model.addAttribute("total", total);
+//		
+//		int begin = (pNum-1)/5*5+1;
+//		int end = begin+5-1;
+//		if(end>totalCount) {
+//			end = totalCount;
+//		}
+//		
+//		model.addAttribute("begin", begin);
+//		model.addAttribute("end", end);
+//		model.addAttribute("search", search);
+//		model.addAttribute("search_option", search_option);
+//		
+//		return "search/searchForm";
+//	}
 	
 
 	

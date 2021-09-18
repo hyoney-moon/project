@@ -25,20 +25,20 @@ body {
 </head>
 <body>
 	<header>
-		<%@ include file = "../publicCSS/hostheader.jsp" %>
+		<%@ include file = "../publicCSS/custheader.jsp" %>
 	</header>
 		<div class="position-absolute top-50 start-50 translate-middle">
 			<div class="container">
-				<form method="post" action="hostLogin">
+				<form method="post" action="custlogin">
 					<div class="form-floating mb-3">
-						<input name="hostId" class="form-control" type="text" aria-label="default input example" placeholder="아이디">
+						<input name="custId" class="form-control" type="text" aria-label="default input example" placeholder="아이디">
 						<label for="floatingInput">아이디</label>
 					</div>
 					<div class="form-floating mb-3">
 						<input name="password" class="form-control" type="password" aria-label="default input example" placeholder="비밀번호">
 						<label for="floatingPassword">비밀번호</label>
 					</div>
-					<input type="submit" value="호스트 로그인 ❤"
+					<input type="submit" value="회원 로그인 ❤"
 						class="w-100 btn btn-outline-danger mb-5" style="height: 50px;">
 				</form>
 			</div>	

@@ -38,24 +38,11 @@ public class homeController {
 		return "login/index";
 	}
 	
-	//호스트로그인
-	@RequestMapping("/login/hostlogin")
-	public String hostLoginForm() {
-		return "login/hostLoginForm";
-	}
 	
 	//검색
 	@RequestMapping("/search")
 	public String searchForm() {
 		return "search/searchForm";
-	}
-	
-	//공간 등록
-	@RequestMapping("/postBoard")
-	public String postBoard(Model model) {
-		List<Category> cList = categoryService.selectCate();
-		model.addAttribute("cList", cList);
-		return "host_board/postBoard";
 	}
 	
 	

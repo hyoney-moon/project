@@ -55,12 +55,12 @@
 						<div id="carouselExampleControls" class="carousel slide"
 							data-bs-ride="carousel">
 							<div class="carousel-inner">
-								<c:forEach items="${blist.frontimgList }" var="fis" begin="0" end="0">
+								<c:forEach items="${blist.frontimg }" var="fis" begin="0" end="0">
 									<div class="carousel-item active">
 										<img src="${fis.filePath }" class="d-block w-100 list_img" alt="...">
 									</div>
 								</c:forEach>
-								<c:forEach items="${blist.frontimgList }" var="fis" begin="1" end="${blist.frontimgList.size() }">
+								<c:forEach items="${blist.frontimg }" var="fis" begin="1" end="${blist.frontimg.size() }">
 									<div class="carousel-item">
 										<img src="${fis.filePath }" class="d-block w-100 list_img" alt="...">
 									</div>
