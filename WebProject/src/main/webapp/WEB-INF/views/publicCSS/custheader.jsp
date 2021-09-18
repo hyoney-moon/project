@@ -49,7 +49,7 @@ a {
 			<nav class="navbar navbar-light bg-white fixed-top">
 				<div class="container-fluid">
 					<!-- searchIcon -->
-					<a class="navbar-brand" href="/searchForm"><img
+					<a class="navbar-brand" href="searchForm"><img
 						class="mh-100 ms-1"
 						style="width: 40px; height: 40px; background-color: white;"
 						src="../images/icon/search.png" /></a>

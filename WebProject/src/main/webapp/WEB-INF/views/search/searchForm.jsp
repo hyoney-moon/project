@@ -1,3 +1,4 @@
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,30 +17,18 @@
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
 <style>
-header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	hegiht: 70px;
-	padding: 2px;
-	background: white;
-	align-items: center;
-}
-
 body {
-	padding-top: 70px
+	padding-top: 40px;
+}
+.headText{
+	padding: 50px;
+	text-align: center;
 }
 </style>
 </head>
 <body>
 	<header>
-		<div class="postion-relateive mt-5">
-			<h3
-				class="position-absolute d-inline top-50 start-50 translate-middle">로고</h3>
-			<nav class="position-absolute top-50 end-0 translate-middle-y">
-				메뉴바 검색</nav>
-		</div>
+		<%@ include file = "../publicCSS/custheader.jsp" %>
 	</header>
 
 	<div class="container">
@@ -68,8 +57,10 @@ body {
 		<c:forEach items="${boardList }" var="boardlist">
 			${boardlist.hostId } / ${boardlist.category } / ${boardlist.spaceName }<br>
 		</c:forEach>
-		
 		</form>
+		<section>
+		<%@ include file = "../custmain/boardList.jsp" %>
+		</section>
 		
 	</div>
 </body>

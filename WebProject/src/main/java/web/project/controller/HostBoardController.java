@@ -3,7 +3,6 @@ package web.project.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -30,12 +29,11 @@ import com.google.gson.Gson;
 import web.project.domain.Board;
 import web.project.domain.Category;
 import web.project.domain.CustQna;
-import web.project.domain.Customer;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.HostQna;
 import web.project.domain.Img;
-import web.project.service.BoardService;
+import web.project.service.HostBoardService;
 import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
@@ -58,7 +56,7 @@ public class HostBoardController implements ApplicationContextAware {
 	@Autowired
 	private ImgService imgService;
 	@Autowired
-	private BoardService boardService;
+	private HostBoardService hostBoardService;
 	@Autowired
 	private QnaService qnaService;
 	@Autowired
@@ -78,8 +76,10 @@ public class HostBoardController implements ApplicationContextAware {
 	//공간등록하기
 	@PostMapping("/insertBoard")
 	public String insertBoard(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
+//		호스트 아이디 가져오기
 		board.setHostId(host.getHostId());
-		Board b =  boardService.saveBoard(board);
+//		저장
+		Board b =  hostBoardService.saveBoard(board);
 //		List<FrontImg> forntImg = new ArrayList<>();
 //		frontImg = forntImg.add(new frontImg);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
@@ -159,11 +159,13 @@ public class HostBoardController implements ApplicationContextAware {
 		@RequestMapping("/viewBoard")
 		public String viewBoard(Model model,
 				@RequestParam(name="p", defaultValue="1")int pNum, 
-				@ModelAttribute("host")Host host) {
+				@ModelAttribute("host")Host host, String hostId) {
+			//호스트 아이디로 로그인 된게 없으면 호스트 로그인 폼으로
 			if(host.getHostId() == null) {
 				return "login/hostLoginForm";
 			}
-			Page<Board> pageList = boardService.getBoardList(pNum);
+			//호스트 아이디로 된 보드 리스트 가져오기(session에 저장된 hostId로 검색해서 가져옴)
+			Page<Board> pageList = hostBoardService.getHostBoardList(pNum, host.getHostId());
 			List<Board> bList = pageList.getContent(); //보여질 글
 			int totalCount = pageList.getTotalPages(); //전체 페이지 수
 			model.addAttribute("bList", bList);
@@ -182,7 +184,7 @@ public class HostBoardController implements ApplicationContextAware {
 		
 		@RequestMapping("/viewPost/{boardNum}")
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-			Board view = boardService.viewPost(boardNum);
+			Board view = hostBoardService.viewPost(boardNum);
 			model.addAttribute("view",view);
 			
 			List<FrontImg> fis = frontImgService.viewImg(boardNum);
@@ -190,65 +192,12 @@ public class HostBoardController implements ApplicationContextAware {
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
-	
-//	//게시판 검색
-//	@RequestMapping("/searchForm")
-//	public String searchForm() {
-//		return "search/searchForm";
-//	}
-//	@PostMapping("/searchBoard")
-//	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
-//			Board board, int search_option, String search) {
-//		Page<Board> searchList = boardService.searchBoardList(pNum, search_option, search);
-//		List<Board> boardList = searchList.getContent(); //보여질 글
-//		int totalCount = searchList.getTotalPages(); //전체 페이지 수
-//		long total = searchList.getTotalElements();
-//		
-//		model.addAttribute("boardList",boardList);
-//		model.addAttribute("totalCount", totalCount);
-//		model.addAttribute("total", total);
-//		
-//		int begin = (pNum-1)/5*5+1;
-//		int end = begin+5-1;
-//		if(end>totalCount) {
-//			end = totalCount;
-//		}
-//		
-//		model.addAttribute("begin", begin);
-//		model.addAttribute("end", end);
-//		model.addAttribute("search", search);
-//		model.addAttribute("search_option", search_option);
-//		
-//		return "search/searchForm";
-//	}
-	
-
-	
-	// 게시글 목록
-	@GetMapping("/boardList")
-	public String getBoardList(Model m, @RequestParam(name = "p", defaultValue = "1") int pNum) {
-		Page<Board> pageList = boardService.getBoardList(pNum);
-		List<Board> bList = pageList.getContent();
-		int totalPageCount = pageList.getTotalPages();
-		m.addAttribute("blist", bList);
-		m.addAttribute("totalPage", totalPageCount);
 		
-		int begin = (pNum - 1) / 5 * 5 + 1;
-		int end = begin + 5 - 1;
-		if (end > totalPageCount) {
-			end = totalPageCount;
-			
-		m.addAttribute("begin", begin);
-		m.addAttribute("end", end);
-		
-		}
-		return "host_board/getBoardList";
-	}
-	
+	//////전현수
 	// 게시글 조회
 	@GetMapping("/content/{boardNum}")
 	public String getBoard(@PathVariable Long boardNum, Model m) {
-		Board board = boardService.getBoard(boardNum);
+		Board board = hostBoardService.getBoard(boardNum);
 		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
 		
 		m.addAttribute("custQna", custQnaResult);

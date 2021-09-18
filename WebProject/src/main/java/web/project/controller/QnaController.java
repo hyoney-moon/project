@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import web.project.domain.Board;
 import web.project.domain.CustQna;
 import web.project.domain.HostQna;
-import web.project.service.BoardService;
+import web.project.service.HostBoardService;
 import web.project.service.QnaService;
 // 
 @Controller
@@ -28,7 +28,7 @@ public class QnaController {
 	@Autowired
 	QnaService qnaService;
 	@Autowired
-	BoardService boardService;
+	HostBoardService boardService;
 	
 	// 일반회원 질문작성
 	@PostMapping(value = "/insertCustQna", produces = "text/plain;charset=UTF-8")

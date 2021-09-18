@@ -8,32 +8,35 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import web.project.domain.Board;
-import web.project.persistence.BoardRepository;
+import web.project.persistence.CustBoardRepository;
+import web.project.persistence.HostBoardRepository;
 //
 @Service
-public class BoardServiceImpl implements BoardService {
+public class CustBoardServiceImpl implements CustBoardService {
 
 	@Autowired
-	BoardRepository boardRepo;
+	CustBoardRepository boardRepo;
 	
 	// 게시글 목록
 	@Override
-	public Page<Board> getBoardList(int pNum) {
+	public Page<Board> getCustBoardList(int pNum) {
 		Pageable page = PageRequest.of(pNum-1, 5);
 		return boardRepo.findByOrderByBoardNumDesc(page);
 	}
-
-	// 게시글 조회
-	@Override
-	public Board getBoard(Long boardNum) {
-		return boardRepo.getById(boardNum);
-	}
-	//상세보기
+	
+	//저장된 게시글 상세보기
 	@Override
 	public Board viewPost(Long boardNum) {
 		boardRepo.updateReadcount(boardNum);
 		return boardRepo.findByBoardNum(boardNum);
 	}
+
+	//게시글 조회
+	@Override
+	public Board getBoard(Long boardNum) {
+		return boardRepo.getById(boardNum);
+	}
+	
 			
 	//검색하기
 	@Override
@@ -51,9 +54,5 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return list;
 	}
-	//글저장
-	@Override
-	public Board saveBoard(Board board) {
-		return boardRepo.save(board);
-	}
+	
 }

@@ -133,6 +133,9 @@ body {
 				</a>
 			</div>
 		</section>
+		<div>
+		<a href="viewBoard">전체게시글 보기</a>
+		</div>
 	</div>
 	<!-- 하단 정보 공유창 -->
 	<footer id="footer">

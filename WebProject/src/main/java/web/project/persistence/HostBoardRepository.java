@@ -9,15 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import web.project.domain.Board;
 //
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface HostBoardRepository extends JpaRepository<Board, Long> {
 
-	Page<Board> findByOrderByBoardNumDesc(Pageable page);
+	Page<Board> findByHostIdOrderByBoardNumDesc(String hostId, Pageable page);
 
-
-	Page<Board> findBySpaceNameContainingIgnoreCase(String spaceName, Pageable page);
-	Page<Board> findByCategoryContainingIgnoreCase(String category, Pageable page);
-	Page<Board> findByAddressContainingIgnoreCase(String address, Pageable page);
-	Page<Board> findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(String spaceName,String category,String address, Pageable page );
+	//검색기능
+//	Page<Board> findBySpaceNameContainingIgnoreCase(String spaceName, Pageable page);
+//	Page<Board> findByCategoryContainingIgnoreCase(String category, Pageable page);
+//	Page<Board> findByAddressContainingIgnoreCase(String address, Pageable page);
+//	Page<Board> findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(String spaceName,String category,String address, Pageable page );
 
 	Board findByBoardNum(Long boardNum);
 	
