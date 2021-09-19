@@ -71,6 +71,7 @@ body {
 	<header>
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
+	<hr>
 	<div class="container">
 		<form action="insertBoard" method="post" enctype="multipart/form-data">
 			공간명<br> <input name="spaceName" class="form-control" type="text"

@@ -17,7 +17,7 @@ public interface CustBoardRepository extends JpaRepository<Board, Long> {
 	Page<Board> findBySpaceNameContainingIgnoreCase(String spaceName, Pageable page);
 	Page<Board> findByCategoryContainingIgnoreCase(String category, Pageable page);
 	Page<Board> findByAddressContainingIgnoreCase(String address, Pageable page);
-	Page<Board> findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(String spaceName,String category,String address, Pageable page );
+//	Page<Board> findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(String spaceName,String category,String address, Pageable page );
 
 	Board findByBoardNum(Long boardNum);
 	

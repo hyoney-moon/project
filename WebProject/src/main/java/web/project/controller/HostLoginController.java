@@ -26,6 +26,12 @@ public class HostLoginController {
 		return "host_main/hostmain";
 	}
 	
+	//logo 클릭시
+	@RequestMapping("/logoClick")
+	public String logoMain() {
+		return "redirect:hostmain";
+	}
+	
 	//로그인 폼
 	@RequestMapping("/hostLoginForm")
 	public String loginForm() {

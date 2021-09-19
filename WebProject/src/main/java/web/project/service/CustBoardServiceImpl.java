@@ -47,12 +47,13 @@ public class CustBoardServiceImpl implements CustBoardService {
 			list = boardRepo.findBySpaceNameContainingIgnoreCase(search, page);
 		} else if(search_option == 2) {
 			list = boardRepo.findByCategoryContainingIgnoreCase(search, page);
-		} else if(search_option == 3) {
-			list = boardRepo.findByAddressContainingIgnoreCase(search, page);
 		} else {
-			list = boardRepo.findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(search, search, search, page);
+			list = boardRepo.findByAddressContainingIgnoreCase(search, page);
 		}
+		
 		return list;
+		
+//		} else {
+//			list = boardRepo.findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(search, search, search, page);		
 	}
-	
 }

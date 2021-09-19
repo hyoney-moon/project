@@ -17,6 +17,18 @@
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
 <style>
+body {
+	padding-top: 40px;
+}
+
+.headText {
+	padding: 50px;
+	text-align: center;
+}
+table{border-collapse : collapse; text-align: center;}
+th{ background-color: white; width: 150px;}
+table.a{margin: 10px auto;}
+#page{text-decoration: none;}
 .list_item {
     display: inline-block;
     width: 250px;
@@ -32,11 +44,15 @@
     overflow: hidden;
     object-fit: cover;
 }
+
 </style>
 </head>
 <body>
+	<header>
+		<%@ include file="../publicCSS/hostheader.jsp"%>
+	</header>
 	<div class="container">
-		<table>
+		<table border="1">
 			<tr>
 				<th>작성자</th>
 				<th>카테고리</th>
@@ -67,17 +83,6 @@
 									</div>
 								</c:forEach>
 							</div>
-
-							<!-- <button class="carousel-control-prev" type="button"
-								data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							</button>
-							<button class="carousel-control-next" type="button"
-								data-bs-target="#carouselExampleControls" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							</button> -->
 							</div>
 						</div>
 						</td>
@@ -90,13 +95,13 @@
 		</table>
 		<div id="page">
 			<c:if test="${begin > 2 }">
-				<a href="/viewBoard?p=${begin-1}">[이전]</a>
+				<a href="viewBoard?p=${begin-1}">[이전]</a>
 			</c:if>
-			<c:forEach begin="${begin }" end="${end}" var="i">
-				<a href="/viewBoard?p=${i}">[${i}]</a>
-			</c:forEach>
-			<c:if test="${end < totalCount }">
-				<a href="/viewBoard?p=${end+1}">[다음]</a>
+				<c:forEach begin="${begin}" end="${end}" var ="i">
+					<a href="viewBoard?p=${i}">[${i}]</a>
+				</c:forEach>
+			<c:if test="${end < totalPage}">
+				<a href="viewBoard?p=${end+1}">[다음]</a>
 			</c:if>
 		</div>
 	</div>

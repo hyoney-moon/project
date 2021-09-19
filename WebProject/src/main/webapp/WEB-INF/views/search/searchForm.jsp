@@ -20,48 +20,88 @@
 body {
 	padding-top: 40px;
 }
-.headText{
+
+.headText {
 	padding: 50px;
 	text-align: center;
 }
+table{border-collapse : collapse; text-align: center;}
+th{ background-color: white; width: 150px;}
+a{margin: 10px auto;}
+#page{text-align: center;}
 </style>
 </head>
 <body>
 	<header>
-		<%@ include file = "../publicCSS/custheader.jsp" %>
+		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
 
-	<div class="container">
+	<div class="container ">
 		<form action="searchBoard" method="post">
-			<!-- <div class="row g-3">
-				<div class="col">
-					<input type="text" class="form-control" placeholder="First name"
-						aria-label="First name">
-				</div>
-				<div class="col">
-					<input type="text" class="form-control" placeholder="Last name"
-						aria-label="Last name">
-				</div>
-			</div> -->
 			<select name="search_option"
 				class="form-select form-select-lg mb-3 w-25"
 				aria-label=".form-select-lg example">
-				<option selected value="0">Select</option>
+				<option selected>Select</option>
 				<option value="1">공간명</option>
 				<option value="2">카테고리</option>
 				<option value="3">지역별</option>
 			</select>
-			<input name="search" class="form-control form-control-lg" type="text" placeholder="검색어를 입력하세요."
+			<input name="search" class="form-control form-control-lg"
+				type="text" placeholder="검색어를 입력하세요."
 				aria-label=".form-control-lg example">
 				<input type="submit" value="검 색"><br>
-		<c:forEach items="${boardList }" var="boardlist">
-			${boardlist.hostId } / ${boardlist.category } / ${boardlist.spaceName }<br>
-		</c:forEach>
+				<table border="1" class="w-100 mt-5">
+					<tr>
+						<th>작성자</th> <th>카테고리</th> <th>이미지</th> <th>공간명</th> <th>작성일</th> <th>조회수</th>
+					</tr>
+					<c:forEach items="${boardList }" var="blist">
+						<tr>
+							<td>${blist.hostId }</td>
+							<td>${blist.category }</td>
+							<td>
+								<div class="list_item">
+									<div id="carouselExampleControls" class="carousel slide"
+										data-bs-ride="carousel">
+										<!-- 이미지가 안 뜸 ㅜㅜ -->
+										<div class="carousel-inner">
+											<c:forEach items="${blist.frontimg }" var="fis" begin="0"
+												end="0">
+												<div class="carousel-item active">
+													<img src="${fis.filePath }" class="d-block w-100 list_img"
+														alt="...">
+												</div>
+											</c:forEach>
+											<c:forEach items="${blist.frontimg }" var="fis" begin="1"
+												end="${blist.frontimg.size() }">
+												<div class="carousel-item">
+													<img src="${fis.filePath }" class="d-block w-100 list_img"
+														alt="...">
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</td>
+							<td><a href="viewPost/${blist.boardNum }">${blist.spaceName }</a></td>
+							<td><fmt:formatDate value="${blist.regDate}" pattern="MM.dd" /></td>
+							<td>${blist.readcount }</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<div id="page">
+					<c:if test="${begin > 2 }">
+						<a href="/searchBoard?p=${begin-1}">[이전]</a>
+					</c:if>
+					<c:forEach begin="${begin }" end="${end}" var="i">
+						<a href="/searchBoard?p=${i}">[${i}]</a>
+					</c:forEach>
+					<c:if test="${end < totalCount }">
+						<a href="/searchBoard?p=${end+1}">[다음]</a>
+					</c:if>
+				</div>
 		</form>
-		<section>
-		<%@ include file = "../custmain/boardList.jsp" %>
-		</section>
-		
+
+
 	</div>
 </body>
 </html>

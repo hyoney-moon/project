@@ -53,7 +53,7 @@ a {
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="hostmain"><img style="width: 150px;"
+						<a href="/logoClick"><img style="width: 150px;"
 							src="../images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->
@@ -93,6 +93,7 @@ a {
 								<li><a class="dropdown-item" href="#">예약현황</a></li>
 								<li><a class="dropdown-item" href="#">리뷰 관리</a></li>
 								<li><a class="dropdown-item" href="#">Q&A 관리</a></li>
+								<li><a class="dropdown-item" href="viewBoard">내공간관리</a>
 								<c:if test="${!empty sessionScope.host }">
 									<li><a class="dropdown-item" href="hostLogout">로그아웃</a></li>
 								</c:if>

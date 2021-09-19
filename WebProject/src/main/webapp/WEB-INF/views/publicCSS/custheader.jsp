@@ -40,6 +40,13 @@ a {
 .dropdown-menu {
 	border: none;
 }
+#hr {
+hr {
+	height: 70px;
+	border: 0;
+	box-shadow:0 10px -10px #bbb inset;
+}
+}
 </style>
 </head>
 <body>
@@ -111,5 +118,6 @@ a {
 			</nav>
 		</div>
 	</header>
+	<hr id="hr">
 </body>
 </html>
