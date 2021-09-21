@@ -14,12 +14,12 @@
 ### 사용된 주요 기술 및 내용
 - 일반회원 DB 조회시 컬럼별 오름차순 내림차순 옵션 제공
 - 일반회원 DB 엑셀 파일로 내려받기 기능 제공
-- Toast UI Grid 라이브러리 사용
+- [Toast UI Grid](https://ui.toast.com/tui-grid) 라이브러리 사용
 - Ajax
 ## 일반회원 통계 정보 조회
 ![일반회원 통계 차트JS](https://user-images.githubusercontent.com/77215614/134183212-5d5445fa-f688-4227-9e78-feb01f07b1e8.gif)
 ### 사용된 주요 기술 및 내용
 - 월별 누적 회원, 게시글 수 등 현황 막대 그래프로 시각화
 - 회원 나이 분포, 성비 등 파이 그래프로 시각화
-- Chart.js 라이브러리 사용
+- [Chart.js](https://www.chartjs.org/) 라이브러리 사용
 - Ajax
