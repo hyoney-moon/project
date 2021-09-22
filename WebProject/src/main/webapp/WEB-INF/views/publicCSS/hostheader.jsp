@@ -53,7 +53,7 @@ a {
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="/logoClick"><img style="width: 150px;"
+						<a href="logoClick"><img style="width: 150px;"
 							src="../images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->

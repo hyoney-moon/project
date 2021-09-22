@@ -1,6 +1,8 @@
 package web.project.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,24 +38,38 @@ public class CustBoardServiceImpl implements CustBoardService {
 	public Board getBoard(Long boardNum) {
 		return boardRepo.getById(boardNum);
 	}
+
+	//검색하기 ajax
+	@Override
+	public List<Board> searchBoardList(int search_option, String search) {
+		List<Board> list = null;
+		if(search_option == 1) {
+			list = boardRepo.findBySpaceNameContainingIgnoreCase(search);
+		}else if(search_option == 2) {
+			list = boardRepo.findByCategoryContainingIgnoreCase(search);
+		} else {
+			list = boardRepo.findByAddressContainingIgnoreCase(search);
+		}
+		return list;
+	}
 	
 			
 	//검색하기
-	@Override
-	public Page<Board> searchBoardList(int pNum, int search_option, String search) {
-		Pageable page = PageRequest.of(pNum-1, 5);
-		Page<Board> list = null;
-		if(search_option == 1) {
-			list = boardRepo.findBySpaceNameContainingIgnoreCase(search, page);
-		} else if(search_option == 2) {
-			list = boardRepo.findByCategoryContainingIgnoreCase(search, page);
-		} else {
-			list = boardRepo.findByAddressContainingIgnoreCase(search, page);
-		}
-		
-		return list;
+//	@Override
+//	public Page<Board> searchBoardList(int pNum, int search_option, String search) {
+//		Pageable page = PageRequest.of(pNum-1, 5);
+//		Page<Board> list = null;
+//		if(search_option == 1) {
+//			list = boardRepo.findBySpaceNameContainingIgnoreCase(search, page);
+//		} else if(search_option == 2) {
+//			list = boardRepo.findByCategoryContainingIgnoreCase(search, page);
+//		} else {
+//			list = boardRepo.findByAddressContainingIgnoreCase(search, page);
+//		}
+//		
+//		return list;
 		
 //		} else {
 //			list = boardRepo.findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(search, search, search, page);		
-	}
+//	}
 }

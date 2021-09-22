@@ -58,7 +58,7 @@ h5, p {color: #2d2d2d;}
 						
 						
 						<div class="card">
-						<a href="adminmain">
+						<a href="admin/adminmain">
 							<img src="../images/icon/adminMain.png" class="card-img-top"
 								alt="...">
 							<div class="card-body">

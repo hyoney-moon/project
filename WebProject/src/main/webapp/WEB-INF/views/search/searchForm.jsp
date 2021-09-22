@@ -49,8 +49,8 @@ a{margin: 10px auto;}
 			<input name="search" class="form-control form-control-lg"
 				type="text" placeholder="검색어를 입력하세요."
 				aria-label=".form-control-lg example">
-				<input type="submit" value="검 색"><br>
-				<table border="1" class="w-100 mt-5">
+				<input type="submit" value="검 색" onclick="getSearchList()"><br>
+				<%-- <table border="1" class="w-100 mt-5">
 					<tr>
 						<th>작성자</th> <th>카테고리</th> <th>이미지</th> <th>공간명</th> <th>작성일</th> <th>조회수</th>
 					</tr>
@@ -98,10 +98,14 @@ a{margin: 10px auto;}
 					<c:if test="${end < totalCount }">
 						<a href="/searchBoard?p=${end+1}">[다음]</a>
 					</c:if>
-				</div>
+				</div> --%>
 		</form>
-
-
 	</div>
+	<script>
+		$(function(){
+			let 
+		})
+	</script>
 </body>
+
 </html>

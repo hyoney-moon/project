@@ -1,6 +1,8 @@
 package web.project.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 import lombok.Getter;
@@ -29,4 +31,7 @@ public class Customer implements Serializable {
 	private String cash; 
 	private String profile;
 	private String pick;
+	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
+	private Date joinDate;
+
 }

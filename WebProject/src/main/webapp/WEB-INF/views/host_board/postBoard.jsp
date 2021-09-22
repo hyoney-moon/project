@@ -21,6 +21,8 @@ header {
 body {
 	padding-top: 70px
 }
+
+div.msg {color: red;}
 </style>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -69,16 +71,18 @@ body {
 <body>
 	<!-- 헤더영역 -->
 	<header>
-		<%@ include file="../publicCSS/custheader.jsp"%>
+		<%@ include file="../publicCSS/hostheader.jsp"%>
 	</header>
-	<hr>
 	<div class="container">
-		<form action="insertBoard" method="post" enctype="multipart/form-data">
-			공간명<br> <input name="spaceName" class="form-control" type="text"
-				placeholder="공간명" aria-label="default input example"> 공간유형<br>
+		<form action="insertBoard" method="post" id="postBoardCheck" enctype="multipart/form-data">
+			공간명<br> <input  id="spaceName" name="spaceName" class="form-control mb-3" type="text"
+				placeholder="공간명" aria-label="default input example">
+				<div id="space_msg" class="mb-3 msg"></div>
+				
+				공간유형<br>
 			<div class="row justify-content-between mb-3">
 				<div class="col">
-					<select name="category" class="form-select"
+					<select id="category" name="category" class="form-select"
 						aria-label="Default select example">
 						<c:forEach items="${cList}" var="clist">
 							<option value="${clist.category }">${clist.category }</option>
@@ -87,38 +91,42 @@ body {
 				</div>
 			</div>
 
-			공간 한줄 소개 <input name="contentOneline" class="form-control mb-3"
+			공간 한줄 소개 <input id="contentOneline" name="contentOneline" class="form-control mb-3"
 				type="text" placeholder="내 귀염 뽀짝한 공간을 한줄로 표현한다면?"
 				aria-label="default input example">
+				<div id="contentOneline_msg" class="mb-3"></div>
 
 			<div class="mb-3 ">
 				<label for="exampleFormControlTextarea1" class="form-label">공간소개</label>
-				<textarea name="content" class="form-control"
+				<textarea id="content" name="content" class="form-control"
 					id="exampleFormControlTextarea1" rows="3"></textarea>
 			</div>
+			<div id="content_msg" class="mb-3"></div>
 
 			<div class="mb-3">
-				시설안내 <input name="direction" class="form-control" type="text"
+				시설안내 <input id="direction" name="direction" class="form-control" type="text"
 					placeholder="내 귀염 뽀짝한 공간을 한줄로 표현한다면?"
 					aria-label="default input example">
 			</div>
+			<div id="direction_msg" class="mb-3"></div>
 
 			<div class="mb-3 ">
 				<label for="exampleFormControlTextarea1" class="form-label">예약시
 					주의사항</label>
-				<textarea name="caution" class="form-control"
+				<textarea id="caution" name="caution" class="form-control"
 					id="exampleFormControlTextarea1" rows="3"></textarea>
 			</div>
+			<div id="caution_msg" class="mb-3"></div>
 
 			<div class="mb-3">
-				웹사이트 <input name="website" class="form-control" type="text"
+				웹사이트 <input id="website" name="website" class="form-control" type="text"
 					placeholder="웹사이트" aria-label="default input example">
 			</div>
 
 			<div class="mb-3">
 				우편번호
 				<div class="input-group mb-3">
-					<input name="zipcode" id="postcode" type="text"
+					<input id="zipcode" name="zipcode" id="postcode" type="text"
 						class="form-control" placeholder="주소"
 						aria-label="Recipient's username" aria-describedby="button-addon2">
 					<button class="btn btn-outline-secondary" type="button"
@@ -129,33 +137,74 @@ body {
 				<input name="addressDetail" id="detailAddress" class="form-control"
 					type="text" placeholder="상세주소" aria-label="default input example">
 			</div>
+			<div id="address_msg" class="mb-3"></div>
 
 			<div class="mb-3">
 				<label for="formFile" class="form-label">대표이미지</label> <input
 					multiple="multiple" name="frontImg" class="form-control"
 					type="file" id="formFile">
 			</div>
+			<div id="frontImg_msg" class="mb-3"></div>
 
 			<div class="mb-3">
 				<label for="formFile" class="form-label">이미지</label> <input
 					multiple="multiple" name="image" class="form-control" type="file"
 					id="formFile">
 			</div>
+			<div id="image_msg" class="mb-3"></div>
 
 			<div class="mb-3">
 				대여 금액 /일<br>
 				<div class="input-group mb-3 w-25">
-					<span class="input-group-text">₩</span> <input name="price"
+					<span class="input-group-text">₩</span>
+					<input name="price" id="price" class="form-control"
+					placeholder="금액" aria-label="default input example">
+					<!-- <input id="price" name="price"
 						type="text" class="form-control text-end"
-						aria-label="Amount (to the nearest dollar)"> <span
-						class="input-group-text">.000</span>
+						aria-label="Amount (to the nearest dollar)"> -->
 				</div>
 			</div>
+			<div id="price_msg" class="mb-3"></div>
 
 			<input type="submit" value="내 마음속에 저장 ❤"
 				class="w-100 btn btn-outline-danger mb-5" style="height: 50px;">
 		</form>
 	</div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function(){
+	$("#postBoardCheck").submit(function(){
+		if(!$("#spaceName").val()){
+			$("#space_msg").html("*필수")
+			return false;
+		}if(!$("#contentOneline").val()){
+			$("#contentOneline_msg").html("*필수")
+			return false;
+		}if(!$("#content").val()){
+			$("#content_msg").html("*필수")
+			return false;
+		}if(!$("#direction").val()){
+			$("#direction_msg").html("*필수")
+			return false;
+		}if(!$("#zipcode").val()){
+			$("#address_msg").html("*필수")
+			return false;
+		}if(!$("#frontImg").val()){
+			$("#frontImg_msg").html("*필수")
+			return false;
+		}if(!$("#img").val()){
+			$("#img_msg").html("*필수")
+			return false;
+		}
+	})
+})
+</script>
 </body>
 </html>
+
+
+
+
+
+
+

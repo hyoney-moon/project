@@ -112,34 +112,44 @@ public class CustBoardController implements ApplicationContextAware {
 		List<FrontImg> fis = frontImgService.viewImg(boardNum);
 		model.addAttribute("fis", fis);
 		model.addAttribute("fisize", fis.size());
-		return "host_board/viewPost";
+		return "cust_board/viewPost";
 	}
 	
-	@PostMapping("/searchBoard")
-	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
-			Board board, int search_option, String search) {
-		Page<Board> searchList = custBoardService.searchBoardList(pNum, search_option, search);
-		List<Board> boardList = searchList.getContent(); //보여질 글
-		int totalCount = searchList.getTotalPages(); //전체 페이지 수
-		long total = searchList.getTotalElements();
-		
-		model.addAttribute("boardList",boardList);
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("total", total);
-		
-		int begin = (pNum-1)/5*5+1;
-		int end = begin+5-1;
-		if(end>totalCount) {
-			end = totalCount;
-		}
-		
-		model.addAttribute("begin", begin);
-		model.addAttribute("end", end);
-		model.addAttribute("search", search);
-		model.addAttribute("search_option", search_option);
-		
-		return "search/searchForm";
+	//검색기능 ajax
+	@PostMapping
+	@ResponseBody
+	public String searchBoard(int search_option, String search) {
+		List<Board> searchList = custBoardService.searchBoardList(search_option, search);
+		Gson json = new Gson();
+		return json.toJson(searchList);
 	}
+	
+	//검색기능 GsonXXX
+//	@PostMapping("/searchBoard")
+//	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
+//			Board board, int search_option, String search) {
+//		Page<Board> searchList = custBoardService.searchBoardList(pNum, search_option, search);
+//		List<Board> boardList = searchList.getContent(); //보여질 글
+//		int totalCount = searchList.getTotalPages(); //전체 페이지 수
+//		long total = searchList.getTotalElements();
+//		
+//		model.addAttribute("boardList",boardList);
+//		model.addAttribute("totalCount", totalCount);
+//		model.addAttribute("total", total);
+//		
+//		int begin = (pNum-1)/5*5+1;
+//		int end = begin+5-1;
+//		if(end>totalCount) {
+//			end = totalCount;
+//		}
+//		
+//		model.addAttribute("begin", begin);
+//		model.addAttribute("end", end);
+//		model.addAttribute("search", search);
+//		model.addAttribute("search_option", search_option);
+//		
+//		return "search/searchForm";
+//	}
 	
 
 	
