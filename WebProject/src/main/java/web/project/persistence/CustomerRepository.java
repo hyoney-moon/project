@@ -19,4 +19,13 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 	@Query(value = "select custId from member where custId = :custId", nativeQuery=true)
 	String idcheck(String custId);
 
+	// void registerCustomer(Customer customer);
+	
+	/*
+	<select id="idcheck" resultType="java.lang.String" parameterType="java.lang.String">
+	select cust_id
+	from member
+	where cust_id = #{cust_id};
+	<select>
+	*/
 }

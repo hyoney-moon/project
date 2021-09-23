@@ -1,6 +1,7 @@
 package web.project.domain;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,12 +19,32 @@ public class Customer implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+=======
+import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
+// 
+/**
+ * Entity implementation class for Entity: Customer
+ *
+ */
+@Entity
+@Setter
+@Getter
+public class Customer implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+
+>>>>>>> 00d47e862d507f94e8d762d450e92a89b7eddcb6
 	@Id
 	private String custId;
 	private String email;
 	private String password;
 	private String nickName;
 	private String gender;
+<<<<<<< HEAD
 	private int age;
 	private String address;
 	private String addressDetail;
@@ -206,4 +227,11 @@ public class Customer implements Serializable {
 	
 	
 
+=======
+	private Long age;
+	private String post;
+	private String cash; 
+	private String profile;
+	private String pick;
+>>>>>>> 00d47e862d507f94e8d762d450e92a89b7eddcb6
 }
