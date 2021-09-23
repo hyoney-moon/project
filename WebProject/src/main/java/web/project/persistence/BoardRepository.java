@@ -10,22 +10,24 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import web.project.domain.Board;
-//
+
 public interface BoardRepository extends JpaRepository<Board, Long> {
+	
+
+	Page<Board> findByHostIdOrderByBoardNumDesc(String hostId, Pageable page);
 
 	Page<Board> findByOrderByBoardNumDesc(Pageable page);
-	
 
-
-	Page<Board> findBySpaceNameContainingIgnoreCase(String spaceName, Pageable page);
-	Page<Board> findByCategoryContainingIgnoreCase(String category, Pageable page);
-	Page<Board> findByAddressContainingIgnoreCase(String address, Pageable page);
-	Page<Board> findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(String spaceName,String category,String address, Pageable page );
+	// 검색 ajax
+	List<Board> findBySpaceNameContainingIgnoreCase(String spaceName);
+	List<Board> findByCategoryContainingIgnoreCase(String category);
+	List<Board> findByAddressContainingIgnoreCase(String address);
 
 	Board findByBoardNum(Long boardNum);
-	
+
 	@Transactional
 	@Modifying
 	@Query("UPDATE Board b SET b.readcount = b.readcount+1 WHERE b.boardNum=?1")
 	int updateReadcount(Long boardNum);
+
 }

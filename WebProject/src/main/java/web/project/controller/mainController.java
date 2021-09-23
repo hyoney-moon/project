@@ -15,7 +15,7 @@ import web.project.service.BoardService;
 import web.project.service.CategoryService;
 import web.project.service.mainboardService;
 
-@SessionAttributes({"host","custId"})
+@SessionAttributes("customer")
 @Controller
 public class mainController {
 	

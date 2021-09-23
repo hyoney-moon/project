@@ -17,8 +17,13 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.17</version>
+		</dependency>
 		<!-- File Upload (대용량 파일 처리) -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>

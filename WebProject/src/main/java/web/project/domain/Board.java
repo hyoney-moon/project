@@ -57,10 +57,19 @@ public class Board implements Serializable {
 	@JoinColumn(name="category", insertable = false, updatable = false)
 	private Category categoryFk;
 	
-	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-	private List<FrontImg> frontimgList = new ArrayList<>();
+	//이렇게 하면 DB에 경로까지 저장 됨
+	@ManyToOne
+	@JoinColumn(name="frontImgNo", insertable = false, updatable = false)
+	private FrontImg frontimg;
+	@ManyToOne
+	@JoinColumn(name="imgNo", insertable = false, updatable = false)
+	private Img img;
 	
-	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-	private List<Img> imgList = new ArrayList<>();
+	
+//	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+//	private List<FrontImg> frontimgList = new ArrayList<>();
+//	
+//	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+//	private List<Img> imgList = new ArrayList<>();
 	
 }

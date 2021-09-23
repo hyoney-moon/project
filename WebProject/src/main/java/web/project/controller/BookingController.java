@@ -28,13 +28,14 @@ import web.project.service.BookingService;
 import web.project.service.HostLoginService;
 
 @Controller
-@SessionAttributes("custId")
+@SessionAttributes("customer")
 public class BookingController {
 
 	@Autowired
 	BookingService service;
 	@Autowired
 	BoardService boardservice;
+	
 		//요청 페이지 출력
 		@GetMapping("/bookingpage/{boardNum}")
 		public String getbookingView(@PathVariable(name = "boardNum") Long boardNum,Model m) {
