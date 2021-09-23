@@ -150,10 +150,10 @@ public class AdminGetHostController {
 //		m.addAttribute("hostAgeList", hostAgeList);
 		
 		// 성비
-//		List<Long> genderList = hostService.getCustGender();
-//		m.addAttribute("genderList",genderList);
+		List<Long> genderList = hostService.getHostGender();
+		m.addAttribute("genderList",genderList);
 		
-		return "admin_board/hostInfo";
+		return "admin_board/hostInfoList";
 	}
 
 }

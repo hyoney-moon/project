@@ -78,58 +78,6 @@ const labels = [
     boardCountconfig
   );
   
-  // 일반회원 연령 분포
-  const percentAge = ${hostAgeList};
-  const percentAge10 = percentAge[0] / (percentAge[0] + percentAge[1] + percentAge[2] + percentAge[3] + percentAge[4]) * 100;
-  const percentAge20 = percentAge[1] / (percentAge[0] + percentAge[1] + percentAge[2] + percentAge[3] + percentAge[4]) * 100;
-  const percentAge30 = percentAge[2] / (percentAge[0] + percentAge[1] + percentAge[2] + percentAge[3] + percentAge[4]) * 100;
-  const percentAge40 = percentAge[3] / (percentAge[0] + percentAge[1] + percentAge[2] + percentAge[3] + percentAge[4]) * 100;
-  const percentAge50 = percentAge[4] / (percentAge[0] + percentAge[1] + percentAge[2] + percentAge[3] + percentAge[4]) * 100;
-  const custAgelabels = [
-	  '10대',
-	  '20대',
-	  '30대',
-	  '40대',
-	  '50대',
-	];
-	const custAgeData = {
-	  labels: custAgelabels,
-	  datasets: [{
-	    label: '회원 연령 분포',
-	    backgroundColor: 
-	    	//'rgb(255, 99, 132)',
-	    	["#2ecc71",
-	        "#3498db",
-	        "#95a5a6",
-	        "#9b59b6",
-	        "#f1c40f",
-	        "#e74c3c",
-	        "#34495e"],
-	    //borderColor: 'rgb(255, 99, 132)',
-	    data: [
-	    	percentAge10,
-	    	percentAge20,
-	    	percentAge30,
-	    	percentAge40,
-	    	percentAge50,
-	    ],
-	  }]
-	};
-	
-	const custAgeconfig = {
-			  type: 'pie',
-			  data: custAgeData,
-			  options: {
-				  title: {
-				        display: true,
-				        text: '회원 연령 분포',
-				      },
-			  }
-			};
-  var custAgeChart = new Chart(
-    document.getElementById('custAgeChart'),
-    custAgeconfig
-  );
   
   // 성비
   const percentMW = ${genderList};
@@ -188,48 +136,11 @@ const labels = [
 			style="position: relative; margin: auto; height: 20vh; width: 40vw">
 			<canvas id="boardCountChart"></canvas>
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 		<!-- <h2>총 매출액(원)</h2> -->
 		<div
 			style="position: relative; margin: auto; height: 20vh; width: 40vw">
 			<canvas id="totalRevenueChart"></canvas>
 		</div>
-		<h2>회원 나이 분포(%)</h2>
-		<div
-			style="position: relative; margin: auto; height: 20vh; width: 40vw">
-			<canvas id="custAgeChart"></canvas>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 		<h2>회원 성비(%)</h2>
 		<div
 			style="position: relative; margin: auto; height: 20vh; width: 40vw">

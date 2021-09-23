@@ -40,6 +40,21 @@ public class AdminHostServiceImpl implements AdminHostService {
 		
 		return hostNumList;
 	}
+
+	@Override
+	public List<Long> getHostGender() {
+		long countGenderM = adHostRepo.countGenderM(); 
+		long countGenderW = adHostRepo.countGenderW();
+		
+//		long percentM = countGenderM / (countGenderM + countGenderW);
+//		long percentW = countGenderW / (countGenderM + countGenderW);
+		
+		List<Long> countGenderList = new ArrayList<>();
+		countGenderList.add(countGenderM);
+		countGenderList.add(countGenderW);
+		
+		return countGenderList;
+	}
 	
 //	@Override
 //	public List<Long> getHostAge(){
