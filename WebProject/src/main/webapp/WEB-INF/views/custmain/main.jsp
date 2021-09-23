@@ -1,6 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,139 +19,81 @@
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
 <style>
-
 body {
 	padding-top: 40px;
 }
-.headText{
-	padding: 50px;
+
+img {
+	position: relative;
+}
+
+div.zIndex {
+	position: absolute;
+	top: 25%;
+	right: 10%;
+}
+
+h2.maintext {
+	text-align: right;
+}
+
+table {
+	border-collapse: collapse;
 	text-align: center;
+}
+
+th {
+	background-color: white;
+	width: 150px;
+}
+
+table a {
+	margin: 10px auto;
 }
 </style>
 </head>
 <!-- Wrapper -->
 <div class="container">
-	<div id="wrapper">
 	<!-- 헤더영역 -->
 	<header>
-	<%@ include file = "../publicCSS/custheader.jsp" %>
+		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
-		<h3 class="headText">
-			안녕하세요 <strong>우리들의 공간</strong>여러분들의 필요 공간을 제공하고 있습니다.
-		</h3>
-
-		<!-- Main카테고리 -->
-		<section class="thumbnails">
-			<div>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/01.jpg"> <img src="images/thumbs/01.jpg"
-					alt="" />
-				</a>
-				<!-- 상세페이지 넘어가는 페이지 -->
-				<a href="images/fulls/02.jpg"> <img src="images/thumbs/02.jpg"
-					alt="" />
-				</a>
-				<!-- 상세페이지 넘어가는 페이지 -->
-				<a href="images/fulls/02.jpg"> <img src="images/thumbs/02.jpg"
-					alt="" />
-				</a>
-			</div>
-			<div>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/03.jpg"> <img src="images/thumbs/03.jpg"
-					alt="" />
-				</a>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/04.jpg"> <img src="images/thumbs/04.jpg"
-					alt="" />
-				</a>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/05.jpg"> <img src="images/thumbs/05.jpg"
-					alt="" />
-				</a>
-			</div>
-			<div>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/06.jpg"> <img src="images/thumbs/06.jpg"
-					alt="" />
-				</a>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/07.jpg"> <img src="images/thumbs/07.jpg"
-					alt="" />
-				</a>
-				<!-- 상세페이지 넘어가는 페이지 -->
-				<a href="images/fulls/02.jpg"> <img src="images/thumbs/02.jpg"
-					alt="" />
-				</a>
-			</div>
-		</section>
-		<!-- 메인 공간이미지  -->
-		<hr>
-		<h1>오늘의 추천공간</h1>
-		<br>
-		<h3>오늘만 추천합니다.</h3>
-		<hr>
-		<section class="thumbnails">
-			<div>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/01.jpg"> <img src="images/thumbs/01.jpg"
-					alt="" />
-					<h3>첫번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-				<!-- 상세페이지 넘어가는 페이지 -->
-				<a href="images/fulls/02.jpg"> <img src="images/thumbs/02.jpg"
-					alt="" />
-					<h3>두번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-			</div>
-			<div>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/03.jpg"> <img src="images/thumbs/03.jpg"
-					alt="" />
-					<h3>세번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/04.jpg"> <img src="images/thumbs/04.jpg"
-					alt="" />
-					<h3>네번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/05.jpg"> <img src="images/thumbs/05.jpg"
-					alt="" />
-					<h3>다섯번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-			</div>
-			<div>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/06.jpg"> <img src="images/thumbs/06.jpg"
-					alt="" />
-					<h3>여섯번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-				<!-- 상세페이지로 넘어가는 페이지 -->
-				<a href="images/fulls/07.jpg"> <img src="images/thumbs/07.jpg"
-					alt="" />
-					<h3>일곱번째 상세페이지로 넘어가는 페이지</h3>
-				</a>
-			</div>
-		</section>
-		<div>
-		<a href="viewBoard">전체게시글 보기</a>
+	<main>
+		<img class="z w-100" src="../images/mainImg/custmainimgs.jpg" />
+		<div class="zIndex">
+			<h2 class="maintext">
+				우리들의 공간 <br> <strong>Bang Bang</strong><br> 여러분들의 필요 공간을 <br>제공하고
+				있습니다.
+			</h2>
 		</div>
-	</div>
-	<!-- 하단 정보 공유창 -->
-	<footer id="footer">
-		<p id="text">
-			&copy; 이곳에 회사정보 등을 입력 해두면된다.: <a href="http://templated.co">TEMPLATED</a>
-			503_프로젝트 반짝반짝: <a href="http://unsplash.com"></a>.
-		</p>
-	</footer>
-
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.poptrox.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/main.js"></script>
+		<h2>오늘의 추천 공간</h2>
+		<div class="card-group">
+			<div class="card">
+				<img src="${bList.frontImg }" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">공간이름</h5>
+					<p class="card-text">한줄소개</p>
+				</div>
+			</div>
+			<div class="card">
+				<img src="${bList.frontImg }" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">공간이름</h5>
+					<p class="card-text">한줄소개</p>
+				</div>
+			</div>
+			<div class="card">
+				<img src="..." class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">공간이름</h5>
+					<p class="card-text">한줄소개</p>
+				</div>
+			</div>
+		</div>
+	</main>
 </div>
+<footer>
+	<%@ include file="../publicCSS/footer.jsp"%>
+</footer>
 </body>
 </html>

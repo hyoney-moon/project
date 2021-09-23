@@ -6,6 +6,6 @@ public interface AdminHostService {
 
 	List<Long> getHostCount();
 
-	List<Long> getHostAge();
+//	List<Long> getHostAge();
 
 }

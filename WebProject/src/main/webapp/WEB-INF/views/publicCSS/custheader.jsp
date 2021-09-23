@@ -118,6 +118,5 @@ hr {
 			</nav>
 		</div>
 	</header>
-	<hr id="hr">
 </body>
 </html>

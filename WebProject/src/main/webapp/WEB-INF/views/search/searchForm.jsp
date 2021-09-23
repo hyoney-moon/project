@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +26,24 @@ body {
 	padding: 50px;
 	text-align: center;
 }
-table{border-collapse : collapse; text-align: center;}
-th{ background-color: white; width: 150px;}
-a{margin: 10px auto;}
-#page{text-align: center;}
+
+table {
+	border-collapse: collapse;
+	text-align: center;
+}
+
+th {
+	background-color: white;
+	width: 150px;
+}
+
+a {
+	margin: 10px auto;
+}
+
+#page {
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -38,23 +53,27 @@ a{margin: 10px auto;}
 
 	<div class="container ">
 		<form action="searchBoard" method="post">
-			<select name="search_option"
+			<select name="search_option" id ="search_option"
 				class="form-select form-select-lg mb-3 w-25"
 				aria-label=".form-select-lg example">
 				<option selected>Select</option>
 				<option value="1">공간명</option>
 				<option value="2">카테고리</option>
 				<option value="3">지역별</option>
-			</select>
-			<input name="search" class="form-control form-control-lg"
+			</select> <input id="search" name="search" class="form-control form-control-lg"
 				type="text" placeholder="검색어를 입력하세요."
-				aria-label=".form-control-lg example">
-				<input type="submit" value="검 색" onclick="getSearchList()"><br>
-				<%-- <table border="1" class="w-100 mt-5">
+				aria-label=".form-control-lg example"> <input type="button"
+				value="검 색" id="searchbtn"><br>
+				<table border="1" class="w-100 mt-5" id="searchList">
 					<tr>
-						<th>작성자</th> <th>카테고리</th> <th>이미지</th> <th>공간명</th> <th>작성일</th> <th>조회수</th>
+						<th>작성자</th>
+						<th>카테고리</th>
+						<th>이미지</th>
+						<th>공간명</th>
+						<!-- <th>작성일</th> -->
+						<th>조회수</th>
 					</tr>
-					<c:forEach items="${boardList }" var="blist">
+					<%-- <c:forEach items="${bList }" var="blist">
 						<tr>
 							<td>${blist.hostId }</td>
 							<td>${blist.category }</td>
@@ -86,25 +105,48 @@ a{margin: 10px auto;}
 							<td><fmt:formatDate value="${blist.regDate}" pattern="MM.dd" /></td>
 							<td>${blist.readcount }</td>
 						</tr>
-					</c:forEach>
+					</c:forEach> --%>
+					
 				</table>
 				<div id="page">
 					<c:if test="${begin > 2 }">
-						<a href="/searchBoard?p=${begin-1}">[이전]</a>
+						<a href="searchForm?p=${begin-1}">[이전]</a>
 					</c:if>
 					<c:forEach begin="${begin }" end="${end}" var="i">
-						<a href="/searchBoard?p=${i}">[${i}]</a>
+						<a href="searchForm?p=${i}">[${i}]</a>
 					</c:forEach>
 					<c:if test="${end < totalCount }">
-						<a href="/searchBoard?p=${end+1}">[다음]</a>
+						<a href="searchForm?p=${end+1}">[다음]</a>
 					</c:if>
-				</div> --%>
+				</div>
 		</form>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script>
-		$(function(){
-			let 
+	$(function(){
+		$("#searchbtn").click(function(){
+			var search_option = $("#search_option").val();
+			var search = $("#search").val(); 
+			$.ajax({
+				url: "/customer/searchBoard",
+				method: "POST",
+				data:"search_option="+search_option+"&search="+search,
+				dataType: "JSON"
+			}).done(function(data){
+				alert("test"+data.length)
+				$("#searchList").empty();
+				for(var i = 0; i < data.length; i++){
+					$("#searchList").append(
+							"<tr><td>"+data[i]["hostId"]+"</td>"+
+							"<td>"+data[i]["category"]+"</td>"+
+							"<td>"+data[i]["frontImg"]+"</td>"+
+							"<td>"+data[i]["placeName"]+"</td>"+
+							"<td>"+data[i]["readcount"]+"</td></tr>"
+					)
+				}
+			});
 		})
+	})
 	</script>
 </body>
 

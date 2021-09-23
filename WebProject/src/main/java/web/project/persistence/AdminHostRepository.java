@@ -27,17 +27,17 @@ public interface AdminHostRepository extends JpaRepository<Host, Long> {
 	@Query(value="select count(*) from host where join_date < '2021-10-01'", nativeQuery=true)
 	long countBeforeSep();
 	
-	//호스트 연령별
-	@Query(value="select count(*) from host where age between 10 and 19", nativeQuery = true)
-	long countAge10();
-	@Query(value="select count(*) from host where age between 20 and 29", nativeQuery = true)
-	long countAge20();
-	@Query(value="select count(*) from host where age between 30 and 39", nativeQuery = true)
-	long countAge30();
-	@Query(value="select count(*) from host where age between 40 and 49", nativeQuery = true)
-	long countAge40();
-	@Query(value="select count(*) from host where age between 50 and 59", nativeQuery = true)
-	long countAge50();
+//	//호스트 연령별
+//	@Query(value="select count(*) from host where age between 10 and 19", nativeQuery = true)
+//	long countAge10();
+//	@Query(value="select count(*) from host where age between 20 and 29", nativeQuery = true)
+//	long countAge20();
+//	@Query(value="select count(*) from host where age between 30 and 39", nativeQuery = true)
+//	long countAge30();
+//	@Query(value="select count(*) from host where age between 40 and 49", nativeQuery = true)
+//	long countAge40();
+//	@Query(value="select count(*) from host where age between 50 and 59", nativeQuery = true)
+//	long countAge50();
 	
 
 }

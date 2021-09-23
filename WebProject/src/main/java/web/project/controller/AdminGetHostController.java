@@ -146,8 +146,8 @@ public class AdminGetHostController {
 		// 총 거래액 통계 조회(컬럼 추가 후 작성)
 		
 		// 연령 분포 통계
-		List<Long> hostAgeList = hostService.getHostAge();
-		m.addAttribute("hostAgeList", hostAgeList);
+//		List<Long> hostAgeList = hostService.getHostAge();
+//		m.addAttribute("hostAgeList", hostAgeList);
 		
 		// 성비
 //		List<Long> genderList = hostService.getCustGender();

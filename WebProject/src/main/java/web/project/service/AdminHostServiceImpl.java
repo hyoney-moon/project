@@ -41,22 +41,22 @@ public class AdminHostServiceImpl implements AdminHostService {
 		return hostNumList;
 	}
 	
-	@Override
-	public List<Long> getHostAge(){
-		long countAge10 = adHostRepo.countAge10();
-		long countAge20 = adHostRepo.countAge20();
-		long countAge30 = adHostRepo.countAge30();
-		long countAge40 = adHostRepo.countAge40();
-		long countAge50 = adHostRepo.countAge50();
-		
-		List<Long> hostAgeList = new ArrayList<>();
-		hostAgeList.add(countAge10);
-		hostAgeList.add(countAge20);
-		hostAgeList.add(countAge30);
-		hostAgeList.add(countAge40);
-		hostAgeList.add(countAge50);
-		
-		return hostAgeList;
-		
-	}
+//	@Override
+//	public List<Long> getHostAge(){
+//		long countAge10 = adHostRepo.countAge10();
+//		long countAge20 = adHostRepo.countAge20();
+//		long countAge30 = adHostRepo.countAge30();
+//		long countAge40 = adHostRepo.countAge40();
+//		long countAge50 = adHostRepo.countAge50();
+//		
+//		List<Long> hostAgeList = new ArrayList<>();
+//		hostAgeList.add(countAge10);
+//		hostAgeList.add(countAge20);
+//		hostAgeList.add(countAge30);
+//		hostAgeList.add(countAge40);
+//		hostAgeList.add(countAge50);
+//		
+//		return hostAgeList;
+//		
+//	}
 }

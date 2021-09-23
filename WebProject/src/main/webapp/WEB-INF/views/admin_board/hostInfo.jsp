@@ -19,7 +19,7 @@ window.onload = function(){
 		dataType: "JSON",
 		success: function(result){
 			console.dir(result);
-			grid.resetDate(result);
+			grid.resetData(result);
 		}
 	});
 	let grid = new tui.Grid({

@@ -116,10 +116,11 @@ public class CustBoardController implements ApplicationContextAware {
 	}
 	
 	//검색기능 ajax
-	@PostMapping
+	@PostMapping("/searchBoard")
 	@ResponseBody
 	public String searchBoard(int search_option, String search) {
 		List<Board> searchList = custBoardService.searchBoardList(search_option, search);
+		System.out.println(search);
 		Gson json = new Gson();
 		return json.toJson(searchList);
 	}
