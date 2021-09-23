@@ -35,7 +35,7 @@ public class LoginController {
 		
 		if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
 			model.addAttribute("customer",findCustomer);
-			return "index";
+			return "main";
 		} else {
 			return "redirect:loginForm";
 		}

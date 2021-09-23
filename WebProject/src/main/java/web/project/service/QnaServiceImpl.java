@@ -17,6 +17,7 @@ public class QnaServiceImpl implements QnaService {
 	
 	@Override
 	public List<CustQna> getQnaList(Long boardNum) {
+		System.out.print("확인" + boardNum);
 		return qnaRepo.getQnaList(boardNum);
 	}
 	

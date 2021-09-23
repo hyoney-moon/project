@@ -64,4 +64,32 @@ public class BoardServiceImpl implements BoardService {
 		return boardCountList;
 	}
 	
+	//상세보기
+	@Override
+	public Board viewPost(Long boardNum) {
+		boardRepo.updateReadcount(boardNum);
+		return boardRepo.findByBoardNum(boardNum);
+	}
+			
+	//검색하기
+	@Override
+	public Page<Board> searchBoardList(int pNum, int search_option, String search) {
+		Pageable page = PageRequest.of(pNum-1, 5);
+		Page<Board> list = null;
+		if(search_option == 1) {
+			list = boardRepo.findBySpaceNameContainingIgnoreCase(search, page);
+		} else if(search_option == 2) {
+			list = boardRepo.findByCategoryContainingIgnoreCase(search, page);
+		} else if(search_option == 3) {
+			list = boardRepo.findByAddressContainingIgnoreCase(search, page);
+		} else {
+			list = boardRepo.findBySpaceNameOrCategoryOrAddressContainingIgnoreCase(search, search, search, page);
+		}
+		return list;
+	}
+	//글저장
+	@Override
+	public Board saveBoard(Board board) {
+		return boardRepo.save(board);
+	}
 }

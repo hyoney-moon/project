@@ -12,7 +12,7 @@
 
 window.onload = function(){
 	$.ajax({
-		url : "/permit/getBoardList",
+		url : "/permit/getPreBoard",
 		method :"GET",
 		dataType : "JSON",
 		success : function(result){
@@ -45,10 +45,10 @@ window.onload = function(){
 	  });
 	
 	// 공간등록 허가 클릭 이벤트
-$(document).on("click","#permission", function(){
+$(document).on("click","#permit", function(){
 	let board = grid.getCheckedRows();
 	$.ajax({
-		url : "/permit/update",
+		url : "/permit/permitBoard",
 		method : "POST",
 		dataType : "JSON",
 		contentType: 'application/json',
@@ -59,11 +59,11 @@ $(document).on("click","#permission", function(){
 });// click 종료
 
 // 공간 등록 전 게시글 삭제 이벤트
-$(document).on("click","#delete",function(){
+$(document).on("click","#reject",function(){
 	let board = grid.getCheckedRows();
 	
 	$.ajax({
-		url : "/permit/deletePermitBoard",
+		url : "/permit/rejectBoard",
 		method : "POST",
 		dataType : "JSON",
 		contentType : 'application/json',
@@ -79,8 +79,8 @@ $(document).on("click","#delete",function(){
 </script>
 <body>
 <div id="grid"></div>
-<button id="permission">공간등록 허가</button>
-<button id="delete">삭제</button>
+<button id="permit">공간등록 허가</button>
+<button id="reject">삭제</button>
 
 </body>
 </html>

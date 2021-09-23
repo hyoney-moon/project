@@ -19,4 +19,10 @@ public interface BoardService {
 
 	// 게시글 수 조회 통계
 	List<Long> getBoardCount();
+
+	Page<Board> searchBoardList(int pNum, int search_option, String search);
+
+	Board saveBoard(Board board);
+
+	Board viewPost(Long boardNum);
 }

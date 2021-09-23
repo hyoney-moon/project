@@ -106,7 +106,7 @@ $(function(){
 		let params = "boardNum="+ ${board.boardNum}
 		$.ajax({
 			type: "post",
-			url: "/board/comment",
+			url: "/comment", // /board/comment
 			data: params,
 			dataType: "json"
 		}).done(function(args){
