@@ -1,19 +1,10 @@
-<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>space 공간 얍얍</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="assets/css/main.css" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-	crossorigin="anonymous">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
@@ -66,32 +57,72 @@ table a {
 				있습니다.
 			</h2>
 		</div>
-		<h2>오늘의 추천 공간</h2>
-		<div class="card-group">
-			<div class="card">
-				<img src="${bList.frontImg }" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">공간이름</h5>
-					<p class="card-text">한줄소개</p>
-				</div>
+		<!-- Main카테고리1번줄 -->
+		<section class="thumbnails">
+			<div>
+				<c:forEach items="${category}" var="cate" begin="0" end="1">
+					<a href="/bookingpage/${cate.category}"> <img
+						src="images/thumbs/02.jpg" alt="" />
+						<h3>${cate.category}</h3>
+					</a>
+
+				</c:forEach>
 			</div>
-			<div class="card">
-				<img src="${bList.frontImg }" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">공간이름</h5>
-					<p class="card-text">한줄소개</p>
-				</div>
+			<!-- Main카테고리2번줄 -->
+			<div>
+				<c:forEach items="${category}" var="cate" begin="2" end="4">
+					<a href="/bookingpage/${cate.category}"> <img
+						src="images/thumbs/03.jpg" alt="" />
+						<h3>${cate.category}</h3>
+					</a>
+				</c:forEach>
 			</div>
-			<div class="card">
-				<img src="..." class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">공간이름</h5>
-					<p class="card-text">한줄소개</p>
-				</div>
-			</div>
-		</div>
-	</main>
+			<!-- Main카테고리3번줄 -->
+			<c:forEach items="${category}" var="cate" begin="5" end="6">
+				<a href="/bookingpage/${cate.category}"> <img
+					src="images/thumbs/04.jpg" alt="" />
+					<h3>${cate.category}</h3>
+				</a>
+			</c:forEach>
 </div>
+</section>
+<!-- 메인 공간이미지  -->
+<hr>
+<h1>오늘의 추천공간</h1>
+<br>
+<h3>오늘만 추천합니다.</h3>
+<hr>
+<section class="thumbnails">
+	<!-- 상세페이지로 넘어가는 페이지 -->
+	<div>
+		<c:forEach items="${board}" var="board" begin="0" end="3">
+			<a href="/bookingpage/${board.boardNum}"> <img
+				src="images/thumbs/01.jpg" alt="" />
+				<h3>${board.content}</h3>
+			</a>
+
+		</c:forEach>
+	</div>
+	<div>
+		<c:forEach items="${board}" var="board" begin="4" end="7">
+			<a href="/bookingpage/${board.boardNum}"> <img
+				src="images/thumbs/02.jpg" alt="" />
+				<h3>${board.content}</h3>
+			</a>
+
+		</c:forEach>
+	</div>
+	<div>
+		<c:forEach items="${board}" var="board" begin="8" end="10">
+			<a href="/bookingpage/${board.boardNum}"> <img
+				src="images/thumbs/07.jpg" alt="" />
+				<h3>${board.content}</h3>
+			</a>
+
+		</c:forEach>
+	</div>
+</section>
+</main>
 <footer>
 	<%@ include file="../publicCSS/footer.jsp"%>
 </footer>

@@ -2,7 +2,8 @@ package web.project.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
- 
+import java.util.Optional;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
  
 import lombok.extern.java.Log;
 import web.project.domain.KakaoPayReadyDto;
+import web.project.persistence.BoardDtoRepository;
  
 @Service
 @Log
@@ -22,6 +24,8 @@ public class KakaoPay {
     private static final String HOST = "https://kapi.kakao.com";
     
     private KakaoPayReadyDto kakaoPayReadyDto;
+    
+    BoardDtoRepository board;
     
     public String kakaoPayReady() {
  

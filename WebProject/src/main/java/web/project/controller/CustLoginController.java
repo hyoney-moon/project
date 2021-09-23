@@ -16,7 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import web.project.domain.Board;
 import web.project.domain.Customer;
 import web.project.domain.Host;
-import web.project.service.CustBoardService;
+import web.project.service.BoardService;
 import web.project.service.LoginService;
 // 
 @Controller
@@ -26,7 +26,7 @@ public class CustLoginController {
 	@Autowired
 	LoginService loginservice;
 	@Autowired
-	private CustBoardService custBoardService;
+	private BoardService boardService;
 	
 	//회원 메인
 		@RequestMapping("/main")
@@ -34,13 +34,6 @@ public class CustLoginController {
 			return "custmain/main";
 		}
 	
-	//회원 메인
-//	@RequestMapping("/main")
-//	public String mainStart(Model model, Long boardNum) {
-//		List<Board> getBoardList = (List<Board>) custBoardService.getBoard(boardNum);
-//		model.addAttribute("bList",getBoardList);
-//		return "custmain/main";
-//	}
 	//회원 로그인 폼
 	@GetMapping("/custloginForm")
 	public String loginForm() {

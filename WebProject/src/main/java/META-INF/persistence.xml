@@ -8,7 +8,7 @@
 		<class>web.project.domain.Category</class>
 		<class>web.project.domain.FrontImg</class>
 		<class>web.project.domain.Img</class>
-		<class>web.project.domain.Book_infoDto</class>
+		<class>web.project.domain.BookInfo</class>
 		<class>web.project.domain.CustQna</class>
 		<class>web.project.domain.Board</class>
 		<class>web.project.domain.Customer</class>

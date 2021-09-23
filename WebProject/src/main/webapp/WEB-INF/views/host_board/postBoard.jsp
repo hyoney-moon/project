@@ -24,8 +24,8 @@ body {
 
 div.msg {color: red;}
 </style>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	function sample6_execDaumPostcode() {
 		new daum.Postcode({
@@ -52,6 +52,34 @@ div.msg {color: red;}
 			}
 		}).open();
 	}
+</script>
+<script>
+$(function(){
+	$("#postBoardCheck").submit(function(){
+		if(!$("#spaceName").val()){
+			$("#space_msg").html("*필수")
+			return false;
+		}if(!$("#contentOneline").val()){
+			$("#contentOneline_msg").html("*필수")
+			return false;
+		}if(!$("#content").val()){
+			$("#content_msg").html("*필수")
+			return false;
+		}if(!$("#direction").val()){
+			$("#direction_msg").html("*필수")
+			return false;
+		}if(!$("#zipcode").val()){
+			$("#address_msg").html("*필수")
+			return false;
+		}if(!$("#frontImg").val()){
+			$("#frontImg_msg").html("*필수")
+			return false;
+		}if(!$("#img").val()){
+			$("#img_msg").html("*필수")
+			return false;
+		}
+	})
+})
 </script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -159,9 +187,6 @@ div.msg {color: red;}
 					<span class="input-group-text">₩</span>
 					<input name="price" id="price" class="form-control"
 					placeholder="금액" aria-label="default input example">
-					<!-- <input id="price" name="price"
-						type="text" class="form-control text-end"
-						aria-label="Amount (to the nearest dollar)"> -->
 				</div>
 			</div>
 			<div id="price_msg" class="mb-3"></div>
@@ -170,35 +195,6 @@ div.msg {color: red;}
 				class="w-100 btn btn-outline-danger mb-5" style="height: 50px;">
 		</form>
 	</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(function(){
-	$("#postBoardCheck").submit(function(){
-		if(!$("#spaceName").val()){
-			$("#space_msg").html("*필수")
-			return false;
-		}if(!$("#contentOneline").val()){
-			$("#contentOneline_msg").html("*필수")
-			return false;
-		}if(!$("#content").val()){
-			$("#content_msg").html("*필수")
-			return false;
-		}if(!$("#direction").val()){
-			$("#direction_msg").html("*필수")
-			return false;
-		}if(!$("#zipcode").val()){
-			$("#address_msg").html("*필수")
-			return false;
-		}if(!$("#frontImg").val()){
-			$("#frontImg_msg").html("*필수")
-			return false;
-		}if(!$("#img").val()){
-			$("#img_msg").html("*필수")
-			return false;
-		}
-	})
-})
-</script>
 </body>
 </html>
 

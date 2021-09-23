@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,21 +23,25 @@ import lombok.Setter;
 @Table(name = "BOOKING")
 @Getter
 @Setter
-public class Book_infoDto implements Serializable {
+public class BookInfo implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Integer bookNum;	//primary key
+	private Long bookNum;	//primary key
+	private Date endDate;
 	private String custId;		//customer foreignkey
 	private String hostId;		//host	   foreignkey
-	private int boardNum;			//board    foreingkey
+	private Long boardNum;			//board    foreingkey
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date startDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regDate;
 	private int people;
 	private int price;
-	
+	private int permit;   //호스트가 예약 가능하게 true false 값 전달
 	@ManyToOne
 	@JoinColumn(name = "custId",insertable = false, updatable = false)
 	private Customer cust;

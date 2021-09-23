@@ -33,8 +33,7 @@ import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.HostQna;
 import web.project.domain.Img;
-import web.project.service.HostBoardService;
-import web.project.service.CustBoardService;
+import web.project.service.BoardService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 import web.project.service.QnaService;
@@ -56,37 +55,16 @@ public class CustBoardController implements ApplicationContextAware {
 	@Autowired
 	private ImgService imgService;
 	@Autowired
-	private CustBoardService custBoardService;
+	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
 	
-	//등록 된 공간 리스트..중복...?
-//	@RequestMapping("/viewBoard")
-//	public String viewBoard(Model model,
-//			@RequestParam(name="p", defaultValue="1")int pNum, 
-//			@ModelAttribute("customer")Customer cust) {
-//		Page<Board> pageList = custBoardService.getCustBoardList(pNum);
-//		List<Board> bList = pageList.getContent(); //보여질 글
-//		int totalCount = pageList.getTotalPages(); //전체 페이지 수
-//		model.addAttribute("bList", bList);
-//		model.addAttribute("totalCount", totalCount);
-//		
-//		int begin = (pNum-1)/5*5+1; //숫자 2 부분만 원하는 갯수로 바꿔주면 됨
-//		int end = begin+5-1;
-//		if(end>totalCount) {
-//			end = totalCount;
-//		}
-//		model.addAttribute("begin", begin);
-//		model.addAttribute("end", end);
-//			
-//		return "custmain/boardList";
-//	}
 	// 게시글 목록
 	@GetMapping("/searchForm")
 	public String viewBoard(Model model,
 			@RequestParam(name="p", defaultValue="1")int pNum, 
 			@ModelAttribute("customer")Customer cust) {
-		Page<Board> pageList = custBoardService.getCustBoardList(pNum);
+		Page<Board> pageList = boardService.getCustBoardList(pNum);
 		List<Board> bList = pageList.getContent(); //보여질 글
 		int totalCount = pageList.getTotalPages(); //전체 페이지 수
 		model.addAttribute("bList", bList);
@@ -106,7 +84,7 @@ public class CustBoardController implements ApplicationContextAware {
 	//글 상세보기
 	@RequestMapping("/viewPost/{boardNum}")
 	public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-		Board view = custBoardService.viewPost(boardNum);
+		Board view = boardService.viewPost(boardNum);
 		model.addAttribute("view",view);
 		
 		List<FrontImg> fis = frontImgService.viewImg(boardNum);
@@ -119,54 +97,12 @@ public class CustBoardController implements ApplicationContextAware {
 	@PostMapping("/searchBoard")
 	@ResponseBody
 	public String searchBoard(int search_option, String search) {
-		List<Board> searchList = custBoardService.searchBoardList(search_option, search);
+		List<Board> searchList = boardService.searchBoardList(search_option, search);
 		System.out.println(search);
 		Gson json = new Gson();
 		return json.toJson(searchList);
 	}
 	
-	//검색기능 GsonXXX
-//	@PostMapping("/searchBoard")
-//	public String searchBoard(Model model, @RequestParam(name="p", defaultValue="1")int pNum, 
-//			Board board, int search_option, String search) {
-//		Page<Board> searchList = custBoardService.searchBoardList(pNum, search_option, search);
-//		List<Board> boardList = searchList.getContent(); //보여질 글
-//		int totalCount = searchList.getTotalPages(); //전체 페이지 수
-//		long total = searchList.getTotalElements();
-//		
-//		model.addAttribute("boardList",boardList);
-//		model.addAttribute("totalCount", totalCount);
-//		model.addAttribute("total", total);
-//		
-//		int begin = (pNum-1)/5*5+1;
-//		int end = begin+5-1;
-//		if(end>totalCount) {
-//			end = totalCount;
-//		}
-//		
-//		model.addAttribute("begin", begin);
-//		model.addAttribute("end", end);
-//		model.addAttribute("search", search);
-//		model.addAttribute("search_option", search_option);
-//		
-//		return "search/searchForm";
-//	}
-	
-
-	
-	
-		
-	
-//	// 게시글 조회
-//	@GetMapping("/content/{boardNum}")
-//	public String getBoard(@PathVariable Long boardNum, Model m) {
-//		Board board = custBoardService.getBoard(boardNum);
-//		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
-//		
-//		m.addAttribute("custQna", custQnaResult);
-//		m.addAttribute("board",board);
-//		return "host_board/getBoard";
-//	}
 	
 	// 댓글 출력(ajax)
 	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")

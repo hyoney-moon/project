@@ -33,7 +33,7 @@ import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.HostQna;
 import web.project.domain.Img;
-import web.project.service.HostBoardService;
+import web.project.service.BoardService;
 import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
@@ -52,11 +52,11 @@ public class HostBoardController implements ApplicationContextAware {
 	}
 	
 	@Autowired
+	private BoardService boardService;
+	@Autowired
 	private FrontImgService frontImgService;
 	@Autowired
 	private ImgService imgService;
-	@Autowired
-	private HostBoardService hostBoardService;
 	@Autowired
 	private QnaService qnaService;
 	@Autowired
@@ -79,7 +79,7 @@ public class HostBoardController implements ApplicationContextAware {
 //		호스트 아이디 가져오기
 		board.setHostId(host.getHostId());
 //		저장
-		Board b =  hostBoardService.saveBoard(board);
+		Board b =  boardService.saveBoard(board);
 //		List<FrontImg> forntImg = new ArrayList<>();
 //		frontImg = forntImg.add(new frontImg);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
@@ -165,7 +165,7 @@ public class HostBoardController implements ApplicationContextAware {
 				return "login/hostLoginForm";
 			}
 			//호스트 아이디로 된 보드 리스트 가져오기(session에 저장된 hostId로 검색해서 가져옴)
-			Page<Board> pageList = hostBoardService.getHostBoardList(pNum, host.getHostId());
+			Page<Board> pageList = boardService.getHostBoardList(pNum, host.getHostId());
 			List<Board> bList = pageList.getContent(); //보여질 글
 			int totalCount = pageList.getTotalPages(); //전체 페이지 수
 			model.addAttribute("bList", bList);
@@ -184,7 +184,7 @@ public class HostBoardController implements ApplicationContextAware {
 		
 		@RequestMapping("/viewPost/{boardNum}")
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-			Board view = hostBoardService.viewPost(boardNum);
+			Board view = boardService.viewPost(boardNum);
 			model.addAttribute("view",view);
 			
 			List<FrontImg> fis = frontImgService.viewImg(boardNum);
@@ -197,7 +197,7 @@ public class HostBoardController implements ApplicationContextAware {
 	// 게시글 조회
 	@GetMapping("/content/{boardNum}")
 	public String getBoard(@PathVariable Long boardNum, Model m) {
-		Board board = hostBoardService.getBoard(boardNum);
+		Board board = boardService.getBoard(boardNum);
 		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
 		
 		m.addAttribute("custQna", custQnaResult);

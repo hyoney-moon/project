@@ -1,14 +1,22 @@
 package web.project.service;
 
 
-import java.util.Date;
+import java.util.List;
 
-import web.project.domain.Book_infoDto;
+import web.project.domain.Board;
+import web.project.domain.BookInfo;
 
 
 public interface BookingService {
 
-	Book_infoDto getBoardList(Integer num);
+	Board getBoard(Long boardNum);
 	
-	void updateBooking(Book_infoDto dto);
+	
+	void insertBooking(BookInfo dto);
+	
+	
+	List<String> getListDate(Long boardNum);
+
+
+	void updateBooking(BookInfo dto);
 }

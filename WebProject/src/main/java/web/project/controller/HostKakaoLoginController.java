@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class HostKakaoLoginController {
-
+public class HostKakaoLoginController {    
+   
 	kakaoAPI kakaoApi = new kakaoAPI();
 
 	@RequestMapping(value = "/login")

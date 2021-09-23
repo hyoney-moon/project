@@ -1,6 +1,8 @@
 package web.project.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,13 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import web.project.domain.Board;
-import web.project.persistence.HostBoardRepository;
+import web.project.persistence.BoardRepository;
 //
 @Service
-public class HostBoardServiceImpl implements HostBoardService {
+public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	HostBoardRepository boardRepo;
+	BoardRepository boardRepo;
 	
 	//글저장
 	@Override
@@ -42,4 +44,23 @@ public class HostBoardServiceImpl implements HostBoardService {
 		return boardRepo.getById(boardNum);
 	}
 	
+	//검색하기 ajax
+	@Override
+	public List<Board> searchBoardList(int search_option, String search) {
+		List<Board> list = null;
+		if(search_option == 1) {
+			list = boardRepo.findBySpaceNameContainingIgnoreCase(search);
+		}else if(search_option == 2) {
+			list = boardRepo.findByCategoryContainingIgnoreCase(search);
+		} else {
+			list = boardRepo.findByAddressContainingIgnoreCase(search);
+		}
+		return list;
+	}
+
+	@Override
+	public Page<Board> getCustBoardList(int pNum) {
+		Pageable page = PageRequest.of(pNum-1, 5);
+		return boardRepo.findByOrderByBoardNumDesc(page);
+	}
 }
