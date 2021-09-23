@@ -26,25 +26,29 @@ window.onload = function(){
 	    rowHeaders: ['checkbox'],
 	    columns: [
 	      {
-	        header: 'boardNum',
+	        header: '글번호',
 	        name: 'boardNum',
 	      },
 	      {
-	        header: 'spaceName',
+		    header: '호스트ID',
+		    name: 'hostId',
+		      },
+	      {
+	        header: '공간이름',
 	        name: 'spaceName',
 	      },
 	      {
-	        header: 'price',
+	        header: '가격(인당)',
 	        name: 'price'
 	      },
 	      {
-	        header: 'regDate',
+	        header: '게시날짜',
 	        name: 'regDate',
 	      }
 	    ]
 	  });
 	
-	// 공간등록 허가 클릭 이벤트
+// 공간등록 허가 클릭 이벤트
 $(document).on("click","#permit", function(){
 	let board = grid.getCheckedRows();
 	$.ajax({

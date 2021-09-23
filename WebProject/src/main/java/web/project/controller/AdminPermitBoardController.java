@@ -15,7 +15,7 @@ import web.project.domain.Board;
 import web.project.service.AdminPermitBoardService;
 
 @Controller
-@RequestMapping("/permit")
+@RequestMapping("/adminPermitBoard")
 public class AdminPermitBoardController {
 	@Autowired
 	private AdminPermitBoardService adminPermitBoardService;

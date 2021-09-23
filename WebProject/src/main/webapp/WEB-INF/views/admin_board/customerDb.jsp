@@ -12,7 +12,7 @@
 
 window.onload = function(){
 	$.ajax({
-		url : "/customerinfo/customerList",
+		url : "/adminCustomerDb/getCustomerDb",
 		method :"GET",
 		dataType : "JSON",
 		success : function(result){
@@ -26,31 +26,41 @@ window.onload = function(){
 	    scrollY: false,
 	    columns: [
 	      {
-	        header: 'custId(desc)',
+	        header: '아이디',
 	        name: 'custId',
 	        sortingType: 'desc',
 	        sortable: true
 	      },
 	      {
-	        header: 'nickname(asc)',
+	        header: '닉네임',
 	        name: 'nickname',
 	        sortingType: 'asc',
 	        sortable: true
 	      },
 	      {
-	        header: 'gender',
+	        header: '성별',
 	        name: 'gender'
 	      },
 	      {
-	        header: 'age',
+	        header: '나이',
 	        name: 'age'
 	      },
 	      {
-	        header: 'totalSpend(asc)',
+	        header: '총 지출액',
 	        name: 'totalSpend',
 	        sortingType: 'asc',
 	        sortable: true
-	      }
+	      },
+	      {
+		    header: '보유 포인트',
+		    name: 'cash',
+		    sortingType: 'asc',
+		    sortable: true
+		  },
+	      {
+		    header: '가입일',
+		    name: 'joinDate',
+		  }
 	    ]
 	  });
 };

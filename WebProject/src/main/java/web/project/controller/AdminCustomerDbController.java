@@ -100,7 +100,15 @@ public class AdminCustomerDbController {
 	    
 	    cell = row.createCell(4);
 	    cell.setCellStyle(headStyle);
-	    cell.setCellValue("사용금액");
+	    cell.setCellValue("총 지출액");
+	    
+	    cell = row.createCell(5);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("보유 포인트");
+	    
+	    cell = row.createCell(6);
+	    cell.setCellStyle(headStyle);
+	    cell.setCellValue("가입일");
 
 	    // 데이터 부분 생성
 	    for(Customer customer : result) {
@@ -124,6 +132,14 @@ public class AdminCustomerDbController {
 	        cell = row.createCell(4);
 	        cell.setCellStyle(bodyStyle);
 	        cell.setCellValue(customer.getTotalSpend());
+	        
+	        cell = row.createCell(5);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(customer.getCash());
+	        
+	        cell = row.createCell(6);
+	        cell.setCellStyle(bodyStyle);
+	        cell.setCellValue(customer.getJoinDate());
 	    }
 	        // 컨텐츠 타입과 파일명 지정
 	        response.setContentType("ms-vnd/excel");
