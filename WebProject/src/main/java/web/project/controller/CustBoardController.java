@@ -1,10 +1,7 @@
 package web.project.controller;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
-import web.project.domain.CustQna;
 import web.project.domain.Customer;
 import web.project.domain.FrontImg;
-import web.project.domain.Host;
-import web.project.domain.HostQna;
-import web.project.domain.Img;
 import web.project.service.BoardService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
@@ -101,25 +93,7 @@ public class CustBoardController implements ApplicationContextAware {
 		System.out.println(search);
 		Gson json = new Gson();
 		return json.toJson(searchList);
-	}
-	
-	
-	// 댓글 출력(ajax)
-	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String commentList(Long boardNum) throws Exception {
-		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(custQnaResult);
-	}
-	
-	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String replyCommentList(Long boardNum) throws Exception {
-		List<HostQna> hostQnaResult = qnaService.getHostQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(hostQnaResult);
-	}
+	}	
 	
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override

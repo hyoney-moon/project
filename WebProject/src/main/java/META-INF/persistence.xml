@@ -12,7 +12,7 @@
 		<class>web.project.domain.CustQna</class>
 		<class>web.project.domain.Board</class>
 		<class>web.project.domain.Customer</class>
-		<class>web.project.domain.HostQna</class>
+		<class>web.project.domain.Admin</class>
 
 	</persistence-unit>
 </persistence>

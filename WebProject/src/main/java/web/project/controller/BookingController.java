@@ -74,7 +74,7 @@ public class BookingController {
 		
 		
 		//카카오페이 페이지 이동 메소드
-	  	@GetMapping("/bookingPay") 
+	  	@GetMapping("/bookingpage/bookingPay") 
 		public String bookingPay() {
 		  return"custmain/kakaopay"; 
 		  }

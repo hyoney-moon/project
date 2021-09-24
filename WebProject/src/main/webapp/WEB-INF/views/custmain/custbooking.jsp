@@ -17,12 +17,10 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 #map {width:500px; height:400px;margin: 40px;}
 </style>
 
-<!DOCTYPE html>
-<html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <title>예약 페이지</title>
-<link rel="stylesheet" href="assets/css/booking.css" />
+<!-- <link rel="stylesheet" href="assets/css/booking.css" />-->
 <script>
 
 </script>
@@ -55,7 +53,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 		</div>
 	</form>
 </div>
- <div id="map"></div> 
+ <div id="map"></div>
 
 
 

@@ -26,6 +26,7 @@ h5, p {color: #2d2d2d;}
 </style>
 </head>
 <body>
+<div class="container h-100">
 	<div class="container h-100">
 		<div
 			class="row d-flex justify-content-center align-items-center h-100">
@@ -58,7 +59,7 @@ h5, p {color: #2d2d2d;}
 						
 						
 						<div class="card">
-						<a href="admin/adminmain">
+						<a href="/admin/main">
 							<img src="../images/icon/adminMain.png" class="card-img-top"
 								alt="...">
 							<div class="card-body">
@@ -67,11 +68,27 @@ h5, p {color: #2d2d2d;}
 							</div>
 							</a>
 						</div>
-						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+<div style="text-align: center">
+<br><br>
+<h2><a href="/main">메인으로</a></h2>
+<h2><a href="/board/boardList">게시판 목록</a></h2>
+<h2><a href="/customerinfo/getCustomerList">일반회원 DB 조회</a></h2>
+<h2><a href="/customerinfo/getCustomerInfo">일반회원 통계 조회</a></h2>
+<h2><a href="/permit/loading">관리자 게시글 허가</a></h2>
+<a href="login/index">카카오테스트</a><br>
+<a href="login/hostlogin">호스트로그인폼</a><br>
+<a href="search">검색 기능</a><br>
+<a href="postBoard">공간등록</a><br>
+<a href="loginForm">호스트 로그인</a><br>
+<a href="viewBoard">호스트 마이페이지</a><br>
+<a href="searchForm">검색</a>
+</div>
 </body>
 </html>
