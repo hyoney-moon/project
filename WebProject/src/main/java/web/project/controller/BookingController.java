@@ -38,6 +38,7 @@ public class BookingController {
 	BookingService service;
 	@Autowired
 	BoardService boardservice;
+	
 		//요청 페이지 출력
 		@GetMapping("/bookingpage/{boardNum}")
 		public String getbookingView(@PathVariable(name = "boardNum") Long boardNum,Model m) {

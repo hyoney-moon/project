@@ -9,7 +9,10 @@ import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 // 
 /**
@@ -19,6 +22,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 @SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq", initialValue=1, allocationSize=1)
 public class Board implements Serializable {
 
@@ -28,10 +32,6 @@ public class Board implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Board_Seq_Gen")
 	private Long boardNum;
-	
-	@ManyToOne
-	@JoinColumn(name="hostId", insertable = false, updatable = false)
-	private Host host;
 	
 	private String hostId;
 	private String spaceName;
@@ -46,6 +46,9 @@ public class Board implements Serializable {
 	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int readcount;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
+	@Temporal(value = TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date regDate;
 	private int price;
 	private int headcnt;
@@ -56,13 +59,19 @@ public class Board implements Serializable {
 	private Long permit;
 	
 	@ManyToOne
+	@JoinColumn(name="hostId", insertable = false, updatable = false)
+	private Host host;
+	
+	@ManyToOne
 	@JoinColumn(name="category", insertable = false, updatable = false)
 	private Category categoryFk;
 	
-	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-	private List<FrontImg> frontimgList = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-	private List<Img> imgList = new ArrayList<>();
+	//이렇게 하면 DB에 경로까지 저장 됨
+//	@ManyToOne
+//	@JoinColumn(name="frontImgNo", insertable = false, updatable = false)
+//	private FrontImg frontimg;
+//	@ManyToOne
+//	@JoinColumn(name="imgNo", insertable = false, updatable = false)
+//	private Img img;
 	
 }

@@ -15,17 +15,21 @@ import web.project.service.BoardService;
 import web.project.service.CategoryService;
 import web.project.service.mainboardService;
 
-@SessionAttributes({"host","custId"})
+@SessionAttributes("customer")
 @Controller
 public class mainController {
 	
 	@Autowired
 	mainboardService service;
-	@Autowired CategoryService cateService;
+	@Autowired 
+	CategoryService cateService;
+	
 	@RequestMapping("/main")
 	public String mainBoard(Model m) {
+		System.err.println("mainBoard실행");
 		List<Board> dto = service.getBoardList();
 		m.addAttribute("board",dto);
+		System.err.println(dto.size()+"board");
 		// 카테고리 리스트 출력
 		List<Category> category = cateService.selectCate();
 		m.addAttribute("category",category);

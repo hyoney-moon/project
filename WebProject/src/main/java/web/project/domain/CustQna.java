@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.Getter;
 import lombok.Setter;
 // 
@@ -27,6 +25,8 @@ public class CustQna implements Serializable {
 	private String content; // 댓글 작성 내용
 	private String profile;
 	private String custId;
+	private String hostContent;
+	private String hostId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="boardNum")

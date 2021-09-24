@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="center">
-<h1>게시글 목록</h1>
+<h1>게시글 목록</h1>${customer.custId}
 <div align="right" id="loginid"><a href="/logout">로그아웃</a></div>
 
 <table border="1">

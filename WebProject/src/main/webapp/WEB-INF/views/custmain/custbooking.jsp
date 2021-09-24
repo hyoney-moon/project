@@ -2,6 +2,7 @@
    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +13,32 @@
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript">var disabledDays = ${dateList};</script>
   <script type="text/javascript" 
-src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script> 
+src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" 
+integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" 
+crossorigin="anonymous"></script>
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+crossorigin="anonymous">
 <style>
 #map {width:500px; height:400px;padding: 10px;margin-top: 30px;margin-bottom: 30px;}
 #paybutton{margin-top: 20px;}
+.img{size: 200px}
 </style>
 
-<!DOCTYPE html>
-<html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+crossorigin="anonymous">
 <title>예약 페이지</title>
-<link rel="stylesheet" href="assets/css/booking.css" />
+<!-- <link rel="stylesheet" href="assets/css/booking.css" />-->
 <script>
 
 </script>
@@ -33,7 +48,33 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 <div class="container">
 <form>
 	<h1>${board.contentOneline }</h1>
-	<img src="../../../images/fulls/01.jpg" alt="..." class="img-thumbnail">
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../../../images/fulls/02.jpg" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../images/fulls/03.jpg" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../images/fulls/01.jpg" class="d-block w-100">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+	
 	<h2>${board.content }</h2>
 	<h1>${board.address }</h1>
 	<h1>${board.price }</h1>
@@ -59,6 +100,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 	</form>
  <div id="map"></div> 
 </div>
+
 
 
 
