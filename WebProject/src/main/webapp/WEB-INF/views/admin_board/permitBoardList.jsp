@@ -3,13 +3,21 @@
 <html>
 <head>
 <title>Insert title here</title>
+<style type="text/css">
+#grid {
+	width: 900px;
+	margin: auto;
+}
+
+</style>
+
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script src="/js/tui-grid.js"></script>
 <link rel="stylesheet" href="/css/tui-grid.css" type="text/css">
 </head>
-<script>
 
+<script>
 window.onload = function(){
 	$.ajax({
 		url : "/permit/getPreBoard",
@@ -82,9 +90,14 @@ $(document).on("click","#reject",function(){
 };
 </script>
 <body>
+	<header>
+		<%@ include file="../publicCSS/adminheader.jsp"%>
+	</header>
+	<br><br>
+<h1 style= "text-align: center;">관리자 게시글 허가</h1>
+<br>
 <div id="grid"></div>
-<button id="permit">공간등록 허가</button>
-<button id="reject">삭제</button>
-
+<button style= "margin-left: 25%; margin-top: 10px;"class="button" id="permit">공간등록 허가</button>
+<button class="button" id="reject">삭제</button>
 </body>
 </html>

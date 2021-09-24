@@ -63,7 +63,7 @@ hr {
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="main"><img style="width: 150px;"
+						<a href="/"><img style="width: 150px;"
 							src="../images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->

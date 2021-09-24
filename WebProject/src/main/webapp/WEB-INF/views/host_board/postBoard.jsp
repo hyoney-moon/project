@@ -45,41 +45,13 @@ div.msg {color: red;}
 				}
 
 				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				document.getElementById('postcode').value = data.zonecode;
+				document.getElementById('zipcode').value = data.zonecode;
 				document.getElementById("address").value = addr;
 				// 커서를 상세주소 필드로 이동한다.
 				document.getElementById("detailAddress").focus();
 			}
 		}).open();
 	}
-</script>
-<script>
-$(function(){
-	$("#postBoardCheck").submit(function(){
-		if(!$("#spaceName").val()){
-			$("#space_msg").html("*필수")
-			return false;
-		}if(!$("#contentOneline").val()){
-			$("#contentOneline_msg").html("*필수")
-			return false;
-		}if(!$("#content").val()){
-			$("#content_msg").html("*필수")
-			return false;
-		}if(!$("#direction").val()){
-			$("#direction_msg").html("*필수")
-			return false;
-		}if(!$("#zipcode").val()){
-			$("#address_msg").html("*필수")
-			return false;
-		}if(!$("#frontImg").val()){
-			$("#frontImg_msg").html("*필수")
-			return false;
-		}if(!$("#img").val()){
-			$("#img_msg").html("*필수")
-			return false;
-		}
-	})
-})
 </script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -196,6 +168,28 @@ $(function(){
 		</form>
 	</div>
 </body>
+<script>
+$(function(){
+	$("#postBoardCheck").submit(function(){
+		if(!$("#spaceName").val()){
+			$("#space_msg").html("*필수")
+			return false;
+		}if(!$("#contentOneline").val()){
+			$("#contentOneline_msg").html("*필수")
+			return false;
+		}if(!$("#content").val()){
+			$("#content_msg").html("*필수")
+			return false;
+		}if(!$("#direction").val()){
+			$("#direction_msg").html("*필수")
+			return false;
+		}if(!$("#zipcode").val()){
+			$("#address_msg").html("*필수")
+			return false;
+		}
+	})
+})
+</script>
 </html>
 
 
