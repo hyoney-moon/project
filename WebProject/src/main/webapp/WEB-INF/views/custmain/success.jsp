@@ -10,16 +10,16 @@
  
 카카오페이 결제가 정상적으로 완료되었습니다.
  
-결제일시:     [[${info.approved_at}]]<br/>
-주문번호:    [[${info.partner_order_id}]]<br/>
-상품명:    [[${info.item_name}]]<br/>
-상품수량:    [[${info.quantity}]]<br/>
-결제금액:    [[${info.amount.total}]]<br/>
-결제방법:    [[${info.payment_method_type}]]<br/>
+결제일시:     		[[${book.regDate}]]<br/>
+주문번호:    		[[${book.bookNum}]]<br/>
+ 공간명:    		[[${boardNum.spaceName}]]
+결제금액:    		[[${book.price}]]<br/>
+대여 시작일:    	[[${book.startDate}]]<br/>
+대여 종료일:   	[[${book.endDate}]]<br/>
+사용하는 인원:		[[${book.people }]]<br/>
+<a href="main">예약완료</a>
  
  
- 
-<h2>[[${info}]]</h2>
  
 </body>
 </html>

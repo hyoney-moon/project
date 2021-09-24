@@ -43,6 +43,7 @@ table a {
 }
 </style>
 </head>
+
 <!-- Wrapper -->
 <div class="container">
 	<!-- 헤더영역 -->
@@ -58,21 +59,22 @@ table a {
 			</h2>
 		</div>
 		<!-- Main카테고리1번줄 -->
-		<section class="thumbnails">
-			<div>
-				<c:forEach items="${category}" var="cate" begin="0" end="1">
-					<a href="/bookingpage/${cate.category}"> <img
-						src="images/thumbs/02.jpg" alt="" />
-						<h3>${cate.category}</h3>
-					</a>
-
-<<<<<<< HEAD
+				<section class="thumbnails">
+					<div>
+						<c:forEach items="${category}" var="cate" begin="0" end="1">
+							<a href="/bookingpage/${cate.category}"> 
+							<img src="../images/thumbs/02.jpg" alt="" />
+								<h3>${cate.category}</h3>
+							</a>
+						</c:forEach>
+					</div>
+				</section>
 				<!-- Main카테고리1번줄 -->
 				<section class="thumbnails">
 								<div >
 								<c:forEach items="${category}" var="cate" begin="0" end="1">
 									<a href="/bookingpage/${cate.category}">
-										<img src="images/thumbs/02.jpg" alt="" />
+										<img src="../images/thumbs/02.jpg" alt="" />
 										<h3>${cate.category}</h3>
 									</a>
 									
@@ -82,89 +84,21 @@ table a {
 									<div >
 								<c:forEach items="${category}" var="cate" begin="2" end="4">
 									<a href="/bookingpage/${cate.category}">
-										<img src="images/thumbs/03.jpg" alt="" />
+										<img src="../images/thumbs/03.jpg" alt="" />
 										<h3>${cate.category}</h3>
 									</a>
 								</c:forEach>
 								</div>
 									<!-- Main카테고리3번줄 -->
+							<div >
 								<c:forEach items="${category}" var="cate" begin="5" end="6">
 									<a href="/bookingpage/${cate.category}">
 										<img src="images/thumbs/04.jpg" alt="" />
 										<h3>${cate.category}</h3>
 									</a>
 								</c:forEach>
-								</div>
+							</div>
 				</section>
-						<!-- 메인 공간이미지  -->
-						<hr><h1>오늘의 추천공간</h1><br>
-							<h3>오늘만 추천합니다.</h3><hr>
-							<section class="thumbnails">
-								<!-- 상세페이지로 넘어가는 페이지 -->
-								<div >
-								<c:forEach items="${board}" var="board" begin="0" end="3">
-									<a href="/bookingpage/${board.boardNum}">
-									<${board. }
-										<img src="images/thumbs/01.jpg" alt="" />
-										<h3>${board.content}</h3>
-									</a>
-									
-								</c:forEach>
-								</div>
-								<div >
-								<c:forEach items="${board}" var="board" begin="4" end="7">
-									<a href="/bookingpage/${board.boardNum}">
-										<img src="images/thumbs/02.jpg" alt="" />
-										<h3>${board.content}</h3>
-									</a>
-									
-								</c:forEach>
-								</div>
-								<div >
-								<c:forEach items="${board}" var="board" begin="8" end="10">
-									<a href="/bookingpage/${board.boardNum}">
-									
-										<img src="images/thumbs/07.jpg" alt="" />
-										<h3>${board.content}</h3>
-									</a>
-									
-								</c:forEach>
-								</div>
-							</section>
-<div style="text-align: center">
-<h2><a href="/customer/loginForm">회원 로그인</a></h2>
-<h2><a href="/customer/hostLoginForm">호스트 로그인</a><br></h2>
-<br><br>
-<h2><a href="/board/boardList">게시판 목록</a></h2>
-<a href="login/index">카카오테스트</a><br>
-<a href="login/hostlogin">호스트로그인폼</a><br>
-<a href="search">검색 기능</a><br>
-<a href="postBoard">공간등록</a><br>
-<a href="loginForm">호스트 로그인</a><br>
-<a href="viewBoard">호스트 마이페이지</a><br>
-<a href="searchForm">검색</a>
-=======
-				</c:forEach>
-			</div>
-			<!-- Main카테고리2번줄 -->
-			<div>
-				<c:forEach items="${category}" var="cate" begin="2" end="4">
-					<a href="/bookingpage/${cate.category}"> <img
-						src="images/thumbs/03.jpg" alt="" />
-						<h3>${cate.category}</h3>
-					</a>
-				</c:forEach>
-			</div>
-			<!-- Main카테고리3번줄 -->
-			<c:forEach items="${category}" var="cate" begin="5" end="6">
-				<a href="/bookingpage/${cate.category}"> <img
-					src="images/thumbs/04.jpg" alt="" />
-					<h3>${cate.category}</h3>
-				</a>
-			</c:forEach>
->>>>>>> f8aa98ca050cbae97bcc4c9431de0c5cdf469203
-</div>
-</section>
 <!-- 메인 공간이미지  -->
 <hr>
 <h1>오늘의 추천공간</h1>
@@ -175,8 +109,8 @@ table a {
 	<!-- 상세페이지로 넘어가는 페이지 -->
 	<div>
 		<c:forEach items="${board}" var="board" begin="0" end="3">
-			<a href="/bookingpage/${board.boardNum}"> <img
-				src="images/thumbs/01.jpg" alt="" />
+			<a href="/bookingpage/${board.boardNum}"> 
+			<img src="../images/thumbs/01.jpg" alt="" />
 				<h3>${board.content}</h3>
 			</a>
 
@@ -184,8 +118,8 @@ table a {
 	</div>
 	<div>
 		<c:forEach items="${board}" var="board" begin="4" end="7">
-			<a href="/bookingpage/${board.boardNum}"> <img
-				src="images/thumbs/02.jpg" alt="" />
+			<a href="/bookingpage/${board.boardNum}"> 
+			<img src="images/thumbs/02.jpg" alt="" />
 				<h3>${board.content}</h3>
 			</a>
 
@@ -194,7 +128,7 @@ table a {
 	<div>
 		<c:forEach items="${board}" var="board" begin="8" end="10">
 			<a href="/bookingpage/${board.boardNum}"> <img
-				src="images/thumbs/07.jpg" alt="" />
+				src="../images/thumbs/07.jpg" alt="" />
 				<h3>${board.content}</h3>
 			</a>
 

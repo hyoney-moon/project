@@ -110,7 +110,6 @@ public class HostBoardController implements ApplicationContextAware {
 		//save
 		imgService.saveImg(im);
 		}
-		
 		return "redirect:hostmain";
 	}
 	

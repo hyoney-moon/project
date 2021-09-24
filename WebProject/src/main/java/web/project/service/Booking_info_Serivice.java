@@ -18,7 +18,8 @@ import web.project.persistence.BoardPickRepository;
 
 @Service
 public class Booking_info_Serivice implements BookingService {
-
+	
+	
 	@Autowired
 	BoardPickRepository repository;
 	@Autowired
@@ -30,12 +31,12 @@ public class Booking_info_Serivice implements BookingService {
 		Optional<Board> select = boardrepository.findById(boardNum);
 		return select.get();
 	}
-	public BookInfo getBoardList(Integer bookNum) {
+	public BookInfo getBoardList(Long bookNum) {
 		BookInfo infodto = repository.findByBookNum(bookNum);
 		return null;
 	}
-	public void insertBooking(BookInfo dto) {
-			repository.save(dto);
+	public BookInfo insertBooking(BookInfo dto) {
+			return repository.save(dto);
 	}
 	@SuppressWarnings("static-access")
 	@Override
@@ -47,10 +48,8 @@ public class Booking_info_Serivice implements BookingService {
 			Date start = ListDate.get(i).getStartDate();
 			Date end = ListDate.get(i).getEndDate();
 			long diff = end.getTime() - start.getTime();
-			System.out.println(diff);
 	        TimeUnit time = TimeUnit.DAYS; 
 	        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-	        System.out.println("diffrence::"+diffrence);
 	        Date temp = start;
 	        for(int j=0; j <= diffrence; j++) {
 	        	
@@ -58,13 +57,11 @@ public class Booking_info_Serivice implements BookingService {
 				String strregdate1 = pattern1.format(temp);
 				
 				totalDate.add(strregdate1);
-				System.out.println(j);
 				Calendar plus = Calendar.getInstance();
 				plus.setTime(temp);
 				plus.add(plus.DATE, 1);
 				temp = plus.getTime();
 				
-				System.out.println(strregdate1);
 			}
 			
 		}
@@ -74,5 +71,14 @@ public class Booking_info_Serivice implements BookingService {
 	public void updateBooking(BookInfo dto) {
 		
 	}
-	
+	@Override
+	public BookInfo getbook(String custId) {
+		BookInfo book = repository.findByCustId(custId);
+		return book;
+	}
+	@Override
+	public BookInfo bookNum(Long bookNum) {
+		return  repository.findByBookNum(bookNum);
+	}
+		
 }

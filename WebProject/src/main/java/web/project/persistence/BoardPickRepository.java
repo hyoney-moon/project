@@ -7,8 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import web.project.domain.BookInfo;
 
 public interface BoardPickRepository extends JpaRepository<BookInfo, Long>{
+	
 
-	BookInfo findByBookNum(Integer bookNum);
+	BookInfo findByCustId(String custId);
+	
+	BookInfo findByBookNum(Long bookNum);
 	
 	BookInfo save(BookInfo dto);
 	
