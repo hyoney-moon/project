@@ -88,7 +88,8 @@ h5, p {color: #2d2d2d;}
 <a href="postBoard">공간등록</a><br>
 <a href="loginForm">호스트 로그인</a><br>
 <a href="viewBoard">호스트 마이페이지</a><br>
-<a href="searchForm">검색</a>
+<a href="searchForm">검색</a><br>
+<a href="main">메인페이지</a>
 </div>
 </body>
 </html>

@@ -93,15 +93,28 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
-	@Override
-	public Page<Board> getCustBoardList(int pNum) {
-		Pageable page = PageRequest.of(pNum-1, 5);
-		return boardRepo.findByOrderByBoardNumDesc(page);
-	}
 
 	@Override
 	public Page<Board> searchBoardList(int pNum, int search_option, String search) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Board getBoardNum(Long boardNum) {
+		return boardRepo.findByBoardNum(boardNum);
+	}
+
+	@Override
+	public Page<Board> getBoardList(int pNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Page<Board> getCustBoardList(int pNum) {
+		Pageable page = PageRequest.of(pNum-1, 5);
+		return boardRepo.findByOrderByBoardNumDesc(page);
+	}
+
 }
