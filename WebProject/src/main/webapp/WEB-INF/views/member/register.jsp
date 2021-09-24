@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="../publicCSS/custheader.jsp" %>
 
 <section class="content">
 	<!-- 회원가입 -->
@@ -102,8 +103,7 @@
 	<br />
 	<br />
 </section>
-
-
+<%@include file="../publicCSS/footer.jsp" %>
 
 
 <script>
@@ -187,8 +187,8 @@ let filename = ''
 		}
 		
 		let pattern1 = /[0-9]/;	// 숫자 let
-		pattern2 = /[a-zA-Z]/;	// 문자 let
-		pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+		let pattern2 = /[a-zA-Z]/;	// 문자 let
+		let pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
 		if(!pattern1.test(password) || !pattern2.test(password) || !pattern3.test(password) || password.length < 8) {
 			alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성되어야 합니다.");
 			return false;

@@ -32,6 +32,7 @@ public class CustomerController {
 		return "member/register";
 	}
 	
+	
 	// 회원가입
 	@PostMapping("/join")
 	public String join(Customer customer) {
@@ -39,6 +40,7 @@ public class CustomerController {
 		
 		return "member/join";
 	}
+	
 	
 	// 로그인 폼
 	@GetMapping("/loginForm")

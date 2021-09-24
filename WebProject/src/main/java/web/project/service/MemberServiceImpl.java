@@ -25,39 +25,18 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
+	
+	// 회원가입 메소드
 	@Override
 	public Customer joinMember(Customer customer) {
 		return customerRepository.save(customer);
 	}
-
-	@Override
-	public Customer loginCustomer(Customer customer) {
-		Optional<Customer> findMember = customerRepository.findById(customer.getCustId());
-		if (findMember.isPresent())
-			return findMember.get();
-		else
-		return null;
-	}
-
-	@Override
-	public Optional<Customer> findCustomer(String custId) {
-		Optional<Customer> customer = customerRepository.findById(custId);
-		return customer;
-	}
-
-	@Override
-	public void delete(Customer customer) {
-		customerRepository.delete(customer);
-	}
-
+	
+	
 	/*
+	// 프로필 사진을 회원가입시 처리하는 메소드
 	@Override
-	public String idcheck(String custId) {
-		return customerRepository.idcheck(custId);
-	}
-
-	@Override
-	public void registerCustomer(MultipartHttpServletRequest request) {
+	public Customer joinMember(Customer customer) {
 		// 파라미터 읽어오기
 		// 파일은 getFile 로 읽고 MultipartFile 로 저장한다
 		MultipartFile profile = request.getFile("profile");
@@ -79,13 +58,40 @@ public class MemberServiceImpl implements MemberService {
 			customer.setProfile(uuid + "_" + filename);
 			// 파일 업로드
 			profile.transferTo(file);
-			// DB 메소드 호출
-			customerRepository.registerCustomer(customer);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return customerRepository.save(customer);
 	}
 	*/
+
+	@Override
+	public Customer loginCustomer(Customer customer) {
+		Optional<Customer> findMember = customerRepository.findById(customer.getCustId());
+		if (findMember.isPresent())
+			return findMember.get();
+		else
+		return null;
+	}
+
+	@Override
+	public Optional<Customer> findCustomer(String custId) {
+		Optional<Customer> customer = customerRepository.findById(custId);
+		return customer;
+	}
+
+	@Override
+	public void delete(Customer customer) {
+		customerRepository.delete(customer);
+	}
+
+	
+	// 아이디 중복 검사를 위한 메소드
+	@Override
+	public String idcheck(String custId) {
+		return customerRepository.idcheck(custId);
+	}
 	
 }

@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 // 설정한 패키지에서 발생시 이곳의 메서드가 처리 
-@ControllerAdvice("com.pk.springboard")
+@ControllerAdvice("web.project.controller")
 // 어커런스 자동 생성
 @Component
 public class CommonExceptionAdvice {
-	/*
+	
 	@ExceptionHandler(Exception.class)
 	private ModelAndView errorModelAndView(Exception ex) {
 		
@@ -21,5 +21,5 @@ public class CommonExceptionAdvice {
 		
 		return modelAndView;
 	}
-	*/
+	
 }

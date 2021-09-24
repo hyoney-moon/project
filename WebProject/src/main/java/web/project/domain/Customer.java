@@ -1,33 +1,19 @@
 package web.project.domain;
 
 import java.io.Serializable;
-<<<<<<< HEAD
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * member 의 데이터를 저장할 클래스
- */
-@Entity
-public class Customer implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-=======
-import javax.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-// 
+
 /**
- * Entity implementation class for Entity: Customer
- *
+ * member 의 데이터를 저장할 클래스
  */
 @Entity
 @Setter
@@ -37,20 +23,18 @@ public class Customer implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
->>>>>>> 00d47e862d507f94e8d762d450e92a89b7eddcb6
 	@Id
 	private String custId;
 	private String email;
 	private String password;
 	private String nickName;
 	private String gender;
-<<<<<<< HEAD
 	private int age;
 	private String address;
 	private String addressDetail;
 	private String zipcode;
 	private String cash;
-	private String profile;
+	private MultipartFile profile;
 	private String pick;
 	@Column(columnDefinition = "date default sysdate")
 	private Date joinDate;
@@ -176,14 +160,13 @@ public class Customer implements Serializable {
 	}
 
 
-
-	public String getProfile() {
+	public MultipartFile getProfile() {
 		return profile;
 	}
 
 
 
-	public void setProfile(String profile) {
+	public void setProfile(MultipartFile profile) {
 		this.profile = profile;
 	}
 
@@ -221,17 +204,6 @@ public class Customer implements Serializable {
 				+ joinDate + "]";
 	}
 	
-	
-	
-	
-	
-	
 
-=======
-	private Long age;
-	private String post;
-	private String cash; 
-	private String profile;
-	private String pick;
->>>>>>> 00d47e862d507f94e8d762d450e92a89b7eddcb6
+
 }

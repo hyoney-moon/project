@@ -17,18 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-<<<<<<< HEAD
 		
-	<dependencies>
-	
-	<dependency>
-    	<groupId>org.springframework.boot</groupId>
-    	<artifactId>spring-boot-starter-test</artifactId>
-    	<scope>test</scope>
-	</dependency>
-
-=======
-	
 	<dependencies>
 		<!-- File Upload (대용량 파일 처리) -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -37,6 +26,13 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
 		</dependency>
+		
+		<dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-test</artifactId>
+    	<scope>test</scope>
+		</dependency>
+		
 		<!--File Upload (file upload 기능 사용) -->
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
@@ -67,7 +63,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
->>>>>>> 00d47e862d507f94e8d762d450e92a89b7eddcb6
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -98,7 +94,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
+
          <groupId>javax.servlet</groupId>
          <artifactId>jstl</artifactId>
       </dependency>
@@ -140,10 +136,10 @@
 		</dependency>
       
       
-=======
+
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
@@ -152,7 +148,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
->>>>>>> 00d47e862d507f94e8d762d450e92a89b7eddcb6
+
 	</dependencies>
 
 	<build>

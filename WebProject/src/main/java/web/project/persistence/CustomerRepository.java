@@ -15,9 +15,11 @@ import web.project.domain.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 	@Autowired
 	
-	// 아이디 중복 체크를 위한 네이티브 쿼리
-	@Query(value = "select custId from member where custId = :custId", nativeQuery=true)
+	// 아이디 중복 체크를 위한 네이티브 쿼리(미완성)
+	@Query(value = "select custId from customer where custId = :custId", nativeQuery=true)
 	String idcheck(String custId);
+
+ //	void registerCustomer(Customer customer);
 
 	// void registerCustomer(Customer customer);
 	

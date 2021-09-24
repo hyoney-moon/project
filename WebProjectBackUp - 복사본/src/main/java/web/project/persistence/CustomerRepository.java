@@ -1,0 +1,24 @@
+package web.project.persistence;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import web.project.domain.Customer;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, String> {
+	@Autowired
+	
+	// 아이디 중복 체크를 위한 네이티브 쿼리(미완성)
+	@Query(value = "select custId from customer where custId = ?", nativeQuery=true)
+	String idcheck(String custId);
+	
+	Customer findByCustId(String custId);
+
+}
