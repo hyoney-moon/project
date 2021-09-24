@@ -75,8 +75,8 @@ hr {
 					<div class="offcanvas offcanvas-end" tabindex="-1"
 						id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header h-25">
-							<c:if test="${empty sessionScope.customer }">
-								<a class="textStyle" href="custloginForm">
+							<c:if test="${empty sessionScope.admin }">
+								<a class="textStyle" href="/adminLogin/loginForm">
 									<h3
 										class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4"
@@ -98,10 +98,12 @@ hr {
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
 								<li><a class="dropdown-item" href="/adminCustomerDb/customerDb">일반회원 DB 조회</a></li>
+								<li><a class="dropdown-item" href="#">호스트 DB 조회</a></li>
 								<li><a class="dropdown-item" href="/adminCustomerDb/customerStatisticsInfo">일반회원 통계 조회</a></li>
+								<li><a class="dropdown-item" href="#">호스트 통계 조회</a></li>
 								<li><a class="dropdown-item" href="/adminPermitBoard/preBoard">관리자 게시글 허가</a></li>
 								<c:if test="${!empty sessionScope.admin }">
-									<li><a class="dropdown-item" href="adminLogout">로그아웃</a></li>
+									<li><a class="dropdown-item" href="/adminLogin/logout">로그아웃</a></li>
 								</c:if>
 							</ul>
 							<hr class="dropdown-divider">

@@ -25,12 +25,7 @@ body {
 </head>
 <body>
 	<header>
-		<div class="postion-relateive mt-5">
-			<h3
-				class="position-absolute d-inline top-50 start-50 translate-middle">로고</h3>
-			<nav class="position-absolute top-50 end-0 translate-middle-y">
-				메뉴바 검색</nav>
-		</div>
+		<%@ include file = "../publicCSS/hostheader.jsp" %>
 	</header>
 		<div class="position-absolute top-50 start-50 translate-middle">
 			<div class="container">

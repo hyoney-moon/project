@@ -18,7 +18,7 @@ img{position:relative;}
 		<%@ include file="../publicCSS/adminheader.jsp"%>
 	</header>
 	<main>
-	<img class="z w-100" src="../images/mainImg/hostmainimgs.jpg"/>
+	<img class="z w-100" src="../images/mainImg/adminmainimgs.jpg"/>
 	<div class="container">
 		<div class="zIndex">
 			<h1><b>관리자 페이지입니다 <br>공간 비즈니스를 관리해보세요.</b></h1><br>

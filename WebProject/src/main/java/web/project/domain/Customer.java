@@ -32,5 +32,7 @@ public class Customer implements Serializable {
 	private String profile;
 	private String pick;
 	private Long totalSpend;
+	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
 	private Date joinDate;
+
 }

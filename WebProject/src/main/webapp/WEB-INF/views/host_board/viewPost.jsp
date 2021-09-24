@@ -15,7 +15,9 @@
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
 <style>
-body {background-color: ;}
+body {
+	padding-top: 40px;
+}
 .list_item {
     display: inline-block;
     width: 800px;
@@ -26,7 +28,7 @@ body {background-color: ;}
 .list_img {
     display: inline-block;
     width: 100%;
-    height: 400px;
+    height: 500px;
     overflow: hidden;
     object-fit: cover;
 }
@@ -36,6 +38,9 @@ body {background-color: ;}
 </style>
 </head>
 <body>
+<header>
+	<%@ include file="../publicCSS/hostheader.jsp"%>
+</header>
 <div class="container">
 		<div id="carouselExampleControls" class="carousel slide w-100"
 			data-bs-ride="carousel">

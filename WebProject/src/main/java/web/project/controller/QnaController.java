@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +36,7 @@ public class QnaController {
 	}
 
 	// 일반회원 질문작성
-	@PostMapping(value = "/question", produces = "text/plain;charset=UTF-8")
+	@GetMapping(value = "/question", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public void insertCustQna(CustQna qna) {
 		qnaService.insertCustQna(qna);

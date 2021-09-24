@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +27,7 @@ h5, p {color: #2d2d2d;}
 </head>
 <body>
 <div class="container h-100">
+	<div class="container h-100">
 		<div
 			class="row d-flex justify-content-center align-items-center h-100">
 			<div class="position-relative">
@@ -58,7 +59,7 @@ h5, p {color: #2d2d2d;}
 						
 						
 						<div class="card">
-						<a href="admin/main">
+						<a href="/admin/main">
 							<img src="../images/icon/adminMain.png" class="card-img-top"
 								alt="...">
 							<div class="card-body">
