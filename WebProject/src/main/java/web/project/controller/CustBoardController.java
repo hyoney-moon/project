@@ -121,6 +121,23 @@ public class CustBoardController implements ApplicationContextAware {
 		return json.toJson(hostQnaResult);
 	}
 	
+	//이미지 뽑아오는 ajax
+	@RequestMapping("/getImgs")
+	@ResponseBody
+	public String getImgs(Long boardNum) {
+		List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+		Gson json = new Gson();
+		return json.toJson(imgList);
+	}
+	//(검색)이미지 뽑아오는 ajax
+		@RequestMapping("/getSearchImgs")
+		@ResponseBody
+		public String getSearchImgs(Long boardNum) {
+			List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+			Gson json = new Gson();
+			return json.toJson(imgList);
+		}
+	
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override
     public void setApplicationContext(ApplicationContext applicationContext)

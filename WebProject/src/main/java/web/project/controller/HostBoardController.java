@@ -159,7 +159,7 @@ public class HostBoardController implements ApplicationContextAware {
 		@RequestMapping("/viewBoard")
 		public String viewBoard(Model model,
 				@RequestParam(name="p", defaultValue="1")int pNum, 
-				@ModelAttribute("host")Host host, String hostId) {
+				@ModelAttribute("host")Host host, String hostId, Long boardNum) {
 			//호스트 아이디로 로그인 된게 없으면 호스트 로그인 폼으로
 			if(host.getHostId() == null) {
 				return "login/hostLoginForm";

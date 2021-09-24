@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import web.project.domain.Board;
+import web.project.domain.Category;
 import web.project.domain.Customer;
 import web.project.domain.Host;
 import web.project.service.BoardService;
+import web.project.service.CategoryService;
 import web.project.service.LoginService;
+import web.project.service.mainboardService;
 // 
 @Controller
 @SessionAttributes("customer")
@@ -27,12 +30,22 @@ public class CustLoginController {
 	LoginService loginservice;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private mainboardService service;
+	@Autowired
+	private CategoryService cateService;
+	
 	
 	//회원 메인
-		@RequestMapping("/main")
-		public String mainStart() {
-			return "custmain/main";
-		}
+	@RequestMapping("/main")
+	public String mainStart(Model m) {
+		List<Board> dto = service.getBoardList();
+		m.addAttribute("board",dto);
+		// 카테고리 리스트 출력
+		List<Category> category = cateService.selectCate();
+		m.addAttribute("category",category);
+		return "custmain/main";
+	}
 	
 	//회원 로그인 폼
 	@GetMapping("/custloginForm")
