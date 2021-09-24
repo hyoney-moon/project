@@ -1,10 +1,7 @@
 package web.project.controller;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +19,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
-import web.project.domain.CustQna;
 import web.project.domain.Customer;
 import web.project.domain.FrontImg;
-import web.project.domain.Host;
-import web.project.domain.HostQna;
-import web.project.domain.Img;
+import web.project.domain.Review;
 import web.project.service.BoardService;
+import web.project.service.BookingService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 import web.project.service.QnaService;
+import web.project.service.ReviewService;
 
 @SessionAttributes("customer")
 @Controller
@@ -58,6 +53,10 @@ public class CustBoardController implements ApplicationContextAware {
 	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private ReviewService inter;
+	@Autowired
+	BookingService service;
 	
 	// 게시글 목록
 	@GetMapping("/searchForm")
@@ -84,8 +83,21 @@ public class CustBoardController implements ApplicationContextAware {
 	//글 상세보기
 	@RequestMapping("/viewPost/{boardNum}")
 	public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
+		
+		Board board =  service.getBoard(boardNum);
+		
+		model.addAttribute("board", board);
+		//사용자가 받는 데이터값 유효성 검사 단계
+		 List<String> dateList = service.getListDate(boardNum);
+		Gson json = new Gson();
+		
+		model.addAttribute("dateList",json.toJson(dateList));
+		
 		Board view = boardService.viewPost(boardNum);
 		model.addAttribute("view",view);
+		
+		List<Review> result = inter.getReviewDto();
+		model.addAttribute("reviewDto",result);
 		
 		List<FrontImg> fis = frontImgService.viewImg(boardNum);
 		model.addAttribute("fis", fis);
@@ -101,25 +113,7 @@ public class CustBoardController implements ApplicationContextAware {
 		System.out.println(search);
 		Gson json = new Gson();
 		return json.toJson(searchList);
-	}
-	
-	
-	// 댓글 출력(ajax)
-	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String commentList(Long boardNum) throws Exception {
-		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(custQnaResult);
-	}
-	
-	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String replyCommentList(Long boardNum) throws Exception {
-		List<HostQna> hostQnaResult = qnaService.getHostQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(hostQnaResult);
-	}
+	}	
 	
 	//이미지 뽑아오는 ajax
 	@RequestMapping("/getImgs")

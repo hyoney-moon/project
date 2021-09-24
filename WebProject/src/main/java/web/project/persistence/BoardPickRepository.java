@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import web.project.domain.BookInfo;
+import web.project.domain.Booking;
 
-public interface BoardPickRepository extends JpaRepository<BookInfo, Long>{
+public interface BoardPickRepository extends JpaRepository<Booking, Long>{
+	
 
-	BookInfo findByBookNum(Integer bookNum);
+	Booking findByCustId(String custId);
 	
-	BookInfo save(BookInfo dto);
+	Booking findByBookNum(Long bookNum);
 	
-	List<BookInfo> findByBoardNumOrderByStartDateAsc(Long boardNum);
+	Booking save(Booking dto);
+	
+	List<Booking> findByBoardNumOrderByStartDateAsc(Long boardNum);
 	//
 }

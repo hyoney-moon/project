@@ -2,6 +2,7 @@
    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,17 +13,32 @@
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript">var disabledDays = ${dateList};</script>
   <script type="text/javascript" 
-src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script> 
+src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" 
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" 
+integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" 
+crossorigin="anonymous"></script>
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+crossorigin="anonymous">
 <style>
-#map {width:500px; height:400px;margin: 40px;}
+#map {width:500px; height:400px;padding: 10px;margin-top: 30px;margin-bottom: 30px;}
+#paybutton{margin-top: 20px;}
+.img{size: 200px}
 </style>
 
-<!DOCTYPE html>
-<html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+crossorigin="anonymous">
 <title>예약 페이지</title>
-<link rel="stylesheet" href="assets/css/booking.css" />
+<!-- <link rel="stylesheet" href="assets/css/booking.css" />-->
 <script>
 
 </script>
@@ -32,13 +48,42 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 <div class="container">
 <form>
 	<h1>${board.contentOneline }</h1>
-	<img src="../../../images/fulls/01.jpg">
+	<div id="carouselExampleControls" class="carousel slide w-100"
+			data-bs-ride="carousel">
+			<div class="carousel-inner list_item w-100">
+				<c:forEach items="${fis }" var="fis" begin="0" end="0">
+				<div class="carousel-item active w-100">
+					<img src="${fis.filePath }" class="d-block w-500 list_img"
+						alt="...">
+				</div>
+				</c:forEach>
+				<c:forEach items="${fis }" var="fis" begin="1" end="${fisize }">
+				<div class="carousel-item">
+					<img src="${fis.filePath }" class="d-block w-500 list_img"
+						alt="...">
+				</div>
+				</c:forEach>
+			</div>
+			
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#carouselExampleControls" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+</div>
+	
 	<h2>${board.content }</h2>
 	<h1>${board.address }</h1>
 	<h1>${board.price }</h1>
 </form>
 	<h2>결제하는 페이지</h2>
-	<form method="post" name="pay_form">
+	<form method="post" action="/kakaoPay" id="paybutton">
 		<div class="input-group">
 			<select class="peoplecount" name="count">
 				<option selected>총원수</option>
@@ -50,17 +95,20 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 			<div class="bookingdate" id="Datepicker">
 				<input type="text" id="startDatepicker" name="startDatepicker">start
 				<input type="text" id="endDatepicker" name="endDatepicker">end
-				<a href="bookingPay">결제</a>
-				<input type="submit" id="bookingcall"value="예약하기" >
+				<input type="hidden" name="boardNum" value="${board.boardNum}">
 		</div>
+	
+	
+	<input type="image" id="payimg" src="../../../images/fulls/kakaoPay.png"/>
 	</form>
-</div>
  <div id="map"></div> 
+</div>
+
 
 
 
 <script>
-<!-- 달력datePicker 건들면안되용  -->
+// 달력datePicker 건들면안되용  -->
 $(function(){
 	$("#startDatepicker").datepicker({
 	    dateFormat: 'yy-mm-dd',
@@ -132,6 +180,7 @@ function disableSomeDay(date) {
         }
         return [true];
 }  
+    
 
  // 카카오 API부분 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -147,8 +196,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 //주소로 좌표를 검색합니다
-geocoder.addressSearch('경기도 고양시 덕양구 원당동 372-2', function(result, status) {
-
+var address = '${board.address}';
+geocoder.addressSearch(address, function(result, status) {
+//'경기도 고양시 덕양구 원당동 372-2'${board.address}
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
 
@@ -163,7 +213,7 @@ geocoder.addressSearch('경기도 고양시 덕양구 원당동 372-2', function
     // 인포윈도우로 장소에 대한 설명을 표시합니다
     // 해당 공간명 입력
     var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">${board.spaceName}</div>'
     });
     infowindow.open(map, marker);
 

@@ -86,10 +86,9 @@ a {text-decoration:none !important }
 							<p class="card-text">${board.contentOneline }</p>
 						</div>
 				</div>
+				</div>
+			</c:forEach>
 			</div>
-		</c:forEach>
-		</div>
-		</section>
 </main>
 <footer>
 	<%@ include file="../publicCSS/footer.jsp"%>

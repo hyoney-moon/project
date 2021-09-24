@@ -27,10 +27,14 @@ public class Customer implements Serializable {
 	private String nickName;
 	private String gender;
 	private Long age;
-	private String post;
-	private String cash; 
+	private String zipcode;
+	private String address;
+	private String addressDetail;
+	@Column(columnDefinition = "Long default 100000")
+	private Long cash;
 	private String profile;
 	private String pick;
+	private Long totalSpend;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
 	private Date joinDate;
 

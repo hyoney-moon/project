@@ -31,7 +31,6 @@ import web.project.domain.Category;
 import web.project.domain.CustQna;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
-import web.project.domain.HostQna;
 import web.project.domain.Img;
 import web.project.service.BoardService;
 import web.project.service.CategoryService;
@@ -111,7 +110,6 @@ public class HostBoardController implements ApplicationContextAware {
 		//save
 		imgService.saveImg(im);
 		}
-		
 		return "redirect:hostmain";
 	}
 	
@@ -192,36 +190,7 @@ public class HostBoardController implements ApplicationContextAware {
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
-		
-	//////전현수
-	// 게시글 조회
-	@GetMapping("/content/{boardNum}")
-	public String getBoard(@PathVariable Long boardNum, Model m) {
-		Board board = boardService.getBoard(boardNum);
-		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
-		
-		m.addAttribute("custQna", custQnaResult);
-		m.addAttribute("board",board);
-		return "host_board/getBoard";
-	}
-	
-	// 댓글 출력(ajax)
-	@RequestMapping(value = "/comment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String commentList(Long boardNum) throws Exception {
-		List<CustQna> custQnaResult = qnaService.getQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(custQnaResult);
-	}
-	
-	@RequestMapping(value = "/replyComment", produces = "text/plain;charset=UTF-8")
-	@ResponseBody
-	public String replyCommentList(Long boardNum) throws Exception {
-		List<HostQna> hostQnaResult = qnaService.getHostQnaList(boardNum);
-		Gson json = new Gson();
-		return json.toJson(hostQnaResult);
-	}
-	
+
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override
     public void setApplicationContext(ApplicationContext applicationContext)
