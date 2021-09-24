@@ -56,4 +56,11 @@ public class BoardServiceImpl implements BoardService {
 	public Board saveBoard(Board board) {
 		return boardRepo.save(board);
 	}
+
+	@Override
+	public Board getBoardNum(Long boardNum) {
+		return boardRepo.findByBoardNum(boardNum);
+	}
+
+
 }

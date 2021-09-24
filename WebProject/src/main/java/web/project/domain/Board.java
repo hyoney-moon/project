@@ -52,6 +52,8 @@ public class Board implements Serializable {
 	private String category;
 	private Long frontImgNo;
 	private Long imgNo;
+	@Column(columnDefinition = "number default 0")
+	private Long permit;
 	
 	@ManyToOne
 	@JoinColumn(name="category", insertable = false, updatable = false)

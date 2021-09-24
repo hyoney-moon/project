@@ -24,6 +24,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
 	Board findByBoardNum(Long boardNum);
 	
+	
 	@Transactional
 	@Modifying
 	@Query("UPDATE Board b SET b.readcount = b.readcount+1 WHERE b.boardNum=?1")

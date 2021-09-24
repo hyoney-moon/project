@@ -11,6 +11,9 @@ import web.project.domain.Board;
 @Configuration
 public interface BoardService {
 
+	Board getBoardNum(Long boardNum);
+//	Board getcustId(String custId);
+	
 	Page<Board> getBoardList(int pNum);
 
 	Board getBoard(Long boardNum);
