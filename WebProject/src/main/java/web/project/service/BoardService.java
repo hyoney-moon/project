@@ -11,7 +11,11 @@ import web.project.domain.Board;
 
 public interface BoardService {
 
-	Page<Board> getCustBoardList(int pNum);
+	Board getBoardNum(Long boardNum);
+//	Board getcustId(String custId);
+	
+	Page<Board> getBoardList(int pNum);
+
 
 	List<Board> searchBoardList(int search_option, String search);
 	
@@ -30,4 +34,5 @@ public interface BoardService {
 
 	Page<Board> getHostBoardList(int pNum, String hostId);
 
+	Page<Board> getCustBoardList(int pNum);
 }

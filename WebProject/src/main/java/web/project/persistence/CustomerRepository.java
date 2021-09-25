@@ -46,4 +46,10 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 	@Query(value="select count(*) from customer where gender = 'w'", nativeQuery=true)
 	long countGenderW();
 	
+	// 아이디 중복 체크를 위한 네이티브 쿼리(미완성)
+		@Query(value = "select custId from customer where custId = ?", nativeQuery=true)
+		String idcheck(String custId);
+		
+		Customer findByCustId(String custId);
+	
 }

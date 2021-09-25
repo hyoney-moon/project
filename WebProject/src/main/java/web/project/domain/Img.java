@@ -25,14 +25,8 @@ public class Img implements Serializable {
 	private String filename;
 	private String filePath;
 	
-//	이렇게하면 왜 안되는지 모르겠어...
-//	@ManyToOne
-//	@JoinColumn(name="boardNum", insertable = false, updatable = false)
-//	private Board board;
-	
-//	@ManyToOne
-//	@JoinColumn(name="boardNum", insertable = false, updatable = false)
-//	private Board board;
-	
+	@ManyToOne(fetch= FetchType.EAGER)
+	@JoinColumn(name="boardNum", insertable = false, updatable = false)
+	private Board board;
 	
 }

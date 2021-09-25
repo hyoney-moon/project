@@ -13,6 +13,8 @@
 		<class>web.project.domain.Board</class>
 		<class>web.project.domain.Customer</class>
 		<class>web.project.domain.Admin</class>
+		<class>web.project.domain.Booking</class>
+		<class>web.project.domain.Review</class>
 
 	</persistence-unit>
 </persistence>

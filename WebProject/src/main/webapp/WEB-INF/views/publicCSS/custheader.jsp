@@ -59,12 +59,12 @@ hr {
 					<a class="navbar-brand" href="searchForm"><img
 						class="mh-100 ms-1"
 						style="width: 40px; height: 40px; background-color: white;"
-						src="../images/icon/search.png" /></a>
+						src="/images/icon/search.png" /></a>
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="main"><img style="width: 150px;"
-							src="../images/icon/Logo.png" /></a>
+						<a href="/customer/main">
+						<img style="width: 150px;" src="/images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->
 					<button class="navbar-toggler" type="button"
@@ -76,7 +76,7 @@ hr {
 						id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header h-25">
 							<c:if test="${empty sessionScope.customer }">
-								<a class="textStyle" href="custloginForm">
+								<a class="textStyle" href="joinForm">
 									<h3
 										class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4"
@@ -98,12 +98,11 @@ hr {
 						</div>
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
-								<li><a class="dropdown-item" href="#">마이페이지</a></li>
-								<li><a class="dropdown-item" href="#">프로필수정</a></li>
+								<li><a class="dropdown-item" href="updateForm">프로필수정</a></li>
 								<li><a class="dropdown-item" href="#">예약현황</a></li>
 								<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
 								<c:if test="${!empty sessionScope.customer }">
-									<li><a class="dropdown-item" href="custLogout">로그아웃</a></li>
+									<li><a class="dropdown-item" href="logout">로그아웃</a></li>
 								</c:if>
 							</ul>
 							<hr class="dropdown-divider">

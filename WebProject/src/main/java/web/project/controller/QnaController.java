@@ -36,7 +36,7 @@ public class QnaController {
 	}
 
 	// 일반회원 질문작성
-	@GetMapping(value = "/question", produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/question", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public void insertCustQna(CustQna qna) {
 		qnaService.insertCustQna(qna);

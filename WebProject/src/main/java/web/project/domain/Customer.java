@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import lombok.Getter;
 import lombok.Setter;
 // 
@@ -15,6 +17,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@DynamicInsert
 public class Customer implements Serializable {
 
 	
@@ -27,7 +30,10 @@ public class Customer implements Serializable {
 	private String nickName;
 	private String gender;
 	private Long age;
-	private String post;
+	private String zipcode;
+	private String address;
+	private String addressDetail;
+	@Column(columnDefinition = "number default 100000")
 	private Long cash;
 	private String profile;
 	private String pick;

@@ -47,7 +47,7 @@ public class AdminCustomerDbController {
 		if(admin != null) {
 			return "admin_board/customerDb";
 		} else {
-			return "login/requiredLogin";
+			return "redirect:/adminLogin/loginForm";
 		}
 	}
 	
@@ -182,7 +182,7 @@ public class AdminCustomerDbController {
 		
 		return "admin_board/customerStatisticsInfo";
 		} else {
-			return "login/requiredLogin";
+			return "redirect:/adminLogin/loginForm";
 		}
 	}
 
