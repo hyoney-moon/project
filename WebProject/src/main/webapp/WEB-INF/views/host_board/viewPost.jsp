@@ -17,7 +17,7 @@
 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script>
 
 <!-- 부트스트랩 -->
-<link
+<!-- <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
@@ -25,7 +25,7 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 <style>
 body {
 	padding-top: 40px;
@@ -54,24 +54,28 @@ body {
 /* The Modal (background) */
 .modal {
 	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
+	/*
+	position: fixed; 
+	z-index: 1; 
 	left: 0;
 	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgb(0, 0, 0); 
+	background-color: rgba(0, 0, 0, 0.4); 
+	*/
 }
 
 /* Modal Content/Box */
 .modal-content {
+	/*
 	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
+	margin: 15% auto; 
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
+	width: 50%;
+	*/ 
 }
 /* The Close Button */
 .close {
@@ -141,19 +145,34 @@ div.button {
 		<!-- Q&A -->
 		<div>
 			<h2 id="qna">QnA</h2>
-			<!-- 질문하기 modal -->
-			<div class="button">
-				<button id="myBtn">질문하기</button>
+			<!-- 질문 작성하기 버튼 -->
+			<div id="myBtn" class="button">
+				<a style="position: absolute; color: #fff; padding: 5px 12px 3px; font-size: 12px; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;" class="btn_qna_write">
+					<span style="vertical-align: middle; font: inherit;">질문 작성하기</span>
+				</a>
+				<!-- <button id="myBtn">질문하기</button> -->
 			</div>
-			<div id="myModal" class="modal">
-				<div class="modal-content">
+			<!-- 질문 작성하기 modal -->
+			<div style="vertical-align: middle; width: 490px; position: relative; margin: 0 auto; padding: 0; border: 0; font: inherit; text-align: center; color: #fff;"id="myModal" class="modal">
+				<div style="text-align: left; font-size: 13px; font-family: NanumBarunGothic,sans-serif; padding: 11px 12px; border-radius: 6px 6px 0 0; background: #704de4; color: #fff; font: inherit; vertical-align: middle;" class="pop_header">질문 작성하기 <span class="close">&times;</span></div>
+				<div style="background: #fff; border-radius: 0 0 6px 6px; padding: 10px;" class="pop_container reviews">
+					<article style="margin-top: 0; border-top: 0; text-align: left; background: #f6f6f6; padding: 0; " class="Questions">
+						<div style="background: #fff;" class="box_form">
+							<textarea rows="15" cols="40" style="resize: none; height: 98px; padding: 10px; vertical-align: top; font-size: 14px; border-radius: 0; border: 1px solid #e0e0e0; color: #000; font-family: NanumBarunGothic; background: #fff;" maxlength="200" placeholder="질문을 남겨주세요."></textarea>
+						</div>
+						<div style="margin-top: 5px; background: #fff;" class="btn">
+							<a style="width: 490px; border-radius: 6px; float: right; height: 35px; line-height: 35px; font-size: 13px; background-color: #704de4; text-align: center; color: #fff; cursor: pointer; text-decoration: none;"class="btn_default">등록</a>
+						</div>
+					</article>
+				</div>
+				<!-- <div class="modal-content">
 					<span class="close">&times;</span>
 					<p>
 						<strong>질문하기</strong>
 					</p>
 					<textarea id="content" name="content" rows="15" cols="40"></textarea>
 					<button id="cmtCnt-btn">작성</button>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- 답변하기 modal -->

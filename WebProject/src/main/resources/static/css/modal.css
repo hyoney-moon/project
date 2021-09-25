@@ -1,0 +1,101 @@
+/**/
+/* The Modal (background) */
+.popup-wrap{
+  background-color:rgba(0,0,0,.3); 
+  justify-content:center; 
+  align-items:center;     
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display:none; 
+  padding:15px; 
+}
+
+.popup{
+  width:100%;               
+  max-width:400px;          
+  border-radius:10px;       
+  overflow:hidden;          
+  background-color:#704de4;
+  color: #fff; 
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3); 
+}
+
+.popupAnswer{
+  width:100%;               
+  max-width:400px;          
+  border-radius:10px;       
+  overflow:hidden;          
+  background-color:#10ac84;
+  color: #fff; 
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3); 
+}
+
+.popup-head{
+  width:100%;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.popup-body{               
+  width:100%;
+  background-color:#ffffff; 
+}
+.body-content{              
+  width:100%;
+  padding:30px;             
+}
+.body-titlebox{             
+  text-align:center;        
+  width:100%;
+  height:40px;
+  margin-bottom:10px;  
+  color: red;
+}
+.body-contentbox{           
+  word-break:break-word;    
+  overflow-y:auto;          
+  min-height:100px;         
+  max-height:200px;         
+}
+
+.body-contentbox> textarea {
+	resize: none;
+	border-color: gray;
+}
+
+textarea:focus { 
+        outline: none !important;
+        border-color: gray;
+    }
+    
+    
+.qnaUl {
+	list-style: none;
+}
+.qnaLi {
+	border-bottom: 1px solid #ebebeb;
+}
+
+.hostReplyTitle {
+	color: #6d3afb;
+}
+.custQuestion, .hostAnswer {
+	padding: 0 0 20px 60px;
+}
+.profile {
+	left: 220px;
+	position: absolute;
+}
+.profileImg {
+	width: 50px;
+  height: 50px;
+  object-fit: cover;
+  left: 0;
+}
+
+
