@@ -2,6 +2,7 @@ package web.project.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import web.project.domain.Customer;
+import web.project.domain.Host;
+import web.project.service.HostLoginService;
 import web.project.service.MemberService;
 
 /**
@@ -21,11 +24,26 @@ public class JSONController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private HostLoginService hostService;
 
 	@RequestMapping(value = "/customer/idcheck", method = RequestMethod.GET)
 	public Map<String, Object> idcheck(@RequestParam("custId") String custId, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Customer result = memberService.idcheck(custId);
+		if (result == null) {
+			map.put("result", true);
+		} else {
+			map.put("result", false);
+		}
+		/* map.put("result", result == null); */
+		return map;
+	}
+	
+	@RequestMapping(value = "/host/idcheck", method = RequestMethod.GET)
+	public Map<String, Object> hostIdcheck(@RequestParam("hostId") String hostId, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Optional<Host> result = hostService.idcheck(hostId);
 		if (result == null) {
 			map.put("result", true);
 		} else {

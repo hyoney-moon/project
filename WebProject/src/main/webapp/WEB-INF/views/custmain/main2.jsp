@@ -57,6 +57,7 @@ a:link {
 a:visited {
 	text-decoration: none;
 }
+#textalign{text-align: center;}
 </style>
 </head>
 <div class="container">
@@ -71,35 +72,54 @@ a:visited {
 			있습니다.
 		</h2>
 	</div>
-	<section class="mt-5">
-		<h2>카테고리별 검색</h2>
-		<div class="row">
-			<c:forEach items="${category}" var="cate">
-				<div class="col mw-100">
-					<div class="card">
-						<div class="card-body">
-							<a href="/bookingpage/${cate.category}"><h5
-									class="card-title">${cate.category }</h5></a>
-						</div>
-					</div>
-				</div>
+
+	<!-- Main카테고리1번줄 -->
+	<section class="row mt-5">
+	<c:forEach items="${category}" var="cate">
+		<div class="col mw-100">
+				<a href="/bookingpage/${cate.category}">
+				<img src="../images/icon/studyroom.png" class="col mw-100" />
+					<h5 id="textalign">${cate.category}</h5>
+				</a>
+			</div>	
+		</c:forEach>
+	</section>
+	
+	<!-- 추천 공간이미지  -->
+	<hr>
+	<h1 class="display-6 fw-normal mb-1">오늘의 추천공간</h1>
+	<h3 class="lead fs-3 mb-3">오늘만 추천합니다.</h3>
+	<hr>
+	<section class="thumbnails">
+		<!-- 상세페이지로 넘어가는 페이지 -->
+		<div>
+			<c:forEach items="${board}" var="board" begin="0" end="3">
+				<a href="/bookingpage/${board.boardNum}"> <img
+					src="../images/thumbs/01.jpg" alt="" />
+					<h3 class="fs-4">${board.spaceName}</h3>
+					<h5 class="lead fs-4 mb-3">${board.contentOneline }</h5>
+				</a>
+
 			</c:forEach>
 		</div>
-	</section>
+		<div>
+			<c:forEach items="${board}" var="board" begin="4" end="7">
+				<a href="/bookingpage/${board.boardNum}"> <img
+					src="images/thumbs/02.jpg" alt="" />
+					<h3 class="fs-4">${board.spaceName}</h3>
+					<h5 class="lead fs-4 mb-3">${board.contentOneline }</h5>
+				</a>
 
-	<section class="mt-5">
-		<h2>오늘의 추천 공간</h2>
-		<div class="row row-cols-1 row-cols-md-2 g-4">
-			<c:forEach items="${board }" var="board" begin="0" end="3">
-				<div class="col" id="${board.boardNum }">
-					<div class="card">
-						<a href="viewPost/${board.boardNum }"><div class="img"></div></a>
-						<div class="card-body">
-							<a href="viewPost/${board.boardNum }"><h5 class="card-title">${board.spaceName }</h5></a>
-							<p class="card-text">${board.contentOneline }</p>
-						</div>
-					</div>
-				</div>
+			</c:forEach>
+		</div>
+		<div>
+			<c:forEach items="${board}" var="board" begin="8" end="10">
+				<a href="/bookingpage/${board.boardNum}"> <img
+					src="../images/thumbs/07.jpg" alt="" />
+					<h3 class="fs-4">${board.spaceName}</h3>
+					<h5 class="lead fs-4 mb-3">${board.contentOneline }</h5>
+				</a>
+
 			</c:forEach>
 		</div>
 	</section>

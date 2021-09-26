@@ -36,27 +36,10 @@ import web.project.service.mainboardService;
 public class CustLoginController implements ApplicationContextAware{
 	
 	@Autowired
-	private BoardService boardService;
-	@Autowired
-	private mainboardService service;
-	@Autowired
-	private CategoryService cateService;
-	@Autowired
 	private MemberService memberService;
 	
 	private WebApplicationContext context = null;
 	
-	
-	//회원 메인
-	@RequestMapping("/main")
-	public String mainStart(Model m) {
-		List<Board> dto = service.getBoardList();
-		m.addAttribute("board",dto);
-		// 카테고리 리스트 출력
-		List<Category> category = cateService.selectCate();
-		m.addAttribute("category",category);
-		return "custmain/main";
-	}
 	
 	// 회원가입 폼
 		@RequestMapping("/joinForm")
@@ -87,9 +70,9 @@ public class CustLoginController implements ApplicationContextAware{
 			
 			if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
 				m.addAttribute("findCustomer",findCustomer);
-				return "member/loginSucecss";
-			} else {
 				return "redirect:main";
+			} else {
+				return "redirect:loginForm";
 			}
 		}
 		

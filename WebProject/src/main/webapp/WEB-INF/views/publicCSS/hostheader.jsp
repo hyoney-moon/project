@@ -88,7 +88,6 @@ a {
 						</div>
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
-								<li><a class="dropdown-item" href="#">마이페이지</a></li>
 								<li><a class="dropdown-item" href="#">프로필수정</a></li>
 								<li><a class="dropdown-item" href="#">예약현황</a></li>
 								<li><a class="dropdown-item" href="#">리뷰 관리</a></li>
@@ -103,6 +102,9 @@ a {
 								<li><a class="dropdown-item" href="#">공지사항</a></li>
 								<li><a class="dropdown-item" href="/">메인페이지</a></li>
 								<li><a class="dropdown-item" href="#">리뷰</a></li>
+								<c:if test="${empty sessionScope.host }">
+									<li><a class="dropdown-item" href="hostJoinForm">호스트 회원가입</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>

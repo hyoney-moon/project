@@ -65,7 +65,7 @@ public class HostBoardController implements ApplicationContextAware {
 	@GetMapping("/insertBoardForm")
 	public String postBoard(Model model, Host host) {
 		if(host.getHostId() == null) {
-			return "login/hostLoginForm";
+			return "host_main/hostLoginForm";
 		}
 		List<Category> cList = categoryService.selectCate();
 		model.addAttribute("cList", cList);

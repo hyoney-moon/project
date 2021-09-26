@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상세보기</title>
+<title>${board.spaceName }</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -21,7 +20,15 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <style>
+#map {
+	width:500px; 
+	height:400px;
+	padding: 10px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
 body {
 	padding-top: 40px;
 }
@@ -94,9 +101,6 @@ div.button {
 	margin: auto;
 	width: 5%;
 }
-
-#map {width:500px; height:400px;padding: 10px;margin-top: 30px;margin-bottom: 30px;}
-#payimg{margin-top: 30px; size: 50px;}
 </style>
 </head>
 <body>
@@ -104,6 +108,8 @@ div.button {
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
 	<div class="container">
+	<h1 class="display-4 fw-normal">${board.spaceName }</h1>
+	<h5 class="lead fs-4 mb-3">${board.contentOneline }</h5>
 		<div id="carouselExampleControls" class="carousel slide w-100"
 			data-bs-ride="carousel">
 			<div class="carousel-inner list_item w-100">
@@ -120,7 +126,18 @@ div.button {
 					</div>
 				</c:forEach>
 			</div>
-
+			<p class="lead">
+			<h1 class="display-6">공간소개</h1>
+			${board.content }
+			</p>
+			<p>
+			<h1 class="display-6">이용안내</h1>
+			${board.direction }
+			</p>
+			<p>
+			<h1 class="display-6">주의사항</h1>
+			${board.caution }
+			</p>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -360,7 +377,6 @@ geocoder.addressSearch(address, function(result, status) {
 		<%@ include file="../publicCSS/footer.jsp"%>
 	</footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(function(){
 	var qnaNumber ="";

@@ -27,9 +27,9 @@ public interface AdminHostRepository extends JpaRepository<Host, Long> {
 	@Query(value="select count(*) from host where join_date < '2021-10-01'", nativeQuery=true)
 	long countBeforeSep();
 	
-	@Query(value="select count(*) from host where gender = '남자'", nativeQuery=true)
+	@Query(value="select count(*) from host where gender = 'm'", nativeQuery=true)
 	long countGenderM();
-	@Query(value="select count(*) from host where gender = '여자'", nativeQuery=true)
+	@Query(value="select count(*) from host where gender = 'w'", nativeQuery=true)
 	long countGenderW();
 	
 	
