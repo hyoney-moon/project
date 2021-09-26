@@ -36,7 +36,8 @@ public class Customer implements Serializable {
 	@Column(columnDefinition = "number default 100000")
 	private Long cash;
 	private String profile;
-	private String pick;
+	//private String pick;
+	@Column(columnDefinition = "number default 0")
 	private Long totalSpend;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
 	private Date joinDate;

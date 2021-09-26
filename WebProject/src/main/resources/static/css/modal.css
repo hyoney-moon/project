@@ -66,6 +66,7 @@
 .body-contentbox> textarea {
 	resize: none;
 	border-color: gray;
+	font-size: 0.9em;
 }
 
 textarea:focus { 
@@ -83,6 +84,7 @@ textarea:focus {
 
 .hostReplyTitle {
 	color: #6d3afb;
+	font-weight: bold;
 }
 .custQuestion, .hostAnswer {
 	padding: 0 0 20px 60px;
@@ -93,9 +95,12 @@ textarea:focus {
 }
 .profileImg {
 	width: 50px;
-  height: 50px;
-  object-fit: cover;
-  left: 0;
+	height: 50px;
+	object-fit: cover;
+	left: 0;
+}
+.content, .hostReplyContent {
+	color: #656565;	
 }
 
 

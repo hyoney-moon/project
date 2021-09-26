@@ -1,3 +1,4 @@
+<!-- cust_board/viewPost -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>상세보기</title>
+<!-- 폰트 css -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+font-family: 'Nanum Gothic', sans-serif;
+}
+</style>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -30,7 +40,7 @@ $(function(){
 	var board = "board.boardNum";
     var question = $("#question");
     var answer = $("#answer");
-    var hostId = "hostId"; // ${host.hostId}
+    //var hostId = "${host.hostId}"; // ${host.hostId}
     getcommentList();
     
  // 댓글 출력
@@ -44,11 +54,14 @@ $(function(){
 		}).done(function(args){
 			$("#getComment").empty();
 			for(var num=0; num < args.length; num++){
-				var reply = "";
-				if(args[num].hostContent != undefined){
-					 reply = args[num].hostContent
-					 }
-				if(hostId != null){
+				var reply = args[num].hostContent;
+				var replyDate = args[num].replyDate;
+				if(reply == null){ // 답변이 달리지 않았다면
+					reply = "*호스트의 답변을 기다리고 있습니다";
+					replyDate = "";
+				}
+				
+				if(${!empty sessionScope.host}){ // 호스트 로그인을 한 경우 
 					$("#getComment").append(
 							"<ul class='qnaUl'>"+
 							"<li class='qnaLi'>"+
@@ -56,7 +69,33 @@ $(function(){
 							"<span class='profile'>" +
 							"<img class='profileImg' src=/img/profileImage.png></img>" +
 							"</span>" +
-							"<strong>" + args[num].custId + "</strong>" +
+							"<strong>" + args[num].nickName + "</strong>" +
+							"<p class='content'>" + args[num].content + "</p>" +
+							"<div class='content'>" + args[num].commentDate + "</div>" +
+							"</div>" +
+							
+							"<div class='hostAnswer'>" +
+							"<p class='hostReplyTitle'>"+
+							"호스트의 답글" +"</p>" +
+							"<p class='hostReplyContent'>" +
+							reply + "</p>" +
+							"<div class='content'>" + replyDate + "</div>" +
+							
+							"<button id='" + "popupAnswer'" + 
+							" value='" + args[num].qnaNum + "'>답변하기</button>" +
+							"</div>" +
+							"</li>" + 
+							"</ul>"
+					);
+				} else { // 호스트로 로그인하지 않은 경우
+					$("#getComment").append(
+							"<ul class='qnaUl'>"+
+							"<li class='qnaLi'>"+
+							"<div class='custQuestion'>" +
+							"<span class='profile'>" +
+							"<img class='profileImg' src=/img/profileImage.png></img>" +
+							"</span>" +
+							"<strong>" + args[num].nickName + "</strong>" +
 							"<p>" + args[num].content + "</p>" +
 							"<div>" + args[num].commentDate + "</div>" +
 							"</div>" +
@@ -66,23 +105,9 @@ $(function(){
 							"호스트의 답글" +"</p>" +
 							"<p class='hostReplyContent'>" +
 							reply + "</p>" +
-							
-							"<button id='" + "popupAnswer'" + 
-							" value='" + args[num].qnaNum + "'>답변하기</button>" +
-							"</div>" +
-							"</li>" + 
-							"</ul>"
-					);
-				} else {
-					$("#getComment").append(
-							"고객이름 : " + args[num].custId + "<br>" +
-							"댓글내용 : " + args[num].content + "<br>" +
-							
-							"<strong>호스트 답변</strong><br>" +
-							reply + "<br>"
+							"<div>" + replyDate + "</div>"
 							)
 				}
-			
 			} //for문 종료
 		}) // done 종료
 	} // getcommentList() 종료
@@ -97,7 +122,7 @@ $(function(){
 					board : ${boardNum},
 					profile : "custprofile",
 					content : $("#question").val(),
-					custId : "${customer.custId}",
+					nickName : "${customer.nickName}",
 				},
 				complete : function(){
 					modalClose(); // modal 닫기
@@ -115,7 +140,8 @@ $(function(){
 		});
 		
 		// 질문하기 클릭 이벤트 모달창 띄우기
-	  $("#modal-open").click(function(){        
+	  $("#modal-open").click(function(){
+		  //$("#popup").show();
 	      $("#popup").css('display','flex').hide().show();
 	      //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 show()으로 효과
 	  });
@@ -334,6 +360,8 @@ body {
 			<br> <br>
 			<div id=getComment></div>
 		</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><<br><br><br><br><br><br><br><br><br><br>
 		<!-- Review  -->
 		<div>
 			<div class="board">
