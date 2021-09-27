@@ -165,7 +165,7 @@ public class HostBoardController implements ApplicationContextAware {
 				@ModelAttribute("host")Host host, String hostId, Long boardNum) {
 			//호스트 아이디로 로그인 된게 없으면 호스트 로그인 폼으로
 			if(host.getHostId() == null) {
-				return "login/hostLoginForm";
+				return "host_main/hostLoginForm";
 			}
 			//호스트 아이디로 된 보드 리스트 가져오기(session에 저장된 hostId로 검색해서 가져옴)
 			Page<Board> pageList = boardService.getHostBoardList(pNum, host.getHostId());
@@ -200,7 +200,7 @@ public class HostBoardController implements ApplicationContextAware {
 			List<Img> fis = imgService.viewImg(boardNum);
 			model.addAttribute("fis", fis);
 			model.addAttribute("fisize", fis.size());
-			return "host_board/viewPost";
+			return "host_board/hostViewPost";
 		}
 		
 //		@RequestMapping("/viewPost/{boardNum}")		

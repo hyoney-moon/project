@@ -114,7 +114,7 @@ public class CustBoardController {
 		List<Img> fis = imgService.viewImg(boardNum);
 		model.addAttribute("fis", fis);
 		model.addAttribute("fisize", fis.size());
-		return "cust_board/viewPost";
+		return "cust_board/custViewPost";
 	}
 	
 	//검색기능 ajax
