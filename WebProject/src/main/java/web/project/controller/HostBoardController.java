@@ -79,8 +79,6 @@ public class HostBoardController implements ApplicationContextAware {
 		board.setHostId(host.getHostId());
 //		저장
 		Board b =  boardService.saveBoard(board);
-//		List<FrontImg> forntImg = new ArrayList<>();
-//		frontImg = forntImg.add(new frontImg);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		model.addAttribute("place", b);
 		model.addAttribute("viewImg", imgb);
@@ -190,6 +188,21 @@ public class HostBoardController implements ApplicationContextAware {
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
+		
+	//이미지 뽑아오는 ajax
+	@RequestMapping("/getImgs")
+	@ResponseBody
+	public String getImgs(Long boardNum) {
+		List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+		Gson json = new Gson();
+		return json.toJson(imgList);
+	}
+	
+	//게시글 삭제
+	@RequestMapping("/deletePost/{boardNum }")
+	public void deletePost(Long BoardNum) {
+		boardService.deleteById(BoardNum);
+	}
 
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override

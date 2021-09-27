@@ -137,14 +137,6 @@ public class HostLoginController implements ApplicationContextAware{
 		return "/profile/"+fileName;
 	}
 	
-	//id 유효성 검사
-		@RequestMapping("/check_id")
-		@ResponseBody
-		public String check_id(String hostId) {
-			Optional<Host> hostIdchk = hostLoginService.findHostId(hostId);
-			Host host =  hostIdchk.orElse(new Host());
-			return host.getHostId();//값이 없으면(null) ""로 전송된다.
-		}
 
 }
 

@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import web.project.domain.Customer;
 import web.project.domain.Host;
 import web.project.persistence.HostLoginRepository;
 

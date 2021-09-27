@@ -2,6 +2,7 @@ package web.project.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,19 @@ public class JSONController {
 	}
 	
 	@RequestMapping(value = "/host/idcheck", method = RequestMethod.GET)
-	public Map<String, Object> hostIdcheck(@RequestParam("hostId") String hostId, Model model) {
+	public Map<String, Object> hostIdcheck(@RequestParam("hostId") String hostId, Model model, Host host) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Optional<Host> result = hostService.idcheck(hostId);
-		if (result == null) {
-			map.put("result", true);
-		} else {
-			map.put("result", false);
+		Optional<Host> result = hostService.findHostId(host.getHostId());
+		//Optional로 꺼내오는 객체는 Null이 될 수 없기때문에 try-catch로 예외 발생시 true 리턴하도록 바꿔줌
+		try {
+		 Host h= result.get();	
+		 map.put("result", false);
+		}catch (NoSuchElementException e) {
+			map.put("result", true);		
 		}
 		/* map.put("result", result == null); */
 		return map;
 	}
+	
 
 }

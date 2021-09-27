@@ -53,7 +53,7 @@ a {
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="logoClick"><img style="width: 150px;"
+						<a href="/host/logoClick"><img style="width: 150px;"
 							src="/images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->
@@ -66,7 +66,7 @@ a {
 						id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header h-25">
 							<c:if test="${empty sessionScope.host }">
-								<a class="textStyle" href="hostLoginForm">
+								<a class="textStyle" href="/host/hostLoginForm">
 									<h3
 										class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4"
@@ -88,13 +88,14 @@ a {
 						</div>
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
-								<li><a class="dropdown-item" href="#">프로필수정</a></li>
+								<li><a class="dropdown-item" href="/host/hostUpdateForm">프로필수정</a></li>
 								<li><a class="dropdown-item" href="#">예약현황</a></li>
 								<li><a class="dropdown-item" href="#">리뷰 관리</a></li>
 								<li><a class="dropdown-item" href="#">Q&A 관리</a></li>
-								<li><a class="dropdown-item" href="viewBoard">내공간관리</a>
+								<li><a class="dropdown-item" href="/host/insertBoardForm">내공간등록</a>
+								<li><a class="dropdown-item" href="/host/viewBoard">내공간관리</a>
 								<c:if test="${!empty sessionScope.host }">
-									<li><a class="dropdown-item" href="hostLogout">로그아웃</a></li>
+									<li><a class="dropdown-item" href="/host/hostLogout">로그아웃</a></li>
 								</c:if>
 							</ul>
 							<hr class="dropdown-divider">
@@ -103,7 +104,7 @@ a {
 								<li><a class="dropdown-item" href="/">메인페이지</a></li>
 								<li><a class="dropdown-item" href="#">리뷰</a></li>
 								<c:if test="${empty sessionScope.host }">
-									<li><a class="dropdown-item" href="hostJoinForm">호스트 회원가입</a></li>
+									<li><a class="dropdown-item" href="/host/hostJoinForm">호스트 회원가입</a></li>
 								</c:if>
 							</ul>
 						</div>
