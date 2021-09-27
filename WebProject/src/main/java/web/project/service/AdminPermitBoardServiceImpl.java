@@ -27,10 +27,10 @@ public class AdminPermitBoardServiceImpl implements AdminPermitBoardService {
 	}
 
 	@Override
-	public void deletePermitBoard(List<Long> boardNum) {
+	public void rejectPermitBoard(List<Long> boardNum) {
 		
 		for(int i=0; i < boardNum.size(); i++) {
-			adminPermitBoardRepository.deletePermitBoard(boardNum.get(i));
+			adminPermitBoardRepository.rejectPermitBoard(boardNum.get(i));
 		}
 		
 	}

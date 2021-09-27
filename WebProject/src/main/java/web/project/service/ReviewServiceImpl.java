@@ -131,7 +131,4 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> getReviewDto() {
 		return ReviewRepo.findAll();
 	}
-
-
 }
-	

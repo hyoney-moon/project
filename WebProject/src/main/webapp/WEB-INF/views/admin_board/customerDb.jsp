@@ -3,6 +3,31 @@
 <html>
 <head>
 <title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+font-family: 'Nanum Gothic', sans-serif;
+}
+#grid {
+	width: 900px;
+	margin: auto;
+	margin-top: 10px; 
+}
+.excelDown {
+	color: #fff;
+	margin-left: 400px;
+	padding: 5px 12px 5px; 
+	font-size: 1em; 
+	border-radius: 100px; 
+	background-color: #009432; 
+	text-decoration: none;
+}
+.excelDown:hover {
+	color: #fff;
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script src="/js/tui-grid.js"></script>
@@ -33,9 +58,7 @@ window.onload = function(){
 	      },
 	      {
 	        header: '닉네임',
-	        name: 'nickname',
-	        sortingType: 'asc',
-	        sortable: true
+	        name: 'nickName',
 	      },
 	      {
 	        header: '성별',
@@ -60,6 +83,8 @@ window.onload = function(){
 	      {
 		    header: '가입일',
 		    name: 'joinDate',
+		    sortingType: 'desc',
+	        sortable: true
 		  }
 	    ]
 	  });
@@ -68,7 +93,12 @@ window.onload = function(){
 
 </script>
 <body>
-<a href="excelDown">엑셀로 내려받기</a>
+<header>
+		<%@ include file="../publicCSS/adminheader.jsp"%>
+</header>
+<br><br>
+<h1 style= "text-align: center;">일반회원 정보</h1>
+<a href="excelDown" class="excelDown">엑셀로 내려받기</a>
 <div id="grid"></div>
 </body>
 </html>

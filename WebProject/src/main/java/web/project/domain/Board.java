@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,6 +23,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@DynamicInsert
 @NoArgsConstructor
 @SequenceGenerator(name="Board_Seq_Gen", sequenceName="Board_Seq", initialValue=1, allocationSize=1)
 public class Board implements Serializable {
