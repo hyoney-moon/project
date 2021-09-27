@@ -65,6 +65,7 @@ public class CustBoardController {
 			m.addAttribute("board",dto);
 			// 카테고리 리스트 출력
 			List<Category> category = cateService.selectCate();
+			
 			m.addAttribute("category",category);
 			return "custmain/main";
 		}

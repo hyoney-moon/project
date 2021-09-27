@@ -218,6 +218,24 @@ public class HostBoardController implements ApplicationContextAware {
 	public void deletePost(Long BoardNum) {
 		boardService.deleteById(BoardNum);
 	}
+	
+	//게시글 수정
+	@GetMapping("/modifyPost/{boardNum }")
+	public String modifyPostForm(Model model, Host host, @PathVariable Long boardNum) {
+		if(host.getHostId() == null) {
+			return "host_main/hostLoginForm";
+		}
+		Board updateBoard = boardService.getBoardNum(boardNum);
+		List<Category> cList = categoryService.selectCate();
+		model.addAttribute("cList", cList);
+		model.addAttribute("update",updateBoard);
+		return "host_board/modifyPostForm";
+	}
+	@PostMapping("/modifyPost")
+	public String modifyPost(Board board) {
+		boardService.saveBoard(board);
+		return "redirect:hostmain";
+	}
 
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override
