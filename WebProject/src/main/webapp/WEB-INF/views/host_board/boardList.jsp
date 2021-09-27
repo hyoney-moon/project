@@ -56,6 +56,8 @@ a:visited {
 							id="button-addon2">삭제</button></a>
 							<a href="hostBookingList"><button class="btn btn-outline-secondary" type="button"
 							id="button-addon2">예약현황</button></a>
+							<a href="modifyPost/${board.boardNum }"><button class="btn btn-outline-secondary" type="button"
+							id="button-addon2">수정</button></a>
 						</div>
 					</div>
 				</div>

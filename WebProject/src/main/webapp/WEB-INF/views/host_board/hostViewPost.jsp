@@ -258,6 +258,42 @@ $(function(){
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
+
+		<!-- Review  -->
+		<div>
+			<div class="board">
+				<div class="board_tit">
+					<h2>REVIEW</h2>
+					<a href="/insertReview/${boardNum }">작성</a> <a href="/chat">채팅</a>
+					<div class="sort-wrap clearfix">
+						<ul>
+							<li>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
+								이동될 수 있습니다.</li>
+						</ul>
+						<div id="review"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<table border="1">
+				<tr>
+					<th>번호</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>별점</th>
+				</tr>
+				<c:forEach items="${reviewDto}" var="re">
+					<tr>
+						<td>${re.review_id}</td>
+						<td><a href="view_content">${re.review_content}</a></td>
+						<td>${re.cust_id}</td>
+						<td>${re.review_star}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+		
 		<!-- booking -->
 		<div>
 			<form method="post" action="/kakaoPay" id="paybutton">
@@ -509,6 +545,5 @@ geocoder.addressSearch(address, function(result, status) {
 	<footer>
 		<%@ include file="../publicCSS/footer.jsp"%>
 	</footer>
-</body>
 </body>
 </html>

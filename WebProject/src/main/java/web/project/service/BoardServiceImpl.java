@@ -121,6 +121,4 @@ public class BoardServiceImpl implements BoardService {
 		boardRepo.deleteById(boardNum);
 	}
 	
-	
-
 }

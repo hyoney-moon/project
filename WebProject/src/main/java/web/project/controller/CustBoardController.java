@@ -65,6 +65,7 @@ public class CustBoardController {
 			m.addAttribute("board",dto);
 			// 카테고리 리스트 출력
 			List<Category> category = cateService.selectCate();
+			
 			m.addAttribute("category",category);
 			return "custmain/main";
 		}
@@ -113,7 +114,7 @@ public class CustBoardController {
 		List<Img> fis = imgService.viewImg(boardNum);
 		model.addAttribute("fis", fis);
 		model.addAttribute("fisize", fis.size());
-		return "cust_board/viewPost";
+		return "cust_board/custViewPost";
 	}
 	
 	//검색기능 ajax

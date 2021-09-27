@@ -61,7 +61,6 @@ body {
 .w-100 {
 	width: 100%;
 }
-
 </style>
 <!-- Q&A css, jquery -->
 <link rel="stylesheet" href="/css/modal.css" type="text/css">
@@ -533,5 +532,4 @@ geocoder.addressSearch(address, function(result, status) {
 		<%@ include file="../publicCSS/footer.jsp"%>
 	</footer>
 </body>
-
 </html>
