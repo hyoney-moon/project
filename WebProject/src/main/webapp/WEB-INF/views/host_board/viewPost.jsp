@@ -359,8 +359,7 @@ body {
 			<br> <br>
 			<div id=getComment></div>
 		</div>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><<br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<!-- Review  -->
 		<div>
 			<div class="board">
