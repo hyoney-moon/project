@@ -66,7 +66,7 @@ public class CustBoardController {
 			// 카테고리 리스트 출력
 			List<Category> category = cateService.selectCate();
 			m.addAttribute("category",category);
-			return "custmain/main2";
+			return "custmain/main";
 		}
 	
 	// 게시글 목록
