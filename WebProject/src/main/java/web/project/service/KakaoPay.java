@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javassist.Loader.Simple;
 import lombok.extern.java.Log;
-import web.project.domain.BookInfo;
+import web.project.domain.Booking;
 import web.project.domain.Customer;
 import web.project.domain.KakaoPayReadyDto;
 import web.project.persistence.BoardDtoRepository;
@@ -35,7 +35,7 @@ public class KakaoPay {
     BoardDtoRepository board;
     
     
-    public String kakaoPayReady(Customer custId, BookInfo booking) {
+    public String kakaoPayReady(Customer custId, Booking booking) {
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         RestTemplate restTemplate = new RestTemplate();
  

@@ -25,85 +25,69 @@ body {
 	padding: 50px;
 	text-align: center;
 }
-table{border-collapse : collapse; text-align: center;}
-th{ background-color: white; width: 150px;}
-table.a{margin: 10px auto;}
-#page{text-decoration: none;}
-.list_item {
-    display: inline-block;
-    width: 250px;
-/* 	height: 200px; */
-    margin: 2px;
-    overflow: hidden;
+
+#page {
+	text-decoration: none;
 }
 
-.list_img {
-    display: inline-block;
-    width: 100%;
-    height: 100px;
-    overflow: hidden;
-    object-fit: cover;
+a:link {
+	text-decoration: none;
 }
 
+a:visited {
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
 	<header>
 		<%@ include file="../publicCSS/hostheader.jsp"%>
 	</header>
-	<div class="container">
-		<table border="1">
-			<tr>
-				<th>작성자</th>
-				<th>카테고리</th>
-				<th>이미지</th>
-				<th>공간명</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			<c:forEach items="${bList }" var="blist">
-				<tr>
-					<td>${blist.hostId }</td>
-					<td>${blist.category }</td>
-					<td>
-					
-					<div class="list_item">
-						<div id="carouselExampleControls" class="carousel slide"
-							data-bs-ride="carousel">
-						<!-- 이미지가 안 뜸 ㅜㅜ -->
-							<div class="carousel-inner">
-								<c:forEach items="${blist.frontimg }" var="fis" begin="0" end="0">
-									<div class="carousel-item active">
-										<img src="${fis.filePath }" class="d-block w-100 list_img" alt="...">
-									</div>
-								</c:forEach>
-								<c:forEach items="${blist.frontimg }" var="fis" begin="1" end="${blist.frontimg.size() }">
-									<div class="carousel-item">
-										<img src="${fis.filePath }" class="d-block w-100 list_img" alt="...">
-									</div>
-								</c:forEach>
-							</div>
-							</div>
+	<div class="container-sm w-50">
+		<div class="row row-cols-1 row-cols-md-2 g-4">
+			<c:forEach items="${bList }" var="board" begin="0" end="3">
+				<div class="col" id="${board.boardNum }">
+					<div class="card">
+						<a href="viewPost/${board.boardNum }"><div class="img"></div></a>
+						<div class="card-body">
+							<a href="viewPost/${board.boardNum }"><h5 class="card-title">${board.spaceName }</h5></a>
+							<p class="card-text">${board.contentOneline }</p>
+							<a href="deletePost/${board.boardNum }"><button class="btn btn-outline-secondary" type="button"
+							id="button-addon2">삭제</button></a>
+							<a href="hostBookingList"><button class="btn btn-outline-secondary" type="button"
+							id="button-addon2">예약현황</button></a>
 						</div>
-						</td>
-						
-					<td><a href="viewPost/${blist.boardNum }">${blist.spaceName }</a></td>
-					<td><fmt:formatDate value="${blist.regDate}" pattern="MM.dd" /></td>
-					<td>${blist.readcount }</td>
-				</tr>
+					</div>
+				</div>
 			</c:forEach>
-		</table>
-		<div id="page">
-			<c:if test="${begin > 2 }">
-				<a href="viewBoard?p=${begin-1}">[이전]</a>
-			</c:if>
-				<c:forEach begin="${begin}" end="${end}" var ="i">
-					<a href="viewBoard?p=${i}">[${i}]</a>
-				</c:forEach>
-			<c:if test="${end < totalPage}">
-				<a href="viewBoard?p=${end+1}">[다음]</a>
-			</c:if>
 		</div>
 	</div>
 </body>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+	$(function() {
+		$("div").each(function() {
+			var id = $(this).attr("id")
+			if (id != undefined) {
+			var tr = $(" .img", this)
+			$.ajax({
+				url : "/host/getImgs",
+				data : "boardNum=" + id,
+				dataType : "JSON"
+			}).done(function(data) {
+				var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
+				str += "<div class='carousel-item active'><img src="+data[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
+				for (var i = 1; i < data.length; i++) {
+				str += "<div class='carousel-item'> <img src="+ data[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+				}
+				str += "</div> </div> </div>"
+
+				$(tr).append(str);
+
+				})
+			}
+		})
+		
+	})
+</script>
 </html>

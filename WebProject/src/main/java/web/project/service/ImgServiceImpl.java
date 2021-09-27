@@ -20,8 +20,14 @@ public class ImgServiceImpl implements ImgService {
 		return imgRepo.save(img);
 	}
 	
-//	@Override
-//	public List<Img> getImgList() {
-//		return imgRepo.findByImgNo();
-//	}
+	@Override
+	public List<Img> viewImg(Long boardNum) {
+		return imgRepo.findByBoardNumOrderByImgNoDesc(boardNum);
+	}
+
+	@Override
+	public List<Img> viewList() {
+		return imgRepo.findAll();
+	}
+	
 }

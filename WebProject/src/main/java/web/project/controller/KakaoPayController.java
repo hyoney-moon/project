@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import web.project.domain.Board;
-import web.project.domain.BookInfo;
+import web.project.domain.Booking;
 import web.project.domain.BookingDto;
 import web.project.domain.Customer;
 import web.project.service.BoardService;
@@ -47,9 +47,9 @@ public class KakaoPayController {
     }
     
     @PostMapping("/kakaoPay")
-    public String kakaoPay(@ModelAttribute("customer")Customer custId, BookInfo booking, BookingDto dto ) {
+    public String kakaoPay(@ModelAttribute("customer")Customer custId, Booking booking, BookingDto dto ) {
         System.out.println("kakaoPay post............................................");
-        BookInfo afterInsert = insertbooking(booking, dto, custId);
+        Booking afterInsert = insertbooking(booking, dto, custId);
 		Board hostNum = board.getBoard(dto.getBoardNum());
 		booking.setBoard(hostNum);
         return "redirect:" + kakaopay.kakaoPayReady(custId,afterInsert);
@@ -60,7 +60,7 @@ public class KakaoPayController {
         log.info("kakaoPaySuccess get............................................");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
         // 해당 결제일 정보 출력해주기
-        BookInfo book = booking.bookNum(bookNum);
+        Booking book = booking.bookNum(bookNum);
         model.addAttribute("book",book);
         //공간명 출력해주시길
         Board boardName = board.getBoardNum(book.getBoardNum());
@@ -74,7 +74,7 @@ public class KakaoPayController {
     }
     
     
-    public BookInfo insertbooking(BookInfo dto , BookingDto bdto, Customer custId) {
+    public Booking insertbooking(Booking dto , BookingDto bdto, Customer custId) {
 		Board numBoard = booking.getBoard(bdto.getBoardNum());
 		Board hostNum = board.getBoard(bdto.getBoardNum());
 		//session 값 불러와서 아이디 저장해서 예약하기

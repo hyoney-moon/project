@@ -23,24 +23,23 @@ import org.springframework.web.context.WebApplicationContext;
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
+import web.project.domain.Category;
 import web.project.domain.Customer;
 import web.project.domain.FrontImg;
+import web.project.domain.Img;
+import web.project.domain.Review;
 import web.project.service.BoardService;
+import web.project.service.BookingService;
+import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 import web.project.service.QnaService;
+import web.project.service.ReviewService;
+import web.project.service.mainboardService;
 
-@SessionAttributes("customer")
 @Controller
 @RequestMapping("/customer")
-public class CustBoardController implements ApplicationContextAware {
-	
-	private WebApplicationContext context = null;
-	
-	@ModelAttribute("customer")
-	public Customer getCustomer() {
-		return new Customer();
-	}
+public class CustBoardController {
 	
 	@Autowired
 	private FrontImgService frontImgService;
@@ -50,6 +49,25 @@ public class CustBoardController implements ApplicationContextAware {
 	private BoardService boardService;
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private ReviewService inter;
+	@Autowired
+	BookingService service;
+	@Autowired
+	private mainboardService mainService;
+	@Autowired
+	private CategoryService cateService;
+	
+	//회원 메인
+		@RequestMapping("/main")
+		public String mainStart(Model m) {
+			List<Board> dto = mainService.getBoardList();
+			m.addAttribute("board",dto);
+			// 카테고리 리스트 출력
+			List<Category> category = cateService.selectCate();
+			m.addAttribute("category",category);
+			return "custmain/main";
+		}
 	
 	// 게시글 목록
 	@GetMapping("/searchForm")
@@ -75,11 +93,24 @@ public class CustBoardController implements ApplicationContextAware {
 	
 	//글 상세보기
 	@RequestMapping("/viewPost/{boardNum}")
-	public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
+	public String viewPost(Model model, @PathVariable Long boardNum, Img fi) {
+		
+		Board board =  service.getBoard(boardNum);
+		
+		model.addAttribute("board", board);
+		//사용자가 받는 데이터값 유효성 검사 단계
+		 List<String> dateList = service.getListDate(boardNum);
+		Gson json = new Gson();
+		
+		model.addAttribute("dateList",json.toJson(dateList));
+		
 		Board view = boardService.viewPost(boardNum);
 		model.addAttribute("view",view);
 		
-		List<FrontImg> fis = frontImgService.viewImg(boardNum);
+		List<Review> result = inter.getReviewDto();
+		model.addAttribute("reviewDto",result);
+		
+		List<Img> fis = imgService.viewImg(boardNum);
 		model.addAttribute("fis", fis);
 		model.addAttribute("fisize", fis.size());
 		return "cust_board/viewPost";
@@ -95,11 +126,21 @@ public class CustBoardController implements ApplicationContextAware {
 		return json.toJson(searchList);
 	}	
 	
-	//어플리케이션 객체 구함, realPath구하려고
-	@Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-          throws BeansException {
-       this.context = (WebApplicationContext) applicationContext;
-    }
+	//이미지 뽑아오는 ajax
+	@RequestMapping("/getImgs")
+	@ResponseBody
+	public String getImgs(Long boardNum) {
+		List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+		Gson json = new Gson();
+		return json.toJson(imgList);
+	}
+	//(검색)이미지 뽑아오는 ajax
+		@RequestMapping("/getSearchImgs")
+		@ResponseBody
+		public String getSearchImgs(Long boardNum) {
+			List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+			Gson json = new Gson();
+			return json.toJson(imgList);
+		}
 	
 }

@@ -32,11 +32,14 @@ import web.project.domain.CustQna;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.Img;
+import web.project.domain.Review;
 import web.project.service.BoardService;
+import web.project.service.BookingService;
 import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 import web.project.service.QnaService;
+import web.project.service.ReviewService;
 
 @SessionAttributes("host")
 @Controller
@@ -60,12 +63,16 @@ public class HostBoardController implements ApplicationContextAware {
 	private QnaService qnaService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private ReviewService inter;
+	@Autowired
+	BookingService service;
 	
 	//공간등록폼
 	@GetMapping("/insertBoardForm")
 	public String postBoard(Model model, Host host) {
 		if(host.getHostId() == null) {
-			return "login/hostLoginForm";
+			return "host_main/hostLoginForm";
 		}
 		List<Category> cList = categoryService.selectCate();
 		model.addAttribute("cList", cList);
@@ -79,8 +86,6 @@ public class HostBoardController implements ApplicationContextAware {
 		board.setHostId(host.getHostId());
 //		저장
 		Board b =  boardService.saveBoard(board);
-//		List<FrontImg> forntImg = new ArrayList<>();
-//		frontImg = forntImg.add(new frontImg);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		model.addAttribute("place", b);
 		model.addAttribute("viewImg", imgb);
@@ -157,7 +162,7 @@ public class HostBoardController implements ApplicationContextAware {
 		@RequestMapping("/viewBoard")
 		public String viewBoard(Model model,
 				@RequestParam(name="p", defaultValue="1")int pNum, 
-				@ModelAttribute("host")Host host, String hostId) {
+				@ModelAttribute("host")Host host, String hostId, Long boardNum) {
 			//호스트 아이디로 로그인 된게 없으면 호스트 로그인 폼으로
 			if(host.getHostId() == null) {
 				return "login/hostLoginForm";
@@ -182,14 +187,37 @@ public class HostBoardController implements ApplicationContextAware {
 		
 		@RequestMapping("/viewPost/{boardNum}")
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
+			//사용자가 받는 데이터값 유효성 검사 단계
+			 List<String> dateList = service.getListDate(boardNum);
+			Gson json = new Gson();
+			
+			List<Review> result = inter.getReviewDto();
+			model.addAttribute("reviewDto",result);
+			
+			model.addAttribute("dateList",json.toJson(dateList));
 			Board view = boardService.viewPost(boardNum);
 			model.addAttribute("view",view);
 			
-			List<FrontImg> fis = frontImgService.viewImg(boardNum);
+			List<Img> fis = imgService.viewImg(boardNum);
 			model.addAttribute("fis", fis);
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
+		
+	//이미지 뽑아오는 ajax
+	@RequestMapping("/getImgs")
+	@ResponseBody
+	public String getImgs(Long boardNum) {
+		List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+		Gson json = new Gson();
+		return json.toJson(imgList);
+	}
+	
+	//게시글 삭제
+	@RequestMapping("/deletePost/{boardNum }")
+	public void deletePost(Long BoardNum) {
+		boardService.deleteById(BoardNum);
+	}
 
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override

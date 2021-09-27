@@ -18,9 +18,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
+import web.project.domain.Admin;
 import web.project.domain.Host;
 import web.project.service.AdminGetHostService;
 import web.project.service.AdminHostBoardService;
@@ -54,8 +56,12 @@ public class AdminGetHostController {
 		return json.toJson(result);
 	}
 	@GetMapping("/getHostList")
-	public String getHostList() {
-		return "admin_board/hostInfo";
+	public String getHostList(@SessionAttribute(required=false) Admin admin) {
+		if(admin != null) {
+			return "admin_board/hostInfo";
+		} else {
+			return "login/requiredLogin";
+		}
 	}
 	
 	//엑셀 다운

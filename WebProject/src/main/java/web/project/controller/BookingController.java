@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 
 import javassist.Loader.Simple;
 import web.project.domain.Board;
-import web.project.domain.BookInfo;
+import web.project.domain.Booking;
 import web.project.domain.Customer;
 import web.project.service.BoardService;
 import web.project.service.BookingService;
@@ -40,21 +40,21 @@ public class BookingController {
 	BoardService boardservice;
 	
 		//요청 페이지 출력
-		@GetMapping("/bookingpage/{boardNum}")
-		public String getbookingView(@PathVariable(name = "boardNum") Long boardNum,Model m) {
-			Board board =  service.getBoard(boardNum);
-			
-			m.addAttribute("board", board);
-			//사용자가 받는 데이터값 유효성 검사 단계
-			 List<String> dateList = service.getListDate(boardNum);
-			Gson json = new Gson();
-			
-			m.addAttribute("dateList",json.toJson(dateList));
-			return "custmain/custbooking";
-		}
+//		@GetMapping("/bookingpage/{boardNum}")
+//		public String getbookingView(@PathVariable(name = "boardNum") Long boardNum,Model m) {
+//			Board board =  service.getBoard(boardNum);
+//			
+//			m.addAttribute("board", board);
+//			//사용자가 받는 데이터값 유효성 검사 단계
+//			 List<String> dateList = service.getListDate(boardNum);
+//			Gson json = new Gson();
+//			
+//			m.addAttribute("dateList",json.toJson(dateList));
+//			return "custmain/custbooking";
+//		}
 		//페이지 결과 처리메소드
 		@PostMapping("/bookingpage/{boardNum}")
-		public String insertbooking(BookInfo dto,@PathVariable(name = "boardNum") Long boardNum, int count,@DateTimeFormat(pattern="yyyy-MM-dd") Date startDatepicker,@DateTimeFormat(pattern="yyyy-MM-dd") Date endDatepicker,@ModelAttribute("customer")Customer custId) throws ParseException {
+		public String insertbooking(Booking dto,@PathVariable(name = "boardNum") Long boardNum, int count,@DateTimeFormat(pattern="yyyy-MM-dd") Date startDatepicker,@DateTimeFormat(pattern="yyyy-MM-dd") Date endDatepicker,@ModelAttribute("customer")Customer custId) throws ParseException {
 			Board board = service.getBoard(boardNum);
 			Board hostNum = boardservice.getBoard(boardNum);
 			//session 값 불러와서 아이디 저장해서 예약하기
@@ -79,7 +79,7 @@ public class BookingController {
 			return "redirect:/main";
 		}
 	@RequestMapping("/home")
-	public void updateBooking(BookInfo dto,@ModelAttribute("customerDto") Customer cust) {
+	public void updateBooking(Booking dto,@ModelAttribute("customerDto") Customer cust) {
 		service.updateBooking(dto);
 	}
 		
