@@ -50,7 +50,7 @@ a:visited {
 					<div class="card">
 						<a href="viewPost/${board.boardNum }"><div class="img"></div></a>
 						<div class="card-body">
-							<a href="viewPost/${board.boardNum }"><h5 class="card-title">${board.spaceName }</h5></a>
+							<a href="/host/viewPost/${board.boardNum }"><h5 class="card-title">${board.spaceName }</h5></a>
 							<p class="card-text">${board.contentOneline }</p>
 							<a href="deletePost/${board.boardNum }"><button class="btn btn-outline-secondary" type="button"
 							id="button-addon2">삭제</button></a>

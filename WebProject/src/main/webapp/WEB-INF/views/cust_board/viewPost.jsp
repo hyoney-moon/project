@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>${board.spaceName }</title>
+<!-- 폰트 css -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+font-family: 'Nanum Gothic', sans-serif;
+}
+</style>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -52,56 +62,157 @@ body {
 	width: 100%;
 }
 
-/**/
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%; /* Could be more or less, depending on screen size */
-}
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-#table {
-	margin: auto;
-}
-
-#getComment, #replyComment, #qna {
-	text-align: center;
-}
-
-div.button {
-	margin: auto;
-	width: 5%;
-}
 </style>
+<!-- Q&A css, jquery -->
+<link rel="stylesheet" href="/css/modal.css" type="text/css">
+<script>
+$(function(){
+	var board = "board.boardNum";
+    var question = $("#question");
+    var answer = $("#answer");
+    //var hostId = "${host.hostId}"; // ${host.hostId}
+    getcommentList();
+    
+ // 댓글 출력
+	function getcommentList(){
+		let params = "boardNum="+ ${boardNum}
+		$.ajax({
+			type: "get",
+			url: "/qna/getQna", // /board/comment
+			data: params,
+			dataType: "json"
+		}).done(function(args){
+			$("#getComment").empty();
+			for(var num=0; num < args.length; num++){
+				var reply = args[num].hostContent;
+				var replyDate = args[num].replyDate;
+				if(reply == null){ // 답변이 달리지 않았다면
+					reply = "*호스트의 답변을 기다리고 있습니다";
+					replyDate = "";
+				}
+				
+				if(${!empty sessionScope.host}){ // 호스트 로그인을 한 경우 
+					$("#getComment").append(
+							"<ul class='qnaUl'>"+
+							"<li class='qnaLi'>"+
+							"<div class='custQuestion'>" +
+							"<span class='profile'>" +
+							"<img class='profileImg' src=/img/profileImage.png></img>" +
+							"</span>" +
+							"<strong>" + args[num].nickName + "</strong>" +
+							"<p class='content'>" + args[num].content + "</p>" +
+							"<div class='content'>" + args[num].commentDate + "</div>" +
+							"</div>" +
+							
+							"<div class='hostAnswer'>" +
+							"<p class='hostReplyTitle'>"+
+							"호스트의 답글" +"</p>" +
+							"<p class='hostReplyContent'>" +
+							reply + "</p>" +
+							"<div class='content'>" + replyDate + "</div>" +
+							
+							"<button id='" + "popupAnswer'" + 
+							" value='" + args[num].qnaNum + "'>답변하기</button>" +
+							"</div>" +
+							"</li>" + 
+							"</ul>"
+					);
+				} else { // 호스트로 로그인하지 않은 경우
+					$("#getComment").append(
+							"<ul class='qnaUl'>"+
+							"<li class='qnaLi'>"+
+							"<div class='custQuestion'>" +
+							"<span class='profile'>" +
+							"<img class='profileImg' src=/img/profileImage.png></img>" +
+							"</span>" +
+							"<strong>" + args[num].nickName + "</strong>" +
+							"<p>" + args[num].content + "</p>" +
+							"<div>" + args[num].commentDate + "</div>" +
+							"</div>" +
+							
+							"<div class='hostAnswer'>" +
+							"<p class='hostReplyTitle'>"+
+							"호스트의 답글" +"</p>" +
+							"<p class='hostReplyContent'>" +
+							reply + "</p>" +
+							"<div>" + replyDate + "</div>"
+							)
+				}
+			} //for문 종료
+		}) // done 종료
+	} // getcommentList() 종료
+    
+ 	  // 질문작성 클릭 이벤트
+	  $("#confirm").click(function(){
+		  $.ajax({
+				url: "/qna/question",
+				type: "POST",
+				dataType: "CustQna",
+				data: {
+					board : ${boardNum},
+					profile : "custprofile",
+					content : $("#question").val(),
+					nickName : "${customer.nickName}",
+				},
+				complete : function(){
+					modalClose(); // modal 닫기
+					question.val("");
+					$("#getComment").empty();
+					getcommentList();
+				}
+			})
+	  });
+		// 답변하기 버튼 클릭 이벤트(모달창 띄우기)
+		$('#getComment').on('click', '#popupAnswer', function() {
+			qnaNumber = $(this).attr('value');
+			document.getElementById("modalQnaNum").value=qnaNumber;
+		$("#popupAnswer").css('display','flex').hide().show();
+		});
+		
+		// 질문하기 클릭 이벤트 모달창 띄우기
+	  $("#modal-open").click(function(){
+		  //$("#popup").show();
+	      $("#popup").css('display','flex').hide().show();
+	      //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 show()으로 효과
+	  });
+	
+		// 취소 클릭 이벤트 모달창 닫기
+	  $("#close").click(function(){
+	      modalClose(); //모달 닫기 함수 호출
+	  });
+		
+		// 답변 취소 클릭 이벤트 모달창 닫기 
+		$('#popupAnswer').on('click', "#close", function(){
+			modalClose();
+	  })
+	  // 답변 등록 클릭 이벤트 
+		$('#popupAnswer').on('click', "#confirm", function(){
+			$.ajax({
+				url:"/qna/answer",
+				type: "POST",
+				dataType: "CustQna",
+				data: {
+					qnaNum : $("#modalQnaNum").val(),
+					hostContent : $("#answer").val(),
+					hostId : "${host.hostId}",
+				},
+				complete : function(){
+					modalClose();
+					answer.val("");
+					$("#answer").empty();
+					getcommentList();
+				}
+			}) 
+	  })
+	  
+		// 모달창 닫기 함수
+	  function modalClose(){
+	      $("#popup").hide();
+	      $("#popupAnswer").hide();
+	  }
+		
+	});
+</script>
 </head>
 <body>
 	<header>
@@ -150,23 +261,68 @@ div.button {
 			</button>
 		</div>
 
-		<!-- Q&A -->
+<!-- Q&A -->
 		<div>
-			<h2 id="qna">QnA</h2>
-			<!-- 질문하기 modal -->
-			<div class="button">
-				<button id="myBtn">질문하기</button>
+			<h1 id="qna">Q&A</h1>
+			<!-- 질문하기 모달 버튼 -->
+			<div id="modal-open" class="button">
+				<a
+					style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
+					class="btn_qna_write"> <span
+					style="font-weight: bold;">✍ 질문 작성하기</span>
+				</a>
 			</div>
-			<div id="myModal" class="modal">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<p>
-						<strong>질문하기</strong>
-					</p>
-					<textarea id="content" name="content" rows="15" cols="40"></textarea>
-					<button id="cmtCnt-btn">작성</button>
+			<!-- 질문하기 modal  -->
+			<div class="container">
+				<div class="popup-wrap" id="popup">
+					<div class="popup">
+						<div class="popup-head">
+							<span class="head-title">질문 작성하기</span>
+						</div>
+						<div class="popup-body">
+							<div class="body-content">
+								<div class="body-titlebox">
+								※질문은 전체 공개됩니다
+								</div>
+								<div class="body-contentbox">
+									<textarea id="question" name="content" rows="6" cols="43" placeholder="질문을 작성하세요."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="popup-foot">
+							<span class="pop-btn confirm" id="confirm">등록</span> <span
+								class="pop-btn close" id="close">취소</span>
+						</div>
+					</div>
 				</div>
 			</div>
+			
+			<!-- 답변하기 modal -->
+			<div class="container">
+				<div class="popup-wrap" id="popupAnswer">
+					<div class="popupAnswer">
+						<div class="popup-head">
+							<span class="head-title">답변 작성하기</span>
+						</div>
+						<div class="popup-body">
+							<div class="body-content">
+								<div class="body-titlebox">
+								※답변은 전체 공개됩니다
+								</div>
+								<div class="body-contentbox">
+									<textarea id="answer" name="content" rows="6" cols="43" placeholder="답변을 작성하세요."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="popup-foot">
+							<input type="hidden" value="" id="modalQnaNum">
+							<span class="pop-btn confirm" id="confirm">등록</span> <span
+								class="pop-btn close" id="close">취소</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
 
 			<!-- 답변하기 modal -->
 			<!-- The Modal -->
@@ -185,7 +341,7 @@ div.button {
 			<br> <br>
 			<div id=getComment></div>
 		</div>
-
+		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<!-- Review  -->
 		<div>
 			<div class="board">
@@ -377,143 +533,5 @@ geocoder.addressSearch(address, function(result, status) {
 		<%@ include file="../publicCSS/footer.jsp"%>
 	</footer>
 </body>
-<script>
-$(function(){
-	var qnaNumber ="";
-	
-	var modal2 = document.getElementById('myModal2');
-	var span2 = document.getElementsByClassName("close")[0];
-	var btn2 = document.getElementById("replyBtn");
-	
-	var hostId = "hostId"; // ${host.hostId}
-	
-	getcommentList();
-	// 댓글 출력
-	function getcommentList(){
-		let params = "boardNum="+ ${boardNum}
-		$.ajax({
-			type: "get",
-			url: "/qna/getQna", // /board/comment
-			data: params,
-			dataType: "json"
-		}).done(function(args){
-			$("#getComment").empty();
-			for(var num=0; num < args.length; num++){
-				var reply = "";
-				if(args[num].hostContent != undefined){
-					 reply = args[num].hostContent
-					 }
-				if(hostId != null){
-					$("#getComment").append(
-							"고객이름 : " + args[num].custId + "<br>" +
-							"댓글내용 : " + args[num].content + "<br>" +
-							
-							"<strong>호스트 답변</strong><br>" +
-							reply + "<br>" +
-							
-							"<button id='" + "replyBtn'" + 
-							" value='" + args[num].qnaNum + "'>답변하기</button><br><br>"
-					);
-				} else {
-					$("#getComment").append(
-							"고객이름 : " + args[num].custId + "<br>" +
-							"댓글내용 : " + args[num].content + "<br>" +
-							
-							"<strong>호스트 답변</strong><br>" +
-							reply + "<br>"
-							)
-				}
-			
-			} //for문 종료
-		}) // done 종료
-	} // getcommentList() 종료
-	
-	// 질문작성 클릭 이벤트
-	$("#cmtCnt-btn").click(function(){
-$.ajax({
-	url: "/qna/question",
-	type: "POST",
-	dataType: "CustQna",
-	data: {
-		board : ${boardNum},
-		profile : "custprofile",
-		content : $("#content").val(),
-		custId : "${customer.custId}",
-	},
-	complete : function(){
-		modal.style.display = "none";
-		comment.val("");
-		$("#getComment").empty();
-		getcommentList();
-	}
-})
-}) // click
 
-	//답변하기 버튼 클릭 이벤트(모달창 띄우기)
-	$('#getComment').on('click', '#replyBtn', function() {
-		qnaNumber = $(this).attr('value');
-		document.getElementById("modalQnaNum").value=qnaNumber;
-		modal2.style.display = "block";
-	})
-	
-	$('#myModal2').on('click', ".close", function(){
-		modal2.style.display = "none";
-	})
-
-	var board = "board.boardNum";
-    var comment = $("#content");
-    var comment2 = $("#content2");
-	
-	// 호스트 답변달기 클릭 이벤트(db 저장)
-	$("#cmtCnt-btn2").click(function(){
-		$.ajax({
-			url:"/qna/answer",
-			type: "POST",
-			dataType: "CustQna",
-			data: {
-				qnaNum : $("#modalQnaNum").val(),
-				hostContent : $("#content2").val(),
-				//hostId : "${host.hostId}",
-			},
-			complete : function(){
-				modal2.style.display = "none";
-				comment2.val("");
-				$("#replyComment").empty();
-				getcommentList();
-			}
-		}) 
-	}) // click 종료
-}) // ready function 종료	
-</script>
-</body>
-
-<script>
-var modal = document.getElementById('myModal');
-var btn = document.getElementById("myBtn");
-var modal = document.getElementById('myModal');
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-//When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}	
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-</script>
 </html>

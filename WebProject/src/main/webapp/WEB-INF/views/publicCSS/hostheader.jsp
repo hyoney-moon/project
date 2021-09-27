@@ -53,8 +53,7 @@ a {
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="/host/logoClick"><img style="width: 150px;"
-							src="/images/icon/Logo.png" /></a>
+						<a href="/host/logoClick"><img src="/images/icon/Logo.png" style="width: 150px;" /></a>
 					</div>
 					<!-- navbar Icon -->
 					<button class="navbar-toggler" type="button"

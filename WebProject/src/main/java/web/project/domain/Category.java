@@ -15,14 +15,5 @@ public class Category implements Serializable {
 
 	@Id
 	private String category;
-	private String filePath;
-	
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
 
 }

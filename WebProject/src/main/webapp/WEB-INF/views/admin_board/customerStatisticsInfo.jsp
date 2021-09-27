@@ -3,13 +3,23 @@
 <html>
 <head>
 <title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 <style>
+* {
+font-family: 'Nanum Gothic', sans-serif;
+}
 #static {
 	text-align: center;
 }
+h {
+	font-weight: bold;
+}
 </style>
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-
+<!-- chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -30,8 +40,8 @@ const labels = [
 	  labels: labels,
 	  datasets: [{
 	    label: '월별 누적 회원수(명)',
-	    backgroundColor: 'rgb(255, 99, 132)',
-	    borderColor: 'rgb(255, 99, 132)',
+	    backgroundColor: '#704de4',
+	    borderColor: '#704de4',
 	    data: ${custNumList},
 	  }]
 	};
@@ -64,8 +74,8 @@ const labels = [
 	  labels: boardCountlabels,
 	  datasets: [{
 	    label: '누적 게시글 수(개)',
-	    backgroundColor: 'rgb(255, 99, 132)',
-	    borderColor: 'rgb(255, 99, 132)',
+	    backgroundColor: '#f1c40f',
+	    borderColor: '#f1c40f',
 	    data: ${boardCountList},
 	  }]
 	};
@@ -150,8 +160,8 @@ const labels = [
 	  datasets: [{
 	    label: '성비',
 	    backgroundColor:[
-	    	"#2ecc71",
-	        "#3498db",
+	    	"#0984e3",
+	        "#d63031",
 	        ],
 	    	//'rgb(255, 99, 132)',
 	    // borderColor: Object.values(Utils.CHART_COLORS),
@@ -174,31 +184,37 @@ const labels = [
 </script>
 
 </head>
-<body>
+<body style="background-color: #f6f6f6;">
+<header>
+		<%@ include file="../publicCSS/adminheader.jsp"%>
+</header>
+
+<h1 style="text-align: center; margin-top: 100px; margin-bottom: 20px;">회원 정보 통계</h1>
 <div id="static">
-<h2>월별 누적 회원수(명)</h2>
-<div style="position: relative; margin: auto; height:20vh; width:40vw">
+<!-- <h3>월별 누적 회원수(명)</h3> -->
+<div style="position: static; margin: auto; height:20vh; width:40vw; margin-bottom: 30px;">
   <canvas id="custCountChart"></canvas>
 </div>
 <br><br><br><br><br><br><br>
-<h2>누적 게시글 수(개)</h2>
-<div style="position: relative; margin: auto; height:20vh; width:40vw">
+<!-- <h3>누적 게시글 수(개)</h3> -->
+<div style="position: static; margin: auto; height:20vh; width:40vw">
   <canvas id="boardCountChart"></canvas>
 </div>
 <br><br><br><br><br><br><br>
 <!-- <h2>총 매출액(원)</h2> -->
-<div style="position: relative; margin: auto; height:20vh; width:40vw">
+<div style="position: static; margin: auto; height:20vh; width:40vw">
   <canvas id="totalRevenueChart"></canvas>
 </div>
-<h2>회원 나이 분포(%)</h2>
-<div style="position: relative; margin: auto; height:20vh; width:40vw">
+<h4>회원 연령(%)</h4>
+<div style="position: static; margin: auto; height:20vh; width:40vw">
   <canvas id="custAgeChart"></canvas>
 </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h2>회원 성비(%)</h2>
-<div style="position: relative; margin: auto; height:20vh; width:40vw">
+<h4>회원 성비(%)</h4>
+<div style="position: static; margin: auto; height:20vh; width:40vw">
   <canvas id="genderChart"></canvas>
 </div>
 </div>
 </body>
+
 </html>

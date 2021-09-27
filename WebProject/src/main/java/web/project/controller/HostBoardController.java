@@ -185,10 +185,9 @@ public class HostBoardController implements ApplicationContextAware {
 			return "host_board/boardList";
 		}
 		
-		@RequestMapping("/viewPost/{boardNum}")
+		@RequestMapping("/viewPost/{boardNum}")		
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-			//사용자가 받는 데이터값 유효성 검사 단계
-			 List<String> dateList = service.getListDate(boardNum);
+			List<String> dateList = service.getListDate(boardNum);
 			Gson json = new Gson();
 			
 			List<Review> result = inter.getReviewDto();
@@ -203,6 +202,17 @@ public class HostBoardController implements ApplicationContextAware {
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
+		
+//		@RequestMapping("/viewPost/{boardNum}")		
+//		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
+//			Board view = boardService.viewPost(boardNum);
+//			model.addAttribute("view",view);
+//			
+//			List<FrontImg> fis = frontImgService.viewImg(boardNum);
+//			model.addAttribute("fis", fis);
+//			model.addAttribute("fisize", fis.size());
+//			return "host_board/viewPost";
+//		}
 		
 	//이미지 뽑아오는 ajax
 	@RequestMapping("/getImgs")

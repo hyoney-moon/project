@@ -41,9 +41,9 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 	long countAge50();
 	
 	// 성비 비율
-	@Query(value="select count(*) from customer where gender = 'm'", nativeQuery=true)
+	@Query(value="select count(*) from customer where gender = '남자'", nativeQuery=true)
 	long countGenderM();
-	@Query(value="select count(*) from customer where gender = 'w'", nativeQuery=true)
+	@Query(value="select count(*) from customer where gender = '여자'", nativeQuery=true)
 	long countGenderW();
 	
 	// 아이디 중복 체크를 위한 네이티브 쿼리(미완성)

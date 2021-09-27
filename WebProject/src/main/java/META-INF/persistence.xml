@@ -8,12 +8,12 @@
 		<class>web.project.domain.Category</class>
 		<class>web.project.domain.FrontImg</class>
 		<class>web.project.domain.Img</class>
-		<class>web.project.domain.Booking</class>
 		<class>web.project.domain.CustQna</class>
 		<class>web.project.domain.Board</class>
 		<class>web.project.domain.Customer</class>
 		<class>web.project.domain.Admin</class>
 		<class>web.project.domain.Review</class>
+		<class>web.project.domain.Booking</class>
 
 	</persistence-unit>
 </persistence>

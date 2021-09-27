@@ -36,10 +36,15 @@ import web.project.service.mainboardService;
 public class CustLoginController implements ApplicationContextAware{
 	
 	@Autowired
+	private BoardService boardService;
+	@Autowired
+	private mainboardService service;
+	@Autowired
+	private CategoryService cateService;
+	@Autowired
 	private MemberService memberService;
 	
 	private WebApplicationContext context = null;
-	
 	
 	// 회원가입 폼
 		@RequestMapping("/joinForm")
@@ -70,9 +75,9 @@ public class CustLoginController implements ApplicationContextAware{
 			
 			if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
 				m.addAttribute("findCustomer",findCustomer);
-				return "redirect:main";
+				return "member/loginSucecss";
 			} else {
-				return "redirect:loginForm";
+				return "redirect:main";
 			}
 		}
 		

@@ -55,6 +55,4 @@ public class JSONController {
 		/* map.put("result", result == null); */
 		return map;
 	}
-	
-
 }
