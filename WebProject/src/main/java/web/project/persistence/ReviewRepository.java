@@ -79,7 +79,4 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	Page<Review> findByOrderByBoardNumDesc(Pageable page);
 
-
-
-
 }

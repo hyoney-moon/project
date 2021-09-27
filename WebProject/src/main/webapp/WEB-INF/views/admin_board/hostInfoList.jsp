@@ -40,8 +40,8 @@ const labels = [
 			  data: data,
 			  options: {}
 			};
-  var custCountChart = new Chart(
-    document.getElementById('custCountChart'),
+  var hostCountChart = new Chart(
+    document.getElementById('hostCountChart'),
     config
   );
   
@@ -109,7 +109,7 @@ const labels = [
 			  data: genderData,
 			  options: {}
 			};
-  var custAgeChart = new Chart(
+  var hostAgeChart = new Chart(
     document.getElementById('genderChart'),
     genderconfig
   );
@@ -119,10 +119,10 @@ const labels = [
 </head>
 <body>
 	<div id="static">
-		<h2>월별 누적 회원수(명)</h2>
+		<h2>월별 누적 호스트 회원수(명)</h2>
 		<div
 			style="position: relative; margin: auto; height: 20vh; width: 40vw">
-			<canvas id="custCountChart"></canvas>
+			<canvas id="hostCountChart"></canvas>
 		</div>
 		<br>
 		<br>

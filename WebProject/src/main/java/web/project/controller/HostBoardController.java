@@ -72,7 +72,7 @@ public class HostBoardController implements ApplicationContextAware {
 	@GetMapping("/insertBoardForm")
 	public String postBoard(Model model, Host host) {
 		if(host.getHostId() == null) {
-			return "login/hostLoginForm";
+			return "host_main/hostLoginForm";
 		}
 		List<Category> cList = categoryService.selectCate();
 		model.addAttribute("cList", cList);
@@ -86,8 +86,6 @@ public class HostBoardController implements ApplicationContextAware {
 		board.setHostId(host.getHostId());
 //		저장
 		Board b =  boardService.saveBoard(board);
-//		List<FrontImg> forntImg = new ArrayList<>();
-//		frontImg = forntImg.add(new frontImg);
 		List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
 		model.addAttribute("place", b);
 		model.addAttribute("viewImg", imgb);
@@ -189,26 +187,22 @@ public class HostBoardController implements ApplicationContextAware {
 		
 		@RequestMapping("/viewPost/{boardNum}")		
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-			Board board =  service.getBoard(boardNum);
-			
-			model.addAttribute("board", board);
-			//사용자가 받는 데이터값 유효성 검사 단계
-			 List<String> dateList = service.getListDate(boardNum);
+			List<String> dateList = service.getListDate(boardNum);
 			Gson json = new Gson();
-			
-			model.addAttribute("dateList",json.toJson(dateList));
-			
-			Board view = boardService.viewPost(boardNum);
-			model.addAttribute("view",view);
 			
 			List<Review> result = inter.getReviewDto();
 			model.addAttribute("reviewDto",result);
 			
-			List<FrontImg> fis = frontImgService.viewImg(boardNum);
+			model.addAttribute("dateList",json.toJson(dateList));
+			Board view = boardService.viewPost(boardNum);
+			model.addAttribute("view",view);
+			
+			List<Img> fis = imgService.viewImg(boardNum);
 			model.addAttribute("fis", fis);
 			model.addAttribute("fisize", fis.size());
 			return "host_board/viewPost";
 		}
+		
 //		@RequestMapping("/viewPost/{boardNum}")		
 //		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
 //			Board view = boardService.viewPost(boardNum);
@@ -219,6 +213,21 @@ public class HostBoardController implements ApplicationContextAware {
 //			model.addAttribute("fisize", fis.size());
 //			return "host_board/viewPost";
 //		}
+		
+	//이미지 뽑아오는 ajax
+	@RequestMapping("/getImgs")
+	@ResponseBody
+	public String getImgs(Long boardNum) {
+		List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+		Gson json = new Gson();
+		return json.toJson(imgList);
+	}
+	
+	//게시글 삭제
+	@RequestMapping("/deletePost/{boardNum }")
+	public void deletePost(Long BoardNum) {
+		boardService.deleteById(BoardNum);
+	}
 
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override

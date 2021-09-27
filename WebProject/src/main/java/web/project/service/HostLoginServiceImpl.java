@@ -23,5 +23,22 @@ public class HostLoginServiceImpl implements HostLoginService {
 		else
 			return null;
 	}
+	
+	@Override
+	public Host joinHost(Host host) {
+		return hostLoginRepo.save(host);
+	}
+	
+	@Override
+	public void hostDelete(Host host) {
+		hostLoginRepo.delete(host);
+	}
+	
+	@Override
+	public Optional<Host> findHostId(String hostId) {
+		Optional<Host> host = hostLoginRepo.findByHostId(hostId);
+		return host;
+	}
+
 
 }

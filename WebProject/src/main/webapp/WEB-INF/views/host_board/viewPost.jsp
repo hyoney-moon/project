@@ -1,27 +1,25 @@
-<!-- cust_board/viewPost -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>${board.spaceName }</title>
 <title>상세보기</title>
 <!-- 폰트 css -->
-
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * {
 font-family: 'Nanum Gothic', sans-serif;
 }
 </style>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.12.4.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">var disabledDays = ${dateList};</script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">var disabledDays = ${dateList};</script>
+  <script type="text/javascript" 
+src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&libraries=services"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -31,8 +29,40 @@ font-family: 'Nanum Gothic', sans-serif;
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 	crossorigin="anonymous"></script>
-	
-<!-- Q&A css, jquery -->
+<style>
+#map {
+	width:500px; 
+	height:400px;
+	padding: 10px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+body {
+	padding-top: 40px;
+}
+
+.list_item {
+	display: inline-block;
+	width: 800px;
+	margin: 2px;
+	overflow: hidden;
+}
+
+.list_img {
+	display: inline-block;
+	width: 100%;
+	height: 500px;
+	overflow: hidden;
+	object-fit: cover;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+</style>
+</head>
+<!-- Q&A -->
 <link rel="stylesheet" href="/css/modal.css" type="text/css">
 <script>
 $(function(){
@@ -182,74 +212,13 @@ $(function(){
 		
 	});
 </script>
-
-<style>
-body {
-	padding-top: 40px;
-}
-
-.list_item {
-	display: inline-block;
-	width: 800px;
-	margin: 2px;
-	overflow: hidden;
-}
-
-.list_img {
-	display: inline-block;
-	width: 100%;
-	height: 500px;
-	overflow: hidden;
-	object-fit: cover;
-}
-
-.w-100 {
-	width: 100%;
-}
-
-#map {
-	width: 500px;
-	height: 400px;
-	padding: 10px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-
-#payimg {
-	margin-top: 30px;
-	size: 50px;
-}
-.popup-foot{                      
-  width:100%;
-  height:50px;
-}
-.pop-btn{ 
-  display:inline-flex;
-  width:50%;          
-  height:100%;        
-  justify-content:center;
-  align-items:center;    
-  float:left;            
-  color:#ffffff;         
-  cursor:pointer;        
-}
-.pop-btn.confirm{        
-  border-right:1px solid #3b5fbf; 
-}
-
-.head-title {
-	font-weight: bold;
-	font-size: 1.2em;
-}
-
-</style>
-
-</head>
-<body style="background-color: #f6f6f6;">
+<body>
 	<header>
 		<%@ include file="../publicCSS/hostheader.jsp"%>
 	</header>
 	<div class="container">
+	<h1 class="display-4 fw-normal">${view.spaceName }</h1>
+	<h5 class="lead fs-4 mb-3">${view.contentOneline }</h5>
 		<div id="carouselExampleControls" class="carousel slide w-100"
 			data-bs-ride="carousel">
 			<div class="carousel-inner list_item w-100">
@@ -266,7 +235,18 @@ body {
 					</div>
 				</c:forEach>
 			</div>
-
+			<p class="lead">
+			<h1 class="display-6">공간소개</h1>
+			${view.content }
+			</p>
+			<p>
+			<h1 class="display-6">이용안내</h1>
+			${view.direction }
+			</p>
+			<p>
+			<h1 class="display-6">주의사항</h1>
+			${view.caution }
+			</p>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -278,123 +258,6 @@ body {
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
-
-		<!-- Q&A -->
-		<div>
-			<h1 id="qna">Q&A</h1>
-			<!-- 질문하기 모달 버튼 -->
-			<div id="modal-open" class="button">
-				<a
-					style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
-					class="btn_qna_write"> <span
-					style="font-weight: bold;">✍ 질문 작성하기</span>
-				</a>
-			</div>
-			<!-- 질문하기 modal  -->
-			<div class="container">
-				<div class="popup-wrap" id="popup">
-					<div class="popup">
-						<div class="popup-head">
-							<span class="head-title">질문 작성하기</span>
-						</div>
-						<div class="popup-body">
-							<div class="body-content">
-								<div class="body-titlebox">
-								※질문은 전체 공개됩니다
-								</div>
-								<div class="body-contentbox">
-									<textarea id="question" name="content" rows="6" cols="43" placeholder="질문을 작성하세요."></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="popup-foot">
-							<span class="pop-btn confirm" id="confirm">등록</span> <span
-								class="pop-btn close" id="close">취소</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- 답변하기 modal -->
-			<div class="container">
-				<div class="popup-wrap" id="popupAnswer">
-					<div class="popupAnswer">
-						<div class="popup-head">
-							<span class="head-title">답변 작성하기</span>
-						</div>
-						<div class="popup-body">
-							<div class="body-content">
-								<div class="body-titlebox">
-								※답변은 전체 공개됩니다
-								</div>
-								<div class="body-contentbox">
-									<textarea id="answer" name="content" rows="6" cols="43" placeholder="답변을 작성하세요."></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="popup-foot">
-							<input type="hidden" value="" id="modalQnaNum">
-							<span class="pop-btn confirm" id="confirm">등록</span> <span
-								class="pop-btn close" id="close">취소</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<!-- 답변하기 modal -->
-			<!-- The Modal -->
-			<div id="myModal2" class="modal">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<p>
-						<strong>답변하기</strong>
-					</p>
-					<textarea id="content2" name="content" rows="15" cols="40"></textarea>
-					<input type="hidden" value="" id="modalQnaNum">
-					<button id="cmtCnt-btn2">작성</button>
-				</div>
-			</div>
-
-			<br> <br>
-			<div id=getComment></div>
-		</div>
-		<br><br><br><br><br><br><br><br><br><br><br><br>
-		<!-- Review  -->
-		<div>
-			<div class="board">
-				<div class="board_tit">
-					<h2>REVIEW</h2>
-					<a href="/insertReview/${boardNum }">작성</a> <a href="/chat">채팅</a>
-					<div class="sort-wrap clearfix">
-						<ul>
-							<li>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
-								이동될 수 있습니다.</li>
-						</ul>
-						<div id="review"></div>
-					</div>
-				</div>
-
-			</div>
-
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>별점</th>
-				</tr>
-				<c:forEach items="${reviewDto}" var="re">
-					<tr>
-						<td>${re.review_id}</td>
-						<td><a href="view_content">${re.review_content}</a></td>
-						<td>${re.cust_id}</td>
-						<td>${re.review_star}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-
 		<!-- booking -->
 		<div>
 			<form method="post" action="/kakaoPay" id="paybutton">
@@ -546,9 +409,106 @@ geocoder.addressSearch(address, function(result, status) {
 });   
 
 </script>
+
+		<!-- Q&A -->
+		<div>
+			<h1 id="qna">Q&A</h1>
+			<!-- 질문하기 모달 버튼 -->
+			<div id="modal-open" class="button">
+				<a
+					style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
+					class="btn_qna_write"> <span
+					style="font-weight: bold;">✍ 질문 작성하기</span>
+				</a>
+			</div>
+			<!-- 질문하기 modal  -->
+			<div class="container">
+				<div class="popup-wrap" id="popup">
+					<div class="popup">
+						<div class="popup-head">
+							<span class="head-title">질문 작성하기</span>
+						</div>
+						<div class="popup-body">
+							<div class="body-content">
+								<div class="body-titlebox">
+								※질문은 전체 공개됩니다
+								</div>
+								<div class="body-contentbox">
+									<textarea id="question" name="content" rows="6" cols="43" placeholder="질문을 작성하세요."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="popup-foot">
+							<span class="pop-btn confirm" id="confirm">등록</span> <span
+								class="pop-btn close" id="close">취소</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 답변하기 modal -->
+			<div class="container">
+				<div class="popup-wrap" id="popupAnswer">
+					<div class="popupAnswer">
+						<div class="popup-head">
+							<span class="head-title">답변 작성하기</span>
+						</div>
+						<div class="popup-body">
+							<div class="body-content">
+								<div class="body-titlebox">
+								※답변은 전체 공개됩니다
+								</div>
+								<div class="body-contentbox">
+									<textarea id="answer" name="content" rows="6" cols="43" placeholder="답변을 작성하세요."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="popup-foot">
+							<input type="hidden" value="" id="modalQnaNum">
+							<span class="pop-btn confirm" id="confirm">등록</span> <span
+								class="pop-btn close" id="close">취소</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- Review  -->
+		<div>
+			<div class="board">
+				<div class="board_tit">
+					<h2>REVIEW</h2>
+					<a href="/insertReview/${boardNum }">작성</a> <a href="/chat">채팅</a>
+					<div class="sort-wrap clearfix">
+						<ul>
+							<li>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
+								이동될 수 있습니다.</li>
+						</ul>
+						<div id="review"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<table border="1">
+				<tr>
+					<th>번호</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>별점</th>
+				</tr>
+				<c:forEach items="${reviewDto}" var="re">
+					<tr>
+						<td>${re.review_id}</td>
+						<td><a href="view_content">${re.review_content}</a></td>
+						<td>${re.cust_id}</td>
+						<td>${re.review_star}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 	<footer>
 		<%@ include file="../publicCSS/footer.jsp"%>
 	</footer>
+</body>
 </body>
 </html>

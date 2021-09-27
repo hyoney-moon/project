@@ -40,11 +40,10 @@ a {
 .dropdown-menu {
 	border: none;
 }
-#hr {
-hr {
-	height: 70px;
+
+#hr {hr { height:70px;
 	border: 0;
-	box-shadow:0 10px -10px #bbb inset;
+	box-shadow: 0 10px -10px #bbb inset;
 }
 }
 </style>
@@ -63,8 +62,8 @@ hr {
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
-						<a href="/customer/main">
-						<img style="width: 150px;" src="/images/icon/Logo.png" /></a>
+						<a href="/customer/main"> <img style="width: 150px;"
+							src="/images/icon/Logo.png" /></a>
 					</div>
 					<!-- navbar Icon -->
 					<button class="navbar-toggler" type="button"
@@ -76,11 +75,9 @@ hr {
 						id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header h-25">
 							<c:if test="${empty sessionScope.customer }">
-								<a class="textStyle" href="joinForm">
-									<h3
-										class="offcanvas-title text-white position-absolute top-0 
-									start-0 px-4 pt-4"
-										id="offcanvasNavbarLabel">회원 로그인</h3>
+								<a class="textStyle" href="loginForm">
+									<h3 class="offcanvas-title text-white position-absolute top-0 
+									start-0 px-4 pt-4" id="offcanvasNavbarLabel">회원 로그인</h3>
 								</a>
 							</c:if>
 							<c:if test="${!empty sessionScope.customer}">
@@ -88,8 +85,7 @@ hr {
 									class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4"
 									id="offcanvasNavbarLabel">${customer.nickName}님<br>
-									당신만의 <strong>공간을</strong><br>
-									찾아보세요.
+									당신만의 <strong>공간을</strong><br> 찾아보세요.
 								</h3>
 							</c:if>
 							<button type="button"
@@ -108,8 +104,11 @@ hr {
 							<hr class="dropdown-divider">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 fs-5">
 								<li><a class="dropdown-item" href="#">공지사항</a></li>
-								<li><a class="dropdown-item" href="/">메인페이지</a></li>
+								<li><a class="dropdown-item" href="#">메인페이지</a></li>
 								<li><a class="dropdown-item" href="#">리뷰</a></li>
+								<c:if test="${empty sessionScope.customer }">
+									<li><a class="dropdown-item" href="joinForm">회원가입</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>
