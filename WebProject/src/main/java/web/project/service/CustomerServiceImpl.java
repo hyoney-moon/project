@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.project.domain.Customer;
 import web.project.persistence.CustomerRepository;
 
 @Service
@@ -70,6 +71,18 @@ public class CustomerServiceImpl implements CustomerService {
 		countGenderList.add(countGenderW);
 		
 		return countGenderList;
+	}
+
+
+	@Override
+	public void priceUpdate(Long boardNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Customer getCustId(String custId) {
+		return CustRepo.findByCustId(custId);
 	}
 	
 }

@@ -4,27 +4,29 @@ package web.project.service;
 import java.util.List;
 
 import web.project.domain.Board;
-import web.project.domain.BookInfo;
+import web.project.domain.Booking;
 import web.project.domain.BookingDto;
 
 
 public interface BookingService {
 	
+	Booking BoardNum(Long boardNum);
 	
-	BookInfo bookNum(Long bookNum);
+	int permitUpdate(Long boardNum);
 	
-	BookInfo getbook(String custId);
+	Booking bookNum(Long bookNum);
+	
+	Booking getbook(String custId);
 
 	Board getBoard(Long boardNum);
 	
-	
-	BookInfo insertBooking(BookInfo dto);
+	Booking insertBooking(Booking dto);
 	
 	
 	List<String> getListDate(Long boardNum);
 
 
-	void updateBooking(BookInfo dto);
+	void updateBooking(Booking dto);
 
 
 }

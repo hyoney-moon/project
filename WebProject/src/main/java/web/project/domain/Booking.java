@@ -16,14 +16,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Entity implementation class for Entity: Book_infoDto
+ * Entity implementation class for Entity: Booking
  *
  */
 @Entity
-@Table(name = "BOOKING")
 @Getter
 @Setter
-public class BookInfo implements Serializable {
+public class Booking implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -42,12 +41,15 @@ public class BookInfo implements Serializable {
 	private int people;
 	private int price;
 	private int permit;   //호스트가 예약 가능하게 true false 값 전달
+	
 	@ManyToOne
 	@JoinColumn(name = "custId",insertable = false, updatable = false)
 	private Customer customer;
+	
 	@ManyToOne
 	@JoinColumn(name = "hostId",insertable = false, updatable = false)
 	private Host host;
+	
 	@ManyToOne
 	@JoinColumn(name = "boardNum",insertable = false, updatable = false)
 	private Board board;  

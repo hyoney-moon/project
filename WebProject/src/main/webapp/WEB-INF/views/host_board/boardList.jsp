@@ -62,22 +62,24 @@ table.a{margin: 10px auto;}
 				<th>조회수</th>
 			</tr>
 			<c:forEach items="${bList }" var="blist">
-				<tr>
+				<tr id="${blist.boardNum }">
 					<td>${blist.hostId }</td>
 					<td>${blist.category }</td>
-					<td>
-					
+			<td class="img">
+				
+			</td>	
+				<%-- 	<td>
 					<div class="list_item">
 						<div id="carouselExampleControls" class="carousel slide"
 							data-bs-ride="carousel">
 						<!-- 이미지가 안 뜸 ㅜㅜ -->
 							<div class="carousel-inner">
-								<c:forEach items="${blist.frontimg }" var="fis" begin="0" end="0">
+								<c:forEach items="${fis.filePath }" var="fis" begin="0" end="0">
 									<div class="carousel-item active">
 										<img src="${fis.filePath }" class="d-block w-100 list_img" alt="...">
 									</div>
 								</c:forEach>
-								<c:forEach items="${blist.frontimg }" var="fis" begin="1" end="${blist.frontimg.size() }">
+								<c:forEach items="${fis }" var="fis" begin="1" end="${fisize }">
 									<div class="carousel-item">
 										<img src="${fis.filePath }" class="d-block w-100 list_img" alt="...">
 									</div>
@@ -85,13 +87,12 @@ table.a{margin: 10px auto;}
 							</div>
 							</div>
 						</div>
-						</td>
-						
+						</td> --%>
 					<td><a href="viewPost/${blist.boardNum }">${blist.spaceName }</a></td>
 					<td><fmt:formatDate value="${blist.regDate}" pattern="MM.dd" /></td>
 					<td>${blist.readcount }</td>
 				</tr>
-			</c:forEach>
+				</c:forEach>
 		</table>
 		<div id="page">
 			<c:if test="${begin > 2 }">

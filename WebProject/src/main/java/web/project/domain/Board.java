@@ -46,15 +46,13 @@ public class Board implements Serializable {
 	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
 	private int readcount;
 	@Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
+	@DateTimeFormat(pattern = "MM.dd")
 	@Temporal(value = TemporalType.DATE)
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date regDate;
 	private int price;
 	private int headcnt;
 	private String category;
-	private Long frontImgNo;
-	private Long imgNo;
 	@Column(columnDefinition = "number default 0")
 	private Long permit;
 	
@@ -66,12 +64,5 @@ public class Board implements Serializable {
 	@JoinColumn(name="category", insertable = false, updatable = false)
 	private Category categoryFk;
 	
-	//이렇게 하면 DB에 경로까지 저장 됨
-//	@ManyToOne
-//	@JoinColumn(name="frontImgNo", insertable = false, updatable = false)
-//	private FrontImg frontimg;
-//	@ManyToOne
-//	@JoinColumn(name="imgNo", insertable = false, updatable = false)
-//	private Img img;
 	
 }

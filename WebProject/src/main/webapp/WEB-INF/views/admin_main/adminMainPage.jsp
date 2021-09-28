@@ -14,7 +14,7 @@ img{position:relative;}
 </style>
 </head>
 <body>
-<header>
+	<header>
 		<%@ include file="../publicCSS/adminheader.jsp"%>
 	</header>
 	<main>

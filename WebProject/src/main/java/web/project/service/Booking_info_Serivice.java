@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import web.project.domain.Board;
-import web.project.domain.BookInfo;
+import web.project.domain.Booking;
 import web.project.persistence.BoardDtoRepository;
 import web.project.persistence.BoardPickRepository;
 
@@ -31,17 +31,17 @@ public class Booking_info_Serivice implements BookingService {
 		Optional<Board> select = boardrepository.findById(boardNum);
 		return select.get();
 	}
-	public BookInfo getBoardList(Long bookNum) {
-		BookInfo infodto = repository.findByBookNum(bookNum);
+	public Booking getBoardList(Long bookNum) {
+		Booking infodto = repository.findByBookNum(bookNum);
 		return null;
 	}
-	public BookInfo insertBooking(BookInfo dto) {
+	public Booking insertBooking(Booking dto) {
 			return repository.save(dto);
 	}
 	@SuppressWarnings("static-access")
 	@Override
 	public List<String> getListDate(Long boardNum) {
-		List<BookInfo> ListDate = repository.findByBoardNumOrderByStartDateAsc(boardNum);
+		List<Booking> ListDate = repository.findByBoardNumOrderByStartDateAsc(boardNum);
 		// 
 		List<String> totalDate = new ArrayList<String>();
 		for(int i=0; i < ListDate.size(); i++) {
@@ -68,17 +68,25 @@ public class Booking_info_Serivice implements BookingService {
 		return totalDate;
 	}
 	@Override
-	public void updateBooking(BookInfo dto) {
+	public void updateBooking(Booking dto) {
 		
 	}
 	@Override
-	public BookInfo getbook(String custId) {
-		BookInfo book = repository.findByCustId(custId);
+	public Booking getbook(String custId) {
+		Booking book = repository.findByCustId(custId);
 		return book;
 	}
 	@Override
-	public BookInfo bookNum(Long bookNum) {
+	public Booking bookNum(Long bookNum) {
 		return  repository.findByBookNum(bookNum);
+	}
+	@Override
+	public int permitUpdate(Long boardNum) {
+		return repository.permitBooking(boardNum);
+	}
+	@Override
+	public Booking BoardNum(Long boardNum) {
+		return repository.findByBoardNum(boardNum);
 	}
 		
 }

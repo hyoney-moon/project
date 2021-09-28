@@ -8,6 +8,7 @@ import web.project.domain.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
+	
 	// 회원 가입 날짜 통계
 	@Query(value="select count(*) from customer where join_date < '2021-02-01'", nativeQuery=true)
 	long countBeforeJan();
@@ -45,5 +46,11 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 	long countGenderM();
 	@Query(value="select count(*) from customer where gender = 'w'", nativeQuery=true)
 	long countGenderW();
+	
+	// 아이디 중복 체크를 위한 네이티브 쿼리(미완성)
+		@Query(value = "select custId from customer where custId = ?", nativeQuery=true)
+		String idcheck(String custId);
+		
+		Customer findByCustId(String custId);
 	
 }

@@ -17,9 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 
+import web.project.domain.Admin;
 import web.project.domain.Customer;
 import web.project.service.AdminCustomerDbService;
 import web.project.service.BoardService;
@@ -40,8 +43,12 @@ public class AdminCustomerDbController {
 
 	// 회원 DB 조회 페이지로 이동
 	@GetMapping("/customerDb")
-	public String getCustomerList() {
-		return "admin_board/customerDb";
+	public String getCustomerList(@SessionAttribute(required=false) Admin admin) {
+		if(admin != null) {
+			return "admin_board/customerDb";
+		} else {
+			return "login/requiredLogin";
+		}
 	}
 	
 	// 회원 DB 조회(Ajax)
@@ -153,7 +160,8 @@ public class AdminCustomerDbController {
 		}
 	
 	@GetMapping("/customerStatisticsInfo")
-	public String getCustomerInfo(Model m) {
+	public String getCustomerInfo(@SessionAttribute(required=false) Admin admin, Model m) {
+		if(admin != null) {
 		// 일반회원 통계 조회
 		List<Long> custNumList = customerService.getCustCount();
 		m.addAttribute("custNumList",custNumList);
@@ -173,6 +181,9 @@ public class AdminCustomerDbController {
 		m.addAttribute("genderList",genderList);
 		
 		return "admin_board/customerStatisticsInfo";
+		} else {
+			return "login/requiredLogin";
+		}
 	}
 
 }

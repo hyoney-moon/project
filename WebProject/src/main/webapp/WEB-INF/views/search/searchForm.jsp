@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,43 +70,21 @@ a {
 						<th>카테고리</th>
 						<th>이미지</th>
 						<th>공간명</th>
-						<!-- <th>작성일</th> -->
+						<th>작성일</th>
 						<th>조회수</th>
 					</tr>
-					<%-- <c:forEach items="${bList }" var="blist">
-						<tr>
+					<c:forEach items="${bList }" var="blist">
+						<tr id="${blist.boardNum }">
 							<td>${blist.hostId }</td>
 							<td>${blist.category }</td>
-							<td>
-								<div class="list_item">
-									<div id="carouselExampleControls" class="carousel slide"
-										data-bs-ride="carousel">
-										<!-- 이미지가 안 뜸 ㅜㅜ -->
-										<div class="carousel-inner">
-											<c:forEach items="${blist.frontimg }" var="fis" begin="0"
-												end="0">
-												<div class="carousel-item active">
-													<img src="${fis.filePath }" class="d-block w-100 list_img"
-														alt="...">
-												</div>
-											</c:forEach>
-											<c:forEach items="${blist.frontimg }" var="fis" begin="1"
-												end="${blist.frontimg.size() }">
-												<div class="carousel-item">
-													<img src="${fis.filePath }" class="d-block w-100 list_img"
-														alt="...">
-												</div>
-											</c:forEach>
-										</div>
-									</div>
-								</div>
+							<td class="img">
+								
 							</td>
 							<td><a href="viewPost/${blist.boardNum }">${blist.spaceName }</a></td>
 							<td><fmt:formatDate value="${blist.regDate}" pattern="MM.dd" /></td>
 							<td>${blist.readcount }</td>
 						</tr>
-					</c:forEach> --%>
-					
+					</c:forEach>
 				</table>
 				<div id="page">
 					<c:if test="${begin > 2 }">
@@ -124,6 +102,10 @@ a {
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script>
 	$(function(){
+		/* $("#search").keypress(function(){
+			$('#searchbtn').click();
+		}); */
+		
 		$("#searchbtn").click(function(){
 			var search_option = $("#search_option").val();
 			var search = $("#search").val(); 
@@ -133,21 +115,71 @@ a {
 				data:"search_option="+search_option+"&search="+search,
 				dataType: "JSON"
 			}).done(function(data){
-				alert("test"+data.length)
 				$("#searchList").empty();
+				
 				for(var i = 0; i < data.length; i++){
 					$("#searchList").append(
-							"<tr><td>"+data[i]["hostId"]+"</td>"+
-							"<td>"+data[i]["category"]+"</td>"+
-							"<td>"+data[i]["frontImg"]+"</td>"+
-							"<td>"+data[i]["placeName"]+"</td>"+
-							"<td>"+data[i]["readcount"]+"</td></tr>"
-					)
-				}
+							"<tr> <th>작성자</th> <th>카테고리</th> <th>이미지</th> <th>공간명</th> <th>작성일</th> <th>조회수</th> </tr>"+
+							"<tr id=" + data[i].boardNum + "><td>"+data[i].hostId+"</td>"+
+							"<td>"+data[i].category+"</td>"+
+							"<td class='img'></td>" +
+							"<td>"+data[i].spaceName+"</td>"+
+							"<td>"+data[i].regDate + "</td>"+
+							"<td>"+data[i].readcount+"</td></tr>"
+					)}
+				get();
 			});
+			function get(){
+				
+			
+			$("tr").each(function(){
+				var id = $(this).attr("id")
+				if(id != undefined){
+				var tr = $(" .img", this)
+				//
+				$.ajax({
+					url: "/customer/getSearchImgs",
+					data: "boardNum=" + id,
+					dataType: "JSON"
+				}).done(function(args){
+					var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
+					str += "<div class='carousel-item active'><img src="+args[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
+					for(var i = 1; i< args.length; i++){
+					str += "<div class='carousel-item'> <img src="+ args[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+					}
+					str += "</div> </div> </div>"
+					
+					$(tr).append(str);
+					
+				})
+				}
+			})
+			}
+		})
+		$("tr").each(function(){
+			var id = $(this).attr("id")
+			if(id != undefined){
+			var tr = $(" .img", this)
+			//
+			$.ajax({
+				url: "/customer/getImgs",
+				data: "boardNum=" + id,
+				dataType: "JSON"
+			}).done(function(data){
+				
+				var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
+				str += "<div class='carousel-item active'><img src="+data[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
+				for(var i = 1; i< data.length; i++){
+				str += "<div class='carousel-item'> <img src="+ data[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+				}
+				str += "</div> </div> </div>"
+				
+				$(tr).append(str);
+				
+			})
+			}
 		})
 	})
 	</script>
 </body>
-
 </html>

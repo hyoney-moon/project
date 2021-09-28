@@ -27,13 +27,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
+import web.project.domain.Booking;
 import web.project.domain.Category;
 import web.project.domain.CustQna;
+import web.project.domain.Customer;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.Img;
 import web.project.service.BoardService;
+import web.project.service.BookingService;
 import web.project.service.CategoryService;
+import web.project.service.CustomerService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
 import web.project.service.QnaService;
@@ -60,7 +64,10 @@ public class HostBoardController implements ApplicationContextAware {
 	private QnaService qnaService;
 	@Autowired
 	private CategoryService categoryService;
-	
+	@Autowired
+	BookingService service;
+	@Autowired
+	CustomerService custSerivce;
 	//공간등록폼
 	@GetMapping("/insertBoardForm")
 	public String postBoard(Model model, Host host) {
@@ -157,7 +164,7 @@ public class HostBoardController implements ApplicationContextAware {
 		@RequestMapping("/viewBoard")
 		public String viewBoard(Model model,
 				@RequestParam(name="p", defaultValue="1")int pNum, 
-				@ModelAttribute("host")Host host, String hostId) {
+				@ModelAttribute("host")Host host, String hostId, Long boardNum) {
 			//호스트 아이디로 로그인 된게 없으면 호스트 로그인 폼으로
 			if(host.getHostId() == null) {
 				return "login/hostLoginForm";
@@ -179,6 +186,18 @@ public class HostBoardController implements ApplicationContextAware {
 			
 			return "host_board/boardList";
 		}
+		// 예약시 호스트와 커스터머 price값 주고 permit 번호 변경하기
+		/*
+		 * @PostMapping("/viewBoard") public String viewUpdate(Long
+		 * boardNum,@ModelAttribute("host")Host hostId) { Booking bookcustId =
+		 * service.BoardNum(boardNum); String custId = bookcustId.getCustId(); Customer
+		 * custPrice =custSerivce.getCustId(custId); int boardPrice =
+		 * bookcustId.getPrice(); Long total = custPrice.getCash() - boardPrice;
+		 * Customer PriceUpdate = int permit = service.permitUpdate(boardNum); Board
+		 * dto1 = service.getBoard(boardNum);
+		 * 
+		 * return "redirect:boardList"; }
+		 */
 		
 		@RequestMapping("/viewPost/{boardNum}")
 		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
@@ -188,6 +207,15 @@ public class HostBoardController implements ApplicationContextAware {
 			List<FrontImg> fis = frontImgService.viewImg(boardNum);
 			model.addAttribute("fis", fis);
 			model.addAttribute("fisize", fis.size());
+			
+			Board board =  service.getBoard(boardNum);
+			model.addAttribute("board", board);
+			//사용자가 받는 데이터값 유효성 검사 단계
+			 List<String> dateList = service.getListDate(boardNum);
+			Gson json = new Gson();
+			
+			model.addAttribute("dateList",json.toJson(dateList));
+			
 			return "host_board/viewPost";
 		}
 
