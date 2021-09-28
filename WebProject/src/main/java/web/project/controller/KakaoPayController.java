@@ -96,6 +96,7 @@ public class KakaoPayController {
         long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
         int price = (int)(numBoard.getPrice()*diffrence);
 		dto.setPrice(price);
+		
 		return booking.insertBooking(dto);
 		//return "redirect:/main";
 	}

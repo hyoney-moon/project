@@ -9,6 +9,8 @@ public interface ImgService {
 
 	Img saveImg(Img img);
 
-//	List<Img> getImgList();
+	List<Img> viewImg(Long boardNum);
+
+	List<Img> viewList();
 
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@
            setConnected(true);
            console.log('Connected: ' + frame);
            stompClient.subscribe('/topic/public', function (message) {
-               showMessage("¹ŞÀº ¸Ş½ÃÁö: " + message.body); //¼­¹ö¿¡ ¸Ş½ÃÁö Àü´Ş ÈÄ ¸®ÅÏ¹Ş´Â ¸Ş½ÃÁö
+               showMessage("ë°›ì€ ë©”ì‹œì§€: " + message.body); //ì„œë²„ì— ë©”ì‹œì§€ ì „ë‹¬ í›„ ë¦¬í„´ë°›ëŠ” ë©”ì‹œì§€
            });
        });
    }
@@ -46,11 +46,11 @@
        console.log("Disconnected");
    }
 
-   function sendMessage() {
-       let message = $("#msg").val()
-       showMessage("º¸³½ ¸Ş½ÃÁö: " + message);
+   function sendMessage(message) {
+       //let message = $("#msg").val()
+       showMessage("ë³´ë‚¸ ë©”ì‹œì§€: " + message);
 
-       stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //¼­¹ö¿¡ º¸³¾ ¸Ş½ÃÁö
+       stompClient.send("/app/sendMessage", {}, JSON.stringify(message)); //ì„œë²„ì— ë³´ë‚¼ ë©”ì‹œì§€
    }
 
    function showMessage(message) {
@@ -64,8 +64,40 @@
        $( "#connect" ).click(function() { connect(); });
        $( "#disconnect" ).click(function() { disconnect(); });
        $( "#send" ).click(function() { sendMessage(); });
-       $("#send2").click(function() { sendMessage(); });
    });
+   
+   function host(){
+	   sendMessage("í˜¸ìŠ¤íŠ¸");
+   }
+   
+   function guest(){
+	   sendMessage("ê²ŒìŠ¤íŠ¸");
+   }
+   
+   function host1(){
+	   sendMessage("ê³µê°„ë“±ë¡ë¬¸ì˜");
+   }
+   
+   function host2(){
+	   sendMessage("ê³µê°„ê²€ìˆ˜ë¬¸ì˜");
+   }
+   
+   function host3(){
+	   sendMessage("ì˜ˆì•½ì·¨ì†Œë¬¸ì˜");
+   }
+   
+   function guest1(){
+	   sendMessage("ê³µê°„ì´ìš©ë¬¸ì˜");
+   }
+   
+   function guest2(){
+	   sendMessage("ì˜ˆì•½ì·¨ì†Œë¬¸ì˜");
+   }
+   
+   function guest3(){
+	   sendMessage("ê²°ì œì˜¤ë¥˜ë¬¸ì˜");
+   }
+ 
    </script>
 </head>
 <body>
@@ -74,9 +106,9 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="connect">À¥¼ÒÄÏ ¿¬°á:</label>
-                    <button id="connect" class="btn btn-default" type="submit">¿¬°á</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">ÇØÁ¦
+                    <label for="connect">ë¬¸ì˜í•˜ê¸°:</label>
+                    <button id="connect" class="btn btn-default" type="submit">ì‹œì‘</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">ì¢…ë£Œ
                     </button>
                 </div>
             </form>
@@ -84,20 +116,18 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="msg">¹®ÀÇ»çÇ×</label>
-                    <input type="text" id="msg" class="form-control" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä....">
+                    <label for="msg">ë¬¸ì˜ì‚¬í•­</label>
+                    <!-- <input type="text" id="msg" class="form-control" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”...."> -->
                 </div>
-                <button id="send" class="btn btn-default" disabled type="submit">º¸³»±â</button>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="msg">¹®ÀÇ»çÇ×</label>
-                    <input type="text" id="msg" class="form-control" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä....">
-                </div>
-                <button id="send2" class="btn btn-default" disabled type="submit">º¸³»±â</button>
-               	
+                <!-- <button id="send" class="btn btn-default" disabled type="submit">ë³´ë‚´ê¸°</button> -->
+                <button id="send" onclick="host()">í˜¸ìŠ¤íŠ¸</button>
+                <button id="send" onclick="guest()">ê²ŒìŠ¤íŠ¸</button>
+                <button id="send" onclick="host1()">ê³µê°„ ë“±ë¡ ë¬¸ì˜</button>
+                <button id="send" onclick="host2()">ê³µê°„ ê²€ìˆ˜ ë¬¸ì˜</button>
+                <button id="send" onclick="host3()">ì˜ˆì•½ ì·¨ì†Œ ë¬¸ì˜</button>
+                <button id="send" onclick="guest1()">ê³µê°„ ì´ìš© ë¬¸ì˜</button>
+                <button id="send" onclick="guest2()">ì˜ˆì•½ ì·¨ì†Œ ë¬¸ì˜</button>
+                <button id="send" onclick="guest3()">ê²°ì œ ì˜¤ë¥˜ ë¬¸ì˜</button>
             </form>
         </div>
     </div>
@@ -106,7 +136,7 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>¸Ş¼¼Áö</th>
+                    <th>ë©”ì„¸ì§€</th>
                 </tr>
                 </thead>
                 <tbody id="communicate">

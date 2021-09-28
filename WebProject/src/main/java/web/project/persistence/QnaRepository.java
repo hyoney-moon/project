@@ -17,7 +17,7 @@ public interface QnaRepository extends JpaRepository<CustQna, Long> {
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE CustQna c SET c.hostContent = ?1 WHERE c.qnaNum = ?2")
+	@Query("UPDATE CustQna c SET c.hostContent = ?1, c.replyDate = sysdate WHERE c.qnaNum = ?2")
 	void updateCustQna(String hostContent, Long qnaNum);
 	
 }

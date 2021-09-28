@@ -78,8 +78,4 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	void likesUpdate(@Param("review_id")int review_id);
 
 	Page<Review> findByOrderByBoardNumDesc(Pageable page);
-
-
-
-
 }

@@ -10,11 +10,11 @@ import web.project.domain.BookingDto;
 
 public interface BookingService {
 	
-	Booking BoardNum(Long boardNum);
 	
 	int permitUpdate(Long boardNum);
 	
 	Booking bookNum(Long bookNum);
+	
 	
 	Booking getbook(String custId);
 
@@ -25,6 +25,7 @@ public interface BookingService {
 	
 	List<String> getListDate(Long boardNum);
 
+	List<Booking> getListBooking(Long boardNum);
 
 	void updateBooking(Booking dto);
 

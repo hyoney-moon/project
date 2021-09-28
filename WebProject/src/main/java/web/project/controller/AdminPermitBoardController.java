@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import web.project.domain.Admin;
 import web.project.domain.Board;
 import web.project.service.AdminPermitBoardService;
 
@@ -22,8 +24,13 @@ public class AdminPermitBoardController {
 	
 	// 승인 대기 게시글 조회
 	@GetMapping("/preBoard")
-	public String loading() {
-		return "admin_board/permitBoardList";
+	public String loading(@SessionAttribute(required=false) Admin admin) {
+		if(admin != null) {
+			return "admin_board/permitBoardList";
+		} else {
+			return "redirect:/adminLogin/loginForm";
+		}
+		//return "admin_board/permitBoardList";
 	}
 	
 	// 승인 대기 게시글 조회(ajax 호출)
@@ -49,13 +56,13 @@ public class AdminPermitBoardController {
 	
 	// 승인 전 게시글 삭제
 	@PostMapping("/rejectBoard")
-	public void deletePermitBoard(@RequestBody List<Board> board) {
+	public void rejectPermitBoard(@RequestBody List<Board> board) {
 		List<Long> boardNum = new ArrayList<>();
 		
 		for(int i=0; i < board.size(); i++) {
 			boardNum.add(board.get(i).getBoardNum());
 		}
 		
-		adminPermitBoardService.deletePermitBoard(boardNum);
+		adminPermitBoardService.rejectPermitBoard(boardNum);
 	}
 }

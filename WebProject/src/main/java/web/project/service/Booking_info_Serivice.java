@@ -84,8 +84,9 @@ public class Booking_info_Serivice implements BookingService {
 	public int permitUpdate(Long boardNum) {
 		return repository.permitBooking(boardNum);
 	}
+
 	@Override
-	public Booking BoardNum(Long boardNum) {
+	public List<Booking> getListBooking(Long boardNum) {
 		return repository.findByBoardNum(boardNum);
 	}
 		

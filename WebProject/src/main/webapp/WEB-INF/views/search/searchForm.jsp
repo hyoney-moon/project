@@ -21,29 +21,15 @@
 body {
 	padding-top: 40px;
 }
-
-.headText {
-	padding: 50px;
-	text-align: center;
+a{text-decoration: none;}
+a:link {
+	text-decoration: none;
 }
 
-table {
-	border-collapse: collapse;
-	text-align: center;
+a:visited {
+	text-decoration: none;
 }
 
-th {
-	background-color: white;
-	width: 150px;
-}
-
-a {
-	margin: 10px auto;
-}
-
-#page {
-	text-align: center;
-}
 </style>
 </head>
 <body>
@@ -54,12 +40,13 @@ a {
 	<div class="container ">
 		<form action="searchBoard" method="post">
 			<select name="search_option" id ="search_option"
-				class="form-select form-select-lg mb-3 w-25"
+				class="form-select form-select-lg mb-2"
 				aria-label=".form-select-lg example">
 				<option selected>Select</option>
 				<option value="1">공간명</option>
 				<option value="2">카테고리</option>
 				<option value="3">지역별</option>
+<<<<<<< HEAD
 			</select> <input id="search" name="search" class="form-control form-control-lg"
 				type="text" placeholder="검색어를 입력하세요."
 				aria-label=".form-control-lg example"> <input type="button"
@@ -96,17 +83,79 @@ a {
 					<c:if test="${end < totalCount }">
 						<a href="searchForm?p=${end+1}">[다음]</a>
 					</c:if>
+=======
+			</select>
+			
+			<div class="input-group mb-5 col">
+			<input id="search" name="search" type="text"
+					class="form-control form-control-lg " placeholder="검색어를 입력하세요."
+					aria-label="Recipient's username" aria-describedby="button-addon2">
+				<button class="btn btn-outline-secondary" type="button"
+					id="button-addon2">검색</button>
+			</div>	
+			
+		<section class="mb-5">
+		<div class="row row-cols-1 row-cols-md-2 g-4" id="searchList">
+		<c:forEach items="${bList }" var="blist" >
+			<div class="col" id="${blist.boardNum }" >
+				<div class="card" >
+					<a href="viewPost/${blist.boardNum }"><div class="img" ></div></a>
+						<div class="card-body">
+							<a href="viewPost/${blist.boardNum }"><h5 class="card-title">${blist.spaceName }</h5></a>
+							<p class="card-text">${blist.contentOneline }</p>
+						</div>
 				</div>
+>>>>>>> 6a66f65c0132eb8e60ca1b4568f30fa6f6198e04
+				</div>
+			</c:forEach>
+			</div>
+		</section>		
 		</form>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<footer>
+	<%@ include file="../publicCSS/footer.jsp"%>
+</footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+	$(function(){	
+		//searchForm 들어오자 마자 화면에 이미지 출력
+		$("div").each(function(){
+			var id = $(this).attr("id")
+			if(id != undefined){
+			var tr = $(" .img", this)
+			//
+			$.ajax({
+				url: "/customer/getImgs",
+				data: "boardNum=" + id,
+				dataType: "JSON"
+			}).done(function(data){
+				
+				var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
+				str += "<div class='carousel-item active'><img src="+data[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
+				for(var i = 1; i< data.length; i++){
+				str += "<div class='carousel-item'> <img src="+ data[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+				}
+				str += "</div> </div> </div>"
+				
+				$(tr).append(str);
+				
+			})
+			}
+		})
+	})	
+</script>		
 	<script>
+<<<<<<< HEAD
 	$(function(){
 		/* $("#search").keypress(function(){
 			$('#searchbtn').click();
 		}); */
 		
 		$("#searchbtn").click(function(){
+=======
+		$("#button-addon2").click(function(){
+>>>>>>> 6a66f65c0132eb8e60ca1b4568f30fa6f6198e04
 			var search_option = $("#search_option").val();
 			var search = $("#search").val(); 
 			$.ajax({
@@ -119,6 +168,7 @@ a {
 				
 				for(var i = 0; i < data.length; i++){
 					$("#searchList").append(
+<<<<<<< HEAD
 							"<tr> <th>작성자</th> <th>카테고리</th> <th>이미지</th> <th>공간명</th> <th>작성일</th> <th>조회수</th> </tr>"+
 							"<tr id=" + data[i].boardNum + "><td>"+data[i].hostId+"</td>"+
 							"<td>"+data[i].category+"</td>"+
@@ -133,11 +183,22 @@ a {
 				
 			
 			$("tr").each(function(){
+=======
+							"<div class='col' id=" +data[i].boardNum+ "><div class='card' ><a href='viewPost/" + data[i].boardNum +"'><div class='img'></div></a><div class='card-body'>"+
+										"<a href='viewPost/" + data[i].boardNum +"'><h5 class='card-title'>" +data[i].spaceName+ "</h5></a><p class='card-text'>"+data[i].contentOneline+ "</p></div></div></div>"
+					)}//for
+				get();
+			})//done
+			});//click
+		function get(){
+			$("div").each(function(){
+>>>>>>> 6a66f65c0132eb8e60ca1b4568f30fa6f6198e04
 				var id = $(this).attr("id")
 				if(id != undefined){
 				var tr = $(" .img", this)
 				//
 				$.ajax({
+<<<<<<< HEAD
 					url: "/customer/getSearchImgs",
 					data: "boardNum=" + id,
 					dataType: "JSON"
@@ -146,11 +207,23 @@ a {
 					str += "<div class='carousel-item active'><img src="+args[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
 					for(var i = 1; i< args.length; i++){
 					str += "<div class='carousel-item'> <img src="+ args[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+=======
+					url: "/customer/getImgs",
+					data: "boardNum=" + id,
+					dataType: "JSON"
+				}).done(function(data){
+					
+					var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
+					str += "<div class='carousel-item active'><img src="+data[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
+					for(var i = 1; i< data.length; i++){
+					str += "<div class='carousel-item'> <img src="+ data[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+>>>>>>> 6a66f65c0132eb8e60ca1b4568f30fa6f6198e04
 					}
 					str += "</div> </div> </div>"
 					
 					$(tr).append(str);
 					
+<<<<<<< HEAD
 				})
 				}
 			})
@@ -183,3 +256,12 @@ a {
 	</script>
 </body>
 </html>
+=======
+					})//done
+				}//if
+				})//each
+			}//get 
+ 
+	</script>
+</html>
+>>>>>>> 6a66f65c0132eb8e60ca1b4568f30fa6f6198e04

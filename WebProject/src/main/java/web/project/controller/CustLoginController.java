@@ -47,17 +47,6 @@ public class CustLoginController implements ApplicationContextAware{
 	private WebApplicationContext context = null;
 	
 	
-	//회원 메인
-	@RequestMapping("/main")
-	public String mainStart(Model m) {
-		List<Board> dto = service.getBoardList();
-		m.addAttribute("board",dto);
-		// 카테고리 리스트 출력
-		List<Category> category = cateService.selectCate();
-		m.addAttribute("category",category);
-		return "custmain/main";
-	}
-	
 	// 회원가입 폼
 		@RequestMapping("/joinForm")
 		public String joinForm() {

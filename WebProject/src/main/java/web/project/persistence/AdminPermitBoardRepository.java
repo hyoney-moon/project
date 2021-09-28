@@ -21,6 +21,6 @@ public interface AdminPermitBoardRepository extends JpaRepository<Board, Long> {
 	
 	@Transactional
 	@Modifying
-	@Query("DELETE FROM Board b WHERE b.boardNum = ?1")
-	void deletePermitBoard(Long boardNum);
+	@Query("UPDATE Board b SET b.permit = 2 WHERE b.boardNum = ?1")
+	void rejectPermitBoard(Long boardNum);
 } 

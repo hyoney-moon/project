@@ -11,7 +11,7 @@ import web.project.domain.Booking;
 
 public interface BoardPickRepository extends JpaRepository<Booking, Long>{
 	
-	Booking findByBoardNum(Long boardNum);
+	List<Booking> findByBoardNum(Long boardNum);
 
 	Booking findByCustId(String custId);
 	
@@ -24,5 +24,7 @@ public interface BoardPickRepository extends JpaRepository<Booking, Long>{
 	@Query("update Booking b set b.permit = 1 where b.boardNum = ?1")
 	int permitBooking(Long bookNum);
 	
+	
 	List<Booking> findByBoardNumOrderByStartDateAsc(Long boardNum);
+	//
 }

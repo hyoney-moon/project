@@ -69,7 +69,6 @@ public class BoardServiceImpl implements BoardService {
 	//호스트 아이디로 저장된 게시글 상세보기
 	@Override
 	public Board viewPost(Long boardNum) {
-		boardRepo.updateReadcount(boardNum);
 		return boardRepo.findByBoardNum(boardNum);
 	}
 
@@ -117,4 +116,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepo.findByOrderByBoardNumDesc(page);
 	}
 
+	@Override
+	public void deleteById(Long boardNum) {
+		boardRepo.deleteById(boardNum);
+	}
+	
 }

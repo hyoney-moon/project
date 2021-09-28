@@ -17,9 +17,6 @@
 <form method="post" action="/kakaoPay">
 	<input type="image" id="payimg" src="img/payment_icon_yellow_medium.png"/>
 	<input type="hidden" name="" value="">
-	<input type="hidden" name="" value="">
-	<input type="hidden" name="" value="">
-	<input type="hidden" name="" value="">
 </form>
 
 

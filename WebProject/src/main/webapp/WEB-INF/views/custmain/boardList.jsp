@@ -36,7 +36,22 @@
 </head>
 <body>
 	<div class="container">
-		<table>
+	<section class="mt-5">
+		<div class="row row-cols-1 row-cols-md-2 g-4">
+		<c:forEach items="${board }" var="board" begin="0" end="3">
+			<div class="col" id="${board.boardNum }">
+				<div class="card" >
+					<div class="img"></div>
+						<div class="card-body">
+							<h5 class="card-title">${board.spaceName }</h5>
+							<p class="card-text">${board.contentOneline }</p>
+						</div>
+				</div>
+				</div>
+			</c:forEach>
+			</div>
+			</section>
+		<%-- <table>
 			<tr>
 				<th>작성자</th>
 				<th>카테고리</th>
@@ -54,7 +69,6 @@
 					<div class="list_item">
 						<div id="carouselExampleControls" class="carousel slide"
 							data-bs-ride="carousel">
-						<!-- 이미지가 안 뜸 ㅜㅜ -->
 							<div class="carousel-inner">
 								<c:forEach items="${blist.frontimg }" var="fis" begin="0" end="0">
 									<div class="carousel-item active">
@@ -67,17 +81,6 @@
 									</div>
 								</c:forEach>
 							</div>
-
-							<!-- <button class="carousel-control-prev" type="button"
-								data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							</button>
-							<button class="carousel-control-next" type="button"
-								data-bs-target="#carouselExampleControls" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							</button> -->
 							</div>
 						</div>
 						</td>
@@ -98,7 +101,7 @@
 			<c:if test="${end < totalCount }">
 				<a href="/viewBoard?p=${end+1}">[다음]</a>
 			</c:if>
-		</div>
-	</div>
+		</div>--%>
+	</div> 
 </body>
 </html>

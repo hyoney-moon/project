@@ -64,7 +64,7 @@ hr {
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
 
-						<a href="main"><img style="width: 150px;"
+						<a href="main"><img style="width: 150px; "
 							src="/images/icon/Logo.png" /></a>
 
 					</div>
@@ -100,9 +100,9 @@ hr {
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
 								<li><a class="dropdown-item" href="/adminCustomerDb/customerDb">일반회원 DB 조회</a></li>
-								<li><a class="dropdown-item" href="#">호스트 DB 조회</a></li>
+								<li><a class="dropdown-item" href="/admin/getHostList">호스트 DB 조회</a></li>
 								<li><a class="dropdown-item" href="/adminCustomerDb/customerStatisticsInfo">일반회원 통계 조회</a></li>
-								<li><a class="dropdown-item" href="#">호스트 통계 조회</a></li>
+								<li><a class="dropdown-item" href="/admin/getHostInfo">호스트 통계 조회</a></li>
 								<li><a class="dropdown-item" href="/adminPermitBoard/preBoard">관리자 게시글 허가</a></li>
 								<c:if test="${!empty sessionScope.admin }">
 									<li><a class="dropdown-item" href="/adminLogin/logout">로그아웃</a></li>

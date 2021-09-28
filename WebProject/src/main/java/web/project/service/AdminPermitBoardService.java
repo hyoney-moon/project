@@ -12,5 +12,5 @@ public interface AdminPermitBoardService {
 	void permitBoard(List<Long> boardNum);
 	
 	// 승인 전 게시글 삭제
-	void deletePermitBoard(List<Long> boardNum);
+	void rejectPermitBoard(List<Long> boardNum);
 }

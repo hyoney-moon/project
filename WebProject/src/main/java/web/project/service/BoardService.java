@@ -35,4 +35,7 @@ public interface BoardService {
 	Page<Board> getHostBoardList(int pNum, String hostId);
 
 	Page<Board> getCustBoardList(int pNum);
+
+	void deleteById(Long boardNum);
+
 }
