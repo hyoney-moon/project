@@ -28,7 +28,7 @@ public class Review implements Serializable {
 	private Long review_id;
 	@GeneratedValue
 	private Long boardNum;
-	private String host_id, cust_id, review_content, review_img, review_anscon, review_answer;
+	private String hostId, custId, review_content, review_img, review_anscon, review_answer;
 	private int review_star;
 	private String review_date;
 	

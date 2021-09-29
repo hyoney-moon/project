@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import web.project.domain.Review;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Integer> {
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 	
 /*	@Transactional
 	@Modifying*/
@@ -78,5 +78,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	void likesUpdate(@Param("review_id")int review_id);
 
 	Page<Review> findByOrderByBoardNumDesc(Pageable page);
-
+	//void deleteAll(Long review_id);
+	
 }

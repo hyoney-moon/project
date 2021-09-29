@@ -64,7 +64,7 @@ a:visited {
 				<div class="col mw-100">
 					<div class="card">
 						<div class="card-body">
-							<a href="/bookingpage/${cate.category}">
+							<a href="#">
 							<h5 class="card-title">${cate.category }</h5></a>
 						</div>
 					</div>

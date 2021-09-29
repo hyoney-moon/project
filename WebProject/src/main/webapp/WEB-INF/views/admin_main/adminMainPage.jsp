@@ -11,6 +11,12 @@ main{margin-top: 30px;}
 a{text-decoration: none;}
 img{position:relative;}
 .zIndex{position: absolute; top: 65%;}
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
 </style>
 </head>
 <body>

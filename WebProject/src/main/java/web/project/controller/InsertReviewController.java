@@ -33,7 +33,7 @@ public class InsertReviewController {
 
 		m.addAttribute("boardNum", boardNum);
 		HttpSession session = request.getSession();
-		String cust_id = (String) session.getAttribute("cust_id");
+		String custId = (String) session.getAttribute("custId");
 		/*
 		 * if(cust_id == null) {
 		 * 
@@ -55,10 +55,10 @@ public class InsertReviewController {
 		HttpSession session = request.getSession();
 		String cust_id = (String) session.getAttribute("cust_id");
 		String asc = inter.currentReview_asc(dto);
-		dto.setCust_id(cust_id);
+		dto.setCustId(cust_id);
 		
 		//파일 업로드
-	    String root_path = request.getSession().getServletContext().getRealPath("resources/review_img");  
+	    String root_path = request.getSession().getServletContext().getRealPath("img/review_img");  
 	    String attach_path = "/";
 	    String FILE_PATH = root_path + attach_path;
 	    System.out.println("제바바아아ㅏ라ㅏ라라라라ㅏ" + FILE_PATH);

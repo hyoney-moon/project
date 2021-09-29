@@ -74,10 +74,11 @@ div.msg {color: red;}
 		<%@ include file="../publicCSS/hostheader.jsp"%>
 	</header>
 	<div class="container">
-		<form action="insertBoard" method="post" id="postBoardCheck" enctype="multipart/form-data">
+	
+		<form action="/host/modifyPost" method="post" id="postBoardCheck" enctype="multipart/form-data">
+		<input type="hidden" name="boardNum" value="${view.boardNum }">
 			공간명<br>
-			${ }
-				
+				<h1 class="display-5 fw-normal">${view.spaceName }</h1>
 				공간유형<br>
 			<div class="row justify-content-between mb-3">
 				<div class="col">
@@ -89,6 +90,10 @@ div.msg {color: red;}
 					</select>
 				</div>
 			</div>
+			최대 인원<br>
+			<input id="headcnt" name="headcnt" class="form-control mb-3"
+				type="text" placeholder="최대 인원"
+				aria-label="default input example">
 
 			공간 한줄 소개 <input id="contentOneline" name="contentOneline" class="form-control mb-3"
 				type="text" placeholder="내 귀염 뽀짝한 공간을 한줄로 표현한다면?"
@@ -162,33 +167,11 @@ div.msg {color: red;}
 			</div>
 			<div id="price_msg" class="mb-3"></div>
 
-			<input type="submit" value="내 마음속에 저장 ❤"
+			<input type="submit" value="글 수정"
 				class="w-100 btn btn-outline-danger mb-5" style="height: 50px;">
 		</form>
 	</div>
 </body>
-<script>
-$(function(){
-	$("#postBoardCheck").submit(function(){
-		if(!$("#spaceName").val()){
-			$("#space_msg").html("*필수")
-			return false;
-		}if(!$("#contentOneline").val()){
-			$("#contentOneline_msg").html("*필수")
-			return false;
-		}if(!$("#content").val()){
-			$("#content_msg").html("*필수")
-			return false;
-		}if(!$("#direction").val()){
-			$("#direction_msg").html("*필수")
-			return false;
-		}if(!$("#zipcode").val()){
-			$("#address_msg").html("*필수")
-			return false;
-		}
-	})
-})
-</script>
 </html>
 
 

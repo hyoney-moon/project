@@ -4,7 +4,7 @@
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <section class="content">
 	<!-- 회원가입 -->
-	<form action="join" id="registerform" enctype="multipart/form-data" method="post"
+	<form action="/join" id="registerform" enctype="multipart/form-data" method="post"
 	onsubmit="return check()">
 		<p align="center">
 		<table border="1" width="50%" height="80%" align='center'>
@@ -17,7 +17,7 @@
 			<tr>
 				<td rowspan="6" align="center">	<p></p>
 				<img id="img" width="100" height="100" border="1" /> <br />
-				<br /> <input type='file' id="profile" name="profile2" /><br /></td>
+				<br /> <input type='file' id="profile" name="profile2" required="required" /><br /></td>
 			</tr>
 			
 
@@ -47,14 +47,14 @@
 			
 			<tr>
 				<td bgcolor="#f5f5f5"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호</font></td>
-				<td>&nbsp;&nbsp;&nbsp; <input type="password" name="password" id="pw"
+				<td>&nbsp;&nbsp;&nbsp; <input type="password" name ="password" id="pw"
 					size="20" required="required" />
-					<div id=passwordDiv"></div>
+					<div id=pwDiv"></div>
 				</td>
 			</tr>
 			<tr>
 				<td bgcolor="#f5f5f5"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;비밀번호 확인</font></td>
-				<td>&nbsp;&nbsp;&nbsp; <input type="password" id="password"
+				<td>&nbsp;&nbsp;&nbsp; <input type="password" name="pwconfirm" id="pwconfirm"
 					size="20" required="required" />
 				</td>
 			</tr>
@@ -143,7 +143,7 @@ let filename = ''
 	let idcheck= false;
 	
 	function confirmId() {
-		let addr = "/customer/idcheck";
+		let addr = "customer/idcheck";
 		// custId 란의 값을 가져오기
 		let custId = document.getElementById("custId").value;
 		// custId 값을 가지고 중복 검사를 위한 ajax 요청
@@ -172,29 +172,35 @@ let filename = ''
 	
 	// 유혀성 검사를 위한 스크립트
 	// 전송 버튼을 눌렀을 경우 수행
+	
 	function check(){
+		
 		if(idcheck == false){
 			document.getElementById("custIdDiv").innerHTML = "ID 중복검사를 수행해 주세요";
 			document.getElementById("custIdDiv").style.color='red';
-			document.getElementById("custIdDiv").focus();
+			document.getElementById("custId").focus();
 			return false;
 		}
-		let password = document.getElementById("password").value;
-		let passwordconfirm = document.getElementById("passwordconfirm").value;
-		if(password != passwordconfirm){
-			document.getElementById("passwordDiv").innerHTML = "2개의 비밀번호가 일치하지 않습니다.";
-			document.getElementById("passwordDiv").style.color='red';
+		
+		var p1 = document.getElementById("pw").value;
+		var p2 = document.getElementById("pwconfirm").value;
+		if(p1 != p2){
+			/*
+			document.getElementById("pwDiv").innerHTML = "2개의 비밀번호가 일치하지 않습니다.";
+			document.getElementById("pwDiv").style.color='red';
 			document.getElementById("password").focus();
+			*/
+			alert("2개의 비밀번호가 일치하지 않습니다.");
 			return false;
 		}
 		
 		let pattern1 = /[0-9]/;	// 숫자 let
-		let pattern2 = /[a-zA-Z]/;	// 문자 let
-		let pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-		if(!pattern1.test(password) || !pattern2.test(password) || !pattern3.test(password) || password.length < 8) {
+			pattern2 = /[a-zA-Z]/;	// 문자 let
+			pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+		if(!pattern1.test(p1) || !pattern2.test(p1) || !pattern3.test(p1) || p1.length < 8) {
 			alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성되어야 합니다.");
 			return false;
 		} 
 	}
-
+	
 </script>

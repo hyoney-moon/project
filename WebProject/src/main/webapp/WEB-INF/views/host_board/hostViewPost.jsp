@@ -212,13 +212,13 @@ $(function(){
 		
 	});
 </script>
-<body>
+<body style="background-color: #f6f6f6;">
 	<header>
 		<%@ include file="../publicCSS/hostheader.jsp"%>
 	</header>
-	<div class="container">
-	<h1 class="display-4 fw-normal">${view.spaceName }</h1>
-	<h5 class="lead fs-4 mb-3">${view.contentOneline }</h5>
+	<div class="container-sm w-50">
+		<h1 class="display-4 fw-normal">${view.spaceName }</h1>
+		<h5 class="lead fs-4 mb-3">${view.contentOneline }</h5>
 		<div id="carouselExampleControls" class="carousel slide w-100"
 			data-bs-ride="carousel">
 			<div class="carousel-inner list_item w-100">
@@ -235,18 +235,6 @@ $(function(){
 					</div>
 				</c:forEach>
 			</div>
-			<p class="lead">
-			<h1 class="display-6">공간소개</h1>
-			${view.content }
-			</p>
-			<p>
-			<h1 class="display-6">이용안내</h1>
-			${view.direction }
-			</p>
-			<p>
-			<h1 class="display-6">주의사항</h1>
-			${view.caution }
-			</p>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -258,152 +246,175 @@ $(function(){
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
+		<nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
+  <a class="navbar-brand" href="#">위치추적</a>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" href="#scrollspyHeading1">공간정보</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#scrollspyHeading2">Second</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#scrollspyHeading3">Third</a></li>
+        <li><a class="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<!-- 네비정보 -->
+<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+   <h4 id="scrollspyHeading1">공간 소개</h4>
+         <p>
+         ${view.content }
+         </p>
+   <h4 id="scrollspyHeading2">이용 안내</h4>
+         <p>
+         ${view.direction }
+         </p>
+    <h4 id="scrollspyHeading3">주의 사항</h4>
+         <p>
+         ${view.caution }</p>
 
-		<!-- Review  -->
+
+		<!-- Q&A -->
 		<div>
-			<div class="board">
-				<div class="board_tit">
-					<h2>REVIEW</h2>
-					<a href="/insertReview/${boardNum }">작성</a> <a href="/chat">채팅</a>
-					<div class="sort-wrap clearfix">
-						<ul>
-							<li>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
-								이동될 수 있습니다.</li>
-						</ul>
-						<div id="review"></div>
+			<h1 id="qna">Q&A</h1>
+			<!-- 질문하기 모달 버튼 -->
+			<div id="modal-open" class="button">
+				<a
+					style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
+					class="btn_qna_write"> <span style="font-weight: bold;">✍
+						질문 작성하기</span>
+				</a>
+			</div>
+			<!-- 질문하기 modal  -->
+			<div class="container">
+				<div class="popup-wrap" id="popup">
+					<div class="popup">
+						<div class="popup-head">
+							<span class="head-title">질문 작성하기</span>
+						</div>
+						<div class="popup-body">
+							<div class="body-content">
+								<div class="body-titlebox">※질문은 전체 공개됩니다</div>
+								<div class="body-contentbox">
+									<textarea id="question" name="content" rows="6" cols="43"
+										placeholder="질문을 작성하세요."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="popup-foot">
+							<span class="pop-btn confirm" id="confirm">등록</span> <span
+								class="pop-btn close" id="close">취소</span>
+						</div>
 					</div>
 				</div>
-
 			</div>
 
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>별점</th>
-				</tr>
-				<c:forEach items="${reviewDto}" var="re">
-					<tr>
-						<td>${re.review_id}</td>
-						<td><a href="view_content">${re.review_content}</a></td>
-						<td>${re.cust_id}</td>
-						<td>${re.review_star}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-		
-		<!-- booking -->
-		<div>
-			<form method="post" action="/kakaoPay" id="paybutton">
-				<div class="input-group">
-					<select class="form-select form-select-sm" name="count"
-						aria-label=".form-select-sm example">
-						<option selected>총원수</option>
-						<c:forEach begin="1" end="${board.headcnt}" var="i">
-							<option value="${i}">${i}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="input-group">
-					<span class="input-group-text">예약</span>
-					<div class="bookingdate" id="Datepicker">
-						<input type="text" id="startDatepicker" name="startDatepicker"
-							aria-label="First name" class="form-control" value="start">
-						<input type="text" id="endDatepicker" name="endDatepicker"
-							aria-label="Last name" class="form-control" value="end">
-						<input type="hidden" name="boardNum" value="${board.boardNum}">
+			<!-- 답변하기 modal -->
+			<div class="container">
+				<div class="popup-wrap" id="popupAnswer">
+					<div class="popupAnswer">
+						<div class="popup-head">
+							<span class="head-title">답변 작성하기</span>
+						</div>
+						<div class="popup-body">
+							<div class="body-content">
+								<div class="body-titlebox">※답변은 전체 공개됩니다</div>
+								<div class="body-contentbox">
+									<textarea id="answer" name="content" rows="6" cols="43"
+										placeholder="답변을 작성하세요."></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="popup-foot">
+							<input type="hidden" value="" id="modalQnaNum"> <span
+								class="pop-btn confirm" id="confirm">등록</span> <span
+								class="pop-btn close" id="close">취소</span>
+						</div>
 					</div>
 				</div>
+			</div>
 
 
-				<input type="image" id="payimg"
-					src="../../../images/fulls/kakaoPay.png" />
-			</form>
-			<div id="map"></div>
-			<h1>${board.address }</h1>
-			<h2>${board.zipcode }</h2>
+			<!-- 답변하기 modal -->
+			<!-- The Modal -->
+			<div id="myModal2" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<p>
+						<strong>답변하기</strong>
+					</p>
+					<textarea id="content2" name="content" rows="15" cols="40"></textarea>
+					<input type="hidden" value="" id="modalQnaNum">
+					<button id="cmtCnt-btn2">작성</button>
+				</div>
+			</div>
+
+			<br> <br>
+			<div id=getComment></div>
 		</div>
+		<br>
+		<br>
+		<!-- Review  -->
+		<div>
+			<div id="s_review" class="text_box msimple">
+			<h1 class="h_intro">리뷰</h1>
+			<a href="/insertReview/${boardNum }" 
+					style="position: absolute; color: #fff; padding: 5px 12px 5px; 
+					font-size: 1.2em; border-radius: 100px; background-color: #704de4; 
+					cursor: pointer; text-decoration: none;" class="btn_qna_write">
+					<span style="font-weight: bold;">
+					✍ 리뷰 작성하기</span>
+				</a>
+			</div>
+			<br><br>
+			<div>
+				<table class="table">
+					 <thead>
+						<tr>
+							<th scope="col">글번호</th>
+							<th scope="col">내용</th>
+							<th scope="col">작성자</th>
+							<th scope="col">평점</th>
+							<th scope="col">수정</th>
+							<th scope="col">삭제</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${reviewDto}" var="re">
+							<tr>
+								<td>${re.review_id}</td>
+								<td>${re.review_content}</td>
+								<td>${re.custId}</td>
+								<td>${re.review_star}</td>
+								<td><a
+									href="/updateReviewForm/${re.review_id }/${boardNum }">수정</a>
+								<td><a href="/delete/${re.review_id }/${boardNum }">삭제</a>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br><br><br><br>
+		
+		<h1 class="h_intro">위치</h1>
+         <div class="map-group" id="map-group">
+         <p style="color: black; font-size: 24px;">${view.address }</p>
+         <p style="color: #656565;">${view.zipcode }</p>
+         <div id="map"></div>
+         </div>
+      </div>
 
 
-
-
-		<script>
-// 달력datePicker 건들면안되용  -->
-$(function(){
-	$("#startDatepicker").datepicker({
-	    dateFormat: 'yy-mm-dd',
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    dayNames: ['일','월','화','수','목','금','토'],
-	    dayNamesShort: ['일','월','화','수','목','금','토'],
-	    dayNamesMin: ['일','월','화','수','목','금','토'],
-	    minDate : '0',
-	    showMonthAfterYear: true,
-	    changeMonth: true,
-	    changeYear: true,   
-	    yearSuffix: '년',
-	    beforeShowDay: disableSomeDay 
-	});// 제외할 날짜
-
-	
-})
-
-function disableSomeDay(date) {
-    var month = date.getMonth();
-    var dates = date.getDate();
-    var year = date.getFullYear();
-    
-         
-    // 배열에 해당하는 날짜는 0번째 index에 false를 담아 리턴해준다.
-    for (i = 0; i < disabledDays.length; i++) {
-        if($.inArray(year + '-' +(month+1) + '-' + dates, disabledDays) != -1) {
-            return [false];
-        }
-    }
-    return [true];
-    
-}
-    $(function(){
-    	$("#endDatepicker").datepicker({
-    	    dateFormat: 'yy-mm-dd',
-    	    prevText: '이전 달',
-    	    nextText: '다음 달',
-    	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	    dayNames: ['일','월','화','수','목','금','토'],
-    	    dayNamesShort: ['일','월','화','수','목','금','토'],
-    	    dayNamesMin: ['일','월','화','수','목','금','토'],
-    	    minDate : '0',
-    	    showMonthAfterYear: true,
-    	    changeMonth: true,
-    	    changeYear: true,   
-    	    yearSuffix: '년',
-    	    beforeShowDay: disableSomeDay 
-    	});// 제외할 날짜
-
-    	
-    })
-
-    function disableSomeDay(date) {
-        var month = date.getMonth();
-        var dates = date.getDate();
-        var year = date.getFullYear();
-        
-             
-        // 배열에 해당하는 날짜는 0번째 index에 false를 담아 리턴해준다.
-        for (i = 0; i < disabledDays.length; i++) {
-            if($.inArray(year + '-' +(month+1) + '-' + dates, disabledDays) != -1) {
-                return [false];
-            }
-        }
-        return [true];
-}  
-    
-
+		
+<script>
  // 카카오 API부분 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -445,103 +456,8 @@ geocoder.addressSearch(address, function(result, status) {
 });   
 
 </script>
-
-		<!-- Q&A -->
-		<div>
-			<h1 id="qna">Q&A</h1>
-			<!-- 질문하기 모달 버튼 -->
-			<div id="modal-open" class="button">
-				<a
-					style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
-					class="btn_qna_write"> <span
-					style="font-weight: bold;">✍ 질문 작성하기</span>
-				</a>
-			</div>
-			<!-- 질문하기 modal  -->
-			<div class="container">
-				<div class="popup-wrap" id="popup">
-					<div class="popup">
-						<div class="popup-head">
-							<span class="head-title">질문 작성하기</span>
-						</div>
-						<div class="popup-body">
-							<div class="body-content">
-								<div class="body-titlebox">
-								※질문은 전체 공개됩니다
-								</div>
-								<div class="body-contentbox">
-									<textarea id="question" name="content" rows="6" cols="43" placeholder="질문을 작성하세요."></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="popup-foot">
-							<span class="pop-btn confirm" id="confirm">등록</span> <span
-								class="pop-btn close" id="close">취소</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- 답변하기 modal -->
-			<div class="container">
-				<div class="popup-wrap" id="popupAnswer">
-					<div class="popupAnswer">
-						<div class="popup-head">
-							<span class="head-title">답변 작성하기</span>
-						</div>
-						<div class="popup-body">
-							<div class="body-content">
-								<div class="body-titlebox">
-								※답변은 전체 공개됩니다
-								</div>
-								<div class="body-contentbox">
-									<textarea id="answer" name="content" rows="6" cols="43" placeholder="답변을 작성하세요."></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="popup-foot">
-							<input type="hidden" value="" id="modalQnaNum">
-							<span class="pop-btn confirm" id="confirm">등록</span> <span
-								class="pop-btn close" id="close">취소</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- Review  -->
-		<div>
-			<div class="board">
-				<div class="board_tit">
-					<h2>REVIEW</h2>
-					<a href="/insertReview/${boardNum }">작성</a> <a href="/chat">채팅</a>
-					<div class="sort-wrap clearfix">
-						<ul>
-							<li>상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로
-								이동될 수 있습니다.</li>
-						</ul>
-						<div id="review"></div>
-					</div>
-				</div>
-
-			</div>
-
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>내용</th>
-					<th>작성자</th>
-					<th>별점</th>
-				</tr>
-				<c:forEach items="${reviewDto}" var="re">
-					<tr>
-						<td>${re.review_id}</td>
-						<td><a href="view_content">${re.review_content}</a></td>
-						<td>${re.cust_id}</td>
-						<td>${re.review_star}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</div>
+</div>
+		
 	<footer>
 		<%@ include file="../publicCSS/footer.jsp"%>
 	</footer>

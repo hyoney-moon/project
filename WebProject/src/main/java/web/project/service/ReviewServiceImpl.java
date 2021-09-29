@@ -33,21 +33,16 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<Review> selectReviewOrderbyUserId(Review dto) {
-		return ReviewRepo.selectReviewOrderbyUserId(dto.getBoardNum(), dto.getCust_id());
+		return ReviewRepo.selectReviewOrderbyUserId(dto.getBoardNum(), dto.getCustId());
 	}
 
 	@Override
 	public Review insertReview(Review dto) {
 		return ReviewRepo.save(dto);
 	}
-
-	@Override
-	public Review reviewUpdate(Review dto) {
-		return ReviewRepo.save(dto);
-	}
 	
 	@Override
-	public void deleteReview(int review_id) {
+	public void deleteReview(Long review_id) {
 		ReviewRepo.deleteById(review_id);
 	}
 
@@ -131,4 +126,17 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> getReviewDto() {
 		return ReviewRepo.findAll();
 	}
+
+	@Override
+	public void saveReview(Review re) {
+		ReviewRepo.save(re);
+	}
+
+	@Override
+	public Review onlyReview(Long review_id) {
+		return ReviewRepo.getById(review_id);
+	}
+
+
 }
+	

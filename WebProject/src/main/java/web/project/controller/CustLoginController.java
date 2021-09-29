@@ -49,7 +49,7 @@ public class CustLoginController implements ApplicationContextAware{
 	// 회원가입 폼
 		@RequestMapping("/joinForm")
 		public String joinForm() {
-			return "custmain/register";
+			return "custmain/custJoinForm";
 		}
 		
 		// 회원가입
@@ -75,9 +75,9 @@ public class CustLoginController implements ApplicationContextAware{
 			
 			if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
 				m.addAttribute("findCustomer",findCustomer);
-				return "member/loginSucecss";
-			} else {
 				return "redirect:main";
+			} else {
+				return "redirect:/customer/loginForm";
 			}
 		}
 		
