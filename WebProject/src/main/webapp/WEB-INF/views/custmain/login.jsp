@@ -38,7 +38,7 @@ footer {
 	<div class="container">
 		<div class="position-absolute top-50 start-50 translate-middle">
 			<div class="container">
-				<form method="post" action="login">
+				<form method="post" action="/customer/login">
 					<div class="form-floating mb-3">
 						<input name="custId" class="form-control" type="text" aria-label="default input example" placeholder="아이디">
 						<label for="floatingInput">아이디</label>

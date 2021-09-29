@@ -38,4 +38,8 @@ public interface BoardService {
 
 	void deleteById(Long boardNum);
 
+	Board updateBoard(Long boardNum);
+	
+	List<Board> permittedBoard();
+
 }

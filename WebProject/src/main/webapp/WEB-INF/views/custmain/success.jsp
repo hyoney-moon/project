@@ -17,7 +17,7 @@
 대여 시작일:    	[[${book.startDate}]]<br/>
 대여 종료일:   	[[${book.endDate}]]<br/>
 사용하는 인원:		[[${book.people }]]<br/>
-<a href="main">예약완료</a>
+<a href="customer/main">예약완료</a>
  
  
  

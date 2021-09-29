@@ -29,7 +29,16 @@ a:link {
 a:visited {
 	text-decoration: none;
 }
-
+#page {
+	text-decoration: none;
+	text-align: center;
+}
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
 </style>
 </head>
 <body>
@@ -37,7 +46,7 @@ a:visited {
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
 
-	<div class="container ">
+	<div class="container mb-5">
 		<form action="searchBoard" method="post">
 			<select name="search_option" id ="search_option"
 				class="form-select form-select-lg mb-2"
@@ -70,7 +79,18 @@ a:visited {
 				</div>
 			</c:forEach>
 			</div>
-		</section>		
+		</section>	
+		<div id="page">
+			<c:if test="${begin > 2 }">
+				<a href="searchForm?p=${begin-1}">[이전]</a>
+			</c:if>
+			<c:forEach begin="${begin }" end="${end}" var="i">
+				<a href="searchForm?p=${i}">[${i}]</a>
+			</c:forEach>
+			<c:if test="${end < totalCount }">
+				<a href="searchForm?p=${end+1}">[다음]</a>
+			</c:if>
+		</div>	
 		</form>
 	</div>
 	<footer>

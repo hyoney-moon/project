@@ -135,7 +135,7 @@ footer {
 				aria-label="default input example">
 			<input class="mb-2" type="radio" name="gender" size="20" required="required" value="m" checked="checked" /> 남자
 			<input class="mb-2" type="radio" name="gender" value="w" /> 여자
-	<input type="submit" value="호스트 회원가입"
+	<input type="submit" value="정보수정"
 		class="w-100 btn btn-outline-danger mb-5" style="height: 50px;">
 	</form>
 	

@@ -80,5 +80,20 @@ public class Booking_info_Serivice implements BookingService {
 	public Booking bookNum(Long bookNum) {
 		return  repository.findByBookNum(bookNum);
 	}
+	
+	@Override
+	   public List<Booking> getListBooking(Long boardNum) {
+	      return repository.findByBoardNum(boardNum);
+	   }
+	
+	@Override
+	   public void permitUpdate(Long bookNum) {
+	      repository.permitBooking(bookNum);
+	   }
+
+	   @Override
+	   public void rejectUpdate(Long bookNum) {
+	      repository.rejectBooking(bookNum);
+	   }
 		
 }

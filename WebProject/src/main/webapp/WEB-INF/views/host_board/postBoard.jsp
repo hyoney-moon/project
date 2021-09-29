@@ -90,6 +90,10 @@ div.msg {color: red;}
 					</select>
 				</div>
 			</div>
+			최대 인원<br>
+			<input id="headcnt" name="headcnt" class="form-control mb-3"
+				type="text" placeholder="최대 인원"
+				aria-label="default input example">
 
 			공간 한줄 소개 <input id="contentOneline" name="contentOneline" class="form-control mb-3"
 				type="text" placeholder="내 귀염 뽀짝한 공간을 한줄로 표현한다면?"
@@ -163,7 +167,7 @@ div.msg {color: red;}
 			</div>
 			<div id="price_msg" class="mb-3"></div>
 
-			<input type="submit" value="내 마음속에 저장 ❤"
+			<input type="submit" value="공간 등록"
 				class="w-100 btn btn-outline-danger mb-5" style="height: 50px;">
 		</form>
 	</div>

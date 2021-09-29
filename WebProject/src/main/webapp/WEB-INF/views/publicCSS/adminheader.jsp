@@ -56,15 +56,12 @@ hr {
 			<nav class="navbar navbar-light bg-white fixed-top">
 				<div class="container-fluid">
 					<!-- searchIcon -->
-					<a class="navbar-brand" href="searchForm"><img
-						class="mh-100 ms-1"
-						style="width: 40px; height: 40px; background-color: white;"
-						src="/images/icon/search.png" /></a>
+					<a class="navbar-brand" href="admin/searchForm"></a>
 					<!-- Logo -->
 					<div
 						class="position-absolute d-inline top-50 start-50 translate-middle">
 
-						<a href="main"><img style="width: 150px; "
+						<a href="/admin/main"><img style="width: 150px; "
 							src="/images/icon/Logo.png" /></a>
 
 					</div>
