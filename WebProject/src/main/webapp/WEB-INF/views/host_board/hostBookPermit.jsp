@@ -51,17 +51,26 @@ a:visited {
 					<c:forEach var="booking" items="${booking }" >
 				<div class="col" id="${booking.bookNum } ">
 							<c:if test="${booking.permit == 0}" >
+							<div>
 						고객아이디::<a href="viewPost/${booking.custId }"><div class="img"></div></a>
 							예약 시작날짜:<p><fmt:formatDate value="${booking.startDate}" pattern="yyyy-MM-dd" /></p>
 							예약 종료날짜:<p><fmt:formatDate value="${booking.endDate}" pattern="yyyy-MM-dd" /> </p>
 							예약 날짜:<p><fmt:formatDate value="${booking.regDate}" pattern="yyyy-MM-dd" /></p>
 							예약 인원수:<p>${booking.people}</p>
 							예약 금액:<p>${booking.price}</p>
+							글번호<p>${booking.bookNum }</p>
+							<div class="btn btn-outline-secondary"
+							id="permit" value="${booking.bookNum }">승인</div>
+							<div class="btn btn-outline-secondary"
+							id="reject" value="${booking.bookNum}">취소</div>
+							
+							<%-- <a href="/host/bookPermin/${booking.bookNum}" class="btn btn-outline-secondary"
+							id="permit" value="${booking.bookNum }">승인</a>
+							<a href="/host/bookReject/${booking.bookNum}">
+							<div class="btn btn-outline-secondary"
+							id="button-addon2">취소</div></a><hr> --%>
+							</div>
 							</c:if>
-							<button class="btn btn-outline-secondary" type="button"
-							id="permit" onclick="">승인</button></a>
-							<a href="modifyPost/${board.boardNum }"><button class="btn btn-outline-secondary" type="button"
-							id="button-addon2">취소</button></a><hr>
 							</c:forEach>
 						</div>
 					</div>
@@ -71,11 +80,33 @@ a:visited {
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-	$(function(){
+ 	$(function(){
+ 		// 승인
 		$("#permit").click(function(){
-			
-		})
-	})
+			var bookNum = $(this).attr('value');
+		 	var param = "bookNum=" + bookNum; // bookNum=숫자
+			/* this.fadeOut() */
+			$.ajax({
+				url : "/host/bookPermit",
+				data: param
+			}).done(function(data){
+				location.reload();
+			})
+			});
+		// 거절
+		$("#reject").click(function(){
+			var bookNum2 = $(this).attr('value');
+		 	var param2 = "bookNum=" + bookNum2;
+			/* this.fadeOut() */
+			$.ajax({
+				url : "/host/bookReject",
+				data: param2
+			}).done(function(args){
+				location.reload();
+			})
+			});
+		
+ 	});
 </script>
 
 </html>

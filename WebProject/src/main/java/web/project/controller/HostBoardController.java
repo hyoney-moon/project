@@ -189,19 +189,6 @@ public class HostBoardController implements ApplicationContextAware {
 	}
 	// 예약시 호스트와 커스터머 price값 주고 permit 번호 변경하기
 
-//	@PostMapping("/viewBoard") public String viewUpdate(Long
-//		  boardNum,@ModelAttribute("host")Host hostId) { 
-//		Booking bookcustId = service.BoardNum(boardNum);
-//		int permit = service.permitUpdate(boardNum);
-//		
-//		  String custId = bookcustId.getCustId(); 
-//		  Customer custPrice =custSerivce.getCustId(custId);
-//		  int boardPrice = bookcustId.getPrice();
-//		  Long total = custPrice.getCash() - boardPrice;
-//		  Customer PriceUpdate = 
-//		  Board dto1 = service.getBoard(boardNum);
-//		  
-//		  return "redirect:boardList"; }
 
 	@RequestMapping("/viewPost/{boardNum}")
 	public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
@@ -285,5 +272,24 @@ public class HostBoardController implements ApplicationContextAware {
 		System.out.println("booking.size():"+booking.size());
 		m.addAttribute("booking", booking);
 		return "host_board/hostBookPermit";
+	}
+	@GetMapping("/bookPermit") 
+	public String bookPermitUpdate(Long bookNum) { 
+		 service.permitUpdate(bookNum);
+		
+		/*
+		 * String custId = bookcustId.getCustId(); Customer custPrice
+		 * =custSerivce.getCustId(custId); int boardPrice = bookcustId.getPrice(); Long
+		 * total = custPrice.getCash() - boardPrice;
+		 */
+		
+		return "host_board/completePermit";
+		}
+	
+	@GetMapping("/bookReject")
+	public String bookRejectUpdate(Long bookNum) {
+		service.rejectUpdate(bookNum);
+		
+		return "host_board/completePermit";
 	}
 }

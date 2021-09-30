@@ -70,6 +70,10 @@ public class CustBoardController {
 			m.addAttribute("category",category);
 			return "custmain/main";
 		}
+		 @GetMapping("/successmain")
+		    public String mainback() {
+		    	return "custmain/mian";
+		    }
 	
 	// 게시글 목록
 	@GetMapping("/searchForm")

@@ -11,7 +11,8 @@ import web.project.domain.BookingDto;
 public interface BookingService {
 	
 	
-	int permitUpdate(Long boardNum);
+	void permitUpdate(Long bookNum);
+	void rejectUpdate(Long bookNum);
 	
 	Booking bookNum(Long bookNum);
 	

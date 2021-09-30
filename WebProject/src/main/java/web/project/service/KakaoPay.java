@@ -49,8 +49,7 @@ public class KakaoPay {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("cid", "TC0ONETIME"); // 카카오rest API요청 토큰
         params.add("partner_order_id", (String)booking.getHostId()); // 호스트아이디 
-        //params.add("partner_user_id", custId.getCustId()); //구매자명
-        params.add("partner_user_id", "kng00233"); //구매자명
+        params.add("partner_user_id", custId.getCustId()); //구매자명
         params.add("item_name", booking.getBoard().getSpaceName()); //상품명
         params.add("quantity", 1+"");//결제일
         params.add("total_amount", booking.getPrice()+"");//가격

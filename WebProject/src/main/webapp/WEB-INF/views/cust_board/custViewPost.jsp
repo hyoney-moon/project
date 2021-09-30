@@ -39,8 +39,37 @@ src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c04294f72056d3a53a87841b928c58e6&lib
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
+.nav{
+	position: pixed;
+}
+#spaceName{
+	bottom: 20px;
+	margin-bottom: 20px;
+}
+#map-group{
+	margin-bottom: 30px;
+	color: gray;
+	
+}
+#contentOneline{
+	margin-bottom: 30px;
+	bottom: 100px;
+}
+/* 네비바고정 */
+#navbar-example2{
+	position: top;
+	
+}
+.h1{
+	margin-bottom: 50px;
+}
+.h4{
+	color: gray;
+	margin: 20px;
+}
 body {
 	padding-top: 40px;
+	background-color: #f6f6f6;
 }
 
 .list_item {
@@ -212,42 +241,44 @@ $(function(){
 		
 	});
 </script>
+<script>
+
+
+/* function navigo (){
+	  const header = document.querySelector('header'); //헤더부분획득
+	  const header2 = document.querySelector('img'); // 상단이미지
+	  const headerheight = header.clientHeight + hearder2.clientHeight;//헤더높이
+	document.addEventListener('scroll', onScroll, { passive: true });//스크롤 이벤트
+	 function onScroll () {
+	     const scrollposition = pageYOffset;//스크롤 위치
+	   const nav = document.querySelector('nav');//네비게이션
+	   if (headerheight<=scrollposition){//만약 헤더높이<=스크롤위치라면
+	     nav.classList.add('fix')//fix클래스를 네비에 추가
+	   }
+	   else {//그 외의 경우
+	     nav.classList.remove('fix');//fix클래스를 네비에서 제거
+	   }
+	 } 
+	  
+	}
+	navigo() */
+</script>
 </head>
-<body>
+<body style="background-color: #f6f6f6;">
 	<header>
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
 	<div class="container">
-	<h1 class="display-4 fw-normal">${board.spaceName }</h1>
-	<h5 class="lead fs-4 mb-3">${board.contentOneline }</h5>
+	<h1>${board.spaceName }</h1>
+	<h5>${board.contentOneline }</h5>
 		<div id="carouselExampleControls" class="carousel slide w-100"
 			data-bs-ride="carousel">
-			<div class="carousel-inner list_item w-100">
+			<div class="carousel-inner list_item w-100" id="img">
 				<c:forEach items="${fis }" var="fis" begin="0" end="0">
 					<div class="carousel-item active w-100">
 						<img src="${fis.filePath }" class="d-block w-500 list_img"
 							alt="...">
 					</div>
-				</c:forEach>
-				<c:forEach items="${fis }" var="fis" begin="1" end="${fisize }">
-					<div class="carousel-item">
-						<img src="${fis.filePath }" class="d-block w-500 list_img"
-							alt="...">
-					</div>
-				</c:forEach>
-			</div>
-			<p class="lead">
-			<h1 class="display-6">공간소개</h1>
-			${board.content }
-			</p>
-			<p>
-			<h1 class="display-6">이용안내</h1>
-			${board.direction }
-			</p>
-			<p>
-			<h1 class="display-6">주의사항</h1>
-			${board.caution }
-			</p>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -258,9 +289,55 @@ $(function(){
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>
-		</div>
+				</c:forEach>
+				<c:forEach items="${fis }" var="fis" begin="1" end="${fisize }">
+					<div class="carousel-item">
+						<img src="${fis.filePath }" class="d-block w-500 list_img"
+							alt="...">
+					</div>
+				</c:forEach>
+			</div>
+					<!-- 네비바 -->
+
+<nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
+  <a class="navbar-brand" href="#">위치추적</a>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" href="#scrollspyHeading1">공간정보</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#scrollspyHeading2">Second</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#scrollspyHeading3">Third</a></li>
+        <li><a class="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<!-- 네비정보 -->
+<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+	<h4 id="scrollspyHeading1">공간 소개</h4>
+			<p>
+			<h1>공간소개</h1>
+			${board.content }
+			</p>
+	<h4 id="scrollspyHeading2">이용 안내</h4>
+			<p>
+			<h1>이용안내</h1>
+			${board.direction }
+			</p>
+	 <h4 id="scrollspyHeading3">주의 사항</h4>
+			<p>
+			<h1>주의사항</h1>
+			${board.caution }</p>
 
 <!-- Q&A -->
+	<h4 id="scrollspyHeading4">Q&A</h4>
 		<div>
 			<h1 id="qna">Q&A</h1>
 			<!-- 질문하기 모달 버튼 -->
@@ -345,7 +422,7 @@ $(function(){
 		<div>
 			<div class="board">
 				<div class="board_tit">
-					<h2>REVIEW</h2>
+					<h3>REVIEW</h3>
 					<a href="/insertReview/${boardNum }">작성</a> <a href="/chat">채팅</a>
 					<div class="sort-wrap clearfix">
 						<ul>
@@ -375,11 +452,17 @@ $(function(){
 				</c:forEach>
 			</table>
 		</div>
-		
-		<!-- booking -->
+
+ 
+ 
+  
+</div>
+</div>
+  <h4 id="scrollspyHeading5">예약하기</h4>
+  <!-- booking -->
 		<div>
 			<form method="post" action="/kakaoPay" id="paybutton">
-				<div class="input-group">
+				<div class="input-group" style="width: 250px;">
 					<select class="form-select form-select-sm" name="count"
 						aria-label=".form-select-sm example">
 						<option selected>총원수</option>
@@ -389,7 +472,7 @@ $(function(){
 					</select>
 				</div>
 				<div class="input-group">
-					<span class="input-group-text">예약</span>
+ 					<span class="input-group-text" style="color: white; background-color: #704de4;">예약</span> 
 					<div class="bookingdate" id="Datepicker">
 						<input type="text" id="startDatepicker" name="startDatepicker"
 							aria-label="First name" class="form-control" value="start">
@@ -403,10 +486,18 @@ $(function(){
 				<input type="image" id="payimg"
 					src="../../../images/fulls/kakaoPay.png" />
 			</form>
+			<div class="map-group" id="map-group">
+			<p style="color: black; font-size: 24px;">${board.address }</p>
+			<p style="color: #656565;">${board.zipcode }</p>
 			<div id="map"></div>
-			<h1>${board.address }</h1>
-			<h2>${board.zipcode }</h2>
+			</div>
 		</div>
+
+  </div>
+  
+  
+ 
+		
 
 
 

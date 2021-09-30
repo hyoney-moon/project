@@ -72,7 +72,6 @@ a:visited {
 			</c:forEach>
 		</div>
 	</section>
-
 	<section class="mt-5">
 		<h2>오늘의 추천 공간</h2>
 		<div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
@@ -103,7 +102,6 @@ a:visited {
 							var id = $(this).attr("id")
 							if (id != undefined) {
 								var tr = $(" .img", this)
-								//
 								$
 										.ajax({
 											url : "/customer/getImgs",

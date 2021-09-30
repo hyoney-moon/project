@@ -81,10 +81,15 @@ public class Booking_info_Serivice implements BookingService {
 		return  repository.findByBookNum(bookNum);
 	}
 	@Override
-	public int permitUpdate(Long boardNum) {
-		return repository.permitBooking(boardNum);
+	public void permitUpdate(Long bookNum) {
+		repository.permitBooking(bookNum);
 	}
 
+	@Override
+	public void rejectUpdate(Long bookNum) {
+		repository.rejectBooking(bookNum);
+	}
+	
 	@Override
 	public List<Booking> getListBooking(Long boardNum) {
 		return repository.findByBoardNum(boardNum);

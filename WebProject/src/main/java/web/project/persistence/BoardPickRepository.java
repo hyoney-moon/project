@@ -21,8 +21,15 @@ public interface BoardPickRepository extends JpaRepository<Booking, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query("update Booking b set b.permit = 1 where b.boardNum = ?1")
-	int permitBooking(Long bookNum);
+	@Query("update Booking b set b.permit = 1 where b.bookNum = ?1")
+	void permitBooking(long bookNum);
+	
+	@Modifying
+	@Transactional
+	@Query("update Booking b set b.permit = 2 where b.bookNum = ?1")
+	void rejectBooking(long bookNum);
+	
+	
 	
 	
 	List<Booking> findByBoardNumOrderByStartDateAsc(Long boardNum);
