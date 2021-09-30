@@ -47,6 +47,7 @@
 
 	<form action="/insertReview" method="post" id="insertForm" enctype="multipart/form-data">
 		<input type="hidden" name="boardNum" value=${boardNum }>
+		<input type="hidden" name="custId" value=${customer.custId }>
 	
 	<table border="1" style="width: 80%">
 	  <tr>

@@ -59,7 +59,16 @@ body {
 .w-100 {
 	width: 100%;
 }
-
+.star_rating {font-size:0; letter-spacing:-4px;}
+.star_rating span {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+    }
+.star_rating span.on {color:#8258FA;}
 </style>
 </head>
 <!-- Q&A -->
@@ -73,73 +82,74 @@ $(function(){
     getcommentList();
     
  // 댓글 출력
-	function getcommentList(){
-		let params = "boardNum="+ ${boardNum}
-		$.ajax({
-			type: "get",
-			url: "/qna/getQna", // /board/comment
-			data: params,
-			dataType: "json"
-		}).done(function(args){
-			$("#getComment").empty();
-			for(var num=0; num < args.length; num++){
-				var reply = args[num].hostContent;
-				var replyDate = args[num].replyDate;
-				if(reply == null){ // 답변이 달리지 않았다면
-					reply = "*호스트의 답변을 기다리고 있습니다";
-					replyDate = "";
-				}
-				
-				if(${!empty sessionScope.host}){ // 호스트 로그인을 한 경우 
-					$("#getComment").append(
-							"<ul class='qnaUl'>"+
-							"<li class='qnaLi'>"+
-							"<div class='custQuestion'>" +
-							"<span class='profile'>" +
-							"<img class='profileImg' src=/img/profileImage.png></img>" +
-							"</span>" +
-							"<strong>" + args[num].nickName + "</strong>" +
-							"<p class='content'>" + args[num].content + "</p>" +
-							"<div class='content'>" + args[num].commentDate + "</div>" +
-							"</div>" +
-							
-							"<div class='hostAnswer'>" +
-							"<p class='hostReplyTitle'>"+
-							"호스트의 답글" +"</p>" +
-							"<p class='hostReplyContent'>" +
-							reply + "</p>" +
-							"<div class='content'>" + replyDate + "</div>" +
-							
-							"<button id='" + "popupAnswer'" + 
-							" value='" + args[num].qnaNum + "'>답변하기</button>" +
-							"</div>" +
-							"</li>" + 
-							"</ul>"
-					);
-				} else { // 호스트로 로그인하지 않은 경우
-					$("#getComment").append(
-							"<ul class='qnaUl'>"+
-							"<li class='qnaLi'>"+
-							"<div class='custQuestion'>" +
-							"<span class='profile'>" +
-							"<img class='profileImg' src=/img/profileImage.png></img>" +
-							"</span>" +
-							"<strong>" + args[num].nickName + "</strong>" +
-							"<p>" + args[num].content + "</p>" +
-							"<div>" + args[num].commentDate + "</div>" +
-							"</div>" +
-							
-							"<div class='hostAnswer'>" +
-							"<p class='hostReplyTitle'>"+
-							"호스트의 답글" +"</p>" +
-							"<p class='hostReplyContent'>" +
-							reply + "</p>" +
-							"<div>" + replyDate + "</div>"
-							)
-				}
-			} //for문 종료
-		}) // done 종료
-	} // getcommentList() 종료
+    function getcommentList(){
+       let params = "boardNum="+ ${boardNum}
+       $.ajax({
+          type: "get",
+          url: "/qna/getQna", // /board/comment
+          data: params,
+          dataType: "json"
+       }).done(function(args){
+          $("#getComment").empty();
+          for(var num=0; num < args.length; num++){
+             var reply = args[num].hostContent;
+             var replyDate = args[num].replyDate;
+             if(reply == null){ // 답변이 달리지 않았다면
+                reply = "*호스트의 답변을 기다리고 있습니다";
+                replyDate = "";
+             }
+             
+             if(${!empty sessionScope.host}){ // 호스트 로그인을 한 경우 
+                $("#getComment").append(
+                      "<ul class='qnaUl'>"+
+                      "<li class='qnaLi'>"+
+                      "<div class='custQuestion'>" +
+                      "<span class='profile'>" +
+                      "<img class='profileImg' src=" + args[num].profile + "></img>" +
+                      //"<img class='profileImg' src=/img/profileImage.png></img>" +
+                      "</span>" +
+                      "<strong>" + args[num].nickName + "</strong>" +
+                      "<p class='content'>" + args[num].content + "</p>" +
+                      "<div class='content'>" + args[num].commentDate + "</div>" +
+                      "</div>" +
+                      
+                      "<div class='hostAnswer'>" +
+                      "<p class='hostReplyTitle'>"+
+                      "호스트의 답글" +"</p>" +
+                      "<p class='hostReplyContent'>" +
+                      reply + "</p>" +
+                      "<div class='content'>" + replyDate + "</div>" +
+                      
+                      "<button id='" + "popupAnswer'" + 
+                      " value='" + args[num].qnaNum + "'>답변하기</button>" +
+                      "</div>" +
+                      "</li>" + 
+                      "</ul>"
+                );
+             } else { // 호스트로 로그인하지 않은 경우
+                $("#getComment").append(
+                      "<ul class='qnaUl'>"+
+                      "<li class='qnaLi'>"+
+                      "<div class='custQuestion'>" +
+                      "<span class='profile'>" +
+                      "<img class='profileImg' src=" + args[num].profile + "></img>" +
+                      "</span>" +
+                      "<strong>" + args[num].nickName + "</strong>" +
+                      "<p>" + args[num].content + "</p>" +
+                      "<div>" + args[num].commentDate + "</div>" +
+                      "</div>" +
+                      
+                      "<div class='hostAnswer'>" +
+                      "<p class='hostReplyTitle'>"+
+                      "호스트의 답글" +"</p>" +
+                      "<p class='hostReplyContent'>" +
+                      reply + "</p>" +
+                      "<div>" + replyDate + "</div>"
+                      )
+             }
+          } //for문 종료
+       }) // done 종료
+    } // getcommentList() 종료
     
  	  // 질문작성 클릭 이벤트
 	  $("#confirm").click(function(){
@@ -149,7 +159,7 @@ $(function(){
 				dataType: "CustQna",
 				data: {
 					board : ${boardNum},
-					profile : "custprofile",
+					profile : "${customer.profile}",
 					content : $("#question").val(),
 					nickName : "${customer.nickName}",
 				},
@@ -365,37 +375,69 @@ $(function(){
 		<div>
 			<div id="s_review" class="text_box msimple">
 			<h1 class="h_intro">리뷰</h1>
-			<a href="/insertReview/${boardNum }" 
-					style="position: absolute; color: #fff; padding: 5px 12px 5px; 
-					font-size: 1.2em; border-radius: 100px; background-color: #704de4; 
-					cursor: pointer; text-decoration: none;" class="btn_qna_write">
-					<span style="font-weight: bold;">
-					✍ 리뷰 작성하기</span>
-				</a>
 			</div>
-			<br><br>
 			<div>
-				<table class="table">
+				<table class="table w-100">
 					 <thead>
 						<tr>
 							<th scope="col">글번호</th>
 							<th scope="col">내용</th>
 							<th scope="col">작성자</th>
 							<th scope="col">평점</th>
-							<th scope="col">수정</th>
-							<th scope="col">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${reviewDto}" var="re">
 							<tr>
 								<td>${re.review_id}</td>
-								<td>${re.review_content}</td>
+								
+								<td style="width: 400px;"><img class="w-50" src="${re.review_img }"> ${re.review_content}</td>
 								<td>${re.custId}</td>
-								<td>${re.review_star}</td>
-								<td><a
-									href="/updateReviewForm/${re.review_id }/${boardNum }">수정</a>
-								<td><a href="/delete/${re.review_id }/${boardNum }">삭제</a>
+								<td><c:if test="${re.review_star==1 }">
+                              <div class="star_rating">
+                               <span class="on">★</span>
+                               <span>★</span>
+                               <span>★</span>
+                               <span>★</span>
+                               <span>★</span>
+                               </div>
+                            </c:if>
+                            <c:if test="${re.review_star==2 }">
+                              <div class="star_rating">
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span>★</span>
+                               <span>★</span>
+                               <span>★</span>
+                               </div>
+                            </c:if>
+                            <c:if test="${re.review_star==3 }">
+                              <div class="star_rating">
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span>★</span>
+                               <span>★</span>
+                               </div>
+                            </c:if>
+                            <c:if test="${re.review_star==4 }">
+                              <div class="star_rating">
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span>★</span>
+                               </div>
+                           </c:if>
+                           <c:if test="${re.review_star==5 }">
+                              <div class="star_rating">
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               <span class="on">★</span>
+                               </div>
+                           </c:if></td>
 							</tr>
 						</c:forEach>
 					</tbody>

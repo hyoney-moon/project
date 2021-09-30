@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import web.project.domain.Review;
 import web.project.service.ReviewService;
 
-
+@SessionAttributes("customer")
 @Controller
 //@RequestMapping("/viewPost")
 public class InsertReviewController {
@@ -33,6 +34,7 @@ public class InsertReviewController {
 
 		m.addAttribute("boardNum", boardNum);
 		HttpSession session = request.getSession();
+		
 		String custId = (String) session.getAttribute("custId");
 		/*
 		 * if(cust_id == null) {
@@ -49,16 +51,16 @@ public class InsertReviewController {
 	//@PostMapping("/insertReview/{boardnum}")
 	public String insertReview(Review dto, HttpServletRequest request,
 							   @RequestParam("review_file")MultipartFile file,
-							   Long boardNum) throws Exception{
+							   Long boardNum, Review review) throws Exception{
 		//int boardNum =
 		//ID,글번호 셋팅
-		HttpSession session = request.getSession();
-		String cust_id = (String) session.getAttribute("cust_id");
-		String asc = inter.currentReview_asc(dto);
-		dto.setCustId(cust_id);
+//		HttpSession session = request.getSession();
+//		String custId = (String) session.getAttribute("custId");
+//		String asc = inter.currentReview_asc(dto);
+//		dto.setCustId(custId);
 		
 		//파일 업로드
-	    String root_path = request.getSession().getServletContext().getRealPath("img/review_img");  
+	    String root_path = request.getSession().getServletContext().getRealPath("/img/review_img");  
 	    String attach_path = "/";
 	    String FILE_PATH = root_path + attach_path;
 	    System.out.println("제바바아아ㅏ라ㅏ라라라라ㅏ" + FILE_PATH);
@@ -72,7 +74,7 @@ public class InsertReviewController {
 		String fileName = dto.getBoardNum() + "_" + orgName;
 		if(!orgName.isEmpty()) {
 			file.transferTo(new File(FILE_PATH, fileName));
-			dto.setReview_img("resources/review_img/" + fileName);
+			dto.setReview_img("/img/review_img/" + fileName);
 		}
 		else {	}
 		

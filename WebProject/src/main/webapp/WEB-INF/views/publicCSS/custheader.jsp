@@ -95,8 +95,8 @@ a {
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
 								<c:if test="${!empty sessionScope.customer }">
-								<li><a class="dropdown-item" href="updateForm">프로필수정</a></li>
-								<li><a class="dropdown-item" href="logout">로그아웃</a></li>
+								<li><a class="dropdown-item" href="/customer/updateForm">프로필수정</a></li>
+								<li><a class="dropdown-item" href="/customer/logout">로그아웃</a></li>
 								</c:if>
 								<li><a class="dropdown-item" href="/customer/searchForm">공간검색</a></li>
 							</ul>
@@ -105,7 +105,7 @@ a {
 								<li><a class="dropdown-item" href="/">메인페이지</a></li>
 								<li><a class="dropdown-item" href="/chat">관리자에게 문의하기</a></li>
 								<c:if test="${empty sessionScope.customer }">
-									<li><a class="dropdown-item" href="joinForm">회원가입</a></li>
+									<li><a class="dropdown-item" href="/customer/joinForm">회원가입</a></li>
 								</c:if>
 							</ul>
 						</div>
