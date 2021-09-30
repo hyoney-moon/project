@@ -36,6 +36,7 @@ import web.project.service.QnaService;
 import web.project.service.ReviewService;
 import web.project.service.mainboardService;
 
+@SessionAttributes("customer")
 @Controller
 @RequestMapping("/customer")
 public class CustBoardController {

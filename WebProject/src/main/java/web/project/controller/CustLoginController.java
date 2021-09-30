@@ -74,7 +74,7 @@ public class CustLoginController implements ApplicationContextAware{
 			Customer findCustomer = memberService.loginCustomer(customer);
 			
 			if(findCustomer != null && findCustomer.getPassword().equals(customer.getPassword())) {
-				m.addAttribute("findCustomer",findCustomer);
+				m.addAttribute("customer",findCustomer);
 				return "redirect:main";
 			} else {
 				return "redirect:/customer/loginForm";
@@ -91,7 +91,7 @@ public class CustLoginController implements ApplicationContextAware{
 		// 회원정보 수정 폼
 		@GetMapping("/updateForm")
 		public String updateForm() {
-			return "custmain/updateForm";
+			return "custmain/custUpdateForm";
 		}
 		
 		// 회원정보 수정
@@ -100,7 +100,7 @@ public class CustLoginController implements ApplicationContextAware{
 			String path = uploadFile(profile2);
 			customer.setProfile(path);
 			memberService.joinMember(customer);
-			return "custmain/updateSuccess";
+			return "redirect:main";
 		}
 		
 		// 회원 탈퇴
@@ -110,7 +110,7 @@ public class CustLoginController implements ApplicationContextAware{
 			if(findCustomer != null && findCustomer.getPassword().equals(password)) {
 				status.setComplete();
 				memberService.delete(customer);
-				return "custmain/deleteSuccess";
+				return "custmain/main";
 			} else {
 				return "redirect:updateForm";
 			}

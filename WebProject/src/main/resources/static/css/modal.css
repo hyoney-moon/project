@@ -11,6 +11,7 @@
   bottom:0;
   display:none; 
   padding:15px; 
+  z-index: 1;
 }
 
 .popup{
@@ -64,9 +65,9 @@
 }
 
 .body-contentbox> textarea {
-	resize: none;
-	border-color: gray;
-	font-size: 0.9em;
+   resize: none;
+   border-color: gray;
+   font-size: 0.85em;
 }
 
 textarea:focus { 
@@ -76,31 +77,47 @@ textarea:focus {
     
     
 .qnaUl {
-	list-style: none;
+   list-style: none;
 }
 .qnaLi {
-	border-bottom: 1px solid #ebebeb;
+   border-bottom: 1px solid #ebebeb;
 }
 
 .hostReplyTitle {
-	color: #6d3afb;
-	font-weight: bold;
+   color: #6d3afb;
+   font-weight: bold;
 }
 .custQuestion, .hostAnswer {
-	padding: 0 0 20px 60px;
+   padding: 0 0 20px 60px;
 }
 .profile {
-	left: 220px;
-	position: absolute;
+   left: 450px;
+   position: absolute;
 }
 .profileImg {
-	width: 50px;
-	height: 50px;
-	object-fit: cover;
-	left: 0;
+   width: 50px;
+   height: 50px;
+   object-fit: cover;
+   left: 0;
 }
 .content, .hostReplyContent {
-	color: #656565;	
+   color: #656565;   
 }
 
-
+.popup-foot{                      
+  width:100%;
+  height:50px;
+}
+.pop-btn{ 
+  display:inline-flex;            
+  width:50%;                      
+  height:100%;                   
+  justify-content:center;         
+  align-items:center;            
+  float:left;                     
+  color:#ffffff;                 
+  cursor:pointer;                 
+}
+.pop-btn.confirm{                 
+  border-right:1px solid #3b5fbf; 
+}
