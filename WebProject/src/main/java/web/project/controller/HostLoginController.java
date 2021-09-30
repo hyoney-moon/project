@@ -115,7 +115,7 @@ public class HostLoginController implements ApplicationContextAware{
 		String path = uploadFile(profile2);
 		host.setProfile(path);
 		hostLoginService.joinHost(host);
-		return "host_main/hostmain";
+		return "redirect:hostmain";
 	}
 	
 	private String uploadFile(MultipartFile profile2) {

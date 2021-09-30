@@ -67,17 +67,24 @@ body {
 .w-100 {
 	width: 100%;
 }
-.star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating span {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-.star_rating span.on {color:#8258FA;}
 
+.star_rating {
+	font-size: 0;
+	letter-spacing: -4px;
+}
+
+.star_rating span {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating span.on {
+	color: #8258FA;
+}
 </style>
 <!-- Q&A css, jquery -->
 <link rel="stylesheet" href="/css/modal.css" type="text/css">
@@ -266,247 +273,233 @@ $(function(){
 			</button>
 		</div>
 		<nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
-  <a class="navbar-brand" href="#">위치추적</a>
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a class="nav-link" href="#scrollspyHeading1">공간정보</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#scrollspyHeading2">Second</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#scrollspyHeading3">Third</a></li>
-        <li><a class="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-<!-- 네비정보 -->
-<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-   <h4 id="scrollspyHeading1">공간 소개</h4>
-         <p>
-         ${board.content }
-         </p>
-   <h4 id="scrollspyHeading2">이용 안내</h4>
-         <p>
-         ${board.direction }
-         </p>
-    <h4 id="scrollspyHeading3">주의 사항</h4>
-         <p>
-         ${board.caution }</p>
+			<ul class="nav">
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#scrollspyHeading1">공간 소개</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#scrollspyHeading2">이용 안내</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#scrollspyHeading3">주의 사항</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#qna">Q&A</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#review">리뷰</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#reservation">예약하기</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#location">위치</a></li>
+			</ul>
+		</nav>
+		<!-- 네비정보 -->
+		<div data-bs-spy="scroll" data-bs-target="#navbar-example2"
+			data-bs-offset="0" class="scrollspy-example" tabindex="0">
+			<h4 id="scrollspyHeading1">공간 소개</h4>
+			<p>${board.content }</p>
+			<h4 id="scrollspyHeading2">이용 안내</h4>
+			<p>${board.direction }</p>
+			<h4 id="scrollspyHeading3">주의 사항</h4>
+			<p>${board.caution }</p>
 
 
-		<!-- Q&A -->
-		<div>
-			<h1 id="qna">Q&A</h1>
-			<!-- 질문하기 모달 버튼 -->
-			<div id="modal-open" class="button">
-				<a
-					style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
-					class="btn_qna_write"> <span style="font-weight: bold;">✍
-						질문 작성하기</span>
-				</a>
-			</div>
-			<!-- 질문하기 modal  -->
-			<div class="container">
-				<div class="popup-wrap" id="popup">
-					<div class="popup">
-						<div class="popup-head">
-							<span class="head-title">질문 작성하기</span>
-						</div>
-						<div class="popup-body">
-							<div class="body-content">
-								<div class="body-titlebox">※질문은 전체 공개됩니다</div>
-								<div class="body-contentbox">
-									<textarea id="question" name="content" rows="6" cols="43"
-										placeholder="질문을 작성하세요."></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="popup-foot">
-							<span class="pop-btn confirm" id="confirm">등록</span> <span
-								class="pop-btn close" id="close">취소</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- 답변하기 modal -->
-			<div class="container">
-				<div class="popup-wrap" id="popupAnswer">
-					<div class="popupAnswer">
-						<div class="popup-head">
-							<span class="head-title">답변 작성하기</span>
-						</div>
-						<div class="popup-body">
-							<div class="body-content">
-								<div class="body-titlebox">※답변은 전체 공개됩니다</div>
-								<div class="body-contentbox">
-									<textarea id="answer" name="content" rows="6" cols="43"
-										placeholder="답변을 작성하세요."></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="popup-foot">
-							<input type="hidden" value="" id="modalQnaNum"> <span
-								class="pop-btn confirm" id="confirm">등록</span> <span
-								class="pop-btn close" id="close">취소</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<!-- 답변하기 modal -->
-			<!-- The Modal -->
-			<div id="myModal2" class="modal">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<p>
-						<strong>답변하기</strong>
-					</p>
-					<textarea id="content2" name="content" rows="15" cols="40"></textarea>
-					<input type="hidden" value="" id="modalQnaNum">
-					<button id="cmtCnt-btn2">작성</button>
-				</div>
-			</div>
-
-			<br> <br>
-			<div id=getComment></div>
-		</div>
-		<br>
-		<br>
-		<!-- Review  -->
-		<div>
-			<div id="s_review" class="text_box msimple">
-			<h1 class="h_intro">리뷰</h1>
-			<a href="/insertReview/${boardNum }" 
-					style="position: absolute; color: #fff; padding: 5px 12px 5px; 
-					font-size: 1.2em; border-radius: 100px; background-color: #704de4; 
-					cursor: pointer; text-decoration: none;" class="btn_qna_write">
-					<span style="font-weight: bold;">
-					✍ 리뷰 작성하기</span>
-				</a>
-			</div>
-			<br><br>
+			<!-- Q&A -->
 			<div>
-				<table class="table w-100">
-					 <thead>
-						<tr>
-							<th scope="col">글번호</th>
-							<th scope="col">내용</th>
-							<th scope="col">작성자</th>
-							<th scope="col">평점</th>
-							<th scope="col">수정</th>
-							<th scope="col">삭제</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${reviewDto}" var="re">
-							<tr>
-								<td>${re.review_id}</td>
-								
-								<td style="width: 400px;"><img class="w-50" src="${re.review_img }"> ${re.review_content}</td>
-								<td>${re.custId}</td>
-								<td><c:if test="${re.review_star==1 }">
-                              <div class="star_rating">
-                               <span class="on">★</span>
-                               <span>★</span>
-                               <span>★</span>
-                               <span>★</span>
-                               <span>★</span>
-                               </div>
-                            </c:if>
-                            <c:if test="${re.review_star==2 }">
-                              <div class="star_rating">
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span>★</span>
-                               <span>★</span>
-                               <span>★</span>
-                               </div>
-                            </c:if>
-                            <c:if test="${re.review_star==3 }">
-                              <div class="star_rating">
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span>★</span>
-                               <span>★</span>
-                               </div>
-                            </c:if>
-                            <c:if test="${re.review_star==4 }">
-                              <div class="star_rating">
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span>★</span>
-                               </div>
-                           </c:if>
-                           <c:if test="${re.review_star==5 }">
-                              <div class="star_rating">
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               <span class="on">★</span>
-                               </div>
-                           </c:if></td>
-								<td><a
-									href="/updateReviewForm/${re.review_id }/${boardNum }">수정</a>
-								<td><a href="/delete/${re.review_id }/${boardNum }">삭제</a>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+				<h1 id="qna">Q&A</h1>
+				<!-- 질문하기 모달 버튼 -->
+				<div id="modal-open" class="button">
+					<a
+						style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
+						class="btn_qna_write"> <span style="font-weight: bold;">✍
+							질문 작성하기</span>
+					</a>
+				</div>
+				<!-- 질문하기 modal  -->
+				<div class="container">
+					<div class="popup-wrap" id="popup">
+						<div class="popup">
+							<div class="popup-head">
+								<span class="head-title">질문 작성하기</span>
+							</div>
+							<div class="popup-body">
+								<div class="body-content">
+									<div class="body-titlebox">※질문은 전체 공개됩니다</div>
+									<div class="body-contentbox">
+										<textarea id="question" name="content" rows="6" cols="43"
+											placeholder="질문을 작성하세요."></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="popup-foot">
+								<span class="pop-btn confirm" id="confirm">등록</span> <span
+									class="pop-btn close" id="close">취소</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 답변하기 modal -->
+				<div class="container">
+					<div class="popup-wrap" id="popupAnswer">
+						<div class="popupAnswer">
+							<div class="popup-head">
+								<span class="head-title">답변 작성하기</span>
+							</div>
+							<div class="popup-body">
+								<div class="body-content">
+									<div class="body-titlebox">※답변은 전체 공개됩니다</div>
+									<div class="body-contentbox">
+										<textarea id="answer" name="content" rows="6" cols="43"
+											placeholder="답변을 작성하세요."></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="popup-foot">
+								<input type="hidden" value="" id="modalQnaNum"> <span
+									class="pop-btn confirm" id="confirm">등록</span> <span
+									class="pop-btn close" id="close">취소</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- 답변하기 modal -->
+				<!-- The Modal -->
+				<div id="myModal2" class="modal">
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<p>
+							<strong>답변하기</strong>
+						</p>
+						<textarea id="content2" name="content" rows="15" cols="40"></textarea>
+						<input type="hidden" value="" id="modalQnaNum">
+						<button id="cmtCnt-btn2">작성</button>
+					</div>
+				</div>
+
+				<br> <br>
+				<div id=getComment></div>
 			</div>
+			<br> <br>
+			<!-- Review  -->
+			<div>
+				<div id="s_review" class="text_box msimple">
+					<h1 class="h_intro" id="review">리뷰</h1>
+					<a href="/insertReview/${boardNum }"
+						style="position: absolute; color: #fff; padding: 5px 12px 5px; font-size: 1.2em; border-radius: 100px; background-color: #704de4; cursor: pointer; text-decoration: none;"
+						class="btn_qna_write"> <span style="font-weight: bold;">
+							✍ 리뷰 작성하기</span>
+					</a>
+				</div>
+				<br>
+				<br>
+				<div>
+					<table class="table w-100">
+						<thead>
+							<tr>
+								<th scope="col">글번호</th>
+								<th scope="col">내용</th>
+								<th scope="col">작성자</th>
+								<th scope="col">평점</th>
+								<th scope="col">수정</th>
+								<th scope="col">삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${reviewDto}" var="re">
+								<tr>
+									<td>${re.review_id}</td>
+
+									<td style="width: 400px;"><img class="w-50"
+										src="${re.review_img }"> ${re.review_content}</td>
+									<td>${re.custId}</td>
+									<td><c:if test="${re.review_star==1 }">
+											<div class="star_rating">
+												<span class="on">★</span> <span>★</span> <span>★</span> <span>★</span>
+												<span>★</span>
+											</div>
+										</c:if> <c:if test="${re.review_star==2 }">
+											<div class="star_rating">
+												<span class="on">★</span> <span class="on">★</span> <span>★</span>
+												<span>★</span> <span>★</span>
+											</div>
+										</c:if> <c:if test="${re.review_star==3 }">
+											<div class="star_rating">
+												<span class="on">★</span> <span class="on">★</span> <span
+													class="on">★</span> <span>★</span> <span>★</span>
+											</div>
+										</c:if> <c:if test="${re.review_star==4 }">
+											<div class="star_rating">
+												<span class="on">★</span> <span class="on">★</span> <span
+													class="on">★</span> <span class="on">★</span> <span>★</span>
+											</div>
+										</c:if> <c:if test="${re.review_star==5 }">
+											<div class="star_rating">
+												<span class="on">★</span> <span class="on">★</span> <span
+													class="on">★</span> <span class="on">★</span> <span
+													class="on">★</span>
+											</div>
+										</c:if></td>
+									<td><a
+										href="/updateReviewForm/${re.review_id }/${boardNum }">수정</a>
+									<td><a href="/delete/${re.review_id }/${boardNum }">삭제</a>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+
+
+			<!-- booking -->
+			<div>
+				<form method="post" action="/kakaoPay" id="paybutton">
+					<h1 class="h_intro" id="reservation">예약하기</h1>
+					<div class="input-group mb-1" style="width: 250px;">
+						<select class="form-select form-select-sm" name="count"
+							aria-label=".form-select-sm example">
+							<option selected>총원수</option>
+							<c:forEach begin="1" end="${board.headcnt}" var="i">
+								<option value="${i}">${i}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="input-group mb-2">
+						<span class="input-group-text"
+							style="color: white; background-color: #704de4;">예약</span>
+						<div class="bookingdate" id="Datepicker">
+							<input type="text" id="startDatepicker" name="startDatepicker"
+								aria-label="First name" class="form-control" value="start">
+							<input type="text" id="endDatepicker" name="endDatepicker"
+								aria-label="Last name" class="form-control" value="end">
+							<input type="hidden" name="boardNum" value="${board.boardNum}">
+						</div>
+					</div>
+
+
+					<input type="image" id="payimg"
+						src="../../../images/fulls/kakaoPay.png" class="mb-5" />
+				</form>
+
+				<h1 class="h_intro" id="location">위치</h1>
+				<div class="map-group" id="map-group">
+					<p style="color: black; font-size: 24px;">${board.address }</p>
+					<p style="color: #656565;">${board.zipcode }</p>
+					<div id="map"></div>
+				</div>
+			</div>
+
 		</div>
-		<br><br><br><br>
-
-
-		<!-- booking -->
-		<div>
-         <form method="post" action="/kakaoPay" id="paybutton">
-         <h1 class="h_intro">예약하기</h1>
-            <div class="input-group mb-1" style="width: 250px;">
-               <select class="form-select form-select-sm" name="count"
-                  aria-label=".form-select-sm example">
-                  <option selected>총원수</option>
-                  <c:forEach begin="1" end="${board.headcnt}" var="i">
-                     <option value="${i}">${i}</option>
-                  </c:forEach>
-               </select>
-            </div>
-            <div class="input-group mb-2">
-                <span class="input-group-text" style="color: white; background-color: #704de4;">예약</span> 
-               <div class="bookingdate" id="Datepicker">
-                  <input type="text" id="startDatepicker" name="startDatepicker"
-                     aria-label="First name" class="form-control" value="start">
-                  <input type="text" id="endDatepicker" name="endDatepicker"
-                     aria-label="Last name" class="form-control" value="end">
-                  <input type="hidden" name="boardNum" value="${board.boardNum}">
-               </div>
-            </div>
-
-
-            <input type="image" id="payimg"
-               src="../../../images/fulls/kakaoPay.png" class="mb-5"/>
-         </form>
-         
-         <h1 class="h_intro">위치</h1>
-         <div class="map-group" id="map-group">
-         <p style="color: black; font-size: 24px;">${board.address }</p>
-         <p style="color: #656565;">${board.zipcode }</p>
-         <div id="map"></div>
-         </div>
-      </div>
-  
-  </div>
 
 
 		<script>

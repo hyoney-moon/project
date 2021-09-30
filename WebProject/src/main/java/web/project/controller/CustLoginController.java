@@ -100,7 +100,7 @@ public class CustLoginController implements ApplicationContextAware{
 			String path = uploadFile(profile2);
 			customer.setProfile(path);
 			memberService.joinMember(customer);
-			return "custmain/main";
+			return "redirect:main";
 		}
 		
 		// 회원 탈퇴

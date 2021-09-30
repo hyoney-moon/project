@@ -92,7 +92,7 @@ footer {
 
 	<div class="container-sm w-25 mb-5">
 		<h3>회원정보 수정</h3>
-		<form action="updateForm" method="post" enctype="multipart/form-data"
+		<form action="update" method="post" enctype="multipart/form-data"
 			enctype="multipart/form-data"">
 			<img id="img" width="100" height="100" border="1"> <input
 				class="form-control mb-2" type='file' id="profile" name="profile2">

@@ -257,25 +257,27 @@ $(function(){
 			</button>
 		</div>
 		<nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
-  <a class="navbar-brand" href="#">위치추적</a>
-  <ul class="nav nav-pills">
-    <li class="nav-item">
-      <a class="nav-link" href="#scrollspyHeading1">공간정보</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#scrollspyHeading2">Second</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#scrollspyHeading3">Third</a></li>
-        <li><a class="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+			<ul class="nav">
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#scrollspyHeading1">공간 소개</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#scrollspyHeading2">이용 안내</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#scrollspyHeading3">주의 사항</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#qna">Q&A</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#review">리뷰</a></li>
+				<li class="nav-item"><a
+					style="color: #656565; text-decoration: none; font-weight: bold;"
+					class="nav-link" href="#location">위치</a></li>
+			</ul>
+		</nav>
 <!-- 네비정보 -->
 <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
    <h4 id="scrollspyHeading1">공간 소개</h4>
@@ -374,7 +376,7 @@ $(function(){
 		<!-- Review  -->
 		<div>
 			<div id="s_review" class="text_box msimple">
-			<h1 class="h_intro">리뷰</h1>
+			<h1 class="h_intro" id="review">리뷰</h1>
 			</div>
 			<div>
 				<table class="table w-100">
@@ -446,7 +448,7 @@ $(function(){
 		</div>
 		<br><br><br><br>
 		
-		<h1 class="h_intro">위치</h1>
+		<h1 class="h_intro" id="location">위치</h1>
          <div class="map-group" id="map-group">
          <p style="color: black; font-size: 24px;">${view.address }</p>
          <p style="color: #656565;">${view.zipcode }</p>
