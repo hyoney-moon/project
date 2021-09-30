@@ -49,7 +49,8 @@ a:visited {text-decoration: none;}
 	<header>
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
-
+	
+	
 	<div class="container ">
 		<form action="searchBoard" method="post">
 			<select name="search_option" id ="search_option"
@@ -68,6 +69,8 @@ a:visited {text-decoration: none;}
 		<section id="searchList">
 		<div class="row row-cols-1 row-cols-md-2 g-4">
 		<c:forEach items="${bList }" var="blist">
+			<c:set var="permit" value="${blist.permit}"/> 
+			<c:if test="${permit eq 1}">
 			<div class="col" id="${blist.boardNum }">
 				<div class="card" >
 					<a href="viewPost/${blist.boardNum }"><div class="img"></div></a>
@@ -77,11 +80,13 @@ a:visited {text-decoration: none;}
 						</div>
 				</div>
 				</div>
+			</c:if>
 			</c:forEach>
 			</div>
 		</section>		
 		</form>
 	</div>
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
