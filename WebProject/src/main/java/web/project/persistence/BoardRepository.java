@@ -59,5 +59,12 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	@Modifying
 	@Query("UPDATE Board b SET b.readcount = b.readcount+1 WHERE b.boardNum=?1")
 	int updateReadcount(Long boardNum);
+	
+	@Query("select b from Board b where b.permit = 1")
+	List<Board> permittedBoard();
+	
+	Page<Board> findByPermitOrderByBoardNumDesc(Long i, Pageable page);
+	
+	
 
 }

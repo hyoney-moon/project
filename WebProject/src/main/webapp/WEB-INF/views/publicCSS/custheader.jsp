@@ -55,7 +55,7 @@ a {
 			<nav class="navbar navbar-light bg-white fixed-top">
 				<div class="container-fluid">
 					<!-- searchIcon -->
-					<a class="navbar-brand" href="searchForm"><img
+					<a class="navbar-brand" href="/customer/searchForm"><img
 						class="mh-100 ms-1"
 						style="width: 40px; height: 40px; background-color: white;"
 						src="/images/icon/search.png" /></a>
@@ -75,7 +75,7 @@ a {
 						id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 						<div class="offcanvas-header h-25">
 							<c:if test="${empty sessionScope.customer }">
-								<a class="textStyle" href="loginForm">
+								<a class="textStyle" href="/customer/loginForm">
 									<h3 class="offcanvas-title text-white position-absolute top-0 
 									start-0 px-4 pt-4" id="offcanvasNavbarLabel">회원 로그인</h3>
 								</a>
@@ -94,18 +94,16 @@ a {
 						</div>
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
-								<li><a class="dropdown-item" href="updateForm">프로필수정</a></li>
-								<li><a class="dropdown-item" href="#">예약현황</a></li>
-								<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
 								<c:if test="${!empty sessionScope.customer }">
-									<li><a class="dropdown-item" href="logout">로그아웃</a></li>
+								<li><a class="dropdown-item" href="updateForm">프로필수정</a></li>
+								<li><a class="dropdown-item" href="logout">로그아웃</a></li>
 								</c:if>
+								<li><a class="dropdown-item" href="/customer/searchForm">공간검색</a></li>
 							</ul>
 							<hr class="dropdown-divider">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 fs-5">
-								<li><a class="dropdown-item" href="#">공지사항</a></li>
-								<li><a class="dropdown-item" href="#">메인페이지</a></li>
-								<li><a class="dropdown-item" href="#">리뷰</a></li>
+								<li><a class="dropdown-item" href="/">메인페이지</a></li>
+								<li><a class="dropdown-item" href="/chat">관리자에게 문의하기</a></li>
 								<c:if test="${empty sessionScope.customer }">
 									<li><a class="dropdown-item" href="joinForm">회원가입</a></li>
 								</c:if>

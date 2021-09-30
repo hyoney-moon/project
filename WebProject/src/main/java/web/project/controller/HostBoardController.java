@@ -27,8 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import web.project.domain.Board;
+import web.project.domain.Booking;
 import web.project.domain.Category;
-import web.project.domain.CustQna;
 import web.project.domain.FrontImg;
 import web.project.domain.Host;
 import web.project.domain.Img;
@@ -38,7 +38,6 @@ import web.project.service.BookingService;
 import web.project.service.CategoryService;
 import web.project.service.FrontImgService;
 import web.project.service.ImgService;
-import web.project.service.QnaService;
 import web.project.service.ReviewService;
 
 @SessionAttributes("host")
@@ -60,8 +59,6 @@ public class HostBoardController implements ApplicationContextAware {
 	@Autowired
 	private ImgService imgService;
 	@Autowired
-	private QnaService qnaService;
-	@Autowired
 	private CategoryService categoryService;
 	@Autowired
 	private ReviewService inter;
@@ -82,6 +79,7 @@ public class HostBoardController implements ApplicationContextAware {
 	//공간등록하기
 	@PostMapping("/insertBoard")
 	public String insertBoard(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
+		
 //		호스트 아이디 가져오기
 		board.setHostId(host.getHostId());
 //		저장
@@ -165,7 +163,7 @@ public class HostBoardController implements ApplicationContextAware {
 				@ModelAttribute("host")Host host, String hostId, Long boardNum) {
 			//호스트 아이디로 로그인 된게 없으면 호스트 로그인 폼으로
 			if(host.getHostId() == null) {
-				return "login/hostLoginForm";
+				return "host_main/hostLoginForm";
 			}
 			//호스트 아이디로 된 보드 리스트 가져오기(session에 저장된 hostId로 검색해서 가져옴)
 			Page<Board> pageList = boardService.getHostBoardList(pNum, host.getHostId());
@@ -200,19 +198,64 @@ public class HostBoardController implements ApplicationContextAware {
 			List<Img> fis = imgService.viewImg(boardNum);
 			model.addAttribute("fis", fis);
 			model.addAttribute("fisize", fis.size());
-			return "host_board/viewPost";
+			return "host_board/hostViewPost";
 		}
 		
-//		@RequestMapping("/viewPost/{boardNum}")		
-//		public String viewPost(Model model, @PathVariable Long boardNum, FrontImg fi) {
-//			Board view = boardService.viewPost(boardNum);
-//			model.addAttribute("view",view);
-//			
-//			List<FrontImg> fis = frontImgService.viewImg(boardNum);
-//			model.addAttribute("fis", fis);
-//			model.addAttribute("fisize", fis.size());
-//			return "host_board/viewPost";
-//		}
+		//게시글 수정
+		@GetMapping("/modifyPost/{boardNum}")
+		public String modifyPostForm(Model model, @ModelAttribute("host")Host host , @PathVariable Long boardNum) {
+			System.out.println(boardNum);
+			if(host.getHostId() == null) {
+				return "host_main/hostLoginForm";
+			}
+			Board view = boardService.updateBoard(boardNum);
+			model.addAttribute("view",view);
+			
+			List<Category> cList = categoryService.selectCate();
+			model.addAttribute("cList", cList);
+			return "host_board/modifyPostForm";
+		}
+		
+		@PostMapping("/modifyPost")
+		public String modifyPost(Model model, Board board, Long frontImgNo, @ModelAttribute("host")Host host, List<MultipartFile> frontImg, List<MultipartFile> image) {
+//			호스트 아이디 가져오기
+			board.setHostId(host.getHostId());
+			board.setBoardNum(board.getBoardNum());
+//			저장
+			Board b =  boardService.saveBoard(board);
+			List<FrontImg> imgb = frontImgService.viewImg(frontImgNo);
+			model.addAttribute("place", b);
+			model.addAttribute("viewImg", imgb);
+			System.out.println(b.getBoardNum());
+			
+			//프론트 이미지 업로드
+			for (MultipartFile file : frontImg) {
+			String path = getFrontPath(file);
+			FrontImg fi = new FrontImg();
+			fi.setBoardNum(b.getBoardNum());
+			fi.setFilename(path);
+			fi.setFilePath(path);
+			fi.setOrigFilename(file.getOriginalFilename());
+			
+			//save
+			frontImgService.saveFrontImg(fi);
+			}
+			
+			//이미지 업로드
+			for (MultipartFile file : image) {
+			String path = getImgPath(file);
+			Img im = new Img();
+			im.setBoardNum(b.getBoardNum());
+			im.setFilename(path);
+			im.setFilePath(path);
+			im.setOrigFilename(file.getOriginalFilename());
+					
+			//save
+			imgService.saveImg(im);
+			}
+			return "redirect:hostmain";
+		}
+		
 		
 	//이미지 뽑아오는 ajax
 	@RequestMapping("/getImgs")
@@ -228,6 +271,7 @@ public class HostBoardController implements ApplicationContextAware {
 	public void deletePost(Long BoardNum) {
 		boardService.deleteById(BoardNum);
 	}
+	
 
 	//어플리케이션 객체 구함, realPath구하려고
 	@Override
@@ -235,5 +279,34 @@ public class HostBoardController implements ApplicationContextAware {
           throws BeansException {
        this.context = (WebApplicationContext) applicationContext;
     }
+	
+	@GetMapping("hostBookingList/{boardNum}")
+	   public String BookingList(@PathVariable(name = "boardNum") Long boardNum, Model m) {
+	      List<Booking> booking = service.getListBooking(boardNum);
+	      System.out.println("booking.size():"+booking.size());
+	      m.addAttribute("booking", booking);
+	      return "host_board/hostBookPermit";
+	   }
+	
+	@GetMapping("/bookPermit") 
+	   public String bookPermitUpdate(Long bookNum) { 
+	       service.permitUpdate(bookNum);
+	      
+	      /*
+	       * String custId = bookcustId.getCustId(); Customer custPrice
+	       * =custSerivce.getCustId(custId); int boardPrice = bookcustId.getPrice(); Long
+	       * total = custPrice.getCash() - boardPrice;
+	       */
+	      
+	      return "host_board/completePermit";
+	      }
+	   
+	   @GetMapping("/bookReject")
+	   public String bookRejectUpdate(Long bookNum) {
+	      service.rejectUpdate(bookNum);
+	      
+	      return "host_board/completePermit";
+	   }
+	
 	
 }

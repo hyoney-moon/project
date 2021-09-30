@@ -113,14 +113,23 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Page<Board> getCustBoardList(int pNum) {
 		Pageable page = PageRequest.of(pNum-1, 5);
-		return boardRepo.findByOrderByBoardNumDesc(page);
+		return boardRepo.findByPermitOrderByBoardNumDesc((long) 1,page);
 	}
 
 	@Override
 	public void deleteById(Long boardNum) {
 		boardRepo.deleteById(boardNum);
 	}
-	
-	
 
+	@Override
+	public Board updateBoard(Long boardNum) {
+		return boardRepo.findByBoardNum(boardNum);
+	}
+
+	@Override
+	public List<Board> permittedBoard() {
+		return boardRepo.permittedBoard();
+	}
+	
+	
 }

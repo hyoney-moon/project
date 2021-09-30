@@ -36,20 +36,6 @@ h2.maintext {
 	text-align: right;
 }
 
-table {
-	border-collapse: collapse;
-	text-align: center;
-}
-
-th {
-	background-color: white;
-	width: 150px;
-}
-
-table a {
-	margin: 10px auto;
-}
-
 a:link {
 	text-decoration: none;
 }
@@ -78,8 +64,8 @@ a:visited {
 				<div class="col mw-100">
 					<div class="card">
 						<div class="card-body">
-							<a href="/bookingpage/${cate.category}"><h5
-									class="card-title">${cate.category }</h5></a>
+							<a href="#">
+							<h5 class="card-title">${cate.category }</h5></a>
 						</div>
 					</div>
 				</div>
@@ -89,7 +75,7 @@ a:visited {
 
 	<section class="mt-5">
 		<h2>오늘의 추천 공간</h2>
-		<div class="row row-cols-1 row-cols-md-2 g-4">
+		<div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
 			<c:forEach items="${board }" var="board" begin="0" end="3">
 				<div class="col" id="${board.boardNum }">
 					<div class="card">

@@ -28,6 +28,7 @@ body {
 
 #page {
 	text-decoration: none;
+	text-align: center;
 }
 
 a:link {
@@ -37,57 +38,93 @@ a:link {
 a:visited {
 	text-decoration: none;
 }
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
 </style>
+<link rel="stylesheet" href="/css/modal.css" type="text/css">
 </head>
 <body>
 	<header>
 		<%@ include file="../publicCSS/hostheader.jsp"%>
 	</header>
-	<div class="container-sm w-50">
+	<div class="container-sm w-50 mb-5">
 		<div class="row row-cols-1 row-cols-md-2 g-4">
 			<c:forEach items="${bList }" var="board" begin="0" end="3">
 				<div class="col" id="${board.boardNum }">
 					<div class="card">
 						<a href="viewPost/${board.boardNum }"><div class="img"></div></a>
 						<div class="card-body">
-							<a href="/host/viewPost/${board.boardNum }"><h5 class="card-title">${board.spaceName }</h5></a>
+							<a href="/host/viewPost/${board.boardNum }"><h5
+									class="card-title">${board.spaceName }</h5></a>
 							<p class="card-text">${board.contentOneline }</p>
-							<a href="deletePost/${board.boardNum }"><button class="btn btn-outline-secondary" type="button"
-							id="button-addon2">삭제</button></a>
-							<a href="hostBookingList"><button class="btn btn-outline-secondary" type="button"
-							id="button-addon2">예약현황</button></a>
+
+							<a onclick="" class="btn_delete_post"><button
+									class="btn btn-outline-secondary" type="button"
+									id="button-addon2">삭제</button></a>
+									<a
+								href="hostBookingList/${board.boardNum }"><button
+									class="btn btn-outline-secondary" type="button"
+									id="button-addon2">예약현황</button></a> <a
+								href="modifyPost/${board.boardNum }"><button
+									class="btn btn-outline-secondary" type="button"
+									id="button-addon2">수정</button></a>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
+		<div id="page">
+			<c:if test="${begin > 2 }">
+				<a href="viewBoard?p=${begin-1}">[이전]</a>
+			</c:if>
+			<c:forEach begin="${begin }" end="${end}" var="i">
+				<a href="viewBoard?p=${i}">[${i}]</a>
+			</c:forEach>
+			<c:if test="${end < totalCount }">
+				<a href="viewBoard?p=${end+1}">[다음]</a>
+			</c:if>
+		</div>
 	</div>
+	<footer>
+		<%@ include file="../publicCSS/footer.jsp"%>
+	</footer>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 	$(function() {
-		$("div").each(function() {
-			var id = $(this).attr("id")
-			if (id != undefined) {
-			var tr = $(" .img", this)
-			$.ajax({
-				url : "/host/getImgs",
-				data : "boardNum=" + id,
-				dataType : "JSON"
-			}).done(function(data) {
-				var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
-				str += "<div class='carousel-item active'><img src="+data[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
-				for (var i = 1; i < data.length; i++) {
-				str += "<div class='carousel-item'> <img src="+ data[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
-				}
-				str += "</div> </div> </div>"
+		$("div")
+				.each(
+						function() {
+							var id = $(this).attr("id")
+							if (id != undefined) {
+								var tr = $(" .img", this)
+								$
+										.ajax({
+											url : "/host/getImgs",
+											data : "boardNum=" + id,
+											dataType : "JSON"
+										})
+										.done(
+												function(data) {
+													var str = "<div class='list_item'> <div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>"
+													str += "<div class='carousel-item active'><img src="+data[0].filePath +" class='d-block w-100 list_img' alt='...'></div>"
+													for (var i = 1; i < data.length; i++) {
+														str += "<div class='carousel-item'> <img src="+ data[i].filePath + " class='d-block w-100 list_img' alt='...'> </div>"
+													}
+													str += "</div> </div> </div>"
 
-				$(tr).append(str);
+													$(tr).append(str);
 
-				})
-			}
-		})
-		
+												})
+							}
+						})
+
 	})
 </script>
 </html>

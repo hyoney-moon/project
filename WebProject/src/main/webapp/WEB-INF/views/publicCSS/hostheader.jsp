@@ -88,9 +88,6 @@ a {
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-4 fs-5">
 								<li><a class="dropdown-item" href="/host/hostUpdateForm">프로필수정</a></li>
-								<li><a class="dropdown-item" href="#">예약현황</a></li>
-								<li><a class="dropdown-item" href="#">리뷰 관리</a></li>
-								<li><a class="dropdown-item" href="#">Q&A 관리</a></li>
 								<li><a class="dropdown-item" href="/host/insertBoardForm">내공간등록</a>
 								<li><a class="dropdown-item" href="/host/viewBoard">내공간관리</a>
 								<c:if test="${!empty sessionScope.host }">
@@ -101,7 +98,7 @@ a {
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 fs-5">
 								<li><a class="dropdown-item" href="#">공지사항</a></li>
 								<li><a class="dropdown-item" href="/">메인페이지</a></li>
-								<li><a class="dropdown-item" href="#">리뷰</a></li>
+								<li><a class="dropdown-item" href="/chat">관리자에게 문의하기</a></li>
 								<c:if test="${empty sessionScope.host }">
 									<li><a class="dropdown-item" href="/host/hostJoinForm">호스트 회원가입</a></li>
 								</c:if>

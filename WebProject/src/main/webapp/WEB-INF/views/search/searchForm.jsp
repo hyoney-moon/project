@@ -21,27 +21,23 @@
 body {
 	padding-top: 40px;
 }
-
-.headText {
-	padding: 50px;
-	text-align: center;
+a{text-decoration: none;}
+a:link {
+	text-decoration: none;
 }
 
-table {
-	border-collapse: collapse;
-	text-align: center;
+a:visited {
+	text-decoration: none;
 }
-
-th {
-	background-color: white;
-	width: 150px;
-}
-
-a:link{text-decoration: none;}
-a:visited {text-decoration: none;}
-
 #page {
+	text-decoration: none;
 	text-align: center;
+}
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }
 </style>
 </head>
@@ -49,49 +45,61 @@ a:visited {text-decoration: none;}
 	<header>
 		<%@ include file="../publicCSS/custheader.jsp"%>
 	</header>
-	
-	
-	<div class="container ">
+
+	<div class="container mb-5">
 		<form action="searchBoard" method="post">
 			<select name="search_option" id ="search_option"
-				class="form-select form-select-lg mb-3 w-25"
+				class="form-select form-select-lg mb-2"
 				aria-label=".form-select-lg example">
 				<option selected>Select</option>
 				<option value="1">공간명</option>
 				<option value="2">카테고리</option>
 				<option value="3">지역별</option>
 			</select>
-			<input id="search" name="search" class="form-control form-control-lg"
-				type="text" placeholder="검색어를 입력하세요."
-				aria-label=".form-control-lg example">
-				<input type="button" value="검 색" id="searchbtn" class="mb-5"><br>
-				
-		<section id="searchList">
-		<div class="row row-cols-1 row-cols-md-2 g-4">
-		<c:forEach items="${bList }" var="blist">
-			<c:set var="permit" value="${blist.permit}"/> 
-			<c:if test="${permit eq 1}">
-			<div class="col" id="${blist.boardNum }">
+			
+			<div class="input-group mb-5 col">
+			<input id="search" name="search" type="text"
+					class="form-control form-control-lg " placeholder="검색어를 입력하세요."
+					aria-label="Recipient's username" aria-describedby="button-addon2">
+				<button class="btn btn-outline-secondary" type="button"
+					id="button-addon2">검색</button>
+			</div>	
+			
+		<section class="mb-5">
+		<div class="row row-cols-1 row-cols-md-2 g-4" id="searchList">
+		<c:forEach items="${bList }" var="blist" >
+			<div class="col" id="${blist.boardNum }" >
 				<div class="card" >
-					<a href="viewPost/${blist.boardNum }"><div class="img"></div></a>
+					<a href="viewPost/${blist.boardNum }"><div class="img" ></div></a>
 						<div class="card-body">
 							<a href="viewPost/${blist.boardNum }"><h5 class="card-title">${blist.spaceName }</h5></a>
 							<p class="card-text">${blist.contentOneline }</p>
 						</div>
 				</div>
 				</div>
-			</c:if>
 			</c:forEach>
 			</div>
-		</section>		
+		</section>	
+		<div id="page">
+			<c:if test="${begin > 2 }">
+				<a href="searchForm?p=${begin-1}">[이전]</a>
+			</c:if>
+			<c:forEach begin="${begin }" end="${end}" var="i">
+				<a href="searchForm?p=${i}">[${i}]</a>
+			</c:forEach>
+			<c:if test="${end < totalCount }">
+				<a href="searchForm?p=${end+1}">[다음]</a>
+			</c:if>
+		</div>	
 		</form>
 	</div>
-	
+	<footer>
+	<%@ include file="../publicCSS/footer.jsp"%>
+</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-	$(function(){
-		
+	$(function(){	
 		//searchForm 들어오자 마자 화면에 이미지 출력
 		$("div").each(function(){
 			var id = $(this).attr("id")
@@ -119,7 +127,7 @@ a:visited {text-decoration: none;}
 	})	
 </script>		
 	<script>
-		$("#searchbtn").click(function(){
+		$("#button-addon2").click(function(){
 			var search_option = $("#search_option").val();
 			var search = $("#search").val(); 
 			$.ajax({
@@ -131,12 +139,13 @@ a:visited {text-decoration: none;}
 				$("#searchList").empty();
 				for(var i = 0; i < data.length; i++){
 					$("#searchList").append(
-							"<div class='col' id=" +data[i].boardNum+ "><div class='card' ><div class='img'></div><div class='card-body'>"+
-										"<h5 class='card-title'>" +data[i].spaceName+ "</h5><p class='card-text'>"+data[i].contentOneline+ "</p></div></div></div>"
-					)}
+							"<div class='col' id=" +data[i].boardNum+ "><div class='card' ><a href='viewPost/" + data[i].boardNum +"'><div class='img'></div></a><div class='card-body'>"+
+										"<a href='viewPost/" + data[i].boardNum +"'><h5 class='card-title'>" +data[i].spaceName+ "</h5></a><p class='card-text'>"+data[i].contentOneline+ "</p></div></div></div>"
+					)}//for
 				get();
-			});
-			function get(){
+			})//done
+			});//click
+		function get(){
 			$("div").each(function(){
 				var id = $(this).attr("id")
 				if(id != undefined){
@@ -157,9 +166,10 @@ a:visited {text-decoration: none;}
 					
 					$(tr).append(str);
 					
-				})
-				}
-			})
-	})
+					})//done
+				}//if
+				})//each
+			}//get 
+ 
 	</script>
 </html>

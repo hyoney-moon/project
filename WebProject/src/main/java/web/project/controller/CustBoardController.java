@@ -1,6 +1,5 @@
 package web.project.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.BeansException;
@@ -40,15 +39,13 @@ import web.project.service.mainboardService;
 @Controller
 @RequestMapping("/customer")
 public class CustBoardController {
-	
+
 	@Autowired
 	private FrontImgService frontImgService;
 	@Autowired
 	private ImgService imgService;
 	@Autowired
 	private BoardService boardService;
-	@Autowired
-	private QnaService qnaService;
 	@Autowired
 	private ReviewService inter;
 	@Autowired
@@ -57,66 +54,70 @@ public class CustBoardController {
 	private mainboardService mainService;
 	@Autowired
 	private CategoryService cateService;
-	
-	//회원 메인
-		@RequestMapping("/main")
-		public String mainStart(Model m) {
-			List<Board> dto = mainService.getBoardList();
-			m.addAttribute("board",dto);
-			// 카테고리 리스트 출력
-			List<Category> category = cateService.selectCate();
-			m.addAttribute("category",category);
-			return "custmain/main";
-		}
+
+	// 회원 메인
+	@RequestMapping("/main")
+	public String mainStart(Model m) {
+		List<Board> dto = mainService.getBoardList();
+		m.addAttribute("board", dto);
+		// 카테고리 리스트 출력
+		List<Category> category = cateService.selectCate();
+
+		m.addAttribute("category", category);
+		return "custmain/main";
+	}
 	
 	// 게시글 목록
 	@GetMapping("/searchForm")
-	public String viewBoard(Model model,
-			@RequestParam(name="p", defaultValue="1")int pNum, 
-			@ModelAttribute("customer")Customer cust) {
-		Page<Board> pageList = boardService.getCustBoardList(pNum);
-		List<Board> bList = pageList.getContent(); //보여질 글
-		int totalCount = pageList.getTotalPages(); //전체 페이지 수
-		model.addAttribute("bList", bList);
-		model.addAttribute("totalCount", totalCount);
+	public String viewBoard(Model model, @RequestParam(name = "p", defaultValue = "1") int pNum, Board board) {
+
+//		List<Board> bList = boardService.permittedBoard();
 		
-		int begin = (pNum-1)/5*5+1; //숫자 2 부분만 원하는 갯수로 바꿔주면 됨
-		int end = begin+5-1;
-		if(end>totalCount) {
+
+		Page<Board> pageList = boardService.getCustBoardList(pNum);
+		List<Board> bList = pageList.getContent();
+		int totalCount = pageList.getTotalPages(); // 전체 페이지 수
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("bList", bList);
+		int begin = (pNum - 1) / 5 * 5 + 1; // 숫자 2 부분만 원하는 갯수로 바꿔주면 됨
+		int end = begin + 5 - 1;
+		if (end > totalCount) {
 			end = totalCount;
 		}
 		model.addAttribute("begin", begin);
 		model.addAttribute("end", end);
-		
+
 		return "search/searchForm";
+
 	}
-	
-	//글 상세보기
+
+	// 글 상세보기
 	@RequestMapping("/viewPost/{boardNum}")
 	public String viewPost(Model model, @PathVariable Long boardNum, Img fi) {
-		
-		Board board =  service.getBoard(boardNum);
-		
+
+		Board board = service.getBoard(boardNum);
+
 		model.addAttribute("board", board);
-		//사용자가 받는 데이터값 유효성 검사 단계
-		 List<String> dateList = service.getListDate(boardNum);
+		// 사용자가 받는 데이터값 유효성 검사 단계
+		List<String> dateList = service.getListDate(boardNum);
 		Gson json = new Gson();
-		
-		model.addAttribute("dateList",json.toJson(dateList));
-		
+
+		model.addAttribute("dateList", json.toJson(dateList));
+
 		Board view = boardService.viewPost(boardNum);
-		model.addAttribute("view",view);
-		
+		model.addAttribute("view", view);
+
 		List<Review> result = inter.getReviewDto();
-		model.addAttribute("reviewDto",result);
-		
+		model.addAttribute("reviewDto", result);
+
 		List<Img> fis = imgService.viewImg(boardNum);
 		model.addAttribute("fis", fis);
 		model.addAttribute("fisize", fis.size());
-		return "cust_board/viewPost";
+		model.addAttribute("boardNum", boardNum);
+		return "cust_board/custViewPost";
 	}
-	
-	//검색기능 ajax
+
+	// 검색기능 ajax
 	@PostMapping("/searchBoard")
 	@ResponseBody
 	public String searchBoard(int search_option, String search) {
@@ -124,9 +125,9 @@ public class CustBoardController {
 		System.out.println(search);
 		Gson json = new Gson();
 		return json.toJson(searchList);
-	}	
-	
-	//이미지 뽑아오는 ajax
+	}
+
+	// 이미지 뽑아오는 ajax
 	@RequestMapping("/getImgs")
 	@ResponseBody
 	public String getImgs(Long boardNum) {
@@ -134,13 +135,14 @@ public class CustBoardController {
 		Gson json = new Gson();
 		return json.toJson(imgList);
 	}
-	//(검색)이미지 뽑아오는 ajax
-		@RequestMapping("/getSearchImgs")
-		@ResponseBody
-		public String getSearchImgs(Long boardNum) {
-			List<FrontImg> imgList = frontImgService.viewImg(boardNum);
-			Gson json = new Gson();
-			return json.toJson(imgList);
-		}
-	
+
+	// (검색)이미지 뽑아오는 ajax
+	@RequestMapping("/getSearchImgs")
+	@ResponseBody
+	public String getSearchImgs(Long boardNum) {
+		List<FrontImg> imgList = frontImgService.viewImg(boardNum);
+		Gson json = new Gson();
+		return json.toJson(imgList);
+	}
+
 }

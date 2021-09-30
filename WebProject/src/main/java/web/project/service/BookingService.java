@@ -26,5 +26,8 @@ public interface BookingService {
 
 	void updateBooking(Booking dto);
 
+	List<Booking> getListBooking(Long boardNum);
 
+	void permitUpdate(Long bookNum);
+	void rejectUpdate(Long bookNum);
 }

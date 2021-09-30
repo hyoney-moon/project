@@ -37,4 +37,9 @@ public interface BoardService {
 	Page<Board> getCustBoardList(int pNum);
 
 	void deleteById(Long boardNum);
+
+	Board updateBoard(Long boardNum);
+	
+	List<Board> permittedBoard();
+
 }

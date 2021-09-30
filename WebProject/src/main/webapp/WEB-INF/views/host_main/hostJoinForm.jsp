@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Post Board</title>
+<title>호스트 회원가입</title>
 <style>
 header {
 	position: fixed;
@@ -95,7 +95,7 @@ footer {
 
 	<div class="container-sm w-25">
 		<form action="hostJoin" method="post" enctype="multipart/form-data"
-			enctype="multipart/form-data"">
+			enctype="multipart/form-data" onsubmit="return check()">
 			<img id="img" width="100" height="100" border="1"> <input
 				class="form-control mb-2" type='file' id="profile" name="profile2">
 			
@@ -105,9 +105,8 @@ footer {
 					aria-label="Recipient's username" aria-describedby="button-addon2">
 				<button class="btn btn-outline-secondary" type="button"
 					id="button-addon2" onclick="confirmId()">중복확인</button>
-			<div id="hostIdDiv" class="mb-2"></div>	
 			</div>	
-
+			<div id="hostIdDiv" class="mb-2"></div>	
 			<input name="nickName" id="nickName"
 				class="form-control form-floating mb-2 w-100" type="text"
 				aria-label="default input example" placeholder="닉네임"
@@ -219,31 +218,37 @@ let filename = ''
 	
 	// 유혀성 검사를 위한 스크립트
 	// 전송 버튼을 눌렀을 경우 수행
+	
 	function check(){
+		
 		if(idcheck == false){
 			document.getElementById("hostIdDiv").innerHTML = "ID 중복검사를 수행해 주세요";
 			document.getElementById("hostIdDiv").style.color='red';
-			document.getElementById("hostIdDiv").focus();
+			document.getElementById("hostId").focus();
 			return false;
 		}
-		let password = document.getElementById("password").value;
-		let passwordconfirm = document.getElementById("passwordconfirm").value;
-		if(password != passwordconfirm){
-			document.getElementById("passwordDiv").innerHTML = "2개의 비밀번호가 일치하지 않습니다.";
-			document.getElementById("passwordDiv").style.color='red';
+		
+		var p1 = document.getElementById("pw").value;
+		var p2 = document.getElementById("pwconfirm").value;
+		if(p1 != p2){
+			/*
+			document.getElementById("pwDiv").innerHTML = "2개의 비밀번호가 일치하지 않습니다.";
+			document.getElementById("pwDiv").style.color='red';
 			document.getElementById("password").focus();
+			*/
+			alert("2개의 비밀번호가 일치하지 않습니다.");
 			return false;
 		}
 		
 		let pattern1 = /[0-9]/;	// 숫자 let
-		let pattern2 = /[a-zA-Z]/;	// 문자 let
-		let pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-		if(!pattern1.test(password) || !pattern2.test(password) || !pattern3.test(password) || password.length < 8) {
+			pattern2 = /[a-zA-Z]/;	// 문자 let
+			pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+		if(!pattern1.test(p1) || !pattern2.test(p1) || !pattern3.test(p1) || p1.length < 8) {
 			alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성되어야 합니다.");
 			return false;
 		} 
 	}
-
+	
 </script>
 </html>
 

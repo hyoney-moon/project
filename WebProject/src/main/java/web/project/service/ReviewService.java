@@ -27,10 +27,10 @@ public interface ReviewService {
 	Review insertReview (Review dto);
  	
  	//리뷰 수정하기 (작성자랑 로그인 된 아이디 비교해서 수정버튼 만들어주기)
-	Review reviewUpdate (Review dto);
+	void saveReview(Review re);
  	
  	//리뷰 삭제하기 (작성자랑 로그인 된 아이디 비교해서 삭제버튼 만들어주기)
-	void deleteReview(int review_id) ;
+	void deleteReview(Long review_id) ;
  	//전체글 번호 증가를 위해 현재 번호를 가져옴
  	public int currentReview_id();
  	
@@ -67,5 +67,7 @@ public interface ReviewService {
  	public void unLikesUpdate(int review_id);
  	
  	public List<Review> getReview();
+ 	
+ 	Review onlyReview(Long review_id);
 
 }

@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -149,7 +151,7 @@ public class BoardController{
 			data = new HashMap<String, String>();
 			data.put("review_id", Long.toString(r.getReview_id()));
 			data.put("review_content", r.getReview_content());
-			data.put("cust_id", r.getCust_id());
+			data.put("cust_id", r.getCustId());
 			data.put("review_date", r.getReview_date());
 			data.put("review_img", r.getReview_img());
 			dataList.add(data);
@@ -216,10 +218,26 @@ public class BoardController{
 //		return data; // 좋아요 처리 완료
 //	}
 
-	@GetMapping("/delete/{review_id}")
-	public String delete(@PathVariable int review_id) { 
+	@GetMapping("/delete/{review_id}/{boardNum}")
+	public String delete(@PathVariable Long review_id,@PathVariable Long boardNum) { 
 		inter.deleteReview(review_id); 
-	  return "redirect:/index";
-	  }
+	  return "redirect:/customer/viewPost/"+boardNum;
+	  
+	}
+	
+	@GetMapping("/updateReviewForm/{review_id}/{boardNum}")
+	public String updateReviewForm(@PathVariable Long review_id, @PathVariable Long boardNum, Model m) {
+		Review re = inter.onlyReview(review_id);
+		m.addAttribute("review", re);
+		m.addAttribute("boardNum", boardNum);
+		return "cust_board/updateReviewForm";
+	}
+
+	
+	@PostMapping("/update")
+	public String update(Review re, Long boardNum) {
+		inter.saveReview(re);
+		return "redirect:/customer/viewPost/"+boardNum;
+	}
 
 }
